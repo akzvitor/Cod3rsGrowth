@@ -1,7 +1,20 @@
-﻿namespace Cod3rsGrowth.Dominio
+﻿using Cod3rsGrowth.Dominio.Enums;
+
+namespace Cod3rsGrowth.Dominio.Classes
 {
-    public class Class1
+    public class Obra
     {
+        public int Id {  get; set; }
+        public string Titulo { get; set; }
+        public string Autor { get; set; }
+        public string Genero { get; set; }
+        public string Sinopse { get; set; }
+        public string CapaCaminhoImg { get; set; }
+        public int NumeroCapitulos { get; set; }
+        public decimal ValorObra { get; set; }
+        public Formato Formato { get; set; }
+        public bool FoiFinalizada { get; set; }
+        public DateTime InicioPublicacao { get; set; }
 
     }
 }
