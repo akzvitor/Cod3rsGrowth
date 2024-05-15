@@ -9,7 +9,7 @@ namespace Cod3rsGrowth.Dominio.Classes
         public string Autor { get; set; }
         public string Genero { get; set; }
         public string Sinopse { get; set; }
-        public string CapaCaminhoImg { get; set; }
+        public string ImagemBase64 { get; set; }
         public int NumeroCapitulos { get; set; }
         public decimal ValorObra { get; set; }
         public Formato Formato { get; set; }
