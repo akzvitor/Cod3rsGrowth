@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.Testes
 {
-    internal class TesteBase
+    public class TesteBase : IDisposable
     {
+
+        protected IServiceProvider ServiceProvider { get; set; }
+        public void Dispose()
+        {
+        }
     }
 }

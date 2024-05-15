@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.Testes
 {
-    internal class ModuloDeInjecao
+    public class ModuloDeInjecao
     {
     }
 }
