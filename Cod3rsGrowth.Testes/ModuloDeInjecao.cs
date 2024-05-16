@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.Testes
 {
-    public class ModuloDeInjecao
+    public static class ModuloDeInjecao
     {
 
         public static void BindService(ServiceCollection servicos)
