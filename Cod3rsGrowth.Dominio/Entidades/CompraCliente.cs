@@ -10,6 +10,5 @@
         public List<Obra> Produtos { get; set; }
         public decimal ValorCompra { get; set; }
         public DateTime DataCompra { get; set; }
-
     }
 }
