@@ -15,6 +15,5 @@ namespace Cod3rsGrowth.Dominio.Classes
         public Formato Formato { get; set; }
         public bool FoiFinalizada { get; set; }
         public DateTime InicioPublicacao { get; set; }
-
     }
 }
