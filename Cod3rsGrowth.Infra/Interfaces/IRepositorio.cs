@@ -5,6 +5,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
 {
     public interface IRepositorio
     {
-        public ListaSingleton ObterTodos();
+        public List<Obra> ObterTodos();
     }
 }

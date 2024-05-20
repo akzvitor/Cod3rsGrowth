@@ -45,9 +45,9 @@ namespace Cod3rsGrowth.Testes.Repositorios
             Singleton.ListaObra.Add(obra3);
         }
 
-        public ListaSingleton ObterTodos()
+        public List<Obra> ObterTodos()
         {
-            return Singleton;
+            return Singleton.ListaObra;
         }
     }
 }
