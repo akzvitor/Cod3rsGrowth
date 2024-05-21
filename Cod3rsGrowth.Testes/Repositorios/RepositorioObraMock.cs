@@ -4,11 +4,11 @@ using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Testes.Repositorios
 {
-    public class RepositorioMockObra : IRepositorioObra
+    public class RepositorioObraMock : IRepositorioObra
     {
         public List<Obra> ListaObra = ListaSingleton.Instancia.ListaObra;
 
-        public RepositorioMockObra() { }
+        public RepositorioObraMock() { }
 
         public List<Obra> ObterTodos()
         {

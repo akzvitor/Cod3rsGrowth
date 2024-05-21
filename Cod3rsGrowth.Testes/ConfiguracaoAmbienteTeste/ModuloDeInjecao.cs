@@ -13,7 +13,7 @@ namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
             servicos.AddScoped<IServicoObra, ServicoObra>();
             servicos.AddScoped<IServicoCompraCliente, ServicoCompraCliente>();
 
-            servicos.AddScoped<IRepositorioObra, RepositorioMockObra>();
+            servicos.AddScoped<IRepositorioObra, RepositorioObraMock>();
         }
     }
 }

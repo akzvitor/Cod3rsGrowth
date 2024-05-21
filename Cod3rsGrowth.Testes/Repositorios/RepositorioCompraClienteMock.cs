@@ -4,11 +4,11 @@ using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Testes.Repositorios
 {
-    public class RepositorioMockCompraCliente : IRepositorioCompraCliente
+    public class RepositorioCompraClienteMock : IRepositorioCompraCliente
     {
         public List<CompraCliente> ListaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
 
-        public RepositorioMockCompraCliente() { } 
+        public RepositorioCompraClienteMock() { } 
 
         public List<CompraCliente> ObterTodos()
         {
