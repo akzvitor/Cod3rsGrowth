@@ -1,7 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
-using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Servico.Interfaces;
 
-namespace Cod3rsGrowth.Dominio.Servicos
+namespace Cod3rsGrowth.Servico.Servicos
 {
     public class ServicoCompraCliente : IServicoCompraCliente
     {

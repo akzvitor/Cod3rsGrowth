@@ -1,6 +1,6 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Dominio.Servicos;
-using Cod3rsGrowth.Infra.Interfaces;
+﻿using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Servico.Interfaces;
+using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.Repositorios;
 using Microsoft.Extensions.DependencyInjection;
 

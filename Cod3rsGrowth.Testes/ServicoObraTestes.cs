@@ -1,4 +1,4 @@
-using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;

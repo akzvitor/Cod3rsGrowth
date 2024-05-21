@@ -1,13 +1,21 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
-using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Servico.Interfaces;
+using Cod3rsGrowth.Infra.Interfaces;
 
-namespace Cod3rsGrowth.Dominio.Servicos
+namespace Cod3rsGrowth.Servico.Servicos
 {
     public class ServicoObra : IServicoObra
     {
+        private readonly IRepositorioObra _repositorioObra;
+        
+        public ServicoObra(IRepositorioObra repositorioObra)
+        {
+            _repositorioObra = repositorioObra;
+        }
+
         public List<Obra> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _repositorioObra.ObterTodos();
         }
 
         public void Criar(Obra novaObra)
