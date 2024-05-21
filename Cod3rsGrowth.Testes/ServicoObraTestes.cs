@@ -1,4 +1,5 @@
 using Cod3rsGrowth.Dominio.Classes;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,14 +26,14 @@ namespace Cod3rsGrowth.Testes
             var novaObra = new Obra
             {
                 Titulo = "Na Honjaman Level Up",
-                Formato = Dominio.Enums.Formato.Manhwa,
+                Formato = Formato.Manhwa,
                 Autor = "Chu-Gong"
             };
 
             var novaObra2 = new Obra
             {
                 Titulo = "Jeonjijeok Dokja Sijeom",
-                Formato = Dominio.Enums.Formato.Manhwa,
+                Formato = Formato.Manhwa,
                 Autor = "UMI"
             };
 
