@@ -9,11 +9,11 @@ namespace Cod3rsGrowth.Testes
 {
     public class RepositorioMockTestes : TesteBase
     {
-        private readonly IRepositorio _repositorioMock;
+        private readonly IRepositorioObra _repositorioMock;
 
         public RepositorioMockTestes()
         {
-            _repositorioMock = ServiceProvider.GetService<IRepositorio>();
+            _repositorioMock = ServiceProvider.GetService<IRepositorioObra>();
         }
 
         [Fact]

@@ -6,14 +6,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
     {
         private static ListaSingleton? _instancia;
 
-        public List<CompraCliente> ListaCompraCliente { get; private set; }
-        public List<Obra> ListaObra { get; private set; }
+        public List<CompraCliente> ListaCompraCliente { get; set; } = new List<CompraCliente> { };
+        public List<Obra> ListaObra { get; set; } = new List<Obra> { };
 
-        private ListaSingleton()
-        {
-            ListaCompraCliente = new List<CompraCliente>();
-            ListaObra = new List<Obra>();
-        }
+        private ListaSingleton() { }
 
         public static ListaSingleton Instancia
         {
