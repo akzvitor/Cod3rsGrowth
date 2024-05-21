@@ -19,10 +19,14 @@ namespace Cod3rsGrowth.Testes
         public void Obter_todos_deve_retornar_uma_lista_vazia()
         {
             //arrange
-            
+
             //act
-            
+            var obras = _servicoObra.ObterTodos();
+            var tamanhoDaListaObras = obras.Count;
+
             //assert
+            Assert.NotNull(obras);
+            Assert.Equal(0, tamanhoDaListaObras);
         }
     }
 }

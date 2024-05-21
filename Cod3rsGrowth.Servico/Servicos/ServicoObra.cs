@@ -5,6 +5,11 @@ namespace Cod3rsGrowth.Dominio.Servicos
 {
     public class ServicoObra : IServicoObra
     {
+        public List<Obra> ObterTodos()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Criar(Obra novaObra)
         {
             throw new NotImplementedException();
@@ -21,11 +26,6 @@ namespace Cod3rsGrowth.Dominio.Servicos
         }
 
         public void ObterPorId()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Obra> ObterTodos()
         {
             throw new NotImplementedException();
         }
