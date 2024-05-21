@@ -1,13 +1,21 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
+using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servico.Interfaces;
 
 namespace Cod3rsGrowth.Servico.Servicos
 {
     public class ServicoCompraCliente : IServicoCompraCliente
     {
+        private readonly IRepositorioCompraCliente _repositorioCompraCliente;
+
+        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente)
+        {
+            _repositorioCompraCliente = repositorioCompraCliente;
+        }
+
         public List<CompraCliente> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _repositorioCompraCliente.ObterTodos();
         }
 
         public void Criar(CompraCliente novaCompraCliente)
