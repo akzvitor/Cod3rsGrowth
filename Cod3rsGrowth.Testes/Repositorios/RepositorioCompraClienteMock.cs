@@ -8,8 +8,6 @@ namespace Cod3rsGrowth.Testes.Repositorios
     {
         public List<CompraCliente> ListaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
 
-        public RepositorioCompraClienteMock() { } 
-
         public List<CompraCliente> ObterTodos()
         {
             return ListaCompraCliente;

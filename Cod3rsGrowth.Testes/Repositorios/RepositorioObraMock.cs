@@ -8,8 +8,6 @@ namespace Cod3rsGrowth.Testes.Repositorios
     {
         public List<Obra> ListaObra = ListaSingleton.Instancia.ListaObra;
 
-        public RepositorioObraMock() { }
-
         public List<Obra> ObterTodos()
         {
             return ListaObra;
