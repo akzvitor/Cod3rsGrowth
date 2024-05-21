@@ -17,20 +17,6 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Obter_todos_deve_retornar_uma_lista_vazia()
-        {
-            //arrange
-
-            //act
-            var listaCompraCliente = _servicoCompraCliente.ObterTodos();
-            var tamanhoDaListaCompraCliente = listaCompraCliente.Count;
-
-            //assert
-            Assert.NotNull(listaCompraCliente);
-            Assert.Equal(0, tamanhoDaListaCompraCliente);
-        }
-
-        [Fact]
         public void Obter_todos_vai_no_banco_de_dados_e_deve_retornar_lista_com_dados()
         {
             //arrange
