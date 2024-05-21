@@ -14,6 +14,7 @@ namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
             servicos.AddScoped<IServicoCompraCliente, ServicoCompraCliente>();
 
             servicos.AddScoped<IRepositorioObra, RepositorioObraMock>();
+            servicos.AddScoped<IRepositorioCompraCliente, RepositorioCompraClienteMock>(); 
         }
     }
 }

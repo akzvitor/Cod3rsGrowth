@@ -21,8 +21,12 @@ namespace Cod3rsGrowth.Testes
             //arrange
 
             //act
-            
+            var compraCliente = _servicoCompraCliente.ObterTodos();
+            var tamanhoDaListaCompraCliente = compraCliente.Count;
+
             //assert
+            Assert.NotNull(compraCliente);
+            Assert.Equal(0, tamanhoDaListaCompraCliente);
         }
     }
 }
