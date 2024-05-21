@@ -4,10 +4,10 @@ namespace Cod3rsGrowth.Servico.Interfaces
 {
     public interface IServicoCompraCliente
     {
-        public List<CompraCliente> ObterTodos();
-        public void Criar(CompraCliente novaCompraCliente);
-        public void Editar(CompraCliente compraCliente);
-        public void Remover(CompraCliente compraCliente);
-        public void ObterPorId();
+        List<CompraCliente> ObterTodos();
+        void Criar(CompraCliente novaCompraCliente);
+        void Editar(CompraCliente compraCliente);
+        void Remover(CompraCliente compraCliente);
+        void ObterPorId();
     }
 }
