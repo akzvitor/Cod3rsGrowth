@@ -67,5 +67,17 @@ namespace Cod3rsGrowth.Testes
             Assert.NotNull(compras);
             Assert.IsType<List<CompraCliente>>(compras);
         }
+
+        [Fact]
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarMensagemDeErro()
+        {
+
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdValido_DeveRetornarCompraClienteCorreta()
+        {
+
+        }
     }
 }

@@ -59,5 +59,17 @@ namespace Cod3rsGrowth.Testes
             Assert.NotNull(obras);
             Assert.IsType <List<Obra>>(obras);
         }
+
+        [Fact]
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarMensagemDeErro()
+        {
+
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
+        {
+
+        }
     }
 }
