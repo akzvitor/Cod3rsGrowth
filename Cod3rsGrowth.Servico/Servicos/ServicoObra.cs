@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Infra.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace Cod3rsGrowth.Servico.Servicos
 {
@@ -19,22 +20,17 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioObra.ObterTodos();
         }
 
+        public Obra ObterPorId(int idInformado)
+        {
+            return _repositorioObra.ObterPorId(idInformado);
+        }
+
         public void Criar(Obra novaObra)
         {
             throw new NotImplementedException();
         }
 
-        public void CriarObra(Obra novaObra)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Editar(Obra obra)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ObterPorId()
         {
             throw new NotImplementedException();
         }

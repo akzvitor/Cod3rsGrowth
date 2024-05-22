@@ -5,5 +5,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
     public interface IRepositorioObra
     {
         List<Obra> ObterTodos();
+        Obra ObterPorId(int idInformado);
     }
 }

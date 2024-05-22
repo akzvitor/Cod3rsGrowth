@@ -12,5 +12,20 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             return ListaObra;
         }
+
+        public Obra ObterPorId(int idInformado)
+        {
+            Obra obraRequisitada = new();
+
+            foreach (var item in ListaObra)
+            {
+                if (item.Id == idInformado)
+                {
+                    obraRequisitada = item;
+                }
+            }
+
+            return obraRequisitada;
+        }
     }
 }

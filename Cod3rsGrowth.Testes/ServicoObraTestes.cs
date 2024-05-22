@@ -69,7 +69,34 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
         {
+            //arrange
+            var novaObra = new Obra
+            {
+                Id = 1, 
+                Titulo = "Na Honjaman Level Up",
+                Formato = Formato.Manhwa,
+                Autor = "Chu-Gong"
+            };
 
+            var novaObra2 = new Obra
+            {
+                Id = 2,
+                Titulo = "Jeonjijeok Dokja Sijeom",
+                Formato = Formato.Manhwa,
+                Autor = "UMI"
+            };
+
+            //act
+            _servicoObra.ObterTodos().Add(novaObra);
+            _servicoObra.ObterTodos().Add(novaObra2);
+            var soloLeveling = _servicoObra.ObterPorId(1);
+            var omniscientReaders = _servicoObra.ObterPorId(2);
+            
+            //assert
+            Assert.NotNull(soloLeveling);
+            Assert.Equal(novaObra, soloLeveling);
+            Assert.NotNull(omniscientReaders);
+            Assert.Equal(novaObra2, omniscientReaders);
         }
     }
 }
