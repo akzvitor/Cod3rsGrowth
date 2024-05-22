@@ -8,16 +8,21 @@ namespace Cod3rsGrowth.Testes
 {
     public class ServicoCompraClienteTestes : TesteBase
     {
-        private readonly IServicoCompraCliente _servicoCompraCliente;
+        private IServicoCompraCliente? _servicoCompraCliente;
 
         public ServicoCompraClienteTestes()
         {
-            _servicoCompraCliente = ServiceProvider.GetService<IServicoCompraCliente>() 
+            CarregarServicos();
+        }
+
+        private void CarregarServicos()
+        {
+            _servicoCompraCliente = ServiceProvider.GetService<IServicoCompraCliente>()
                 ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoCompraCliente)}]");
         }
 
         [Fact]
-        public void Obter_todos_vai_no_banco_de_dados_e_deve_retornar_lista_com_dados()
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarListaCompraCliente()
         {
             //arrange
 
@@ -39,15 +44,20 @@ namespace Cod3rsGrowth.Testes
             };
 
             _servicoCompraCliente.ObterTodos().Add(novaCompra);
-            var compra1 = _servicoCompraCliente.ObterTodos().FirstOrDefault();
+            var listaDoBanco = _servicoCompraCliente.ObterTodos();
+
+            List<CompraCliente> listaMock = new()
+            {
+                novaCompra
+            };
 
             //assert
-            Assert.NotNull(compra1);
-            Assert.Equal(novaCompra, compra1);
+            Assert.NotNull(listaDoBanco);
+            Assert.Equal(listaMock, listaDoBanco);
         }
 
         [Fact]
-        public void Obter_todos_deve_retornar_uma_lista_da_sua_classe()
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarListaDoTipoCompraCliente()
         {
             //arrange
 
