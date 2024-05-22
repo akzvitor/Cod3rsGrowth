@@ -15,10 +15,10 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
         public CompraCliente ObterPorId(int idInformado)
         {
-            var resultadoDaBusca = ListaCompraCliente.Find(compra => compra.Id == idInformado)
+            var compraRequisitada = ListaCompraCliente.Find(compra => compra.Id == idInformado)
                 ?? throw new ArgumentNullException();
 
-            return resultadoDaBusca;
+            return compraRequisitada;
         }
     }
 }

@@ -122,7 +122,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_InformandoIdInvalido_DeveRetornarMensagemDeErro()
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecao()
         {
             //arrange
             var novaCompra1 = new CompraCliente
@@ -134,7 +134,7 @@ namespace Cod3rsGrowth.Testes
             _servicoCompraCliente.ObterTodos().Add(novaCompra1);
 
             //assert
-            Assert.Throws<ArgumentNullException>(() => _servicoCompraCliente.ObterPorId(5));
+            Assert.Throws<ArgumentNullException>(() => _servicoCompraCliente.ObterPorId(6));
         }
 
         [Fact]

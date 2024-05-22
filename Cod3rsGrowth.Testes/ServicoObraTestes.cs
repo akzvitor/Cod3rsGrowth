@@ -1,6 +1,7 @@
 using Cod3rsGrowth.Dominio.Classes;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Interfaces;
+using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -94,9 +95,19 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_InformandoIdInvalido_DeveRetornarMensagemDeErro()
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecao()
         {
+            //arrange
+            var novaObra = new Obra
+            {
+                Id = 3
+            };
 
+            //act
+            _servicoObra.ObterTodos().Add(novaObra);
+
+            //assert
+            Assert.Throws<ArgumentNullException>(() => _servicoObra.ObterPorId(4));
         }
 
         [Fact]
