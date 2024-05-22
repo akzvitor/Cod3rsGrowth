@@ -2,8 +2,8 @@
 
 namespace Cod3rsGrowth.Infra.Interfaces
 {
-    public interface IRepositorio
+    public interface IRepositorioObra
     {
         List<Obra> ObterTodos();
-     }
+    }
 }
