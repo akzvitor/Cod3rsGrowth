@@ -70,12 +70,6 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_InformandoIdInvalido_DeveRetornarMensagemDeErro()
-        {
-            
-        }
-
-        [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarCompraClienteCorreta()
         {
             //arrange
@@ -125,6 +119,22 @@ namespace Cod3rsGrowth.Testes
             Assert.Equal(novaCompra, compraClienteVitor);
             Assert.NotNull(compraClienteJorge);
             Assert.Equal(novaCompra2, compraClienteJorge);
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarMensagemDeErro()
+        {
+            //arrange
+            var novaCompra1 = new CompraCliente
+            {
+                Id = 3
+            };
+
+            //act
+            _servicoCompraCliente.ObterTodos().Add(novaCompra1);
+
+            //assert
+            Assert.Throws<ArgumentNullException>(() => _servicoCompraCliente.ObterPorId(5));
         }
 
         [Fact]
