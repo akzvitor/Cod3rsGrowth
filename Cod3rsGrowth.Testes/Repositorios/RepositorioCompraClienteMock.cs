@@ -12,5 +12,20 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             return ListaCompraCliente;
         }
+
+        public CompraCliente ObterPorId(int idInformado)
+        {
+            CompraCliente compraRequisitada = new();
+
+            foreach (var item in ListaCompraCliente)
+            {
+                if (item.Id == idInformado)
+                {
+                    compraRequisitada = item;
+                }
+            }
+
+            return compraRequisitada;
+        }
     }
 }

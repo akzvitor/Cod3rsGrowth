@@ -5,7 +5,7 @@ namespace Cod3rsGrowth.Servico.Interfaces
     public interface IServicoCompraCliente
     {
         List<CompraCliente> ObterTodos();
-        void ObterPorId();
+        CompraCliente ObterPorId(int idInformado);
         void Criar(CompraCliente novaCompraCliente);
         void Editar(CompraCliente compraCliente);
         void Remover(CompraCliente compraCliente);

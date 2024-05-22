@@ -29,6 +29,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaCompra = new CompraCliente
             {
+                Cpf = "11111111111",
                 Nome = "Vitor",
                 Produtos = new List<Obra>
                 {
@@ -43,8 +44,9 @@ namespace Cod3rsGrowth.Testes
                 }
             };
 
-            _servicoCompraCliente.ObterTodos().Add(novaCompra);
             var listaDoBanco = _servicoCompraCliente.ObterTodos();
+            listaDoBanco.Clear();
+            listaDoBanco.Add(novaCompra);
 
             List<CompraCliente> listaMock = new()
             {
@@ -77,7 +79,53 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarCompraClienteCorreta()
         {
+            //arrange
+            var novaCompra = new CompraCliente
+            {
+                Cpf = "22222222222",
+                Id = 10,
+                Nome = "Luiz",
+                Produtos = new List<Obra>
+                {
+                    new()
+                    {
+                        Titulo = "One Punch Man",
+                    },
+                    new()
+                    {
+                        Titulo = "Sakamoto Days"
+                    }
+                }
+            };
+            var novaCompra2 = new CompraCliente
+            {
+                Cpf = "33333333333",
+                Id = 20,
+                Nome = "Jorge",
+                Produtos = new List<Obra>
+                {
+                    new()
+                    {
+                        Titulo = "Hells Paradise: Jigokuraku"
+                    },
+                    new()
+                    {
+                        Titulo = "Shingeki no Kyojin"
+                    }
+                }
+            };
 
+            //act
+            _servicoCompraCliente.ObterTodos().Add(novaCompra);
+            _servicoCompraCliente.ObterTodos().Add(novaCompra2);
+            var compraClienteVitor = _servicoCompraCliente.ObterPorId(10);
+            var compraClienteJorge = _servicoCompraCliente.ObterPorId(20);
+
+            //assert
+            Assert.NotNull(compraClienteVitor);
+            Assert.Equal(novaCompra, compraClienteVitor);
+            Assert.NotNull(compraClienteJorge);
+            Assert.Equal(novaCompra2, compraClienteJorge);
         }
     }
 }

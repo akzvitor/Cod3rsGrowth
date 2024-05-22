@@ -18,9 +18,9 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioCompraCliente.ObterTodos();
         }
 
-        public void ObterPorId()
+        public CompraCliente ObterPorId(int idInformado)
         {
-            throw new NotImplementedException();
+            return _repositorioCompraCliente.ObterPorId(idInformado);
         }
 
         public void Criar(CompraCliente novaCompraCliente)
