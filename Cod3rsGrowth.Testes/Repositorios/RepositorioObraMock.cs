@@ -15,17 +15,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
         public Obra ObterPorId(int idInformado)
         {
-            Obra obraRequisitada = new();
-
-            foreach (var item in ListaObra)
-            {
-                if (item.Id == idInformado)
-                {
-                    obraRequisitada = item;
-                }
-            }
-
-            return obraRequisitada;
+            return ListaObra.Find(obra => obra.Id == idInformado);
         }
     }
 }
