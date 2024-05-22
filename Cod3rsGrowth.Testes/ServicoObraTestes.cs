@@ -23,7 +23,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterTodos_ComDadosDisponiveis_DeveRetornarListaDeObras()
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaDeObras()
         {
             //arrange
 
@@ -61,18 +61,12 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_InformandoIdInvalido_DeveRetornarMensagemDeErro()
-        {
-
-        }
-
-        [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
         {
             //arrange
             var novaObra = new Obra
             {
-                Id = 1, 
+                Id = 1,
                 Titulo = "Na Honjaman Level Up",
                 Formato = Formato.Manhwa,
                 Autor = "Chu-Gong"
@@ -91,12 +85,30 @@ namespace Cod3rsGrowth.Testes
             _servicoObra.ObterTodos().Add(novaObra2);
             var soloLeveling = _servicoObra.ObterPorId(1);
             var omniscientReaders = _servicoObra.ObterPorId(2);
-            
+
             //assert
             Assert.NotNull(soloLeveling);
             Assert.Equal(novaObra, soloLeveling);
             Assert.NotNull(omniscientReaders);
             Assert.Equal(novaObra2, omniscientReaders);
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarMensagemDeErro()
+        {
+
+        }
+
+        [Fact]
+        public void ObterPorId_ComDadosDisponiveis_DeveRetornarObjetoDoTipoObra()
+        {
+            //arrange
+
+            //act
+            var obra = _servicoObra.ObterPorId(1);
+            //assert
+            Assert.NotNull(obra);
+            Assert.IsType<Obra>(obra);
         }
     }
 }

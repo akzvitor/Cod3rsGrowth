@@ -22,7 +22,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterTodos_ComDadosDisponiveis_DeveRetornarListaCompraCliente()
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaCompraCliente()
         {
             //arrange
 
@@ -82,7 +82,7 @@ namespace Cod3rsGrowth.Testes
             var novaCompra = new CompraCliente
             {
                 Cpf = "22222222222",
-                Id = 10,
+                Id = 1,
                 Nome = "Luiz",
                 Produtos = new List<Obra>
                 {
@@ -99,7 +99,7 @@ namespace Cod3rsGrowth.Testes
             var novaCompra2 = new CompraCliente
             {
                 Cpf = "33333333333",
-                Id = 20,
+                Id = 2,
                 Nome = "Jorge",
                 Produtos = new List<Obra>
                 {
@@ -117,14 +117,32 @@ namespace Cod3rsGrowth.Testes
             //act
             _servicoCompraCliente.ObterTodos().Add(novaCompra);
             _servicoCompraCliente.ObterTodos().Add(novaCompra2);
-            var compraClienteVitor = _servicoCompraCliente.ObterPorId(10);
-            var compraClienteJorge = _servicoCompraCliente.ObterPorId(20);
+            var compraClienteVitor = _servicoCompraCliente.ObterPorId(1);
+            var compraClienteJorge = _servicoCompraCliente.ObterPorId(2);
 
             //assert
             Assert.NotNull(compraClienteVitor);
             Assert.Equal(novaCompra, compraClienteVitor);
             Assert.NotNull(compraClienteJorge);
             Assert.Equal(novaCompra2, compraClienteJorge);
+        }
+
+        [Fact]
+        public void ObterPorId_ComDadosDisponiveis_DeveRetornarObjetoDoTipoCompraCliente()
+        {
+            //arrange
+            var novaCompra1 = new CompraCliente
+            {
+                Id = 3
+            };
+
+            //act
+            _servicoCompraCliente.ObterTodos().Add(novaCompra1);
+            var compra = _servicoCompraCliente.ObterPorId(3);
+            
+            //assert
+            Assert.NotNull(compra);
+            Assert.IsType<CompraCliente>(compra);
         }
     }
 }
