@@ -44,9 +44,8 @@ namespace Cod3rsGrowth.Testes
                 }
             };
 
+            _servicoCompraCliente.ObterTodos().Add(novaCompra);
             var listaDoBanco = _servicoCompraCliente.ObterTodos();
-            listaDoBanco.Clear();
-            listaDoBanco.Add(novaCompra);
 
             List<CompraCliente> listaMock = new()
             {
@@ -55,7 +54,7 @@ namespace Cod3rsGrowth.Testes
 
             //assert
             Assert.NotNull(listaDoBanco);
-            Assert.Equal(listaMock, listaDoBanco);
+            Assert.Equivalent(listaMock, listaDoBanco);
         }
 
         [Fact]

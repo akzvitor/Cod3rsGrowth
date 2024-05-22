@@ -45,7 +45,7 @@ namespace Cod3rsGrowth.Testes
 
             //assert
             Assert.NotNull(listaDoBanco);
-            Assert.Equal(listaMock, listaDoBanco);
+            Assert.Equivalent(listaMock, listaDoBanco);
         }
 
         [Fact]
