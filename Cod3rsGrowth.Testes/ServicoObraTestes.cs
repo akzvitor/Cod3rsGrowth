@@ -29,19 +29,20 @@ namespace Cod3rsGrowth.Testes
             //arrange
 
             //act
-            var novaObra = new Obra
+            var novaObra1 = new Obra
             {
+                Id = 1,
                 Titulo = "Na Honjaman Level Up",
                 Formato = Formato.Manhwa,
                 Autor = "Chu-Gong"
             };
 
-            _servicoObra.ObterTodos().Add(novaObra);
+            _servicoObra.ObterTodos().Add(novaObra1);
             var listaDoBanco = _servicoObra.ObterTodos();
 
             List<Obra> listaMock = new()
             {
-                novaObra
+                novaObra1
             };
 
             //assert
@@ -65,58 +66,63 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
         {
             //arrange
-            var novaObra = new Obra
-            {
-                Id = 1,
-                Titulo = "Na Honjaman Level Up",
-                Formato = Formato.Manhwa,
-                Autor = "Chu-Gong"
-            };
-
             var novaObra2 = new Obra
             {
                 Id = 2,
+                Titulo = "Berserk",
+                Formato = Formato.Manga,
+                Autor = "Kento Miura"
+            };
+
+            var novaObra3 = new Obra
+            {
+                Id = 3,
                 Titulo = "Jeonjijeok Dokja Sijeom",
                 Formato = Formato.Manhwa,
                 Autor = "UMI"
             };
 
             //act
-            _servicoObra.ObterTodos().Add(novaObra);
             _servicoObra.ObterTodos().Add(novaObra2);
-            var soloLeveling = _servicoObra.ObterPorId(1);
-            var omniscientReaders = _servicoObra.ObterPorId(2);
+            _servicoObra.ObterTodos().Add(novaObra3);
+            var berserk = _servicoObra.ObterPorId(2);
+            var omniscientReaders = _servicoObra.ObterPorId(3);
 
             //assert
-            Assert.NotNull(soloLeveling);
-            Assert.Equal(novaObra, soloLeveling);
+            Assert.NotNull(berserk);
+            Assert.Equal(novaObra2, berserk);
             Assert.NotNull(omniscientReaders);
-            Assert.Equal(novaObra2, omniscientReaders);
+            Assert.Equal(novaObra3, omniscientReaders);
         }
 
         [Fact]
-        public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecao()
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
         {
             //arrange
-            var novaObra = new Obra
+            var novaObra4 = new Obra
             {
-                Id = 3
+                Id = 4
             };
 
             //act
-            _servicoObra.ObterTodos().Add(novaObra);
+            _servicoObra.ObterTodos().Add(novaObra4);
 
             //assert
-            Assert.Throws<ArgumentNullException>(() => _servicoObra.ObterPorId(4));
+            var excecao = Assert.Throws<Exception>(() => _servicoObra.ObterPorId(100));
+            Assert.Equal("ID inválido. Obra não encontrada.", excecao.Message);
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarObjetoDoTipoObra()
+        public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoObra()
         {
             //arrange
-
+            var novaObra5 = new Obra
+            {
+                Id = 5
+            };
             //act
-            var obra = _servicoObra.ObterPorId(1);
+            _servicoObra.ObterTodos().Add(novaObra5);
+            var obra = _servicoObra.ObterPorId(5);
             //assert
             Assert.NotNull(obra);
             Assert.IsType<Obra>(obra);

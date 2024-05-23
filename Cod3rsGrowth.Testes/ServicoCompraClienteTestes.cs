@@ -27,8 +27,9 @@ namespace Cod3rsGrowth.Testes
             //arrange
 
             //act
-            var novaCompra = new CompraCliente
+            var novaCompra1 = new CompraCliente
             {
+                Id = 1,
                 Cpf = "11111111111",
                 Nome = "Vitor",
                 Produtos = new List<Obra>
@@ -44,12 +45,12 @@ namespace Cod3rsGrowth.Testes
                 }
             };
 
-            _servicoCompraCliente.ObterTodos().Add(novaCompra);
+            _servicoCompraCliente.ObterTodos().Add(novaCompra1);
             var listaDoBanco = _servicoCompraCliente.ObterTodos();
 
             List<CompraCliente> listaMock = new()
             {
-                novaCompra
+                novaCompra1
             };
 
             //assert
@@ -73,10 +74,10 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_InformandoIdValido_DeveRetornarCompraClienteCorreta()
         {
             //arrange
-            var novaCompra = new CompraCliente
+            var novaCompra2 = new CompraCliente
             {
                 Cpf = "22222222222",
-                Id = 1,
+                Id = 2,
                 Nome = "Luiz",
                 Produtos = new List<Obra>
                 {
@@ -90,10 +91,10 @@ namespace Cod3rsGrowth.Testes
                     }
                 }
             };
-            var novaCompra2 = new CompraCliente
+            var novaCompra3 = new CompraCliente
             {
                 Cpf = "33333333333",
-                Id = 2,
+                Id = 3,
                 Nome = "Jorge",
                 Produtos = new List<Obra>
                 {
@@ -109,46 +110,47 @@ namespace Cod3rsGrowth.Testes
             };
 
             //act
-            _servicoCompraCliente.ObterTodos().Add(novaCompra);
             _servicoCompraCliente.ObterTodos().Add(novaCompra2);
-            var compraClienteVitor = _servicoCompraCliente.ObterPorId(1);
-            var compraClienteJorge = _servicoCompraCliente.ObterPorId(2);
+            _servicoCompraCliente.ObterTodos().Add(novaCompra3);
+            var compraClienteLuiz = _servicoCompraCliente.ObterPorId(2);
+            var compraClienteJorge = _servicoCompraCliente.ObterPorId(3);
 
             //assert
-            Assert.NotNull(compraClienteVitor);
-            Assert.Equal(novaCompra, compraClienteVitor);
+            Assert.NotNull(compraClienteLuiz);
+            Assert.Equal(novaCompra2, compraClienteLuiz);
             Assert.NotNull(compraClienteJorge);
-            Assert.Equal(novaCompra2, compraClienteJorge);
+            Assert.Equal(novaCompra3, compraClienteJorge);
         }
 
         [Fact]
-        public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecao()
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
         {
             //arrange
-            var novaCompra1 = new CompraCliente
+            var novaCompra4 = new CompraCliente
             {
-                Id = 3
+                Id = 4
             };
 
             //act
-            _servicoCompraCliente.ObterTodos().Add(novaCompra1);
+            _servicoCompraCliente.ObterTodos().Add(novaCompra4);
 
             //assert
-            Assert.Throws<ArgumentNullException>(() => _servicoCompraCliente.ObterPorId(6));
+            var excecao = Assert.Throws<Exception>(() => _servicoCompraCliente.ObterPorId(100));
+            Assert.Equal("ID inválido. Compra não encontrada.", excecao.Message);
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarObjetoDoTipoCompraCliente()
+        public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoCompraCliente()
         {
             //arrange
-            var novaCompra1 = new CompraCliente
+            var novaCompra5 = new CompraCliente
             {
-                Id = 3
+                Id = 5
             };
 
             //act
-            _servicoCompraCliente.ObterTodos().Add(novaCompra1);
-            var compra = _servicoCompraCliente.ObterPorId(3);
+            _servicoCompraCliente.ObterTodos().Add(novaCompra5);
+            var compra = _servicoCompraCliente.ObterPorId(5);
             
             //assert
             Assert.NotNull(compra);

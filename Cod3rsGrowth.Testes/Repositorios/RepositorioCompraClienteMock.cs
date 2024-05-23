@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         public CompraCliente ObterPorId(int idInformado)
         {
             var compraRequisitada = ListaCompraCliente.Find(compra => compra.Id == idInformado)
-                ?? throw new ArgumentNullException();
+                ?? throw new Exception("ID inválido. Compra não encontrada.");
 
             return compraRequisitada;
         }

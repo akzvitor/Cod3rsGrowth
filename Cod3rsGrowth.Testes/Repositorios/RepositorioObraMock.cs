@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         public Obra ObterPorId(int idInformado)
         {
             var obraRequisitada = ListaObra.Find(obra => obra.Id == idInformado)
-                ?? throw new ArgumentNullException();
+                ?? throw new Exception("ID inválido. Obra não encontrada.");
             return obraRequisitada;
         }
     }
