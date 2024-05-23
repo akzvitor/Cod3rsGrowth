@@ -10,11 +10,13 @@ namespace Cod3rsGrowth.Testes
     public class ServicoObraTestes : TesteBase
     {
         private IServicoObra? _servicoObra;
+        private List<Obra> _listaDoBanco;
+        private List<Obra> _listaMock;
 
         public ServicoObraTestes()
         {
             CarregarServico();
-            InicializarDadosMockados();
+            _listaMock = InicializarDadosMockados();
         }
 
         private void CarregarServico()
@@ -75,30 +77,29 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaDeObras()
         {
-            var listaDoBanco = _servicoObra.ObterTodos();
-            List<Obra> listaMock = InicializarDadosMockados();
+            _listaDoBanco = _servicoObra.ObterTodos();
 
-            Assert.NotNull(listaDoBanco);
-            Assert.Equivalent(listaMock, listaDoBanco);
+            Assert.NotNull(_listaDoBanco);
+            Assert.Equivalent(_listaMock, _listaDoBanco);
         }
 
         [Fact]
         public void ObterTodos_EmQualquerCenario_DeveRetornarUmaListaDoTipoObra()
         {
-            var listaDoBanco = _servicoObra.ObterTodos();
+            _listaDoBanco = _servicoObra.ObterTodos();
 
-            Assert.NotNull(listaDoBanco);
-            Assert.IsType <List<Obra>>(listaDoBanco);
+            Assert.NotNull(_listaDoBanco);
+            Assert.IsType <List<Obra>>(_listaDoBanco);
         }
 
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
         {
-            var listaMock = InicializarDadosMockados();
             var obra = _servicoObra.ObterPorId(1);
+            var obraMock = _listaMock[0];
 
             Assert.NotNull(obra);
-            Assert.Equivalent(listaMock[0], obra);
+            Assert.Equivalent(obraMock, obra);
         }
 
         [Fact]
