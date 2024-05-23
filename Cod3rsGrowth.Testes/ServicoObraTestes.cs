@@ -104,10 +104,11 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
         {
+            var idInvalido = 200;
             var obra = _servicoObra.ObterPorId(4);
 
-            var excecao = Assert.Throws<Exception>(() => _servicoObra.ObterPorId(200));
-            Assert.Equal("ID inválido. Obra não encontrada.", excecao.Message);
+            var excecao = Assert.Throws<Exception>(() => _servicoObra.ObterPorId(idInvalido));
+            Assert.Equal($"O ID informado ({idInvalido}) é inválido. Obra não encontrada.", excecao.Message);
         }
 
         [Fact]
