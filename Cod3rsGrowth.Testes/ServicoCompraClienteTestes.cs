@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Testes
         public ServicoCompraClienteTestes()
         {
             CarregarServicos();
-            _listaMock =InicializarDadosMockados();
+            _listaMock = InicializarDadosMockados();
         }
 
         private void CarregarServicos()
