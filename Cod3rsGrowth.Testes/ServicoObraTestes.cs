@@ -10,10 +10,13 @@ namespace Cod3rsGrowth.Testes
     public class ServicoObraTestes : TesteBase
     {
         private IServicoObra? _servicoObra;
+        private List<Obra> _listaDoBanco;
+        private List<Obra> _listaMock;
 
         public ServicoObraTestes()
         {
             CarregarServico();
+            _listaMock = InicializarDadosMockados();
         }
 
         private void CarregarServico()
@@ -22,42 +25,105 @@ namespace Cod3rsGrowth.Testes
                 ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoObra)}]");
         }
 
-        [Fact]
-        public void ObterTodos_ComDadosDisponiveis_DeveRetornarListaDeObras()
+        private List<Obra> InicializarDadosMockados()
         {
-            //arrange
-
-            //act
-            var novaObra = new Obra
+            List<Obra> listaDeObras = new()
             {
-                Titulo = "Na Honjaman Level Up",
-                Formato = Formato.Manhwa,
-                Autor = "Chu-Gong"
+                new Obra
+                {
+                    Id = 1,
+                    Titulo = "Na Honjaman Level Up",
+                    Formato = Formato.Manhwa,
+                    Autor = "Chu-Gong"
+                },
+                new Obra
+                {
+                    Id = 2,
+                    Titulo = "Jujutsu Kaisen",
+                    Formato = Formato.Manga,
+                    Autor = "Gege Akutami"
+                },
+                new Obra
+                {
+                    Id = 3,
+                    Titulo = "Jeonjijeok Dokja Sijeom",
+                    Formato = Formato.Manhwa,
+                    Autor = "UMI"
+                },
+                new Obra
+                {
+                    Id = 4,
+                    Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                    Formato = Formato.WebNovel,
+                    Autor = "Tappei Nagatsuki"
+                },
+                new Obra
+                {
+                    Id = 5,
+                    Titulo = "One Piece",
+                    Formato = Formato.Manga,
+                    Autor = "Eiichiro Oda"
+                }
             };
 
-            _servicoObra.ObterTodos().Add(novaObra);
-            var listaDoBanco = _servicoObra.ObterTodos();
+            _listaDoBanco = _servicoObra.ObterTodos();
 
-            List<Obra> listaMock = new()
+            foreach (var obra in listaDeObras)
             {
-                novaObra
-            };
+                _listaDoBanco.Add(obra);
+            }
 
-            //assert
-            Assert.NotNull(listaDoBanco);
-            Assert.Equal(listaMock, listaDoBanco);
+            return listaDeObras;
+        } 
+
+        [Fact]
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaDeObras()
+        {
+            _listaDoBanco = _servicoObra.ObterTodos();
+
+            Assert.NotNull(_listaDoBanco);
+            Assert.Equivalent(_listaMock, _listaDoBanco);
         }
 
         [Fact]
-        public void ObterTodos_EmQualquerCenario_DeveRetornarListaDoTipoObra()
+        public void ObterTodos_EmQualquerCenario_DeveRetornarUmaListaDoTipoObra()
         {
-            //arrange
+            _listaDoBanco = _servicoObra.ObterTodos();
 
-            //act
-            var obras = _servicoObra.ObterTodos();
-            //assert
-            Assert.NotNull(obras);
-            Assert.IsType <List<Obra>>(obras);
+            Assert.NotNull(_listaDoBanco);
+            Assert.IsType <List<Obra>>(_listaDoBanco);
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
+        {
+            var idValidoInformado = 1;
+            var obra = _servicoObra.ObterPorId(idValidoInformado);
+            var obraMock = _listaMock.FirstOrDefault();
+
+            Assert.NotNull(obra);
+            Assert.Equivalent(obraMock, obra);
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
+        {
+            var idValidoInformado = 4;
+            var idInvalidoInformado = 200;
+            var obra = _servicoObra.ObterPorId(idValidoInformado);
+
+            var excecao = Assert.Throws<Exception>(() => _servicoObra.ObterPorId(idInvalidoInformado));
+            Assert.Equal($"O ID informado ({idInvalidoInformado}) é inválido. Obra não encontrada.", excecao.Message);
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoObra()
+        {
+            var idValidoInformado = 5;
+            var obra = _servicoObra.ObterPorId(idValidoInformado);
+            
+            Assert.NotNull(obra);
+            Assert.IsType<Obra>(obra);
         }
     }
 }

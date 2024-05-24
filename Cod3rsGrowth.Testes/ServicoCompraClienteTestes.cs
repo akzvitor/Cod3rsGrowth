@@ -9,10 +9,13 @@ namespace Cod3rsGrowth.Testes
     public class ServicoCompraClienteTestes : TesteBase
     {
         private IServicoCompraCliente? _servicoCompraCliente;
+        private List<CompraCliente> _listaDoBanco;
+        private List<CompraCliente> _listaMock;
 
         public ServicoCompraClienteTestes()
         {
             CarregarServicos();
+            _listaMock = InicializarDadosMockados();
         }
 
         private void CarregarServicos()
@@ -21,51 +24,121 @@ namespace Cod3rsGrowth.Testes
                 ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoCompraCliente)}]");
         }
 
-        [Fact]
-        public void ObterTodos_ComDadosDisponiveis_DeveRetornarListaCompraCliente()
+        private List<CompraCliente> InicializarDadosMockados()
         {
-            //arrange
-
-            //act
-            var novaCompra = new CompraCliente
+            List<CompraCliente> listaDeComprasCliente = new()
             {
-                Nome = "Vitor",
-                Produtos = new List<Obra>
+                new CompraCliente
                 {
-                    new()
+                    Id = 1,
+                    Cpf = "11111111111",
+                    Nome = "Vitor",
+                    Produtos = new List<Obra>
                     {
-                        Titulo = "Jujutsu Kaisen",
-                    },
-                    new()
+                        new()
+                        {
+                            Titulo = "Dungeon Meshi",
+                        },
+                        new()
+                        {
+                            Titulo = "Dorohedoro"
+                        }
+                    }
+                },
+                new CompraCliente
+                {
+                    Id = 2,                    
+                    Cpf = "22222222222",
+                    Nome = "Luiz",
+                    Produtos = new List<Obra>
                     {
-                        Titulo = "Dorohedoro"
+                        new()
+                        {
+                            Titulo = "Gachiakuta",
+                        },
+                        new()
+                        {
+                            Titulo = "Sakamoto Days"
+                        }
+                    }
+                },
+                new CompraCliente
+                {
+                    Id = 3,
+                    Cpf = "33333333333",
+                    Nome = "Jorge",
+                    Produtos = new List<Obra>
+                    {
+                        new()
+                        {
+                            Titulo = "Hells Paradise: Jigokuraku"
+                        },
+                        new()
+                        {
+                            Titulo = "Shingeki no Kyojin"
+                        }
                     }
                 }
             };
 
-            _servicoCompraCliente.ObterTodos().Add(novaCompra);
-            var listaDoBanco = _servicoCompraCliente.ObterTodos();
+            _listaDoBanco = _servicoCompraCliente.ObterTodos();
 
-            List<CompraCliente> listaMock = new()
+            foreach (var compraCliente in listaDeComprasCliente)
             {
-                novaCompra
-            };
+                _listaDoBanco.Add(compraCliente);
+            }
 
-            //assert
-            Assert.NotNull(listaDoBanco);
-            Assert.Equal(listaMock, listaDoBanco);
+            return listaDeComprasCliente;
         }
 
         [Fact]
-        public void ObterTodos_ComDadosDisponiveis_DeveRetornarListaDoTipoCompraCliente()
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaCompraCliente()
         {
-            //arrange
+            _listaDoBanco = _servicoCompraCliente.ObterTodos();
 
-            //act
-            var compras = _servicoCompraCliente.ObterTodos();
-            //assert
-            Assert.NotNull(compras);
-            Assert.IsType<List<CompraCliente>>(compras);
+            Assert.NotNull(_listaDoBanco);
+            Assert.Equivalent(_listaMock, _listaDoBanco);
+        }
+
+        [Fact]
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarUmaListaDoTipoCompraCliente()
+        {
+            _listaDoBanco = _servicoCompraCliente.ObterTodos();
+            
+            Assert.NotNull(_listaDoBanco);
+            Assert.IsType<List<CompraCliente>>(_listaDoBanco);
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdValido_DeveRetornarCompraClienteCorreta()
+        {
+            var idValidoInformado = 1;
+            var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
+            var compraClienteMock = _listaMock.FirstOrDefault();
+
+            Assert.NotNull(compraCliente);
+            Assert.Equivalent(compraClienteMock, compraCliente);
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
+        {
+            var idValidoInformado = 3;
+            var idInvalidoInformado = 100;
+            var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
+
+            var excecao = Assert.Throws<Exception>(() => _servicoCompraCliente.ObterPorId(idInvalidoInformado));
+            Assert.Equal($"O ID informado ({idInvalidoInformado}) é inválido. Compra não encontrada.", excecao.Message);
+        }
+
+        [Fact]
+        public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoCompraCliente()
+        {
+            var idValidoInformado = 2;
+            var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
+            
+            Assert.NotNull(compraCliente);
+            Assert.IsType<CompraCliente>(compraCliente);
         }
     }
 }

@@ -18,22 +18,17 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioCompraCliente.ObterTodos();
         }
 
+        public CompraCliente ObterPorId(int idInformado)
+        {
+            return _repositorioCompraCliente.ObterPorId(idInformado);
+        }
+
         public void Criar(CompraCliente novaCompraCliente)
         {
             throw new NotImplementedException();
         }
 
-        public void CriarCompraCliente(CompraCliente novaCompraCliente)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Editar(CompraCliente compraCliente)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ObterPorId()
         {
             throw new NotImplementedException();
         }

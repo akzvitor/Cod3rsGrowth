@@ -5,5 +5,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
     public interface IRepositorioCompraCliente
     {
         List<CompraCliente> ObterTodos();
+        CompraCliente ObterPorId(int idInformado);
     }
 }
