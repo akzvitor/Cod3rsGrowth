@@ -81,9 +81,11 @@ namespace Cod3rsGrowth.Testes
                 }
             };
 
+            _listaDoBanco = _servicoCompraCliente.ObterTodos();
+
             foreach (var compraCliente in listaDeComprasCliente)
             {
-                _servicoCompraCliente.ObterTodos().Add(compraCliente);
+                _listaDoBanco.Add(compraCliente);
             }
 
             return listaDeComprasCliente;
@@ -110,8 +112,9 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarCompraClienteCorreta()
         {
-            var compraCliente = _servicoCompraCliente.ObterPorId(2);
-            var compraClienteMock = _listaMock[1];
+            var idValidoInformado = 1;
+            var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
+            var compraClienteMock = _listaMock.FirstOrDefault();
 
             Assert.NotNull(compraCliente);
             Assert.Equivalent(compraClienteMock, compraCliente);
@@ -120,17 +123,19 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
         {
-            var idInvalido = 100;
-            var compraCliente = _servicoCompraCliente.ObterPorId(3);
+            var idValidoInformado = 3;
+            var idInvalidoInformado = 100;
+            var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
 
-            var excecao = Assert.Throws<Exception>(() => _servicoCompraCliente.ObterPorId(idInvalido));
-            Assert.Equal($"O ID informado ({idInvalido}) é inválido. Compra não encontrada.", excecao.Message);
+            var excecao = Assert.Throws<Exception>(() => _servicoCompraCliente.ObterPorId(idInvalidoInformado));
+            Assert.Equal($"O ID informado ({idInvalidoInformado}) é inválido. Compra não encontrada.", excecao.Message);
         }
 
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoCompraCliente()
         {
-            var compraCliente = _servicoCompraCliente.ObterPorId(2);
+            var idValidoInformado = 2;
+            var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
             
             Assert.NotNull(compraCliente);
             Assert.IsType<CompraCliente>(compraCliente);

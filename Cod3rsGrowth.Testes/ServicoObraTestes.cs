@@ -66,13 +66,15 @@ namespace Cod3rsGrowth.Testes
                 }
             };
 
+            _listaDoBanco = _servicoObra.ObterTodos();
+
             foreach (var obra in listaDeObras)
             {
-                _servicoObra.ObterTodos().Add(obra);
+                _listaDoBanco.Add(obra);
             }
 
             return listaDeObras;
-        }
+        } 
 
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaDeObras()
@@ -95,8 +97,9 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
         {
-            var obra = _servicoObra.ObterPorId(1);
-            var obraMock = _listaMock[0];
+            var idValidoInformado = 1;
+            var obra = _servicoObra.ObterPorId(idValidoInformado);
+            var obraMock = _listaMock.FirstOrDefault();
 
             Assert.NotNull(obra);
             Assert.Equivalent(obraMock, obra);
@@ -105,17 +108,19 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
         {
-            var idInvalido = 200;
-            var obra = _servicoObra.ObterPorId(4);
+            var idValidoInformado = 4;
+            var idInvalidoInformado = 200;
+            var obra = _servicoObra.ObterPorId(idValidoInformado);
 
-            var excecao = Assert.Throws<Exception>(() => _servicoObra.ObterPorId(idInvalido));
-            Assert.Equal($"O ID informado ({idInvalido}) é inválido. Obra não encontrada.", excecao.Message);
+            var excecao = Assert.Throws<Exception>(() => _servicoObra.ObterPorId(idInvalidoInformado));
+            Assert.Equal($"O ID informado ({idInvalidoInformado}) é inválido. Obra não encontrada.", excecao.Message);
         }
 
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoObra()
         {
-            var obra = _servicoObra.ObterPorId(5);
+            var idValidoInformado = 5;
+            var obra = _servicoObra.ObterPorId(idValidoInformado);
             
             Assert.NotNull(obra);
             Assert.IsType<Obra>(obra);
