@@ -19,5 +19,10 @@ namespace Cod3rsGrowth.Testes.Repositorios
                 ?? throw new Exception($"O ID informado ({idInformado}) é inválido. Obra não encontrada.");
             return obraRequisitada;
         }
+
+        public void Criar(Obra novaObra) 
+        {
+            ListaObra.Add(novaObra);   
+        }
     }
 }

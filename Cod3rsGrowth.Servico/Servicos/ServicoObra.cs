@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.Servico.Servicos
 
         public void Criar(Obra novaObra)
         {
-            throw new NotImplementedException();
+            _repositorioObra.Criar(novaObra);
         }
 
         public void Editar(Obra obra)
