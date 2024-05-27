@@ -20,8 +20,8 @@ namespace Cod3rsGrowth.Testes.Repositorios
             return obraRequisitada;
         }
 
-        public void Criar(Obra novaObra) 
-        {
+        public void Criar(Obra novaObra)
+        { 
             ListaObra.Add(novaObra);   
         }
     }
