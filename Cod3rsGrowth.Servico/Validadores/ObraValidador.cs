@@ -16,7 +16,8 @@ namespace Cod3rsGrowth.Servico.Validadores
                 .Length(1, 150).WithMessage("O nome do autor deve ter entre 1 e 150 caracteres.");
 
             RuleFor(obra => obra.Sinopse)
-                .NotEmpty().WithMessage("A obra deve ter uma sinopse.");
+                .NotEmpty().WithMessage("A obra deve ter uma sinopse.")
+                .Length(1, 2000);
 
             RuleFor(obra => obra.Id)
                 .NotNull().WithMessage("O ID da obra deve ser especificado.")
@@ -33,6 +34,18 @@ namespace Cod3rsGrowth.Servico.Validadores
             RuleFor(obra => obra.FoiFinalizada)
                 .NotNull().WithMessage("O status da obra deve ser informado.");
 
+            RuleFor(obra => obra.InicioPublicacao)
+                .LessThanOrEqualTo(DateTime.Now).WithMessage("Data inválida.");
+
+            RuleFor(obra => obra.Formato)
+                .NotEmpty().WithMessage("O formato da obra deve ser informado.");
+
+            RuleFor(obra => obra.Genero)
+                .NotEmpty().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).")
+                .Must(list => list.Count < 10);
+
+            RuleForEach(obra => obra.Genero)
+                .NotEmpty().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).");
         }
     }
 }
