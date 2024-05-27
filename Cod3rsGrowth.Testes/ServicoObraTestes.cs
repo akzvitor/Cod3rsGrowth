@@ -2,6 +2,8 @@ using Cod3rsGrowth.Dominio.Classes;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using FluentValidation;
+using FluentValidation.Validators;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -124,6 +126,32 @@ namespace Cod3rsGrowth.Testes
             
             Assert.NotNull(obra);
             Assert.IsType<Obra>(obra);
+        }
+
+        [Fact]
+        public void Criar_InformandoDadoInvalido_DeveRetornarExcecaoComMensagemCorreta()
+        {
+            var novaObra = new Obra
+            {
+                Id = 50,
+                Titulo = "Dragon Ball Z",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = -4,
+                Sinopse = "aaaaaaaaaaaaaaa"
+            };
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal($"aaa", excecao.Message);
         }
     }
 }

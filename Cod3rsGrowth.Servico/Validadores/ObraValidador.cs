@@ -38,15 +38,15 @@ namespace Cod3rsGrowth.Servico.Validadores
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("Data inválida.");
 
             RuleFor(obra => obra.Formato)
-                .NotEmpty().WithMessage("O formato da obra deve ser informado.")
+                .NotNull().WithMessage("O formato da obra deve ser informado.")
                 .IsInEnum().WithMessage("Formato de obra inválido.");
 
-            RuleFor(obra => obra.Genero)
+            RuleFor(obra => obra.Generos)
                 .NotEmpty().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).")
-                .Must(list => list.Count < 10);
+                .Must(list => list.Count < 10).WithMessage("O limite de gêneros em uma única obra é 10.");
 
-            RuleForEach(obra => obra.Genero)
-                .NotEmpty().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).")
+            RuleForEach(obra => obra.Generos)
+                .NotNull().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).")
                 .IsInEnum().WithMessage("Genero informado inválido.");
         }
     }

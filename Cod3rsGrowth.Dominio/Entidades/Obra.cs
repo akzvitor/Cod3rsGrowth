@@ -7,7 +7,7 @@ namespace Cod3rsGrowth.Dominio.Classes
         public int Id {  get; set; }
         public string Titulo { get; set; }
         public string Autor { get; set; }
-        public List<Genero> Genero { get; set; }
+        public List<Genero> Generos { get; set; }
         public string Sinopse { get; set; }
         public string CapaImagemBase64 { get; set; }
         public int NumeroCapitulos { get; set; }
