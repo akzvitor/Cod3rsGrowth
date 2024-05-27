@@ -21,7 +21,7 @@ namespace Cod3rsGrowth.Servico.Validadores
 
             RuleFor(obra => obra.Id)
                 .NotNull().WithMessage("O ID da obra deve ser especificado.")
-                .GreaterThan(0).WithMessage("O ID da obra deve ser maior que 0.");
+                .GreaterThanOrEqualTo(0).WithMessage("O ID da obra não pode ser negativo.");
 
             RuleFor(obra => obra.NumeroCapitulos)
                 .NotNull().WithMessage("O número de capítulos da obra deve ser informado.")
@@ -35,6 +35,7 @@ namespace Cod3rsGrowth.Servico.Validadores
                 .NotNull().WithMessage("O status da obra deve ser informado.");
 
             RuleFor(obra => obra.InicioPublicacao)
+                .NotNull().WithMessage("A data de início da publicação da obra deve ser informada.")
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("Data inválida.");
 
             RuleFor(obra => obra.Formato)
