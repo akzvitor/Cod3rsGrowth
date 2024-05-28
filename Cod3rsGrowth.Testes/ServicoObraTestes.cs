@@ -66,6 +66,24 @@ namespace Cod3rsGrowth.Testes
                     Titulo = "One Piece",
                     Formato = Formato.Manga,
                     Autor = "Eiichiro Oda"
+                },
+                new Obra
+                {
+                    Id = 100,
+                    Titulo = "Dragon Ball",
+                    Autor = "Akira Toriyama",
+                    FoiFinalizada = false,
+                    Formato = Formato.Manga,
+                    Generos = new List<Genero>
+                    {
+                        Genero.Acao,
+                        Genero.ArtesMarciais,
+                        Genero.Aventura
+                    },
+                    InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                    NumeroCapitulos = 20,
+                    ValorObra = 0,
+                    Sinopse = "Sinopse Dragon Ball"
                 }
             };
 
@@ -130,6 +148,37 @@ namespace Cod3rsGrowth.Testes
         }
 
         //Método Criar
+        [Fact]
+        public void Criar_ComDadosValidos_DeveCriarObjetoCorretamente()
+        {
+            var novaObra = new Obra
+            {
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+
+            _servicoObra.Criar(novaObra);
+            _listaDoBanco = _servicoObra.ObterTodos();
+
+            var obraNaListaMock = _listaMock.Last();
+            var obraNoBanco = _listaDoBanco.Last();
+
+            Assert.NotNull(_listaDoBanco);
+            Assert.Equivalent(obraNaListaMock, obraNoBanco);
+        }
+
         [Theory]
         [InlineData("")]
         [InlineData("      ")]

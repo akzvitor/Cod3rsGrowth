@@ -7,6 +7,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
     public class RepositorioObraMock : IRepositorioObra
     {
         public List<Obra> ListaObra = ListaSingleton.Instancia.ListaObra;
+        private int _obraId = 100;
 
         public List<Obra> ObterTodos()
         {
@@ -22,6 +23,8 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
         public void Criar(Obra novaObra)
         { 
+            novaObra.Id = _obraId;
+            _obraId++;
             ListaObra.Add(novaObra);   
         }
     }
