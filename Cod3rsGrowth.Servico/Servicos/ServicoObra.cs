@@ -36,12 +36,13 @@ namespace Cod3rsGrowth.Servico.Servicos
 
             if (!resultadoValidacao.IsValid)
             {
-                var mensagemDeErro = "";
+                var mensagemDeErroGeral = "";
+
                 foreach (var falha in resultadoValidacao.Errors)
                 {
-                    mensagemDeErro += falha.ErrorMessage + " | ";
+                    mensagemDeErroGeral += falha.ErrorMessage + " | ";
                 }
-                throw new ValidationException(mensagemDeErro);
+                throw new ValidationException(mensagemDeErroGeral);
             }
            
             _repositorioObra.Criar(novaObra);

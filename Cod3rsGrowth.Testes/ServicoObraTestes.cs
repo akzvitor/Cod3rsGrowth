@@ -77,7 +77,7 @@ namespace Cod3rsGrowth.Testes
             }
 
             return listaDeObras;
-        } 
+        }
 
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaDeObras()
@@ -94,7 +94,7 @@ namespace Cod3rsGrowth.Testes
             _listaDoBanco = _servicoObra.ObterTodos();
 
             Assert.NotNull(_listaDoBanco);
-            Assert.IsType <List<Obra>>(_listaDoBanco);
+            Assert.IsType<List<Obra>>(_listaDoBanco);
         }
 
         [Fact]
@@ -124,19 +124,22 @@ namespace Cod3rsGrowth.Testes
         {
             var idValidoInformado = 5;
             var obra = _servicoObra.ObterPorId(idValidoInformado);
-            
+
             Assert.NotNull(obra);
             Assert.IsType<Obra>(obra);
         }
 
         //Método Criar
-        [Fact]
-        public void Criar_ComTituloVazio_DeveRetornarExcecao()
+        [Theory]
+        [InlineData("")]
+        [InlineData("      ")]
+        [InlineData(null)]
+        public void Criar_ComTituloVazio_DeveRetornarExcecao(string titulo)
         {
             var novaObra = new Obra
             {
                 Id = 50,
-                Titulo = "",
+                Titulo = titulo,
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
                 Formato = Formato.Manga,
@@ -151,34 +154,7 @@ namespace Cod3rsGrowth.Testes
                 ValorObra = 0,
                 Sinopse = "Sinopse Dragon Ball"
             };
-            var mensagemDeErro = "O titulo da obra é obrigatório. | O título deve ter entre 2 e 1950 caracteres. | ";
-
-            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
-            Assert.Equal(mensagemDeErro, excecao.Message);
-        }
-
-        [Fact]
-        public void Criar_ComTituloPequenoDemais_DeveRetornarExcecao()
-        {
-            var novaObra = new Obra
-            {
-                Id = 51,
-                Titulo = "D",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
-            var mensagemDeErro = "O título deve ter entre 2 e 1950 caracteres. | ";
+            var mensagemDeErro = "O titulo da obra é obrigatório. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
             Assert.Equal(mensagemDeErro, excecao.Message);
@@ -211,6 +187,9 @@ namespace Cod3rsGrowth.Testes
                 "A Cool Thing To Be Taught Because At Our School The Only Book We Learned Was Atlas Shrugged, " +
                 "And She Asked What That Was And I Told Her I Was The Book Our Society Based Its Philosophy On " +
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
+                "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
+                "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
+                "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "Twelve Years You Have Been Asking…                                                          ",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -226,7 +205,227 @@ namespace Cod3rsGrowth.Testes
                 ValorObra = 0,
                 Sinopse = "Sinopse Dragon Ball"
             };
-            var mensagemDeErro = "O título deve ter entre 2 e 1950 caracteres. | ";
+            var mensagemDeErro = "O título pode ter no máximo 2000 caracteres. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComNumeroDeCapitulosMenorQueUm_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 52,
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = -1,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "A obra deve ter pelo menos 1 capítulo. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComValorDaObraNegativo_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 53,
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = -1,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "O valor da obra não pode ser negativo. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.NotNull(excecao);
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComInicioDaPublicacaoNulo_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 55,
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "A data de início da publicação da obra deve ser informada. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComInicioDaPublicacaoNoFuturo_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 56,
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                InicioPublicacao = DateTime.Parse("Nov 21, 3000"),
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "Data inválida. Não é possível colocar uma data futura. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComFormatoInvalido_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 57,
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = (Formato)32,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "Formato de obra inválido. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComListaDeGenerosVazia_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 58,
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manhwa,
+                Generos = new List<Genero>{ },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "O(s) gênero(s) da obra deve(m) ser informado(s). | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComListaDeGenerosMaiorQue10_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 59,
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manhwa,
+                Generos = new List<Genero> 
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura,
+                    Genero.Comedia,
+                    Genero.Drama,
+                    Genero.Romance,
+                    Genero.Psicologico,
+                    Genero.Historico,
+                    Genero.Musical,
+                    Genero.Horror,
+                    Genero.SciFi,
+                    Genero.MahouShoujo
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "O limite de gêneros em uma única obra é 10. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComGeneroInvalidoNaListaDeGeneros_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 57,
+                Titulo = "Dragon Ball",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    (Genero)45
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "Genero informado inválido. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
             Assert.Equal(mensagemDeErro, excecao.Message);
