@@ -8,8 +8,8 @@ namespace Cod3rsGrowth.Servico.Validadores
         public ObraValidador() 
         {
             RuleFor(obra => obra.Titulo)
-                .NotEmpty().WithMessage("A obra deve ter um título.")
-                .Length(1, 1950).WithMessage("O título deve ter entre 1 e 1950 caracteres.");
+                .NotEmpty().WithMessage("O titulo da obra é obrigatório.")
+                .Length(2, 1950).WithMessage("O título deve ter entre 2 e 1950 caracteres.");
 
             RuleFor(obra => obra.Autor)
                 .NotEmpty().WithMessage("O nome do autor da obra é obrigatório.")

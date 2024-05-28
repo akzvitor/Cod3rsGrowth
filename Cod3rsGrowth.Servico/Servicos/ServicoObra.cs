@@ -39,7 +39,7 @@ namespace Cod3rsGrowth.Servico.Servicos
                 var mensagemDeErro = "";
                 foreach (var falha in resultadoValidacao.Errors)
                 {
-                    mensagemDeErro += $"Falha ao validar a propriedade ({falha.PropertyName}). Erro: '{falha.ErrorMessage}' ";
+                    mensagemDeErro += falha.ErrorMessage + " | ";
                 }
                 throw new ValidationException(mensagemDeErro);
             }

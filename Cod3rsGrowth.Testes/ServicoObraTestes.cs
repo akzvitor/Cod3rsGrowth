@@ -5,6 +5,7 @@ using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using FluentValidation;
 using FluentValidation.Validators;
 using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.ConstrainedExecution;
 using Xunit;
 
 namespace Cod3rsGrowth.Testes
@@ -128,13 +129,14 @@ namespace Cod3rsGrowth.Testes
             Assert.IsType<Obra>(obra);
         }
 
+        //Método Criar
         [Fact]
-        public void Criar_InformandoDadoInvalido_DeveRetornarExcecaoComMensagemCorreta()
+        public void Criar_ComTituloVazio_DeveRetornarExcecao()
         {
             var novaObra = new Obra
             {
                 Id = 50,
-                Titulo = "Dragon Ball Z",
+                Titulo = "",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
                 Formato = Formato.Manga,
@@ -146,12 +148,88 @@ namespace Cod3rsGrowth.Testes
                 },
                 InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
                 NumeroCapitulos = 20,
-                ValorObra = -4,
-                Sinopse = "aaaaaaaaaaaaaaa"
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
             };
+            var mensagemDeErro = "O titulo da obra é obrigatório. | O título deve ter entre 2 e 1950 caracteres. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
-            Assert.Equal($"aaa", excecao.Message);
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComTituloPequenoDemais_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 51,
+                Titulo = "D",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "O título deve ter entre 2 e 1950 caracteres. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Criar_ComTituloGrandeDemais_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 51,
+                Titulo = "My Life Is Just As Wrong As I Expected After Traveling to Another World Where " +
+                "I’m Surrounded By Cute Girls At A Magical High School And Am Also The Fabled Hero of Legend, " +
+                "But Before I Tell You That Story I Have To Tell You This Story, In Which I Was Walking " +
+                "Along With My Unbelievably, Impossibly Cute Younger Sister Who Doesn’t Like Me At All, " +
+                "And She Said To Me It Was My Fault She Wasn’t Popular No Matter How She Looked At It As We " +
+                "Walked To School Together, And We Stopped To Look At A Garden, Which Had A Flower Whose Name " +
+                "I Don’t Remember, When Suddenly A Portal Opened Up To Another World And When I Landed In A " +
+                "Field And My Face Was Buried In The Largest Pair of Boobs I’d Ever Seen, And My Sister Hit " +
+                "Me And Called Me An Idiot While Blushing, But Then The Girl I Landed On Saw The Birthmark On " +
+                "My Hand And Gasped And She Grabbed My Hand And I Blushed But She Started Dragging Me Away " +
+                "And My Sister Got Mad And Chased After Us And I Asked Where We Were Going, And She Said She " +
+                "Was Taking Us To Grimheart Magic School, Where She Was The School President, And Then I Gasped " +
+                "Because I Was Now In A Magical World, And When We Got To The School Which Was A Giant Castle " +
+                "I Asked The Girl What Her Name Was And She Said It Was Akane Yuusha, Which I Thought Was A " +
+                "Tad Strange Since She Had Blonde Hair And Blue Eyes And The Entire Aesthetic Of The School " +
+                "Seemed Very Ancient European, But I Forgot About All Of That When She Told Me We Needed To " +
+                "See The Headmaster Because She Had Been Taught That The Mark On My Hand Was The Symbol Of " +
+                "The Reincarnation Of The Legendary Dragon Hero Of Legendary Literature, And I Said That Was " +
+                "A Cool Thing To Be Taught Because At Our School The Only Book We Learned Was Atlas Shrugged, " +
+                "And She Asked What That Was And I Told Her I Was The Book Our Society Based Its Philosophy On " +
+                "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
+                "Twelve Years You Have Been Asking…                                                          ",
+                Autor = "Akira Toriyama",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.ArtesMarciais,
+                    Genero.Aventura
+                },
+                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                NumeroCapitulos = 20,
+                ValorObra = 0,
+                Sinopse = "Sinopse Dragon Ball"
+            };
+            var mensagemDeErro = "O título deve ter entre 2 e 1950 caracteres. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
         }
     }
 }
