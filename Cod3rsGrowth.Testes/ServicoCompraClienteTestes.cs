@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -196,7 +197,10 @@ namespace Cod3rsGrowth.Testes
                 DataCompra = DateTime.Parse("May 29, 2024")
             };
 
+            var mensagemDeErro = "O nome do cliente deve ser informado. | ";
 
+            var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
         }
     }
 }

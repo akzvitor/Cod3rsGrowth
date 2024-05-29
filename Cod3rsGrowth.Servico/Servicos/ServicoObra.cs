@@ -1,8 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
 using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Infra.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 using Cod3rsGrowth.Servico.Validadores;
 using FluentValidation;
 

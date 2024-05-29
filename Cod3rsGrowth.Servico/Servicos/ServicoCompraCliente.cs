@@ -11,9 +11,10 @@ namespace Cod3rsGrowth.Servico.Servicos
         private readonly IRepositorioCompraCliente _repositorioCompraCliente;
         private readonly CompraClienteValidador _validadorCompraCliente;
 
-        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente)
+        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente, CompraClienteValidador validadorCompraCliente)
         {
             _repositorioCompraCliente = repositorioCompraCliente;
+            _validadorCompraCliente = validadorCompraCliente;
         }
 
         public List<CompraCliente> ObterTodos()
