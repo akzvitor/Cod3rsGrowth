@@ -42,6 +42,7 @@ namespace Cod3rsGrowth.Servico.Servicos
                 {
                     mensagemDeErroGeral += falha.ErrorMessage + " | ";
                 }
+
                 throw new ValidationException(mensagemDeErroGeral);
             }
            

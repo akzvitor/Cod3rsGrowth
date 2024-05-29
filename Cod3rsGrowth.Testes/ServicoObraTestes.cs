@@ -3,9 +3,7 @@ using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using FluentValidation;
-using FluentValidation.Validators;
 using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.ConstrainedExecution;
 using Xunit;
 
 namespace Cod3rsGrowth.Testes

@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Microsoft.Extensions.DependencyInjection;
@@ -139,6 +140,63 @@ namespace Cod3rsGrowth.Testes
             
             Assert.NotNull(compraCliente);
             Assert.IsType<CompraCliente>(compraCliente);
+        }
+
+        //Criar CompraCliente
+        [Theory]
+        [InlineData("")]
+        [InlineData("          ")]
+        [InlineData(null)]
+        public void Criar_ComNomeDoClienteVazio_DeveRetornarExcecao(string nome)
+        {
+            var novaCompra = new CompraCliente
+            {
+                Cpf = "948.534.743-32",
+                Nome = nome,
+                Telefone = "(62)99332-7668",
+                Email = "vitor@hotmail.com",
+                Produtos = new List<Obra>
+                {
+                    new() 
+                    {
+                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                        Autor = "Tappei Nagatsuki",
+                        FoiFinalizada = false,
+                        Formato = Formato.WebNovel,
+                        Generos = new List<Genero>
+                        {
+                            Genero.Sobrenatural,
+                            Genero.Psicologico,
+                            Genero.Misterio
+                        },
+                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
+                        NumeroCapitulos = 20,
+                        ValorObra = 0,
+                        Sinopse = "Sinopse Re:Zero"
+                    },
+                    new()
+                    {
+                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
+                        Autor = "Aka Akasaka",
+                        FoiFinalizada = true,
+                        Formato = Formato.Manga,
+                        Generos = new List<Genero>
+                        {
+                            Genero.Romance,
+                            Genero.Comedia,
+                            Genero.VidaEscolar
+                        },
+                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
+                        NumeroCapitulos = 281,
+                        ValorObra = 12,
+                        Sinopse = "Sinopse Kaguya-sama"
+                    }
+                },
+                ValorCompra = 12,
+                DataCompra = DateTime.Parse("May 29, 2024")
+            };
+
+
         }
     }
 }

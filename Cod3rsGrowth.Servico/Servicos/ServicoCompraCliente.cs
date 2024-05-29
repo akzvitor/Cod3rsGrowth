@@ -1,12 +1,15 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servico.Interfaces;
+using Cod3rsGrowth.Servico.Validadores;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Servico.Servicos
 {
     public class ServicoCompraCliente : IServicoCompraCliente
     {
         private readonly IRepositorioCompraCliente _repositorioCompraCliente;
+        private readonly CompraClienteValidador _validadorCompraCliente;
 
         public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente)
         {
@@ -25,7 +28,21 @@ namespace Cod3rsGrowth.Servico.Servicos
 
         public void Criar(CompraCliente novaCompraCliente)
         {
-            throw new NotImplementedException();
+            var resultadoValidacao = _validadorCompraCliente.Validate(novaCompraCliente);
+
+            if(!resultadoValidacao.IsValid) 
+            {
+                var mensagemDeErroGeral = "";
+
+                foreach (var falha in resultadoValidacao.Errors)
+                {
+                    mensagemDeErroGeral += falha.ErrorMessage + " | ";
+                }
+
+                throw new ValidationException(mensagemDeErroGeral);
+            }
+
+            _repositorioCompraCliente.Criar(novaCompraCliente);
         }
 
         public void Editar(CompraCliente compraCliente)

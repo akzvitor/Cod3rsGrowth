@@ -20,6 +20,7 @@ namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
             servicos.AddScoped<IRepositorioCompraCliente, RepositorioCompraClienteMock>();
 
             servicos.AddScoped<ObraValidador>();
+            servicos.AddScoped<CompraClienteValidador>();
         }
     }
 }
