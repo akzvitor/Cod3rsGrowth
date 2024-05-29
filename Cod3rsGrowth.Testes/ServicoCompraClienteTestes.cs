@@ -144,6 +144,63 @@ namespace Cod3rsGrowth.Testes
         }
 
         //Criar CompraCliente
+        [Fact]
+        public void Criar_ComDadosValidos_DeveCriarCompraClienteComSucesso()
+        {
+            var novaCompra = new CompraCliente
+            {
+                Cpf = "123.456.789-09",
+                Nome = "Vitor",
+                Telefone = "(62)99332-7668",
+                Email = "vitor@hotmail.com",
+                Produtos = new List<Obra>
+                {
+                    new()
+                    {
+                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                        Autor = "Tappei Nagatsuki",
+                        FoiFinalizada = false,
+                        Formato = Formato.WebNovel,
+                        Generos = new List<Genero>
+                        {
+                            Genero.Sobrenatural,
+                            Genero.Psicologico,
+                            Genero.Misterio
+                        },
+                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
+                        NumeroCapitulos = 20,
+                        ValorObra = 0,
+                        Sinopse = "Sinopse Re:Zero"
+                    },
+                    new()
+                    {
+                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
+                        Autor = "Aka Akasaka",
+                        FoiFinalizada = true,
+                        Formato = Formato.Manga,
+                        Generos = new List<Genero>
+                        {
+                            Genero.Romance,
+                            Genero.Comedia,
+                            Genero.VidaEscolar
+                        },
+                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
+                        NumeroCapitulos = 281,
+                        ValorObra = 12,
+                        Sinopse = "Sinopse Kaguya-sama"
+                    }
+                },
+                ValorCompra = 12,
+                DataCompra = DateTime.Parse("May 29, 2024")
+            };
+
+            _servicoCompraCliente.Criar(novaCompra);
+
+            var compraEsperada = _servicoCompraCliente.ObterTodos().Last();
+
+            Assert.Equivalent(novaCompra, compraEsperada);
+        }
+
         [Theory]
         [InlineData("")]
         [InlineData("          ")]
