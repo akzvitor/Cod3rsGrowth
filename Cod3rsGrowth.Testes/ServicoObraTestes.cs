@@ -208,7 +208,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Criar_ComTituloGrandeDemais_DeveRetornarExcecao()
+        public void Criar_ComTituloMaiorQue2000Caracteres_DeveRetornarExcecao()
         {
             var novaObra = new Obra
             {

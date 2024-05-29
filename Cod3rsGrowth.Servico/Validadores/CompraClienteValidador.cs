@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Cod3rsGrowth.Dominio.Classes;
+using System.Text.RegularExpressions;
 
 namespace Cod3rsGrowth.Servico.Validadores
 {
@@ -8,33 +9,100 @@ namespace Cod3rsGrowth.Servico.Validadores
         public CompraClienteValidador()
         {
             RuleFor(cliente => cliente.Cpf)
-                .NotEmpty().WithMessage("O CPF do cliente é obrigatório.");
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("O CPF do cliente é obrigatório.")
+                .Must(EhCpfValido).WithMessage("O CPF informado é inválido.");
 
             RuleFor(cliente => cliente.Nome)
                 .NotEmpty().WithMessage("O nome do cliente deve ser informado.")
-                .MaximumLength(100).WithMessage("O nome deve ter até 100 caracteres.");
+                .MaximumLength(100).WithMessage("O nome do cliente pode ter até 100 caracteres.");
 
             RuleFor(cliente => cliente.Telefone)
-                .NotEmpty().WithMessage("O telefone do cliente é obrigatório.");
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("O telefone do cliente é obrigatório.")
+                .Matches(@"^\(?\d{2}\)?[\s-]?\d{4,5}[\s-]?\d{4}$")
+                .WithMessage("O telefone deve ter apenas " + "números e símbolos e estar no formato correto " +
+                                "(XX) XXXXX-XXXX ou (XX) XXXX-XXXX.");
 
             RuleFor(cliente => cliente.Email)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("O e-mail do cliente é obrigatório.")
                 .EmailAddress().WithMessage("Formato de e-mail inválido.");
 
             RuleFor(cliente => cliente.Produtos)
-                .NotEmpty().WithMessage("Os produtos da compra devem ser informados.");
+                .NotEmpty().WithMessage("A compra deve conter a lista de produtos preenchida.");
 
             RuleForEach(cliente => cliente.Produtos)
-                .NotEmpty().WithMessage("A compra deve conter a lista de produtos.")
                 .SetValidator(new ObraValidador());
 
             RuleFor(cliente => cliente.ValorCompra)
-                .NotNull().WithMessage("O valor total da compra deve ser informado.")
                 .GreaterThanOrEqualTo(0).WithMessage("O valor da compra não pode ser negativo.");
 
             RuleFor(cliente => cliente.DataCompra)
                 .NotEmpty().WithMessage("A data da compra deve ser informada.")
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("Não é possível informar uma data futura.");
+        }
+
+        public static bool EhCpfValido(string cpf)
+        {
+            cpf = new string(cpf.Where(char.IsDigit).ToArray());
+
+            if (cpf.Length != 11)
+                return false;
+
+            if (cpf.Distinct().Count() == 1)
+                return false;
+
+            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            string tempCpf;
+            string digito;
+            int soma;
+            int resto;
+
+            cpf = cpf.Trim();
+            cpf = cpf.Replace(".", "").Replace("-", "");
+
+            if (cpf.Length != 11)
+                return false;
+
+            tempCpf = cpf.Substring(0, 9);
+            soma = 0;
+
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+
+            resto = soma % 11;
+
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            digito = resto.ToString();
+            tempCpf += digito;
+            soma = 0;
+
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+
+            resto = soma % 11;
+
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            digito += resto.ToString();
+
+            return cpf.EndsWith(digito);
+        }
+
+        public static bool EhTelefoneValido(string telefone)
+        {
+            var regex = new Regex(@"\(?[1-9]{2}\)? ?(?:[2-8]|9[0-9])[0-9]{3}\-?[0-9]{4}");
+
+            return regex.IsMatch(telefone);
         }
     }
 }
