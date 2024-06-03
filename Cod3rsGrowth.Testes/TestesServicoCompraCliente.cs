@@ -8,13 +8,13 @@ using Xunit;
 
 namespace Cod3rsGrowth.Testes
 {
-    public class ServicoCompraClienteTestes : TesteBase
+    public class TestesServicoCompraCliente : TesteBase
     {
         private IServicoCompraCliente? _servicoCompraCliente;
         private List<CompraCliente> _listaDoBanco;
         private List<CompraCliente> _listaMock;
 
-        public ServicoCompraClienteTestes()
+        public TestesServicoCompraCliente()
         {
             CarregarServicos();
             _listaMock = InicializarDadosMockados();
