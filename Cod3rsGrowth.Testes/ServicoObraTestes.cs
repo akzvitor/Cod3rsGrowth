@@ -311,7 +311,7 @@ namespace Cod3rsGrowth.Testes
                 ValorObra = 0,
                 Sinopse = "Sinopse Dragon Ball"
             };
-            var mensagemDeErro = "O nome do autor deve conter apenas letras, espaços e símbolos como - ou _. | ";
+            var mensagemDeErro = "O nome do autor deve conter apenas letras, números, espaços ou símbolos como - ou _. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
             Assert.Equal(mensagemDeErro, excecao.Message);

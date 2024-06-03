@@ -260,6 +260,65 @@ namespace Cod3rsGrowth.Testes
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
+        [Theory]
+        [InlineData("@@@$$")]
+        [InlineData("    $*&#(*&¨#$(      ")]
+        [InlineData("AAA222355")]
+        public void Criar_ComNomeDoClienteInvalido_DeveRetornarExcecao(string nome)
+        {
+            var novaCompra = new CompraCliente
+            {
+                Cpf = "123.456.789-09",
+                Nome = nome,
+                Telefone = "(62)99332-7668",
+                Email = "vitor@hotmail.com",
+                Produtos = new List<Obra>
+                {
+                    new()
+                    {
+                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                        Autor = "Tappei Nagatsuki",
+                        FoiFinalizada = false,
+                        Formato = Formato.WebNovel,
+                        Generos = new List<Genero>
+                        {
+                            Genero.Sobrenatural,
+                            Genero.Psicologico,
+                            Genero.Misterio
+                        },
+                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
+                        NumeroCapitulos = 20,
+                        ValorObra = 0,
+                        Sinopse = "Sinopse Re:Zero"
+                    },
+                    new()
+                    {
+                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
+                        Autor = "Aka Akasaka",
+                        FoiFinalizada = true,
+                        Formato = Formato.Manga,
+                        Generos = new List<Genero>
+                        {
+                            Genero.Romance,
+                            Genero.Comedia,
+                            Genero.VidaEscolar
+                        },
+                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
+                        NumeroCapitulos = 281,
+                        ValorObra = 12,
+                        Sinopse = "Sinopse Kaguya-sama"
+                    }
+                },
+                ValorCompra = 12,
+                DataCompra = DateTime.Parse("May 29, 2024")
+            };
+
+            var mensagemDeErro = "O nome deve conter apenas letras, espaços ou símbolos como - e '. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
         [Fact]
         public void Criar_ComNomeDoClienteMaiorQue100Caracteres_DeveRetornarExcecao()
         {
@@ -267,7 +326,7 @@ namespace Cod3rsGrowth.Testes
             {
                 Cpf = "123.456.789-09",
                 Nome = "Antlez Broke the Stereo Neon Tide Bring Back Honesty " +
-                "Coalition Feedback Hand of Aces Keep Going Captain Let’s Pretend Lost State of " +
+                "Coalition Feedback Hand of Aces Keep Going Captain Let's Pretend Lost State of " +
                 "Dance Paper Taxis Lunar Road Up Down Strange All and I Neon Sheep Eve Hornby Faye " +
                 "Bradley AJ Wilde Michael Rice Dion Watts Matthew Appleyard John Ashurst Lauren " +
                 "Swales Zoe Angus Jaspreet Singh Emma Matthews Nicola Brown Leanne Pickering " +
@@ -279,7 +338,7 @@ namespace Cod3rsGrowth.Testes
                 "Dominic Parker Sharpe Elena Larkin Rebecca Simpson Nick Dixon Abbie Farrelly " +
                 "Liam Grieves Casey Smith Downing Ben Wignall Elizabeth Hann Danielle Walker L" +
                 "auren Glen James Johnson Ervine Kate Burton James Hudson Daniel Mayes Matthew " +
-                "Kitching Josh Bennett Evolution Dreams.",
+                "Kitching Josh Bennett Evolution Dreams",
                 Telefone = "(62)99332-7668",
                 Email = "vitor@hotmail.com",
                 Produtos = new List<Obra>
@@ -443,6 +502,65 @@ namespace Cod3rsGrowth.Testes
             };
 
             var mensagemDeErro = "Formato de e-mail inválido. | ";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Theory]
+        [InlineData("vit%$%$or@hotmail.com")]
+        [InlineData("vitór@hotmail.com")]
+
+        public void Criar_ComCaracteresInvalidosNoEmail_DeveRetornarExcecao(string email)
+        {
+            var novaCompra = new CompraCliente
+            {
+                Cpf = "123.456.789-09",
+                Nome = "Vitor",
+                Telefone = "(62)99332-7668",
+                Email = email,
+                Produtos = new List<Obra>
+                {
+                    new()
+                    {
+                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                        Autor = "Tappei Nagatsuki",
+                        FoiFinalizada = false,
+                        Formato = Formato.WebNovel,
+                        Generos = new List<Genero>
+                        {
+                            Genero.Sobrenatural,
+                            Genero.Psicologico,
+                            Genero.Misterio
+                        },
+                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
+                        NumeroCapitulos = 20,
+                        ValorObra = 0,
+                        Sinopse = "Sinopse Re:Zero"
+                    },
+                    new()
+                    {
+                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
+                        Autor = "Aka Akasaka",
+                        FoiFinalizada = true,
+                        Formato = Formato.Manga,
+                        Generos = new List<Genero>
+                        {
+                            Genero.Romance,
+                            Genero.Comedia,
+                            Genero.VidaEscolar
+                        },
+                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
+                        NumeroCapitulos = 281,
+                        ValorObra = 12,
+                        Sinopse = "Sinopse Kaguya-sama"
+                    }
+                },
+                ValorCompra = 12,
+                DataCompra = DateTime.Parse("May 29, 2024")
+            };
+
+            var mensagemDeErro = "O email deve conter apenas letras sem acento, números, espaços ou alguns símbolos, como - e _. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
             Assert.Equal(mensagemDeErro, excecao.Message);

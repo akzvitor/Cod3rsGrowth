@@ -15,6 +15,8 @@ namespace Cod3rsGrowth.Servico.Validadores
 
             RuleFor(cliente => cliente.Nome)
                 .NotEmpty().WithMessage("O nome do cliente deve ser informado.")
+                .Matches("^[a-zA-Zà-úÀ-Ú-' ]*$").WithMessage("O nome deve conter apenas " +
+                            "letras, espaços ou símbolos como - e '.")
                 .MaximumLength(100).WithMessage("O nome do cliente pode ter até 100 caracteres.");
 
             RuleFor(cliente => cliente.Telefone)
@@ -27,6 +29,8 @@ namespace Cod3rsGrowth.Servico.Validadores
             RuleFor(cliente => cliente.Email)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("O e-mail do cliente é obrigatório.")
+                .Matches("^[a-zA-Z0-9-_.@ ]*$").WithMessage("O email deve conter apenas " +
+                            "letras sem acento, números, espaços ou alguns símbolos, como - e _.")
                 .EmailAddress().WithMessage("Formato de e-mail inválido.");
 
             RuleFor(cliente => cliente.Produtos)
@@ -98,11 +102,5 @@ namespace Cod3rsGrowth.Servico.Validadores
             return cpf.EndsWith(digito);
         }
 
-        public static bool EhTelefoneValido(string telefone)
-        {
-            var regex = new Regex(@"\(?[1-9]{2}\)? ?(?:[2-8]|9[0-9])[0-9]{3}\-?[0-9]{4}");
-
-            return regex.IsMatch(telefone);
-        }
     }
 }

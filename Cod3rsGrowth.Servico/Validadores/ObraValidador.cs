@@ -14,7 +14,7 @@ namespace Cod3rsGrowth.Servico.Validadores
             RuleFor(obra => obra.Autor)
                 .NotEmpty().WithMessage("O nome do autor da obra é obrigatório.")
                 .Matches("^[a-zA-Zà-úÀ-Ú0-9-_ ]*$").WithMessage("O nome do autor deve conter apenas " +
-                            "letras, espaços e símbolos como - ou _.")
+                            "letras, números, espaços ou símbolos como - ou _.")
                 .MaximumLength(150).WithMessage("O nome do autor deve ter até 150 caracteres.");
 
             RuleFor(obra => obra.Sinopse)
