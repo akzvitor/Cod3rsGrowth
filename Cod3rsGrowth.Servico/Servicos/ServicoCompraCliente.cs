@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioCompraCliente.ObterPorId(idInformado);
         }
 
-        public void Criar(CompraCliente novaCompraCliente)
+        public CompraCliente Criar(CompraCliente novaCompraCliente)
         {
             var resultadoValidacao = _validadorCompraCliente.Validate(novaCompraCliente);
 
@@ -43,7 +43,7 @@ namespace Cod3rsGrowth.Servico.Servicos
                 throw new ValidationException(mensagemDeErroGeral);
             }
 
-            _repositorioCompraCliente.Criar(novaCompraCliente);
+            return _repositorioCompraCliente.Criar(novaCompraCliente);
         }
 
         public void Editar(CompraCliente compraCliente)

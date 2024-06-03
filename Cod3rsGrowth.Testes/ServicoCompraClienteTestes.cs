@@ -280,11 +280,12 @@ namespace Cod3rsGrowth.Testes
                 DataCompra = DateTime.Parse("May 29, 2024")
             };
 
-            _servicoCompraCliente.Criar(novaCompra);
+            var novaCompraNoBancoDeDados = _servicoCompraCliente.Criar(novaCompra);
 
-            var compraEsperada = _servicoCompraCliente.ObterTodos().Last();
+            var compraEsperada = novaCompra;
 
-            Assert.Equivalent(novaCompra, compraEsperada);
+            Assert.NotNull(novaCompraNoBancoDeDados?.Id);
+            Assert.Equivalent(compraEsperada, novaCompraNoBancoDeDados);
         }
 
         [Theory]

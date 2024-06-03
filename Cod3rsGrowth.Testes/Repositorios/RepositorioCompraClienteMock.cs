@@ -22,11 +22,13 @@ namespace Cod3rsGrowth.Testes.Repositorios
             return compraRequisitada;
         }
 
-        public void Criar(CompraCliente novaCompraCliente)
+        public CompraCliente Criar(CompraCliente novaCompraCliente)
         {
             novaCompraCliente.Id = compraClienteId;
             compraClienteId++;
             ListaCompraCliente.Add(novaCompraCliente);
+
+            return novaCompraCliente;
         }
     }
 }
