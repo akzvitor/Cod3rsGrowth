@@ -597,55 +597,10 @@ namespace Cod3rsGrowth.Testes
         [Theory]
         [InlineData("vit%$%$or@hotmail.com")]
         [InlineData("vitór@hotmail.com")]
-
-        public void Criar_ComCaracteresInvalidosNoEmail_DeveRetornarExcecao(string email)
+        public void Criar_ComCaracteresInvalidosNoEmail_DeveRetornarExcecao(string emailInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = email,
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
+            var novaCompra = _listaMock.FirstOrDefault();
+            novaCompra.Email = emailInvalido;
 
             var mensagemDeErro = "O email deve conter apenas letras sem acento, números, espaços ou alguns símbolos, como - e _. | ";
 
