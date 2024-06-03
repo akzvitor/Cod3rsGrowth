@@ -193,7 +193,6 @@ namespace Cod3rsGrowth.Testes
         {
             var listaDoBanco = _servicoCompraCliente.ObterTodos();
 
-
             Assert.NotNull(listaDoBanco);
             Assert.IsType<List<CompraCliente>>(listaDoBanco);
         }
