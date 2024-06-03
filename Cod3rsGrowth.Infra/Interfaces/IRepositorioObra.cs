@@ -6,6 +6,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
     {
         List<Obra> ObterTodos();
         Obra ObterPorId(int idInformado);
-        void Criar(Obra novaObra);
+        Obra Criar(Obra novaObra);
     }
 }

@@ -28,7 +28,7 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioObra.ObterPorId(idInformado);
         }
 
-        public void Criar(Obra novaObra)
+        public Obra Criar(Obra novaObra)
         {
             var resultadoValidacao = _validadorObra.Validate(novaObra);
 
@@ -44,7 +44,7 @@ namespace Cod3rsGrowth.Servico.Servicos
                 throw new ValidationException(mensagemDeErroGeral);
             }
            
-            _repositorioObra.Criar(novaObra);
+            return _repositorioObra.Criar(novaObra);
         }
 
         public void Editar(Obra obra)

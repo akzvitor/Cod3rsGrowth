@@ -18,6 +18,7 @@ namespace Cod3rsGrowth.Testes
         {
             CarregarServico();
             _listaMock = InicializarDadosMockados();
+            _listaDoBanco = _servicoObra.ObterTodos();
         }
 
         private void CarregarServico()
@@ -32,42 +33,40 @@ namespace Cod3rsGrowth.Testes
             {
                 new Obra
                 {
-                    Id = 1,
-                    Titulo = "Na Honjaman Level Up",
-                    Formato = Formato.Manhwa,
-                    Autor = "Chu-Gong"
-                },
-                new Obra
-                {
-                    Id = 2,
-                    Titulo = "Jujutsu Kaisen",
+                    Titulo = "Dragon Ball",
+                    Autor = "Akira Toriyama",
+                    FoiFinalizada = false,
                     Formato = Formato.Manga,
-                    Autor = "Gege Akutami"
+                    Generos = new List<Genero>
+                    {
+                        Genero.Acao,
+                        Genero.ArtesMarciais,
+                        Genero.Aventura
+                    },
+                    InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                    NumeroCapitulos = 20,
+                    ValorObra = 0,
+                    Sinopse = "Sinopse Dragon Ball"
                 },
                 new Obra
                 {
-                    Id = 3,
-                    Titulo = "Jeonjijeok Dokja Sijeom",
-                    Formato = Formato.Manhwa,
-                    Autor = "UMI"
-                },
-                new Obra
-                {
-                    Id = 4,
-                    Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                    Formato = Formato.WebNovel,
-                    Autor = "Tappei Nagatsuki"
-                },
-                new Obra
-                {
-                    Id = 5,
-                    Titulo = "One Piece",
+                    Titulo = "Dragon Ball",
+                    Autor = "Akira Toriyama",
+                    FoiFinalizada = false,
                     Formato = Formato.Manga,
-                    Autor = "Eiichiro Oda"
+                    Generos = new List<Genero>
+                    {
+                        Genero.Acao,
+                        Genero.ArtesMarciais,
+                        Genero.Aventura
+                    },
+                    InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                    NumeroCapitulos = 20,
+                    ValorObra = 0,
+                    Sinopse = "Sinopse Dragon Ball"
                 },
                 new Obra
                 {
-                    Id = 100,
                     Titulo = "Dragon Ball",
                     Autor = "Akira Toriyama",
                     FoiFinalizada = false,
@@ -85,11 +84,9 @@ namespace Cod3rsGrowth.Testes
                 }
             };
 
-            _listaDoBanco = _servicoObra.ObterTodos();
-
             foreach (var obra in listaDeObras)
             {
-                _listaDoBanco.Add(obra);
+                _servicoObra.Criar(obra);
             }
 
             return listaDeObras;
@@ -98,25 +95,25 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaDeObras()
         {
-            _listaDoBanco = _servicoObra.ObterTodos();
+            var listaDoBanco = _servicoObra.ObterTodos();
 
-            Assert.NotNull(_listaDoBanco);
-            Assert.Equivalent(_listaMock, _listaDoBanco);
+            Assert.NotNull(listaDoBanco);
+            Assert.Equivalent(_listaMock, listaDoBanco);
         }
 
         [Fact]
         public void ObterTodos_EmQualquerCenario_DeveRetornarUmaListaDoTipoObra()
         {
-            _listaDoBanco = _servicoObra.ObterTodos();
+            var listaDoBanco = _servicoObra.ObterTodos();
 
-            Assert.NotNull(_listaDoBanco);
-            Assert.IsType<List<Obra>>(_listaDoBanco);
+            Assert.NotNull(listaDoBanco);
+            Assert.IsType<List<Obra>>(listaDoBanco);
         }
 
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
         {
-            var idValidoInformado = 1;
+            var idValidoInformado = 100;
             var obra = _servicoObra.ObterPorId(idValidoInformado);
             var obraMock = _listaMock.FirstOrDefault();
 
@@ -127,7 +124,7 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
         {
-            var idValidoInformado = 4;
+            var idValidoInformado = 101;
             var idInvalidoInformado = 200;
             var obra = _servicoObra.ObterPorId(idValidoInformado);
 
@@ -138,7 +135,7 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoObra()
         {
-            var idValidoInformado = 5;
+            var idValidoInformado = 102;
             var obra = _servicoObra.ObterPorId(idValidoInformado);
 
             Assert.NotNull(obra);
@@ -167,14 +164,12 @@ namespace Cod3rsGrowth.Testes
                 Sinopse = "Sinopse Dragon Ball"
             };
 
-            _servicoObra.Criar(novaObra);
-            _listaDoBanco = _servicoObra.ObterTodos();
+            var novaObraNoBanco = _servicoObra.Criar(novaObra);
 
-            var obraNaListaMock = _listaMock.Last();
-            var obraNoBanco = _listaDoBanco.Last();
+            var obraEsperada = novaObra;
 
-            Assert.NotNull(_listaDoBanco);
-            Assert.Equivalent(obraNaListaMock, obraNoBanco);
+            Assert.NotNull(novaObraNoBanco?.Id);
+            Assert.Equivalent(obraEsperada, novaObraNoBanco);
         }
 
         [Theory]
@@ -185,7 +180,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 50,
                 Titulo = titulo,
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -212,7 +206,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 51,
                 Titulo = "My Life Is Just As Wrong As I Expected After Traveling to Another World Where " +
                 "I’m Surrounded By Cute Girls At A Magical High School And Am Also The Fabled Hero of Legend, " +
                 "But Before I Tell You That Story I Have To Tell You This Story, In Which I Was Walking " +
@@ -266,7 +259,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 50,
                 Titulo = "Dragon Ball",
                 Autor = autor,
                 FoiFinalizada = false,
@@ -295,7 +287,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 50,
                 Titulo = "Dragon Ball",
                 Autor = autor,
                 FoiFinalizada = false,
@@ -322,7 +313,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 50,
                 Titulo = "Dragon Ball",
                 Autor = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
                 "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
@@ -354,7 +344,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 50,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -381,7 +370,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 50,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -432,7 +420,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 52,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -459,7 +446,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 53,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -487,7 +473,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 55,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -513,7 +498,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 56,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -540,7 +524,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 57,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -567,7 +550,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 58,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -589,7 +571,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 59,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,
@@ -625,7 +606,6 @@ namespace Cod3rsGrowth.Testes
         {
             var novaObra = new Obra
             {
-                Id = 57,
                 Titulo = "Dragon Ball",
                 Autor = "Akira Toriyama",
                 FoiFinalizada = false,

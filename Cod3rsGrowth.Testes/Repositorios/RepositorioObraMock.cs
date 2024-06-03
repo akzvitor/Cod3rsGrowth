@@ -21,11 +21,13 @@ namespace Cod3rsGrowth.Testes.Repositorios
             return obraRequisitada;
         }
 
-        public void Criar(Obra novaObra)
+        public Obra Criar(Obra novaObra)
         { 
             novaObra.Id = _obraId;
             _obraId++;
-            ListaObra.Add(novaObra);   
+            ListaObra.Add(novaObra);
+
+            return novaObra;
         }
     }
 }

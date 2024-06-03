@@ -6,7 +6,7 @@ namespace Cod3rsGrowth.Servico.Interfaces
     {
         List<Obra> ObterTodos();
         Obra ObterPorId(int idInformado);
-        void Criar(Obra novaObra);
+        Obra Criar(Obra novaObra);
         void Editar(Obra obra);
         void Remover(Obra obra);
     }
