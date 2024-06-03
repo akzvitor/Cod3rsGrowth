@@ -292,7 +292,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("          ")]
         [InlineData(null)]
-        public void Criar_ComNomeDoClienteVazio_DeveRetornarExcecao(string nome)
+        public void Criar_ComNomeDoClienteNuloOuVazio_DeveRetornarExcecao(string nome)
         {
             var novaCompra = new CompraCliente
             {
@@ -351,7 +351,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("@@@$$")]
         [InlineData("    $*&#(*&¨#$(      ")]
         [InlineData("AAA222355")]
-        public void Criar_ComNomeDoClienteInvalido_DeveRetornarExcecao(string nome)
+        public void Criar_ComCaracteresInvalidosNoNomeDoCliente_DeveRetornarExcecao(string nome)
         {
             var novaCompra = new CompraCliente
             {
@@ -479,7 +479,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("          ")]
         [InlineData(null)]
-        public void Criar_ComEmailVazio_DeveRetornarExcecao(string email)
+        public void Criar_ComEmailNuloOuVazio_DeveRetornarExcecao(string email)
         {
             var novaCompra = new CompraCliente
             {
@@ -925,7 +925,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("          ")]
         [InlineData(null)]
-        public void Criar_ComCPFNulo_DeveRetornarExcecao(string cpf)
+        public void Criar_ComCPFNuloOuVazio_DeveRetornarExcecao(string cpf)
         {
             var novaCompra = new CompraCliente
             {
@@ -985,6 +985,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("aaaaaaa")]
         [InlineData("(aa) 1111-1111")]
         [InlineData("(632)2233334-4444")]
+
         public void Criar_ComFormatoDeTelefoneInvalido_DeveRetornarExcecao(string telefone)
         {
             var novaCompra = new CompraCliente
@@ -1045,7 +1046,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("          ")]
         [InlineData(null)]
-        public void Criar_ComTelefoneNulo_DeveRetornarExcecao(string telefone)
+        public void Criar_ComTelefoneNuloOuVazio_DeveRetornarExcecao(string telefone)
         {
             var novaCompra = new CompraCliente
             {

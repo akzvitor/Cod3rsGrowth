@@ -102,7 +102,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterTodos_EmQualquerCenario_DeveRetornarUmaListaDoTipoObra()
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarUmaListaDoTipoObra()
         {
             var listaDoBanco = _servicoObra.ObterTodos();
 
@@ -133,7 +133,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoObra()
+        public void ObterPorId_InformandoIdValido_DeveRetornarUmObjetoDoTipoObra()
         {
             var idValidoInformado = 102;
             var obra = _servicoObra.ObterPorId(idValidoInformado);
@@ -144,7 +144,7 @@ namespace Cod3rsGrowth.Testes
 
         //Método Criar
         [Fact]
-        public void Criar_ComDadosValidos_DeveCriarObjetoCorretamente()
+        public void Criar_ComDadosValidos_DeveCriarObjetoComSucesso()
         {
             var novaObra = new Obra
             {
@@ -176,7 +176,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("      ")]
         [InlineData(null)]
-        public void Criar_ComTituloVazio_DeveRetornarExcecao(string titulo)
+        public void Criar_ComTituloNuloOuVazio_DeveRetornarExcecao(string titulo)
         {
             var novaObra = new Obra
             {
@@ -255,7 +255,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("      ")]
         [InlineData(null)]
-        public void Criar_ComNomeDoAutorVazio_DeveRetornarExcecao(string autor)
+        public void Criar_ComNomeDoAutorNuloOuVazio_DeveRetornarExcecao(string autor)
         {
             var novaObra = new Obra
             {
@@ -283,7 +283,7 @@ namespace Cod3rsGrowth.Testes
         [Theory]
         [InlineData("&&%*$*(")]
         [InlineData("Aaaaa@@#$")]
-        public void Criar_ComNomeDoAutorInvalido_DeveRetornarExcecao(string autor)
+        public void Criar_ComCaracteresInvalidosNoNomeDoAutor_DeveRetornarExcecao(string autor)
         {
             var novaObra = new Obra
             {
@@ -340,7 +340,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("      ")]
         [InlineData(null)]
-        public void Criar_ComSinopseVazia_DeveRetornarExcecao(string sinopse)
+        public void Criar_ComSinopseNulaOuVazia_DeveRetornarExcecao(string sinopse)
         {
             var novaObra = new Obra
             {
@@ -469,7 +469,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Criar_ComInicioDaPublicacaoNulo_DeveRetornarExcecao()
+        public void Criar_ComDataDeInicioDaPublicacaoNulaOuVazia_DeveRetornarExcecao()
         {
             var novaObra = new Obra
             {
@@ -494,7 +494,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Criar_ComInicioDaPublicacaoNoFuturo_DeveRetornarExcecao()
+        public void Criar_ComDataDeInicioDaPublicacaoNoFuturo_DeveRetornarExcecao()
         {
             var novaObra = new Obra
             {
@@ -520,7 +520,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Criar_ComFormatoInvalido_DeveRetornarExcecao()
+        public void Criar_ComFormatoDeObraInvalido_DeveRetornarExcecao()
         {
             var novaObra = new Obra
             {
