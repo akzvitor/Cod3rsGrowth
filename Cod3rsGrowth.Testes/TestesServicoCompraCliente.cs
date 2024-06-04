@@ -12,13 +12,12 @@ namespace Cod3rsGrowth.Testes
     {
         private IServicoCompraCliente? _servicoCompraCliente;
         private List<CompraCliente> _listaDoBanco;
-        private List<CompraCliente> _listaMock;
 
         public TestesServicoCompraCliente()
         {
             CarregarServicos();
-            _listaMock = InicializarDadosMockados();
-            _listaDoBanco = _servicoCompraCliente.ObterTodos();
+            _servicoCompraCliente.ObterTodos().Clear();
+            InicializarBancoDeDados();
         }
 
         private void CarregarServicos()
@@ -29,10 +28,57 @@ namespace Cod3rsGrowth.Testes
 
         private List<CompraCliente> InicializarDadosMockados()
         {
-            List<CompraCliente> listaDeComprasCliente = new()
-            {
-                new CompraCliente
+            var listaCompras = new List<CompraCliente> 
+            {  
+                new() 
                 {
+                    Id = 100,
+                    Cpf = "123.456.789-09",
+                    Nome = "Vitor",
+                    Telefone = "(62)99332-7668",
+                    Email = "vitor@hotmail.com",
+                    Produtos = new List<Obra>
+                        {
+                            new()
+                            {
+                                Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                                Autor = "Tappei Nagatsuki",
+                                FoiFinalizada = false,
+                                Formato = Formato.WebNovel,
+                                Generos = new List<Genero>
+                                {
+                                    Genero.Sobrenatural,
+                                    Genero.Psicologico,
+                                    Genero.Misterio
+                                },
+                                InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
+                                NumeroCapitulos = 20,
+                                ValorObra = 0,
+                                Sinopse = "Sinopse Re:Zero"
+                            },
+                            new()
+                            {
+                                Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
+                                Autor = "Aka Akasaka",
+                                FoiFinalizada = true,
+                                Formato = Formato.Manga,
+                                Generos = new List<Genero>
+                                {
+                                    Genero.Romance,
+                                    Genero.Comedia,
+                                    Genero.VidaEscolar
+                                },
+                                InicioPublicacao = DateTime.Parse("May 19, 2015"),
+                                NumeroCapitulos = 281,
+                                ValorObra = 12,
+                                Sinopse = "Sinopse Kaguya-sama"
+                            }
+                        },
+                    ValorCompra = 12,
+                    DataCompra = DateTime.Parse("May 29, 2024")
+                }, 
+                new() {
+                    Id = 2,
                     Cpf = "123.456.789-09",
                     Nome = "Vitor",
                     Telefone = "(62)99332-7668",
@@ -77,115 +123,74 @@ namespace Cod3rsGrowth.Testes
                     ValorCompra = 12,
                     DataCompra = DateTime.Parse("May 29, 2024")
                 },
-                new CompraCliente
+                new()
                 {
+                    Id = 3,
                     Cpf = "123.456.789-09",
                     Nome = "Vitor",
                     Telefone = "(62)99332-7668",
                     Email = "vitor@hotmail.com",
                     Produtos = new List<Obra>
-                    {
-                        new()
                         {
-                            Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                            Autor = "Tappei Nagatsuki",
-                            FoiFinalizada = false,
-                            Formato = Formato.WebNovel,
-                            Generos = new List<Genero>
+                            new()
                             {
-                                Genero.Sobrenatural,
-                                Genero.Psicologico,
-                                Genero.Misterio
+                                Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                                Autor = "Tappei Nagatsuki",
+                                FoiFinalizada = false,
+                                Formato = Formato.WebNovel,
+                                Generos = new List<Genero>
+                                {
+                                    Genero.Sobrenatural,
+                                    Genero.Psicologico,
+                                    Genero.Misterio
+                                },
+                                InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
+                                NumeroCapitulos = 20,
+                                ValorObra = 0,
+                                Sinopse = "Sinopse Re:Zero"
                             },
-                            InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                            NumeroCapitulos = 20,
-                            ValorObra = 0,
-                            Sinopse = "Sinopse Re:Zero"
+                            new()
+                            {
+                                Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
+                                Autor = "Aka Akasaka",
+                                FoiFinalizada = true,
+                                Formato = Formato.Manga,
+                                Generos = new List<Genero>
+                                {
+                                    Genero.Romance,
+                                    Genero.Comedia,
+                                    Genero.VidaEscolar
+                                },
+                                InicioPublicacao = DateTime.Parse("May 19, 2015"),
+                                NumeroCapitulos = 281,
+                                ValorObra = 12,
+                                Sinopse = "Sinopse Kaguya-sama"
+                            }
                         },
-                        new()
-                        {
-                            Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                            Autor = "Aka Akasaka",
-                            FoiFinalizada = true,
-                            Formato = Formato.Manga,
-                            Generos = new List<Genero>
-                            {
-                                Genero.Romance,
-                                Genero.Comedia,
-                                Genero.VidaEscolar
-                            },
-                            InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                            NumeroCapitulos = 281,
-                            ValorObra = 12,
-                            Sinopse = "Sinopse Kaguya-sama"
-                        }
-                    },
-                    ValorCompra = 12,
-                    DataCompra = DateTime.Parse("May 29, 2024")
-                },
-                new CompraCliente
-                {
-                    Cpf = "123.456.789-09",
-                    Nome = "Vitor",
-                    Telefone = "(62)99332-7668",
-                    Email = "vitor@hotmail.com",
-                    Produtos = new List<Obra>
-                    {
-                        new()
-                        {
-                            Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                            Autor = "Tappei Nagatsuki",
-                            FoiFinalizada = false,
-                            Formato = Formato.WebNovel,
-                            Generos = new List<Genero>
-                            {
-                                Genero.Sobrenatural,
-                                Genero.Psicologico,
-                                Genero.Misterio
-                            },
-                            InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                            NumeroCapitulos = 20,
-                            ValorObra = 0,
-                            Sinopse = "Sinopse Re:Zero"
-                        },
-                        new()
-                        {
-                            Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                            Autor = "Aka Akasaka",
-                            FoiFinalizada = true,
-                            Formato = Formato.Manga,
-                            Generos = new List<Genero>
-                            {
-                                Genero.Romance,
-                                Genero.Comedia,
-                                Genero.VidaEscolar
-                            },
-                            InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                            NumeroCapitulos = 281,
-                            ValorObra = 12,
-                            Sinopse = "Sinopse Kaguya-sama"
-                        }
-                    },
                     ValorCompra = 12,
                     DataCompra = DateTime.Parse("May 29, 2024")
                 }
             };
+            return listaCompras;
+        }
 
-            foreach (var compraCliente in listaDeComprasCliente)
+        private void InicializarBancoDeDados()
+        {
+            var listaMock = InicializarDadosMockados();
+            foreach (var item in listaMock)
             {
-                _servicoCompraCliente.Criar(compraCliente);
+                _servicoCompraCliente.Criar(item);
             }
-
-            return listaDeComprasCliente;
         }
 
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaCompraCliente()
         {
             var listaDoBanco = _servicoCompraCliente.ObterTodos();
+            var listaMock = InicializarDadosMockados();
 
             Assert.NotNull(listaDoBanco);
-            Assert.Equivalent(_listaMock, listaDoBanco);
+            Assert.Equivalent(listaMock, listaDoBanco);
         }
 
         [Fact]
@@ -200,9 +205,12 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarCompraClienteCorreta()
         {
+            var listaMock = InicializarDadosMockados();
+
             var idValidoInformado = 100;
+            var compraClienteMock = listaMock.FirstOrDefault();
+
             var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
-            var compraClienteMock = _listaMock.FirstOrDefault();
 
             Assert.NotNull(compraCliente);
             Assert.Equivalent(compraClienteMock, compraCliente);
@@ -213,7 +221,6 @@ namespace Cod3rsGrowth.Testes
         {
             var idValidoInformado = 101;
             var idInvalidoInformado = 10;
-            var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
 
             var excecao = Assert.Throws<Exception>(() => _servicoCompraCliente.ObterPorId(idInvalidoInformado));
             Assert.Equal($"O ID informado ({idInvalidoInformado}) é inválido. Compra não encontrada.", excecao.Message);
@@ -223,6 +230,7 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_InformandoIdValido_DeveRetornarObjetoDoTipoCompraCliente()
         {
             var idValidoInformado = 102;
+
             var compraCliente = _servicoCompraCliente.ObterPorId(idValidoInformado);
             
             Assert.NotNull(compraCliente);
@@ -233,117 +241,28 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Criar_ComDadosValidos_DeveCriarCompraClienteComSucesso()
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@hotmail.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
 
-            var novaCompraNoBancoDeDados = _servicoCompraCliente.Criar(novaCompra);
+            var compraCadastrada = _servicoCompraCliente.Criar(novaCompra);
 
-            var compraEsperada = novaCompra;
-
-            Assert.NotNull(novaCompraNoBancoDeDados?.Id);
-            Assert.Equivalent(compraEsperada, novaCompraNoBancoDeDados);
+            Assert.NotNull(compraCadastrada?.Id);
+            Assert.Equivalent(novaCompra, compraCadastrada);
         }
 
         [Theory]
         [InlineData("")]
         [InlineData("          ")]
         [InlineData(null)]
-        public void Criar_ComNomeDoClienteNuloOuVazio_DeveRetornarExcecao(string nome)
+        public void Criar_ComNomeDoClienteNuloOuVazio_DeveRetornarExcecao(string nomeInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = nome,
-                Telefone = "(62)99332-7668",
-                Email = "vitor@hotmail.com",
-                Produtos = new List<Obra>
-                {
-                    new() 
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Nome = nomeInvalido;
             var mensagemDeErro = "O nome do cliente deve ser informado. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -351,68 +270,24 @@ namespace Cod3rsGrowth.Testes
         [InlineData("@@@$$")]
         [InlineData("    $*&#(*&¨#$(      ")]
         [InlineData("AAA222355")]
-        public void Criar_ComCaracteresInvalidosNoNomeDoCliente_DeveRetornarExcecao(string nome)
+        public void Criar_ComCaracteresInvalidosNoNomeDoCliente_DeveRetornarExcecao(string nomeInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = nome,
-                Telefone = "(62)99332-7668",
-                Email = "vitor@hotmail.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Nome = nomeInvalido;
             var mensagemDeErro = "O nome deve conter apenas letras, espaços ou símbolos como - e '. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComNomeDoClienteMaiorQue100Caracteres_DeveRetornarExcecao()
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Antlez Broke the Stereo Neon Tide Bring Back Honesty " +
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Nome = "Antlez Broke the Stereo Neon Tide Bring Back Honesty " +
                 "Coalition Feedback Hand of Aces Keep Going Captain Let's Pretend Lost State of " +
                 "Dance Paper Taxis Lunar Road Up Down Strange All and I Neon Sheep Eve Hornby Faye " +
                 "Bradley AJ Wilde Michael Rice Dion Watts Matthew Appleyard John Ashurst Lauren " +
@@ -425,53 +300,11 @@ namespace Cod3rsGrowth.Testes
                 "Dominic Parker Sharpe Elena Larkin Rebecca Simpson Nick Dixon Abbie Farrelly " +
                 "Liam Grieves Casey Smith Downing Ben Wignall Elizabeth Hann Danielle Walker L" +
                 "auren Glen James Johnson Ervine Kate Burton James Hudson Daniel Mayes Matthew " +
-                "Kitching Josh Bennett Evolution Dreams",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@hotmail.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+                "Kitching Josh Bennett Evolution Dreams";
             var mensagemDeErro = "O nome do cliente pode ter até 100 caracteres. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -479,58 +312,15 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("          ")]
         [InlineData(null)]
-        public void Criar_ComEmailNuloOuVazio_DeveRetornarExcecao(string email)
+        public void Criar_ComEmailNuloOuVazio_DeveRetornarExcecao(string emailInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = email,
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Email = emailInvalido;
             var mensagemDeErro = "O e-mail do cliente é obrigatório. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -539,58 +329,15 @@ namespace Cod3rsGrowth.Testes
         [InlineData("vitorhotmail.com")]
         [InlineData("@vvvvvvvvv")]
         [InlineData("vvvvvvvvv@")]
-        public void Criar_ComFormatoDeEmailInvalido_DeveRetornarExcecao(string email)
+        public void Criar_ComFormatoDeEmailInvalido_DeveRetornarExcecao(string emailInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = email,
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Email = emailInvalido;
             var mensagemDeErro = "Formato de e-mail inválido. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -599,218 +346,39 @@ namespace Cod3rsGrowth.Testes
         [InlineData("vitór@hotmail.com")]
         public void Criar_ComCaracteresInvalidosNoEmail_DeveRetornarExcecao(string emailInvalido)
         {
-            var novaCompra = _listaMock.FirstOrDefault();
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Email = emailInvalido;
-
             var mensagemDeErro = "O email deve conter apenas letras sem acento, números, espaços ou alguns símbolos, como - e _. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComValorDaCompraMenorQue0_DeveRetornarExcecao()
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@yahoo.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = -12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.ValorCompra = -1000;
             var mensagemDeErro = "O valor da compra não pode ser negativo. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
-            Assert.Equal(mensagemDeErro, excecao.Message);
-        }
 
-        [Fact]
-        public void Criar_ComDataDeCompraNoFuturo_DeveRetornarExcecao()
-        {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@yahoo.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 3000")
-            };
-
-            var mensagemDeErro = "Não é possível informar uma data futura. | ";
-
-            var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
-            Assert.Equal(mensagemDeErro, excecao.Message);
-        }
-
-        [Fact]
-        public void Criar_ComDataDeCompraVazia_DeveRetornarExcecao()
-        {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@yahoo.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-            };
-
-            var mensagemDeErro = "A data da compra deve ser informada. | ";
-
-            var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComAListaDeProdutosVazia_DeveRetornarExcecao()
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@yahoo.com",
-                Produtos = new List<Obra> { },
-                DataCompra = DateTime.Parse("May 29, 2024"),
-                ValorCompra = 12,
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Produtos = new List<Obra> { };
             var mensagemDeErro = "A compra deve conter a lista de produtos preenchida. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
-            Assert.Equal(mensagemDeErro, excecao.Message);
-        }
 
-        [Fact]
-        public void Criar_SemAListaDeProdutos_DeveRetornarExcecao()
-        {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@yahoo.com",
-                DataCompra = DateTime.Parse("May 29, 2024"),
-                ValorCompra = 12,
-            };
-
-            var mensagemDeErro = "A compra deve conter a lista de produtos preenchida. | ";
-
-            var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -821,55 +389,11 @@ namespace Cod3rsGrowth.Testes
         [InlineData("aaa.aaa.aaa-aa")]
         [InlineData("123.456.789-10")]
         [InlineData("666.777.888-99")]
-        public void Criar_ComCPFInvalido_DeveRetornarExcecao(string cpf)
+        public void Criar_ComCPFInvalido_DeveRetornarExcecao(string cpfInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = cpf,
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@yahoo.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Cpf = cpfInvalido;
             var mensagemDeErro = "O CPF informado é inválido. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
@@ -880,55 +404,11 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("          ")]
         [InlineData(null)]
-        public void Criar_ComCPFNuloOuVazio_DeveRetornarExcecao(string cpf)
+        public void Criar_ComCPFNuloOuVazio_DeveRetornarExcecao(string cpfInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = cpf,
-                Nome = "Vitor",
-                Telefone = "(62)99332-7668",
-                Email = "vitor@yahoo.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Cpf = cpfInvalido;
             var mensagemDeErro = "O CPF do cliente é obrigatório. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
@@ -940,56 +420,11 @@ namespace Cod3rsGrowth.Testes
         [InlineData("aaaaaaa")]
         [InlineData("(aa) 1111-1111")]
         [InlineData("(632)2233334-4444")]
-
-        public void Criar_ComFormatoDeTelefoneInvalido_DeveRetornarExcecao(string telefone)
+        public void Criar_ComFormatoDeTelefoneInvalido_DeveRetornarExcecao(string telefoneInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = telefone,
-                Email = "vitor@yahoo.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Telefone = telefoneInvalido;
             var mensagemDeErro = "O telefone deve ter apenas números e símbolos e estar no formato correto " +
                 "(XX) XXXXX-XXXX ou (XX) XXXX-XXXX. | ";
 
@@ -1001,54 +436,11 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("          ")]
         [InlineData(null)]
-        public void Criar_ComTelefoneNuloOuVazio_DeveRetornarExcecao(string telefone)
+        public void Criar_ComTelefoneNuloOuVazio_DeveRetornarExcecao(string telefoneInvalido)
         {
-            var novaCompra = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = telefone,
-                Email = "vitor@yahoo.com",
-                Produtos = new List<Obra>
-                {
-                    new()
-                    {
-                        Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                        Autor = "Tappei Nagatsuki",
-                        FoiFinalizada = false,
-                        Formato = Formato.WebNovel,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Sobrenatural,
-                            Genero.Psicologico,
-                            Genero.Misterio
-                        },
-                        InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                        NumeroCapitulos = 20,
-                        ValorObra = 0,
-                        Sinopse = "Sinopse Re:Zero"
-                    },
-                    new()
-                    {
-                        Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                        Autor = "Aka Akasaka",
-                        FoiFinalizada = true,
-                        Formato = Formato.Manga,
-                        Generos = new List<Genero>
-                        {
-                            Genero.Romance,
-                            Genero.Comedia,
-                            Genero.VidaEscolar
-                        },
-                        InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                        NumeroCapitulos = 281,
-                        ValorObra = 12,
-                        Sinopse = "Sinopse Kaguya-sama"
-                    }
-                },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaCompra = listaMock.FirstOrDefault();
+            novaCompra.Telefone = telefoneInvalido;
 
             var mensagemDeErro = "O telefone do cliente é obrigatório. | ";
 

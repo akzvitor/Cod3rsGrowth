@@ -43,7 +43,7 @@ namespace Cod3rsGrowth.Servico.Validadores
                 .GreaterThanOrEqualTo(0).WithMessage("O valor da compra não pode ser negativo.");
 
             RuleFor(cliente => cliente.DataCompra)
-                .NotEmpty().WithMessage("A data da compra deve ser informada.")
+                .NotEmpty().GreaterThan(DateTime.MinValue).WithMessage("A data da compra deve ser informada.")
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("Não é possível informar uma data futura.");
         }
 

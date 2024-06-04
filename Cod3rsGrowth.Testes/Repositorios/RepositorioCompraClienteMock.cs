@@ -6,17 +6,17 @@ namespace Cod3rsGrowth.Testes.Repositorios
 {
     public class RepositorioCompraClienteMock : IRepositorioCompraCliente
     {
-        public List<CompraCliente> ListaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
+        public List<CompraCliente> listaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
         private int compraClienteId = 100;
 
         public List<CompraCliente> ObterTodos()
         {
-            return ListaCompraCliente;
+            return listaCompraCliente;
         }
 
         public CompraCliente ObterPorId(int idInformado)
         {
-            var compraRequisitada = ListaCompraCliente.Find(compra => compra.Id == idInformado)
+            var compraRequisitada = listaCompraCliente.Find(compra => compra.Id == idInformado)
                 ?? throw new Exception($"O ID informado ({idInformado}) é inválido. Compra não encontrada.");
 
             return compraRequisitada;
@@ -26,7 +26,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             novaCompraCliente.Id = compraClienteId;
             compraClienteId++;
-            ListaCompraCliente.Add(novaCompraCliente);
+            listaCompraCliente.Add(novaCompraCliente);
 
             return novaCompraCliente;
         }
