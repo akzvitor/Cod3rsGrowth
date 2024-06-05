@@ -1,12 +1,11 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
-using Cod3rsGrowth.Servico.Interfaces;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servico.Validadores;
 using FluentValidation;
 
 namespace Cod3rsGrowth.Servico.Servicos
 {
-    public class ServicoObra : IServicoObra
+    public class ServicoObra
     {
         private readonly IRepositorioObra _repositorioObra;
         private readonly ObraValidador _validadorObra;

@@ -1,6 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Servico.Interfaces;
+using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Testes
 {
     public class TestesServicoCompraCliente : TesteBase
     {
-        private IServicoCompraCliente? _servicoCompraCliente;
+        private ServicoCompraCliente? _servicoCompraCliente;
 
         public TestesServicoCompraCliente()
         {
@@ -21,8 +21,8 @@ namespace Cod3rsGrowth.Testes
 
         private void CarregarServicos()
         {
-            _servicoCompraCliente = ServiceProvider.GetService<IServicoCompraCliente>()
-                ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoCompraCliente)}]");
+            _servicoCompraCliente = ServiceProvider.GetService<ServicoCompraCliente>()
+                ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoCompraCliente)}]");
         }
 
         private List<CompraCliente> InicializarDadosMockados()
