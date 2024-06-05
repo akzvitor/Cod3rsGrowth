@@ -1,16 +1,19 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
 using Cod3rsGrowth.Infra.Interfaces;
-using Cod3rsGrowth.Servico.Interfaces;
+using Cod3rsGrowth.Servico.Validadores;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Servico.Servicos
 {
-    public class ServicoCompraCliente : IServicoCompraCliente
+    public class ServicoCompraCliente
     {
         private readonly IRepositorioCompraCliente _repositorioCompraCliente;
+        private readonly CompraClienteValidador _validadorCompraCliente;
 
-        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente)
+        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente, CompraClienteValidador validadorCompraCliente)
         {
             _repositorioCompraCliente = repositorioCompraCliente;
+            _validadorCompraCliente = validadorCompraCliente;
         }
 
         public List<CompraCliente> ObterTodos()
@@ -23,9 +26,18 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioCompraCliente.ObterPorId(idInformado);
         }
 
-        public void Criar(CompraCliente novaCompraCliente)
+        public CompraCliente Criar(CompraCliente novaCompraCliente)
         {
-            throw new NotImplementedException();
+            var resultadoValidacao = _validadorCompraCliente.Validate(novaCompraCliente);
+
+            if(!resultadoValidacao.IsValid) 
+            {
+                var erros = string.Join(Environment.NewLine, resultadoValidacao.Errors.Select(x => x.ErrorMessage).ToArray());
+
+                throw new ValidationException(erros);
+            }
+
+            return _repositorioCompraCliente.Criar(novaCompraCliente);
         }
 
         public void Editar(CompraCliente compraCliente)
