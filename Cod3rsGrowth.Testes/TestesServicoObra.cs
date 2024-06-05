@@ -11,14 +11,12 @@ namespace Cod3rsGrowth.Testes
     public class TestesServicoObra : TesteBase
     {
         private IServicoObra? _servicoObra;
-        private List<Obra> _listaDoBanco;
-        private List<Obra> _listaMock;
 
         public TestesServicoObra()
         {
             CarregarServico();
-            _listaMock = InicializarDadosMockados();
-            _listaDoBanco = _servicoObra.ObterTodos();
+            _servicoObra.ObterTodos().Clear();
+            InicializarBancoDeDados();
         }
 
         private void CarregarServico()
@@ -33,72 +31,99 @@ namespace Cod3rsGrowth.Testes
             {
                 new Obra
                 {
-                    Titulo = "Dragon Ball",
-                    Autor = "Akira Toriyama",
+                    Id = 100,
+                    Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                    Autor = "Tappei Nagatsuki",
                     FoiFinalizada = false,
-                    Formato = Formato.Manga,
+                    Formato = Formato.WebNovel,
                     Generos = new List<Genero>
                     {
-                        Genero.Acao,
-                        Genero.ArtesMarciais,
-                        Genero.Aventura
+                        Genero.Sobrenatural,
+                        Genero.Psicologico,
+                        Genero.Misterio
                     },
-                    InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
+                    InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
                     NumeroCapitulos = 20,
                     ValorObra = 0,
-                    Sinopse = "Sinopse Dragon Ball"
+                    Sinopse = "Subaru Natsuki estava apenas tentando chegar à loja de conveniência, " +
+                    "mas acabou convocado para outro mundo. Ele encontra coisas comuns – situações de " +
+                    "risco de vida, belezas de cabelos prateados, fadas felinas – você sabe, coisas normais. " +
+                    "Tudo isso já seria ruim o suficiente, mas ele também ganhou a habilidade mágica " +
+                    "mais inconveniente de todas: viajar no tempo, mas ele precisa morrer para usá-la. " +
+                    "Como você retribui alguém que salvou sua vida quando tudo o que você pode fazer é morrer?"
                 },
                 new Obra
                 {
-                    Titulo = "Dragon Ball",
-                    Autor = "Akira Toriyama",
-                    FoiFinalizada = false,
+                    Id = 101,
+                    Titulo = "Hagane no Renkinjutsushi",
+                    Autor = "Hiromu Arakawa",
+                    FoiFinalizada = true,
                     Formato = Formato.Manga,
                     Generos = new List<Genero>
                     {
                         Genero.Acao,
-                        Genero.ArtesMarciais,
-                        Genero.Aventura
+                        Genero.Aventura,
+                        Genero.Drama,
+                        Genero.Fantasia
                     },
-                    InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                    NumeroCapitulos = 20,
-                    ValorObra = 0,
-                    Sinopse = "Sinopse Dragon Ball"
+                    InicioPublicacao = DateTime.Parse("Jul 12, 2001"),
+                    NumeroCapitulos = 116,
+                    ValorObra = 20,
+                    Sinopse = "A alquimia destruiu os corpos dos irmãos Elric. O vínculo deles pode torná-los " +
+                    "inteiros novamente? Neste mundo, os alquimistas são aqueles que estudam e realizam a " +
+                    "arte da transmutação alquímica – a ciência da manipulação e transformação da matéria. Eles estão " +
+                    "sujeitos à Lei da Troca Equivalente: para ganhar algo, é preciso sacrificar algo de igual valor. " +
+                    "Em um ritual alquímico que deu errado, Edward Elric perdeu o braço e a perna, e seu irmão Alphonse " +
+                    "se tornou nada além de uma alma em uma armadura. Equipado com membros mecânicos de “correio " +
+                    "automático”, Edward se torna um alquimista do estado, buscando a única coisa que pode restaurar o " +
+                    "corpo dele e de seu irmão... a lendária Pedra Filosofal."
                 },
                 new Obra
                 {
-                    Titulo = "Dragon Ball",
-                    Autor = "Akira Toriyama",
-                    FoiFinalizada = false,
-                    Formato = Formato.Manga,
+                    Id = 102,
+                    Titulo = "Na Honjaman Level Up",
+                    Autor = "Chu-Gong",
+                    FoiFinalizada = true,
+                    Formato = Formato.Manhwa,
                     Generos = new List<Genero>
                     {
                         Genero.Acao,
-                        Genero.ArtesMarciais,
-                        Genero.Aventura
+                        Genero.Aventura,
+                        Genero.Fantasia
                     },
-                    InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                    NumeroCapitulos = 20,
-                    ValorObra = 0,
-                    Sinopse = "Sinopse Dragon Ball"
+                    InicioPublicacao = DateTime.Parse("Mar 4, 2018"),
+                    NumeroCapitulos = 201,
+                    ValorObra = 70,
+                    Sinopse = "Num mundo onde seres despertos chamados “Caçadores” devem lutar contra monstros mortais " +
+                    "para proteger a humanidade, Sung Jinwoo, apelidado de “o caçador mais fraco de toda a humanidade”, " +
+                    "encontra-se numa luta constante pela sobrevivência. Um dia, depois de um encontro brutal em uma " +
+                    "masmorra dominada destruir seu grupo e ameaçar acabar com sua vida, um misterioso Sistema o escolhe " +
+                    "como único jogador: Jinwoo teve a rara oportunidade de aprimorar suas habilidades, possivelmente além " +
+                    "de quaisquer limites conhecidos. . Acompanhe a jornada de Jinwoo enquanto ele enfrenta inimigos cada " +
+                    "vez mais fortes, tanto humanos quanto monstros, para descobrir os segredos profundos das masmorras e a " +
+                    "extensão máxima de seus poderes."
                 }
             };
 
-            foreach (var obra in listaDeObras)
-            {
-                _servicoObra.Criar(obra);
-            }
-
             return listaDeObras;
+        }
+
+        private void InicializarBancoDeDados()
+        {
+            var listaDeObras = InicializarDadosMockados();
+
+            listaDeObras.ForEach(item => _servicoObra.Criar(item));    
         }
 
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaDeObras()
         {
+            var listaMock = InicializarDadosMockados();
+
             var listaDoBanco = _servicoObra.ObterTodos();
 
             Assert.NotNull(listaDoBanco);
-            Assert.Equivalent(_listaMock, listaDoBanco);
+            Assert.Equivalent(listaMock, listaDoBanco);
         }
 
         [Fact]
@@ -113,9 +138,11 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdValido_DeveRetornarObraCorreta()
         {
+            var listaMock = InicializarDadosMockados();
             var idValidoInformado = 100;
+            var obraMock = listaMock.FirstOrDefault();
+
             var obra = _servicoObra.ObterPorId(idValidoInformado);
-            var obraMock = _listaMock.FirstOrDefault();
 
             Assert.NotNull(obra);
             Assert.Equivalent(obraMock, obra);
@@ -124,11 +151,10 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
         {
-            var idValidoInformado = 101;
             var idInvalidoInformado = 200;
-            var obra = _servicoObra.ObterPorId(idValidoInformado);
 
             var excecao = Assert.Throws<Exception>(() => _servicoObra.ObterPorId(idInvalidoInformado));
+
             Assert.Equal($"O ID informado ({idInvalidoInformado}) é inválido. Obra não encontrada.", excecao.Message);
         }
 
@@ -136,6 +162,7 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_InformandoIdValido_DeveRetornarUmObjetoDoTipoObra()
         {
             var idValidoInformado = 102;
+
             var obra = _servicoObra.ObterPorId(idValidoInformado);
 
             Assert.NotNull(obra);
@@ -146,67 +173,37 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Criar_ComDadosValidos_DeveCriarObjetoComSucesso()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
 
-            var novaObraNoBanco = _servicoObra.Criar(novaObra);
+            var novaObraCadastrada = _servicoObra.Criar(novaObra);
 
-            var obraEsperada = novaObra;
-
-            Assert.NotNull(novaObraNoBanco?.Id);
-            Assert.Equivalent(obraEsperada, novaObraNoBanco);
+            Assert.NotNull(novaObraCadastrada?.Id);
+            Assert.Equivalent(novaObra, novaObraCadastrada);
         }
 
         [Theory]
         [InlineData("")]
         [InlineData("      ")]
         [InlineData(null)]
-        public void Criar_ComTituloNuloOuVazio_DeveRetornarExcecao(string titulo)
+        public void Criar_ComTituloNuloOuVazio_DeveRetornarExcecao(string tituloInvalido)
         {
-            var novaObra = new Obra
-            {
-                Titulo = titulo,
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Titulo = tituloInvalido;
             var mensagemDeErro = "O titulo da obra é obrigatório. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComTituloMaiorQue2000Caracteres_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "My Life Is Just As Wrong As I Expected After Traveling to Another World Where " +
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Titulo = "My Life Is Just As Wrong As I Expected After Traveling to Another World Where " +
                 "I’m Surrounded By Cute Girls At A Magical High School And Am Also The Fabled Hero of Legend, " +
                 "But Before I Tell You That Story I Have To Tell You This Story, In Which I Was Walking " +
                 "Along With My Unbelievably, Impossibly Cute Younger Sister Who Doesn’t Like Me At All, " +
@@ -230,24 +227,11 @@ namespace Cod3rsGrowth.Testes
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
-                "Twelve Years You Have Been Asking…                                                          ",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+                "Twelve Years You Have Been Asking…                                                          ";
             var mensagemDeErro = "O título pode ter no máximo 2000 caracteres. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -255,84 +239,45 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("      ")]
         [InlineData(null)]
-        public void Criar_ComNomeDoAutorNuloOuVazio_DeveRetornarExcecao(string autor)
+        public void Criar_ComNomeDoAutorNuloOuVazio_DeveRetornarExcecao(string autorInvalido)
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = autor,
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Autor = autorInvalido;
             var mensagemDeErro = "O nome do autor da obra é obrigatório. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Theory]
         [InlineData("&&%*$*(")]
         [InlineData("Aaaaa@@#$")]
-        public void Criar_ComCaracteresInvalidosNoNomeDoAutor_DeveRetornarExcecao(string autor)
+        public void Criar_ComCaracteresInvalidosNoNomeDoAutor_DeveRetornarExcecao(string autorInvalido)
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = autor,
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Autor = autorInvalido;
             var mensagemDeErro = "O nome do autor deve conter apenas letras, números, espaços ou símbolos como - ou _. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComNomeDoAutorMaiorQue150Caracteres_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Autor = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
                 "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
-                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
             var mensagemDeErro = "O nome do autor deve ter até 150 caracteres. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -340,50 +285,24 @@ namespace Cod3rsGrowth.Testes
         [InlineData("")]
         [InlineData("      ")]
         [InlineData(null)]
-        public void Criar_ComSinopseNulaOuVazia_DeveRetornarExcecao(string sinopse)
+        public void Criar_ComSinopseNulaOuVazia_DeveRetornarExcecao(string sinopseInvalida)
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = sinopse
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Sinopse = sinopseInvalida;
             var mensagemDeErro = "A obra deve ter uma sinopse. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComSinopseMaiorQue2000Caracteres_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "My Life Is Just As Wrong As I Expected After Traveling to Another World Where " +
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Sinopse = "My Life Is Just As Wrong As I Expected After Traveling to Another World Where " +
                 "I’m Surrounded By Cute Girls At A Magical High School And Am Also The Fabled Hero of Legend, " +
                 "But Before I Tell You That Story I Have To Tell You This Story, In Which I Was Walking " +
                 "Along With My Unbelievably, Impossibly Cute Younger Sister Who Doesn’t Like Me At All, " +
@@ -407,63 +326,37 @@ namespace Cod3rsGrowth.Testes
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
-                "Twelve Years You Have Been Asking…                                                          "
-            };
+                "Twelve Years You Have Been Asking…                                                          ";
             var mensagemDeErro = "A sinopse deve ter no máximo 2000 caracteres. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComNumeroDeCapitulosMenorQueUm_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = -1,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.NumeroCapitulos = -187;
             var mensagemDeErro = "A obra deve ter pelo menos 1 capítulo. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComValorDaObraNegativo_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = -1,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.ValorObra = -40;
             var mensagemDeErro = "O valor da obra não pode ser negativo. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.NotNull(excecao);
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
@@ -471,159 +364,92 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Criar_ComDataDeInicioDaPublicacaoNulaOuVazia_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.InicioPublicacao = DateTime.MinValue;
             var mensagemDeErro = "A data de início da publicação da obra deve ser informada. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComDataDeInicioDaPublicacaoNoFuturo_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Nov 21, 3000"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.InicioPublicacao = DateTime.Parse("Jul 19, 3000");
             var mensagemDeErro = "Data inválida. Não é possível colocar uma data futura. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComFormatoDeObraInvalido_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = (Formato)32,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Formato = (Formato)32;
             var mensagemDeErro = "Formato de obra inválido. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComListaDeGenerosVazia_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manhwa,
-                Generos = new List<Genero>{ },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Generos = new List<Genero> { };
             var mensagemDeErro = "O(s) gênero(s) da obra deve(m) ser informado(s). | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComListaDeGenerosMaiorQue10_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Generos = new List<Genero>
             {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manhwa,
-                Generos = new List<Genero> 
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    Genero.Aventura,
-                    Genero.Comedia,
-                    Genero.Drama,
-                    Genero.Romance,
-                    Genero.Psicologico,
-                    Genero.Historico,
-                    Genero.Musical,
-                    Genero.Horror,
-                    Genero.SciFi,
-                    Genero.MahouShoujo
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
+                Genero.Acao,
+                Genero.ArtesMarciais,
+                Genero.Aventura,
+                Genero.Comedia,
+                Genero.Drama,
+                Genero.Romance,
+                Genero.Psicologico,
+                Genero.Historico,
+                Genero.Musical,
+                Genero.Horror,
+                Genero.SciFi,
+                Genero.MahouShoujo
             };
             var mensagemDeErro = "O limite de gêneros em uma única obra é 10. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
         [Fact]
         public void Criar_ComGeneroInvalidoNaListaDeGeneros_DeveRetornarExcecao()
         {
-            var novaObra = new Obra
-            {
-                Titulo = "Dragon Ball",
-                Autor = "Akira Toriyama",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.ArtesMarciais,
-                    (Genero)45
-                },
-                InicioPublicacao = DateTime.Parse("Sep 15, 1991"),
-                NumeroCapitulos = 20,
-                ValorObra = 0,
-                Sinopse = "Sinopse Dragon Ball"
-            };
+            var listaMock = InicializarDadosMockados();
+            var novaObra = listaMock.FirstOrDefault();
+            novaObra.Generos = new List<Genero> { (Genero)456 };
             var mensagemDeErro = "Genero informado inválido. | ";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
     }
