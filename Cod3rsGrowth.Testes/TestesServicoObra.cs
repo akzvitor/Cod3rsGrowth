@@ -452,5 +452,22 @@ namespace Cod3rsGrowth.Testes
 
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
+
+        //Método Editar
+        [Fact]
+        public void Editar_ComDadosValidos_DeveEditarObraCorretamenteNoBancoDeDados()
+        {
+            var listaMock = InicializarDadosMockados();
+            var novaObra = new Obra
+            {
+                Id = 100,
+                Autor = "AAAAAAAAAAAA"
+            };
+            var obraMockada = listaMock.FirstOrDefault();
+
+            var obraNoBanco = _servicoObra.Editar(novaObra);
+
+            Assert.Equal(novaObra, obraNoBanco);
+        }
     }
 }

@@ -41,9 +41,21 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioObra.Criar(novaObra);
         }
 
-        public void Editar(Obra obra)
+        public Obra Editar(Obra obraEditada)
         {
-            throw new NotImplementedException();
+            var resultadoValidacao = _validadorObra.Validate(obraEditada, options =>
+            {
+                options.IncludeRuleSets("Editar");
+            });
+
+            if (!resultadoValidacao.IsValid)
+            {
+                var erros = string.Join(Environment.NewLine, resultadoValidacao.Errors.Select(x => x.ErrorMessage).ToArray());
+
+                throw new ValidationException(erros);
+            }
+
+            return _repositorioObra.Editar(obraEditada);
         }
 
         public void Remover(Obra obra)
