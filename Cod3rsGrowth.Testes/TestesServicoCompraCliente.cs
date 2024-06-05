@@ -11,7 +11,6 @@ namespace Cod3rsGrowth.Testes
     public class TestesServicoCompraCliente : TesteBase
     {
         private IServicoCompraCliente? _servicoCompraCliente;
-        private List<CompraCliente> _listaDoBanco;
 
         public TestesServicoCompraCliente()
         {
@@ -28,14 +27,14 @@ namespace Cod3rsGrowth.Testes
 
         private List<CompraCliente> InicializarDadosMockados()
         {
-            var listaCompras = new List<CompraCliente> 
-            {  
-                new() 
+            var listaCompras = new List<CompraCliente>
+            {
+                new()
                 {
                     Id = 100,
                     Cpf = "123.456.789-09",
                     Nome = "Vitor",
-                    Telefone = "(62)99332-7668",
+                    Telefone = "(64)99332-7668",
                     Email = "vitor@hotmail.com",
                     Produtos = new List<Obra>
                         {
@@ -54,7 +53,12 @@ namespace Cod3rsGrowth.Testes
                                 InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
                                 NumeroCapitulos = 20,
                                 ValorObra = 0,
-                                Sinopse = "Sinopse Re:Zero"
+                                Sinopse = "Subaru Natsuki estava apenas tentando chegar à loja de conveniência, " +
+                                "mas acabou convocado para outro mundo. Ele encontra coisas comuns – situações de " +
+                                "risco de vida, belezas de cabelos prateados, fadas felinas – você sabe, coisas normais. " +
+                                "Tudo isso já seria ruim o suficiente, mas ele também ganhou a habilidade mágica " +
+                                "mais inconveniente de todas: viajar no tempo, mas ele precisa morrer para usá-la. " +
+                                "Como você retribui alguém que salvou sua vida quando tudo o que você pode fazer é morrer?"
                             },
                             new()
                             {
@@ -71,123 +75,155 @@ namespace Cod3rsGrowth.Testes
                                 InicioPublicacao = DateTime.Parse("May 19, 2015"),
                                 NumeroCapitulos = 281,
                                 ValorObra = 12,
-                                Sinopse = "Sinopse Kaguya-sama"
+                                Sinopse = "Como líderes do conselho estudantil de sua prestigiada academia, Kaguya e Miyuki " +
+                                "são a elite da elite! Mas no topo é solitário… Felizmente para eles, eles se apaixonaram! Só " +
+                                "há um problema: ambos têm orgulho demais para admitir. E assim começa a trama diária para " +
+                                "fazer com que o objeto de seu afeto confesse primeiro seus sentimentos românticos... O amor " +
+                                "é uma guerra que você ganha ao perder."
                             }
                         },
                     ValorCompra = 12,
                     DataCompra = DateTime.Parse("May 29, 2024")
-                }, 
+                },
                 new() {
-                    Id = 2,
-                    Cpf = "123.456.789-09",
-                    Nome = "Vitor",
-                    Telefone = "(62)99332-7668",
-                    Email = "vitor@hotmail.com",
+                    Id = 101,
+                    Cpf = "405.036.220-10",
+                    Nome = "Matheus",
+                    Telefone = "(63)99849-0887",
+                    Email = "cascao@yahoo.com",
                     Produtos = new List<Obra>
                     {
                         new()
                         {
-                            Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                            Autor = "Tappei Nagatsuki",
-                            FoiFinalizada = false,
-                            Formato = Formato.WebNovel,
-                            Generos = new List<Genero>
-                            {
-                                Genero.Sobrenatural,
-                                Genero.Psicologico,
-                                Genero.Misterio
-                            },
-                            InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                            NumeroCapitulos = 20,
-                            ValorObra = 0,
-                            Sinopse = "Sinopse Re:Zero"
-                        },
-                        new()
-                        {
-                            Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                            Autor = "Aka Akasaka",
+                            Titulo = "Hagane no Renkinjutsushi",
+                            Autor = "Hiromu Arakawa",
                             FoiFinalizada = true,
                             Formato = Formato.Manga,
                             Generos = new List<Genero>
                             {
-                                Genero.Romance,
-                                Genero.Comedia,
-                                Genero.VidaEscolar
+                                Genero.Acao,
+                                Genero.Aventura,
+                                Genero.Drama,
+                                Genero.Fantasia
                             },
-                            InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                            NumeroCapitulos = 281,
-                            ValorObra = 12,
-                            Sinopse = "Sinopse Kaguya-sama"
+                            InicioPublicacao = DateTime.Parse("Jul 12, 2001"),
+                            NumeroCapitulos = 116,
+                            ValorObra = 20,
+                            Sinopse = "A alquimia destruiu os corpos dos irmãos Elric. O vínculo deles pode torná-los " +
+                            "inteiros novamente? Neste mundo, os alquimistas são aqueles que estudam e realizam a " +
+                            "arte da transmutação alquímica – a ciência da manipulação e transformação da matéria. Eles estão " +
+                            "sujeitos à Lei da Troca Equivalente: para ganhar algo, é preciso sacrificar algo de igual valor. " +
+                            "Em um ritual alquímico que deu errado, Edward Elric perdeu o braço e a perna, e seu irmão Alphonse " +
+                            "se tornou nada além de uma alma em uma armadura. Equipado com membros mecânicos de “correio " +
+                            "automático”, Edward se torna um alquimista do estado, buscando a única coisa que pode restaurar o " +
+                            "corpo dele e de seu irmão... a lendária Pedra Filosofal."
+                        },
+                        new()
+                        {
+                            Titulo = "Kiseijuu",
+                            Autor = "Hitoshi Iwaaki",
+                            FoiFinalizada = true,
+                            Formato = Formato.Manga,
+                            Generos = new List<Genero>
+                            {
+                                Genero.Acao,
+                                Genero.Drama,
+                                Genero.SciFi,
+                                Genero.Horror,
+                                Genero.Psicologico
+                            },
+                            InicioPublicacao = DateTime.Parse("Nov 22, 1989"),
+                            NumeroCapitulos = 64,
+                            ValorObra = 40,
+                            Sinopse = "Eles chegam em silêncio e escuridão. Eles descem dos céus. Eles têm fome de carne humana. " +
+                            "Eles estão em toda parte. Eles são parasitas, criaturas alienígenas que devem invadir – e assumir o " +
+                            "controle – de um hospedeiro humano para sobreviver. E depois de infectarem suas vítimas, eles podem " +
+                            "assumir qualquer forma mortal que escolherem: monstros com dentes gigantes, demônios alados, criaturas " +
+                            "com lâminas no lugar das mãos. Mas a maioria optou por esconder o seu propósito letal por trás de " +
+                            "rostos humanos comuns. Portanto, ninguém conhece o segredo deles – exceto um estudante comum do ensino " +
+                            "médio. Shin está lutando pelo controle de seu próprio corpo contra um parasita alienígena, mas será que " +
+                            "ele encontrará uma maneira de alertar a humanidade sobre os horrores que estão por vir?"
                         }
                     },
-                    ValorCompra = 12,
-                    DataCompra = DateTime.Parse("May 29, 2024")
+                    ValorCompra = 60,
+                    DataCompra = DateTime.Parse("Mar 28, 2024")
                 },
                 new()
                 {
-                    Id = 3,
-                    Cpf = "123.456.789-09",
-                    Nome = "Vitor",
-                    Telefone = "(62)99332-7668",
-                    Email = "vitor@hotmail.com",
+                    Id = 102,
+                    Cpf = "684.198.350-56",
+                    Nome = "Henrique",
+                    Telefone = "(11)99887-8022",
+                    Email = "henrique@uol.com",
                     Produtos = new List<Obra>
                         {
                             new()
                             {
-                                Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                                Autor = "Tappei Nagatsuki",
-                                FoiFinalizada = false,
-                                Formato = Formato.WebNovel,
+                                Titulo = "Na Honjaman Level Up",
+                                Autor = "Chu-Gong",
+                                FoiFinalizada = true,
+                                Formato = Formato.Manhwa,
                                 Generos = new List<Genero>
                                 {
-                                    Genero.Sobrenatural,
-                                    Genero.Psicologico,
-                                    Genero.Misterio
+                                    Genero.Acao,
+                                    Genero.Aventura,
+                                    Genero.Fantasia
                                 },
-                                InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                                NumeroCapitulos = 20,
-                                ValorObra = 0,
-                                Sinopse = "Sinopse Re:Zero"
+                                InicioPublicacao = DateTime.Parse("Mar 4, 2018"),
+                                NumeroCapitulos = 201,
+                                ValorObra = 70,
+                                Sinopse = "Num mundo onde seres despertos chamados “Caçadores” devem lutar contra monstros mortais " +
+                                "para proteger a humanidade, Sung Jinwoo, apelidado de “o caçador mais fraco de toda a humanidade”, " +
+                                "encontra-se numa luta constante pela sobrevivência. Um dia, depois de um encontro brutal em uma " +
+                                "masmorra dominada destruir seu grupo e ameaçar acabar com sua vida, um misterioso Sistema o escolhe " +
+                                "como único jogador: Jinwoo teve a rara oportunidade de aprimorar suas habilidades, possivelmente além " +
+                                "de quaisquer limites conhecidos. . Acompanhe a jornada de Jinwoo enquanto ele enfrenta inimigos cada " +
+                                "vez mais fortes, tanto humanos quanto monstros, para descobrir os segredos profundos das masmorras e a " +
+                                "extensão máxima de seus poderes."
                             },
                             new()
                             {
-                                Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                                Autor = "Aka Akasaka",
-                                FoiFinalizada = true,
-                                Formato = Formato.Manga,
+                                Titulo = "Jeonjijeok Dokja Sijeom",
+                                Autor = "Sing-Shong",
+                                FoiFinalizada = false,
+                                Formato = Formato.Manhwa,
                                 Generos = new List<Genero>
                                 {
-                                    Genero.Romance,
-                                    Genero.Comedia,
-                                    Genero.VidaEscolar
+                                    Genero.Acao,
+                                    Genero.Aventura,
+                                    Genero.Fantasia
                                 },
-                                InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                                NumeroCapitulos = 281,
-                                ValorObra = 12,
-                                Sinopse = "Sinopse Kaguya-sama"
+                                InicioPublicacao = DateTime.Parse("May 26, 2020"),
+                                NumeroCapitulos = 180,
+                                ValorObra = 50,
+                                Sinopse = "Naquela época, Dok-Ja não tinha ideia. Ele não tinha ideia de que seu romance favorito na " +
+                                "web, 'Três maneiras de sobreviver ao apocalipse', ganharia vida e que ele se tornaria a única pessoa " +
+                                "a saber como o mundo iria acabar. Ele também não tinha ideia de que acabaria se tornando o protagonista " +
+                                "desse romance que virou realidade. Agora, Dok-Ja embarcará em uma jornada para mudar o rumo da história " +
+                                "e salvar a humanidade de uma vez por todas."
                             }
                         },
-                    ValorCompra = 12,
-                    DataCompra = DateTime.Parse("May 29, 2024")
+                    ValorCompra = 120,
+                    DataCompra = DateTime.Parse("May 07, 2024")
                 }
             };
+
             return listaCompras;
         }
 
         private void InicializarBancoDeDados()
         {
             var listaMock = InicializarDadosMockados();
-            foreach (var item in listaMock)
-            {
-                _servicoCompraCliente.Criar(item);
-            }
+
+            listaMock.ForEach(item => _servicoCompraCliente.Criar(item));
         }
 
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarAListaCompraCliente()
         {
-            var listaDoBanco = _servicoCompraCliente.ObterTodos();
             var listaMock = InicializarDadosMockados();
+
+            var listaDoBanco = _servicoCompraCliente.ObterTodos();
 
             Assert.NotNull(listaDoBanco);
             Assert.Equivalent(listaMock, listaDoBanco);
@@ -206,7 +242,6 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_InformandoIdValido_DeveRetornarCompraClienteCorreta()
         {
             var listaMock = InicializarDadosMockados();
-
             var idValidoInformado = 100;
             var compraClienteMock = listaMock.FirstOrDefault();
 
@@ -219,10 +254,10 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterPorId_InformandoIdInvalido_DeveRetornarExcecaoObjetoNaoEncontrado()
         {
-            var idValidoInformado = 101;
             var idInvalidoInformado = 10;
 
             var excecao = Assert.Throws<Exception>(() => _servicoCompraCliente.ObterPorId(idInvalidoInformado));
+
             Assert.Equal($"O ID informado ({idInvalidoInformado}) é inválido. Compra não encontrada.", excecao.Message);
         }
 
