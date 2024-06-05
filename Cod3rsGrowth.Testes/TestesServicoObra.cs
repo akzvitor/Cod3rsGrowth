@@ -191,7 +191,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.Titulo = tituloInvalido;
-            var mensagemDeErro = "O titulo da obra é obrigatório. | ";
+            var mensagemDeErro = "O titulo da obra é obrigatório.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -228,7 +228,7 @@ namespace Cod3rsGrowth.Testes
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "Twelve Years You Have Been Asking…                                                          ";
-            var mensagemDeErro = "O título pode ter no máximo 2000 caracteres. | ";
+            var mensagemDeErro = "O título pode ter no máximo 2000 caracteres.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -244,7 +244,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.Autor = autorInvalido;
-            var mensagemDeErro = "O nome do autor da obra é obrigatório. | ";
+            var mensagemDeErro = "O nome do autor da obra é obrigatório.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -259,7 +259,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.Autor = autorInvalido;
-            var mensagemDeErro = "O nome do autor deve conter apenas letras, números, espaços ou símbolos como - ou _. | ";
+            var mensagemDeErro = "O nome do autor deve conter apenas letras, números, espaços ou símbolos como - ou _.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -274,7 +274,7 @@ namespace Cod3rsGrowth.Testes
             novaObra.Autor = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
                 "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
                 "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-            var mensagemDeErro = "O nome do autor deve ter até 150 caracteres. | ";
+            var mensagemDeErro = "O nome do autor deve ter até 150 caracteres.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -290,7 +290,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.Sinopse = sinopseInvalida;
-            var mensagemDeErro = "A obra deve ter uma sinopse. | ";
+            var mensagemDeErro = "A obra deve ter uma sinopse.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -327,7 +327,7 @@ namespace Cod3rsGrowth.Testes
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "A Speech From, And She Asked Me To Recite The Speech, Which I Did, And The Speech Went “For " +
                 "Twelve Years You Have Been Asking…                                                          ";
-            var mensagemDeErro = "A sinopse deve ter no máximo 2000 caracteres. | ";
+            var mensagemDeErro = "A sinopse deve ter no máximo 2000 caracteres.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -340,7 +340,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.NumeroCapitulos = -187;
-            var mensagemDeErro = "A obra deve ter pelo menos 1 capítulo. | ";
+            var mensagemDeErro = "A obra deve ter pelo menos 1 capítulo.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -353,7 +353,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.ValorObra = -40;
-            var mensagemDeErro = "O valor da obra não pode ser negativo. | ";
+            var mensagemDeErro = "O valor da obra não pode ser negativo.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -367,7 +367,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.InicioPublicacao = DateTime.MinValue;
-            var mensagemDeErro = "A data de início da publicação da obra deve ser informada. | ";
+            var mensagemDeErro = "A data de início da publicação da obra deve ser informada.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -380,7 +380,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.InicioPublicacao = DateTime.Parse("Jul 19, 3000");
-            var mensagemDeErro = "Data inválida. Não é possível colocar uma data futura. | ";
+            var mensagemDeErro = "Data inválida. Não é possível colocar uma data futura.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -393,7 +393,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.Formato = (Formato)32;
-            var mensagemDeErro = "Formato de obra inválido. | ";
+            var mensagemDeErro = "Formato de obra inválido.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -406,7 +406,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.Generos = new List<Genero> { };
-            var mensagemDeErro = "O(s) gênero(s) da obra deve(m) ser informado(s). | ";
+            var mensagemDeErro = "O(s) gênero(s) da obra deve(m) ser informado(s).";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -433,7 +433,7 @@ namespace Cod3rsGrowth.Testes
                 Genero.SciFi,
                 Genero.MahouShoujo
             };
-            var mensagemDeErro = "O limite de gêneros em uma única obra é 10. | ";
+            var mensagemDeErro = "O limite de gêneros em uma única obra é 10.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 
@@ -446,7 +446,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaObra = listaMock.FirstOrDefault();
             novaObra.Generos = new List<Genero> { (Genero)456 };
-            var mensagemDeErro = "Genero informado inválido. | ";
+            var mensagemDeErro = "Genero informado inválido.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Criar(novaObra));
 

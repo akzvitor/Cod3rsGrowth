@@ -33,14 +33,9 @@ namespace Cod3rsGrowth.Servico.Servicos
 
             if(!resultadoValidacao.IsValid) 
             {
-                var mensagemDeErroGeral = "";
+                var erros = string.Join(Environment.NewLine, resultadoValidacao.Errors.Select(x => x.ErrorMessage).ToArray());
 
-                foreach (var falha in resultadoValidacao.Errors)
-                {
-                    mensagemDeErroGeral += falha.ErrorMessage + " | ";
-                }
-
-                throw new ValidationException(mensagemDeErroGeral);
+                throw new ValidationException(erros);
             }
 
             return _repositorioCompraCliente.Criar(novaCompraCliente);

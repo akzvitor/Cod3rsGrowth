@@ -294,7 +294,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Nome = nomeInvalido;
-            var mensagemDeErro = "O nome do cliente deve ser informado. | ";
+            var mensagemDeErro = "O nome do cliente deve ser informado.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
@@ -310,7 +310,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Nome = nomeInvalido;
-            var mensagemDeErro = "O nome deve conter apenas letras, espaços ou símbolos como - e '. | ";
+            var mensagemDeErro = "O nome deve conter apenas letras, espaços ou símbolos como - e '.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
@@ -336,7 +336,7 @@ namespace Cod3rsGrowth.Testes
                 "Liam Grieves Casey Smith Downing Ben Wignall Elizabeth Hann Danielle Walker L" +
                 "auren Glen James Johnson Ervine Kate Burton James Hudson Daniel Mayes Matthew " +
                 "Kitching Josh Bennett Evolution Dreams";
-            var mensagemDeErro = "O nome do cliente pode ter até 100 caracteres. | ";
+            var mensagemDeErro = "O nome do cliente pode ter até 100 caracteres.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
@@ -352,7 +352,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Email = emailInvalido;
-            var mensagemDeErro = "O e-mail do cliente é obrigatório. | ";
+            var mensagemDeErro = "O e-mail do cliente é obrigatório.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
@@ -369,7 +369,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Email = emailInvalido;
-            var mensagemDeErro = "Formato de e-mail inválido. | ";
+            var mensagemDeErro = "Formato de e-mail inválido.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
@@ -384,7 +384,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Email = emailInvalido;
-            var mensagemDeErro = "O email deve conter apenas letras sem acento, números, espaços ou alguns símbolos, como - e _. | ";
+            var mensagemDeErro = "O email deve conter apenas letras sem acento, números, espaços ou alguns símbolos, como - e _.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
@@ -397,7 +397,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.ValorCompra = -1000;
-            var mensagemDeErro = "O valor da compra não pode ser negativo. | ";
+            var mensagemDeErro = "O valor da compra não pode ser negativo.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
@@ -410,7 +410,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Produtos = new List<Obra> { };
-            var mensagemDeErro = "A compra deve conter a lista de produtos preenchida. | ";
+            var mensagemDeErro = "A compra deve conter a lista de produtos preenchida.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
@@ -429,7 +429,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Cpf = cpfInvalido;
-            var mensagemDeErro = "O CPF informado é inválido. | ";
+            var mensagemDeErro = "O CPF informado é inválido.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
             Assert.Equal(mensagemDeErro, excecao.Message);
@@ -444,7 +444,7 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Cpf = cpfInvalido;
-            var mensagemDeErro = "O CPF do cliente é obrigatório. | ";
+            var mensagemDeErro = "O CPF do cliente é obrigatório.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
             Assert.Equal(mensagemDeErro, excecao.Message);
@@ -461,7 +461,7 @@ namespace Cod3rsGrowth.Testes
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Telefone = telefoneInvalido;
             var mensagemDeErro = "O telefone deve ter apenas números e símbolos e estar no formato correto " +
-                "(XX) XXXXX-XXXX ou (XX) XXXX-XXXX. | ";
+                "(XX) XXXXX-XXXX ou (XX) XXXX-XXXX.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
             Assert.Equal(mensagemDeErro, excecao.Message);
@@ -477,7 +477,7 @@ namespace Cod3rsGrowth.Testes
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Telefone = telefoneInvalido;
 
-            var mensagemDeErro = "O telefone do cliente é obrigatório. | ";
+            var mensagemDeErro = "O telefone do cliente é obrigatório.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
             Assert.Equal(mensagemDeErro, excecao.Message);
