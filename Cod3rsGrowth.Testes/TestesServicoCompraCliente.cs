@@ -518,66 +518,12 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Editar_SemId_DeveRetornarExcecaoDefinidaNoRuleSet()
+        public void Editar_ComDataDeCompraDiferente_DeveRetornarExcecaoDefinidaNoRuleSet()
         {
-            var compraEditada = new CompraCliente
-            {
-                Cpf = "123.456.789-09",
-                Nome = "Vitor",
-                Telefone = "(64)99332-7668",
-                Email = "vitor@hotmail.com",
-                Produtos = new List<Obra>
-                        {
-                            new()
-                            {
-                                Id = 100,
-                                Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                                Autor = "Tappei Nagatsuki",
-                                FoiFinalizada = false,
-                                Formato = Formato.WebNovel,
-                                Generos = new List<Genero>
-                                {
-                                    Genero.Sobrenatural,
-                                    Genero.Psicologico,
-                                    Genero.Misterio
-                                },
-                                InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                                NumeroCapitulos = 20,
-                                ValorObra = 0,
-                                Sinopse = "Subaru Natsuki estava apenas tentando chegar à loja de conveniência, " +
-                                "mas acabou convocado para outro mundo. Ele encontra coisas comuns – situações de " +
-                                "risco de vida, belezas de cabelos prateados, fadas felinas – você sabe, coisas normais. " +
-                                "Tudo isso já seria ruim o suficiente, mas ele também ganhou a habilidade mágica " +
-                                "mais inconveniente de todas: viajar no tempo, mas ele precisa morrer para usá-la. " +
-                                "Como você retribui alguém que salvou sua vida quando tudo o que você pode fazer é morrer?"
-                            },
-                            new()
-                            {
-                                Id = 103,
-                                Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                                Autor = "Aka Akasaka",
-                                FoiFinalizada = true,
-                                Formato = Formato.Manga,
-                                Generos = new List<Genero>
-                                {
-                                    Genero.Romance,
-                                    Genero.Comedia,
-                                    Genero.VidaEscolar
-                                },
-                                InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                                NumeroCapitulos = 281,
-                                ValorObra = 12,
-                                Sinopse = "Como líderes do conselho estudantil de sua prestigiada academia, Kaguya e Miyuki " +
-                                "são a elite da elite! Mas no topo é solitário… Felizmente para eles, eles se apaixonaram! Só " +
-                                "há um problema: ambos têm orgulho demais para admitir. E assim começa a trama diária para " +
-                                "fazer com que o objeto de seu afeto confesse primeiro seus sentimentos românticos... O amor " +
-                                "é uma guerra que você ganha ao perder."
-                            }
-                        },
-                ValorCompra = 12,
-                DataCompra = DateTime.Parse("May 29, 2024")
-            };
-            var mensagemDeErro = "Compra não encontrada, o ID precisa ser informado!";
+            var listaMock = InicializarDadosMockados();
+            var compraEditada = listaMock.FirstOrDefault();
+            compraEditada.DataCompra = DateTime.Parse("Sep 14, 2020");
+            var mensagemDeErro = "A data de uma compra concluída não pode ser alterada.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Editar(compraEditada));
 

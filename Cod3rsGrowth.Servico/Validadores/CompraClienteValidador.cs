@@ -1,13 +1,18 @@
 ﻿using FluentValidation;
 using Cod3rsGrowth.Dominio.Classes;
 using System.Text.RegularExpressions;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Servico.Validadores
 {
     public class CompraClienteValidador : AbstractValidator<CompraCliente>
     {
-        public CompraClienteValidador()
+        private readonly IRepositorioCompraCliente _repositorioCompraCliente;
+
+        public CompraClienteValidador(IRepositorioCompraCliente repositorioCompraCliente)
         {
+            _repositorioCompraCliente = repositorioCompraCliente;
+
             RuleFor(cliente => cliente.Cpf)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("O CPF do cliente é obrigatório.")
@@ -48,8 +53,8 @@ namespace Cod3rsGrowth.Servico.Validadores
 
             RuleSet("Editar", () =>
             {
-                RuleFor(cliente => cliente.Id)
-                .NotEmpty().WithMessage("Compra não encontrada, o ID precisa ser informado!");
+                RuleFor(cliente => cliente)
+                .Must(EhDataIgual).WithMessage("A data de uma compra concluída não pode ser alterada.");
             });
         }
 
@@ -126,5 +131,11 @@ namespace Cod3rsGrowth.Servico.Validadores
             return cpf.EndsWith(digito);
         }
 
+        public bool EhDataIgual(CompraCliente compraCliente)
+        {
+            var compraDoBanco = _repositorioCompraCliente.ObterPorId(compraCliente.Id);
+
+            return compraCliente.DataCompra == compraDoBanco.DataCompra;
+        }
     }
 }
