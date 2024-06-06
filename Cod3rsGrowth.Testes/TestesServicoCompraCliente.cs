@@ -36,53 +36,10 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Vitor",
                     Telefone = "(64)99332-7668",
                     Email = "vitor@hotmail.com",
-                    Produtos = new List<Obra>
+                    Produtos = new List<int>
                         {
-                            new()
-                            {
-                                Id = 100,
-                                Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
-                                Autor = "Tappei Nagatsuki",
-                                FoiFinalizada = false,
-                                Formato = Formato.WebNovel,
-                                Generos = new List<Genero>
-                                {
-                                    Genero.Sobrenatural,
-                                    Genero.Psicologico,
-                                    Genero.Misterio
-                                },
-                                InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
-                                NumeroCapitulos = 20,
-                                ValorObra = 0,
-                                Sinopse = "Subaru Natsuki estava apenas tentando chegar à loja de conveniência, " +
-                                "mas acabou convocado para outro mundo. Ele encontra coisas comuns – situações de " +
-                                "risco de vida, belezas de cabelos prateados, fadas felinas – você sabe, coisas normais. " +
-                                "Tudo isso já seria ruim o suficiente, mas ele também ganhou a habilidade mágica " +
-                                "mais inconveniente de todas: viajar no tempo, mas ele precisa morrer para usá-la. " +
-                                "Como você retribui alguém que salvou sua vida quando tudo o que você pode fazer é morrer?"
-                            },
-                            new()
-                            {
-                                Id = 103,
-                                Titulo = "Kaguya-sama wa Kokurasetai: Tensaitachi no Renai Zunousen",
-                                Autor = "Aka Akasaka",
-                                FoiFinalizada = true,
-                                Formato = Formato.Manga,
-                                Generos = new List<Genero>
-                                {
-                                    Genero.Romance,
-                                    Genero.Comedia,
-                                    Genero.VidaEscolar
-                                },
-                                InicioPublicacao = DateTime.Parse("May 19, 2015"),
-                                NumeroCapitulos = 281,
-                                ValorObra = 12,
-                                Sinopse = "Como líderes do conselho estudantil de sua prestigiada academia, Kaguya e Miyuki " +
-                                "são a elite da elite! Mas no topo é solitário… Felizmente para eles, eles se apaixonaram! Só " +
-                                "há um problema: ambos têm orgulho demais para admitir. E assim começa a trama diária para " +
-                                "fazer com que o objeto de seu afeto confesse primeiro seus sentimentos românticos... O amor " +
-                                "é uma guerra que você ganha ao perder."
-                            }
+                            100,
+                            103
                         },
                     ValorCompra = 12,
                     DataCompra = DateTime.Parse("May 29, 2024")
@@ -93,61 +50,10 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Matheus",
                     Telefone = "(63)99849-0887",
                     Email = "cascao@yahoo.com",
-                    Produtos = new List<Obra>
+                    Produtos = new List<int>
                     {
-                        new()
-                        {
-                            Id = 101,
-                            Titulo = "Hagane no Renkinjutsushi",
-                            Autor = "Hiromu Arakawa",
-                            FoiFinalizada = true,
-                            Formato = Formato.Manga,
-                            Generos = new List<Genero>
-                            {
-                                Genero.Acao,
-                                Genero.Aventura,
-                                Genero.Drama,
-                                Genero.Fantasia
-                            },
-                            InicioPublicacao = DateTime.Parse("Jul 12, 2001"),
-                            NumeroCapitulos = 116,
-                            ValorObra = 20,
-                            Sinopse = "A alquimia destruiu os corpos dos irmãos Elric. O vínculo deles pode torná-los " +
-                            "inteiros novamente? Neste mundo, os alquimistas são aqueles que estudam e realizam a " +
-                            "arte da transmutação alquímica – a ciência da manipulação e transformação da matéria. Eles estão " +
-                            "sujeitos à Lei da Troca Equivalente: para ganhar algo, é preciso sacrificar algo de igual valor. " +
-                            "Em um ritual alquímico que deu errado, Edward Elric perdeu o braço e a perna, e seu irmão Alphonse " +
-                            "se tornou nada além de uma alma em uma armadura. Equipado com membros mecânicos de “correio " +
-                            "automático”, Edward se torna um alquimista do estado, buscando a única coisa que pode restaurar o " +
-                            "corpo dele e de seu irmão... a lendária Pedra Filosofal."
-                        },
-                        new()
-                        {
-                            Id = 104,
-                            Titulo = "Kiseijuu",
-                            Autor = "Hitoshi Iwaaki",
-                            FoiFinalizada = true,
-                            Formato = Formato.Manga,
-                            Generos = new List<Genero>
-                            {
-                                Genero.Acao,
-                                Genero.Drama,
-                                Genero.SciFi,
-                                Genero.Horror,
-                                Genero.Psicologico
-                            },
-                            InicioPublicacao = DateTime.Parse("Nov 22, 1989"),
-                            NumeroCapitulos = 64,
-                            ValorObra = 40,
-                            Sinopse = "Eles chegam em silêncio e escuridão. Eles descem dos céus. Eles têm fome de carne humana. " +
-                            "Eles estão em toda parte. Eles são parasitas, criaturas alienígenas que devem invadir – e assumir o " +
-                            "controle – de um hospedeiro humano para sobreviver. E depois de infectarem suas vítimas, eles podem " +
-                            "assumir qualquer forma mortal que escolherem: monstros com dentes gigantes, demônios alados, criaturas " +
-                            "com lâminas no lugar das mãos. Mas a maioria optou por esconder o seu propósito letal por trás de " +
-                            "rostos humanos comuns. Portanto, ninguém conhece o segredo deles – exceto um estudante comum do ensino " +
-                            "médio. Shin está lutando pelo controle de seu próprio corpo contra um parasita alienígena, mas será que " +
-                            "ele encontrará uma maneira de alertar a humanidade sobre os horrores que estão por vir?"
-                        }
+                        101,
+                        104
                     },
                     ValorCompra = 60,
                     DataCompra = DateTime.Parse("Mar 28, 2024")
@@ -159,55 +65,10 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Henrique",
                     Telefone = "(11)99887-8022",
                     Email = "henrique@uol.com",
-                    Produtos = new List<Obra>
+                    Produtos = new List<int>
                         {
-                            new()
-                            {
-                                Id = 102,
-                                Titulo = "Na Honjaman Level Up",
-                                Autor = "Chu-Gong",
-                                FoiFinalizada = true,
-                                Formato = Formato.Manhwa,
-                                Generos = new List<Genero>
-                                {
-                                    Genero.Acao,
-                                    Genero.Aventura,
-                                    Genero.Fantasia
-                                },
-                                InicioPublicacao = DateTime.Parse("Mar 4, 2018"),
-                                NumeroCapitulos = 201,
-                                ValorObra = 70,
-                                Sinopse = "Num mundo onde seres despertos chamados “Caçadores” devem lutar contra monstros mortais " +
-                                "para proteger a humanidade, Sung Jinwoo, apelidado de “o caçador mais fraco de toda a humanidade”, " +
-                                "encontra-se numa luta constante pela sobrevivência. Um dia, depois de um encontro brutal em uma " +
-                                "masmorra dominada destruir seu grupo e ameaçar acabar com sua vida, um misterioso Sistema o escolhe " +
-                                "como único jogador: Jinwoo teve a rara oportunidade de aprimorar suas habilidades, possivelmente além " +
-                                "de quaisquer limites conhecidos. . Acompanhe a jornada de Jinwoo enquanto ele enfrenta inimigos cada " +
-                                "vez mais fortes, tanto humanos quanto monstros, para descobrir os segredos profundos das masmorras e a " +
-                                "extensão máxima de seus poderes."
-                            },
-                            new()
-                            {
-                                Id = 105,
-                                Titulo = "Jeonjijeok Dokja Sijeom",
-                                Autor = "Sing-Shong",
-                                FoiFinalizada = false,
-                                Formato = Formato.Manhwa,
-                                Generos = new List<Genero>
-                                {
-                                    Genero.Acao,
-                                    Genero.Aventura,
-                                    Genero.Fantasia
-                                },
-                                InicioPublicacao = DateTime.Parse("May 26, 2020"),
-                                NumeroCapitulos = 180,
-                                ValorObra = 50,
-                                Sinopse = "Naquela época, Dok-Ja não tinha ideia. Ele não tinha ideia de que seu romance favorito na " +
-                                "web, 'Três maneiras de sobreviver ao apocalipse', ganharia vida e que ele se tornaria a única pessoa " +
-                                "a saber como o mundo iria acabar. Ele também não tinha ideia de que acabaria se tornando o protagonista " +
-                                "desse romance que virou realidade. Agora, Dok-Ja embarcará em uma jornada para mudar o rumo da história " +
-                                "e salvar a humanidade de uma vez por todas."
-                            }
+                            102,
+                            105
                         },
                     ValorCompra = 120,
                     DataCompra = DateTime.Parse("May 07, 2024")
@@ -415,8 +276,8 @@ namespace Cod3rsGrowth.Testes
         {
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
-            novaCompra.Produtos = new List<Obra> { };
-            var mensagemDeErro = "A compra deve conter a lista de produtos preenchida.";
+            novaCompra.Produtos = new List<int> { };
+            var mensagemDeErro = "A compra deve conter pelo menos um produto.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
 
