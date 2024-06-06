@@ -455,11 +455,11 @@ namespace Cod3rsGrowth.Testes
 
         //Método Editar
         [Fact]
-        public void Editar_ComDadosValidos_DeveEditarAObraSelecionadaCorretamente()
+        public void Editar_ComTodosOsDadosValidos_DeveEditarTodaAObraSelecionadaCorretamente()
         {
-            var novaObra = new Obra
+            var obraEditada = new Obra
             {
-                Id = 102,
+                Id = 101,
                 Titulo = "SPY × FAMILY",
                 Autor = "Tatsuya Endou",
                 FoiFinalizada = false,
@@ -480,39 +480,36 @@ namespace Cod3rsGrowth.Testes
                 "sobre uma família única!"
             };
 
-            var obraNoBanco = _servicoObra.Editar(novaObra);
+            var obraNoBanco = _servicoObra.Editar(obraEditada);
 
-            Assert.Equivalent(novaObra, obraNoBanco);
+            Assert.Equivalent(obraEditada, obraNoBanco);
         }
 
         [Fact]
-        public void Editar_InformandoIdInvalido_DeveRetornarExcecao()
+        public void Editar_ComDadosValidos_DeveEditarDadosDaObraSelecionadaCorretamente()
         {
-            var novaObra = new Obra
-            {
-                Id = 2000,
-                Titulo = "SPY × FAMILY",
-                Autor = "Tatsuya Endou",
-                FoiFinalizada = false,
-                Formato = Formato.Manga,
-                Generos = new List<Genero>
-                {
-                    Genero.Acao,
-                    Genero.Comedia,
-                    Genero.Sobrenatural,
-                    Genero.SliceOfLife
-                },
-                InicioPublicacao = DateTime.Parse("Mar 25, 2019"),
-                NumeroCapitulos = 98,
-                ValorObra = 30,
-                Sinopse = "O mestre espião de codinome <Crepúsculo> passou seus dias em missões secretas, tudo pelo " +
-                "sonho de um mundo melhor. Mas um dia, ele recebe uma nova ordem particularmente difícil do comando. " +
-                "Para sua missão, ele deverá formar uma família temporária e começar uma nova vida?! Um Espião/Ação/Comédia " +
-                "sobre uma família única!"
-            };
-            var mensagemDeErroEsperada = $"O ID informado ({novaObra.Id}) é inválido. Obra não encontrada.";
+            var listaMock = InicializarDadosMockados();
 
-            var excecao = Assert.Throws<Exception>(() => _servicoObra.Editar(novaObra));
+            var obraEditada = listaMock.FirstOrDefault();
+            obraEditada.Autor = "nezumiironyanko";
+            obraEditada.Titulo = "Emilia-sama no Sekai wa Subarashii";
+
+            var obraNoBanco = _servicoObra.Editar(obraEditada);
+
+            Assert.Equivalent(obraEditada, obraNoBanco);
+        }
+
+        [Fact]
+        public void Editar_InformandoIdInexistente_DeveRetornarExcecao()
+        {
+            var listaMock = InicializarDadosMockados();
+            var obraASerEditada = listaMock.FirstOrDefault();
+            var idInexistente =  2000;
+            obraASerEditada.Id = idInexistente;
+            obraASerEditada.Titulo = "Gintama";
+            var mensagemDeErroEsperada = $"O ID informado ({idInexistente}) é inválido. Obra não encontrada.";
+
+            var excecao = Assert.Throws<Exception>(() => _servicoObra.Editar(obraASerEditada));
 
             Assert.Equal(mensagemDeErroEsperada, excecao.Message);
         }
@@ -520,7 +517,7 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Editar_SemInformarId_DeveRetornarExcecaoDefinidaNoRuleSetDeEdicao()
         {
-            var novaObra = new Obra
+            var obraEditada = new Obra
             {
                 Titulo = "SPY × FAMILY",
                 Autor = "Tatsuya Endou",
@@ -543,7 +540,7 @@ namespace Cod3rsGrowth.Testes
             };
             var mensagemDeErroEsperada = "Obra não encontrada, o ID precisa ser informado!";
 
-            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Editar(novaObra));
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Editar(obraEditada));
 
             Assert.Equal(mensagemDeErroEsperada, excecao.Message);
         }

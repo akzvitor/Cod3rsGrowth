@@ -482,5 +482,8 @@ namespace Cod3rsGrowth.Testes
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
+
+        //Método Editar
+        
     }
 }

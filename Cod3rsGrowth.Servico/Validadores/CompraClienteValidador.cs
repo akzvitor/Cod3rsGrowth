@@ -45,6 +45,12 @@ namespace Cod3rsGrowth.Servico.Validadores
             RuleFor(cliente => cliente.DataCompra)
                 .NotEmpty().GreaterThan(DateTime.MinValue).WithMessage("A data da compra deve ser informada.")
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("Não é possível informar uma data futura.");
+
+            RuleSet("Editar", () =>
+            {
+                RuleFor(cliente => cliente.Id)
+                .NotEmpty().WithMessage("Compra não encontrada, o ID precisa ser informado!");
+            });
         }
 
         public static bool EhCpfValido(string cpf)
