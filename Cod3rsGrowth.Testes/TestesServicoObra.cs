@@ -489,7 +489,6 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComDadosValidos_DeveEditarDadosDaObraSelecionadaCorretamente()
         {
             var listaMock = InicializarDadosMockados();
-
             var obraEditada = listaMock.FirstOrDefault();
             obraEditada.Autor = "nezumiironyanko";
             obraEditada.Titulo = "Emilia-sama no Sekai wa Subarashii";
@@ -500,7 +499,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Editar_InformandoIdInexistente_DeveRetornarExcecao()
+        public void Editar_ComIdInexistente_DeveRetornarExcecao()
         {
             var listaMock = InicializarDadosMockados();
             var obraASerEditada = listaMock.FirstOrDefault();
@@ -515,7 +514,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Editar_SemInformarId_DeveRetornarExcecaoDefinidaNoRuleSetDeEdicao()
+        public void Editar_SemId_DeveRetornarExcecaoDefinidaNoRuleSetDeEdicao()
         {
             var obraEditada = new Obra
             {
