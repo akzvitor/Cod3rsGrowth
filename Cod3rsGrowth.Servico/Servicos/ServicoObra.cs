@@ -45,7 +45,7 @@ namespace Cod3rsGrowth.Servico.Servicos
         {
             var resultadoValidacao = _validadorObra.Validate(obraEditada, options =>
             {
-                options.IncludeRuleSets("Editar");
+                options.IncludeRuleSets("Editar").IncludeRulesNotInRuleSet();
             });
 
             if (!resultadoValidacao.IsValid)

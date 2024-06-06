@@ -44,7 +44,7 @@ namespace Cod3rsGrowth.Servico.Validadores
             RuleSet("Editar", () =>
             {
                 RuleFor(obra => obra.Id)
-                .NotNull().WithMessage("Obra não encontrada.");
+                .NotEmpty().WithMessage("Obra não encontrada, o ID precisa ser informado!");
             });
         }
     }

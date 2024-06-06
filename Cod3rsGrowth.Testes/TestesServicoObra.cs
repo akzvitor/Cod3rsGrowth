@@ -455,19 +455,97 @@ namespace Cod3rsGrowth.Testes
 
         //Método Editar
         [Fact]
-        public void Editar_ComDadosValidos_DeveEditarObraCorretamenteNoBancoDeDados()
+        public void Editar_ComDadosValidos_DeveEditarAObraSelecionadaCorretamente()
         {
-            var listaMock = InicializarDadosMockados();
             var novaObra = new Obra
             {
-                Id = 100,
-                Autor = "AAAAAAAAAAAA"
+                Id = 102,
+                Titulo = "SPY × FAMILY",
+                Autor = "Tatsuya Endou",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.Comedia,
+                    Genero.Sobrenatural,
+                    Genero.SliceOfLife
+                },
+                InicioPublicacao = DateTime.Parse("Mar 25, 2019"),
+                NumeroCapitulos = 98,
+                ValorObra = 30,
+                Sinopse = "O mestre espião de codinome <Crepúsculo> passou seus dias em missões secretas, tudo pelo " +
+                "sonho de um mundo melhor. Mas um dia, ele recebe uma nova ordem particularmente difícil do comando. " +
+                "Para sua missão, ele deverá formar uma família temporária e começar uma nova vida?! Um Espião/Ação/Comédia " +
+                "sobre uma família única!"
             };
-            var obraMockada = listaMock.FirstOrDefault();
 
             var obraNoBanco = _servicoObra.Editar(novaObra);
 
-            Assert.Equal(novaObra, obraNoBanco);
+            Assert.Equivalent(novaObra, obraNoBanco);
+        }
+
+        [Fact]
+        public void Editar_InformandoIdInvalido_DeveRetornarExcecao()
+        {
+            var novaObra = new Obra
+            {
+                Id = 2000,
+                Titulo = "SPY × FAMILY",
+                Autor = "Tatsuya Endou",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.Comedia,
+                    Genero.Sobrenatural,
+                    Genero.SliceOfLife
+                },
+                InicioPublicacao = DateTime.Parse("Mar 25, 2019"),
+                NumeroCapitulos = 98,
+                ValorObra = 30,
+                Sinopse = "O mestre espião de codinome <Crepúsculo> passou seus dias em missões secretas, tudo pelo " +
+                "sonho de um mundo melhor. Mas um dia, ele recebe uma nova ordem particularmente difícil do comando. " +
+                "Para sua missão, ele deverá formar uma família temporária e começar uma nova vida?! Um Espião/Ação/Comédia " +
+                "sobre uma família única!"
+            };
+            var mensagemDeErroEsperada = $"O ID informado ({novaObra.Id}) é inválido. Obra não encontrada.";
+
+            var excecao = Assert.Throws<Exception>(() => _servicoObra.Editar(novaObra));
+
+            Assert.Equal(mensagemDeErroEsperada, excecao.Message);
+        }
+
+        [Fact]
+        public void Editar_SemInformarId_DeveRetornarExcecaoDefinidaNoRuleSetDeEdicao()
+        {
+            var novaObra = new Obra
+            {
+                Titulo = "SPY × FAMILY",
+                Autor = "Tatsuya Endou",
+                FoiFinalizada = false,
+                Formato = Formato.Manga,
+                Generos = new List<Genero>
+                {
+                    Genero.Acao,
+                    Genero.Comedia,
+                    Genero.Sobrenatural,
+                    Genero.SliceOfLife
+                },
+                InicioPublicacao = DateTime.Parse("Mar 25, 2019"),
+                NumeroCapitulos = 98,
+                ValorObra = 30,
+                Sinopse = "O mestre espião de codinome <Crepúsculo> passou seus dias em missões secretas, tudo pelo " +
+                "sonho de um mundo melhor. Mas um dia, ele recebe uma nova ordem particularmente difícil do comando. " +
+                "Para sua missão, ele deverá formar uma família temporária e começar uma nova vida?! Um Espião/Ação/Comédia " +
+                "sobre uma família única!"
+            };
+            var mensagemDeErroEsperada = "Obra não encontrada, o ID precisa ser informado!";
+
+            var excecao = Assert.Throws<ValidationException>(() => _servicoObra.Editar(novaObra));
+
+            Assert.Equal(mensagemDeErroEsperada, excecao.Message);
         }
     }
 }
