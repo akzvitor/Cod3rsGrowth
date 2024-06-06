@@ -40,9 +40,21 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioCompraCliente.Criar(novaCompraCliente);
         }
 
-        public void Editar(CompraCliente compraCliente)
+        public CompraCliente Editar(CompraCliente compraCliente)
         {
-            throw new NotImplementedException();
+            var resultadoValidacao = _validadorCompraCliente.Validate(compraCliente, options =>
+            {
+                options.IncludeRuleSets("Editar").IncludeRulesNotInRuleSet();
+            });
+
+            if(!resultadoValidacao.IsValid)
+            {
+                var erros = string.Join(Environment.NewLine, resultadoValidacao.Errors.Select(x => x.ErrorMessage).ToArray());
+
+                throw new ValidationException(erros);
+            }
+
+            return _repositorioCompraCliente.Editar(compraCliente);
         }
 
         public void Remover(CompraCliente compraCliente)

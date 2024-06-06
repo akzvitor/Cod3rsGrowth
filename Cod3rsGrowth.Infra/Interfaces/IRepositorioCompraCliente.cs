@@ -7,5 +7,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
         List<CompraCliente> ObterTodos();
         CompraCliente ObterPorId(int idInformado);
         CompraCliente Criar(CompraCliente novaCompraCliente);
+        CompraCliente Editar(CompraCliente compraCliente);
     }
 }

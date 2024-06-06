@@ -40,6 +40,12 @@ namespace Cod3rsGrowth.Servico.Validadores
 
             RuleForEach(obra => obra.Generos)
                 .IsInEnum().WithMessage("Genero informado inválido.");
+
+            RuleSet("Editar", () =>
+            {
+                RuleFor(obra => obra.Id)
+                .NotEmpty().WithMessage("Obra não encontrada, o ID precisa ser informado!");
+            });
         }
     }
 }

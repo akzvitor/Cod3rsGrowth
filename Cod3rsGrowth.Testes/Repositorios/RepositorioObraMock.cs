@@ -29,5 +29,22 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
             return novaObra;
         }
+
+        public Obra Editar(Obra obraEditada)
+        {
+            var obraNoBanco = ObterPorId(obraEditada.Id);
+
+            obraNoBanco.Titulo = obraEditada.Titulo;
+            obraNoBanco.Autor = obraEditada.Autor;
+            obraNoBanco.NumeroCapitulos = obraEditada.NumeroCapitulos;
+            obraNoBanco.InicioPublicacao = obraEditada.InicioPublicacao;
+            obraNoBanco.ValorObra = obraEditada.ValorObra;
+            obraNoBanco.FoiFinalizada = obraEditada.FoiFinalizada;
+            obraNoBanco.Sinopse = obraEditada.Sinopse;
+            obraNoBanco.Formato = obraEditada.Formato;
+            obraNoBanco.Generos = obraEditada.Generos;
+
+            return obraNoBanco;
+        }
     }
 }

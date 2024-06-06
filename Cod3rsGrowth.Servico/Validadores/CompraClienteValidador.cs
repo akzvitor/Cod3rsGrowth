@@ -1,13 +1,18 @@
 ﻿using FluentValidation;
 using Cod3rsGrowth.Dominio.Classes;
 using System.Text.RegularExpressions;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Servico.Validadores
 {
     public class CompraClienteValidador : AbstractValidator<CompraCliente>
     {
-        public CompraClienteValidador()
+        private readonly IRepositorioCompraCliente _repositorioCompraCliente;
+
+        public CompraClienteValidador(IRepositorioCompraCliente repositorioCompraCliente)
         {
+            _repositorioCompraCliente = repositorioCompraCliente;
+
             RuleFor(cliente => cliente.Cpf)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("O CPF do cliente é obrigatório.")
@@ -34,10 +39,7 @@ namespace Cod3rsGrowth.Servico.Validadores
                 .EmailAddress().WithMessage("Formato de e-mail inválido.");
 
             RuleFor(cliente => cliente.Produtos)
-                .NotEmpty().WithMessage("A compra deve conter a lista de produtos preenchida.");
-
-            RuleForEach(cliente => cliente.Produtos)
-                .SetValidator(new ObraValidador());
+                .NotEmpty().WithMessage("A compra deve conter pelo menos um produto.");
 
             RuleFor(cliente => cliente.ValorCompra)
                 .GreaterThanOrEqualTo(0).WithMessage("O valor da compra não pode ser negativo.");
@@ -45,6 +47,12 @@ namespace Cod3rsGrowth.Servico.Validadores
             RuleFor(cliente => cliente.DataCompra)
                 .NotEmpty().GreaterThan(DateTime.MinValue).WithMessage("A data da compra deve ser informada.")
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("Não é possível informar uma data futura.");
+
+            RuleSet("Editar", () =>
+            {
+                RuleFor(cliente => cliente)
+                .Must(EhDataIgual).WithMessage("A data de uma compra concluída não pode ser alterada.");
+            });
         }
 
         public static bool EhCpfValido(string cpf)
@@ -120,5 +128,11 @@ namespace Cod3rsGrowth.Servico.Validadores
             return cpf.EndsWith(digito);
         }
 
+        public bool EhDataIgual(CompraCliente compraCliente)
+        {
+            var compraDoBanco = _repositorioCompraCliente.ObterPorId(compraCliente.Id);
+
+            return compraCliente.DataCompra == compraDoBanco.DataCompra;
+        }
     }
 }

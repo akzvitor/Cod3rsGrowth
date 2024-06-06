@@ -30,5 +30,20 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
             return novaCompraCliente;
         }
+
+        public CompraCliente Editar(CompraCliente compraCliente)
+        {
+            var compraNoBanco = ObterPorId(compraCliente.Id);
+
+            compraNoBanco.Cpf = compraCliente.Cpf;
+            compraNoBanco.Nome = compraCliente.Nome;
+            compraNoBanco.Telefone = compraCliente.Telefone;
+            compraNoBanco.Email = compraCliente.Email;
+            compraNoBanco.Produtos = compraCliente.Produtos;
+            compraNoBanco.ValorCompra = compraCliente.ValorCompra;
+            compraNoBanco.DataCompra = compraCliente.DataCompra;
+
+            return compraNoBanco;
+        }
     }
 }
