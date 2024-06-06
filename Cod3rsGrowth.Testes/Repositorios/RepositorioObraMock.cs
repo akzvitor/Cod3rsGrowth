@@ -46,5 +46,12 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
             return obraNoBanco;
         }
+
+        public void Remover(int id)
+        {
+            var obra = ObterPorId(id);
+
+            listaObra.Remove(obra);
+        }
     }
 }
