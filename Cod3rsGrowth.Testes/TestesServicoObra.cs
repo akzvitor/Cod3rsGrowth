@@ -543,5 +543,11 @@ namespace Cod3rsGrowth.Testes
 
             Assert.Equal(mensagemDeErroEsperada, excecao.Message);
         }
+
+        //Método Remover
+        public void Remover_ComObraValida_DeveRemoverObraSelecionadaCorretamente()
+        {
+
+        }
     }
 }
