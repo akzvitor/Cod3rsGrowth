@@ -45,5 +45,12 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
             return compraNoBanco;
         }
+
+        public void Remover(int id)
+        {
+            var compra = ObterPorId(id);
+
+            listaCompraCliente.Remove(compra);
+        }
     }
 }

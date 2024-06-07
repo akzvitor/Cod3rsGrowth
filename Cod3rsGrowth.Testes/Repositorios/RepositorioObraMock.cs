@@ -50,17 +50,8 @@ namespace Cod3rsGrowth.Testes.Repositorios
         public void Remover(int id)
         {
             var obra = ObterPorId(id);
-            
-            //if (obra  != null)
-            //{
-            //    listaObra.Remove(obra);
-            //}
-            //else
-            //{
-            //    throw new Exception($"O ID informado ({id}) é inválido. Obra não encontrada.");
-            //}
 
-            _ = obra != null ? listaObra.Remove(obra) : throw new Exception($"O ID informado ({id}) é inválido. Obra não encontrada.");
+            listaObra.Remove(obra);
         }
     }
 }

@@ -57,9 +57,9 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioCompraCliente.Editar(compraCliente);
         }
 
-        public void Remover(CompraCliente compraCliente)
+        public void Remover(int id)
         {
-            throw new NotImplementedException();
+            _repositorioCompraCliente.Remover(id);
         }
     }
 }

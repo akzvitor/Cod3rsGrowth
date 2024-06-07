@@ -545,9 +545,29 @@ namespace Cod3rsGrowth.Testes
         }
 
         //Método Remover
-        public void Remover_ComObraValida_DeveRemoverObraSelecionadaCorretamente()
+        [Fact]
+        public void Remover_ComIdValido_DeveRemoverAObraCorreta()
         {
+            var listaMock = InicializarDadosMockados();
+            var obraASerRemovida = listaMock.FirstOrDefault();
+            var idDaObra = obraASerRemovida.Id;
+            var mensagemDeErro = $"O ID informado ({idDaObra}) é inválido. Obra não encontrada.";
 
+            _servicoObra.Remover(idDaObra);
+            var excecao = Assert.Throws<Exception>(() => _servicoObra.Remover(idDaObra));
+
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Remover_ComIdInvalido_DeveRetornarExcecao()
+        {
+            var idParaRemocao = 4000;
+            var mensagemDeErro = $"O ID informado ({idParaRemocao}) é inválido. Obra não encontrada.";
+
+            var excecao = Assert.Throws<Exception>(() => _servicoObra.Remover(idParaRemocao));
+
+            Assert.Equal(mensagemDeErro, excecao.Message);
         }
     }
 }

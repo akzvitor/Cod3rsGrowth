@@ -390,5 +390,31 @@ namespace Cod3rsGrowth.Testes
 
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
+
+        //Método Remover
+        [Fact]
+        public void Remover_ComIdValido_DeveRemoverACompraCorreta()
+        {
+            var listaMock = InicializarDadosMockados();
+            var compraASerRemovida = listaMock.FirstOrDefault();
+            var idDaCompra = compraASerRemovida.Id;
+            var mensagemDeErro = $"O ID informado ({idDaCompra}) é inválido. Compra não encontrada.";
+
+            _servicoCompraCliente.Remover(idDaCompra);
+            var excecao = Assert.Throws<Exception>(() => _servicoCompraCliente.Remover(idDaCompra));
+
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
+
+        [Fact]
+        public void Remover_ComIdInvalido_DeveRetornarExcecao()
+        {
+            var idParaRemocao = 4000;
+            var mensagemDeErro = $"O ID informado ({idParaRemocao}) é inválido. Compra não encontrada.";
+
+            var excecao = Assert.Throws<Exception>(() => _servicoCompraCliente.Remover(idParaRemocao));
+
+            Assert.Equal(mensagemDeErro, excecao.Message);
+        }
     }
 }
