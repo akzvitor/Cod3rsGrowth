@@ -6,43 +6,43 @@ namespace Cod3rsGrowth.Testes.Repositorios
 {
     public class RepositorioObraMock : IRepositorioObra
     {
-        public List<Obra> listaObra = ListaSingleton.Instancia.ListaObra;
+        private List<Obra> _listaObra = ListaSingleton.Instancia.ListaObra;
         private int _obraId = 100;
 
         public List<Obra> ObterTodos()
         {
-            return listaObra;
+            return _listaObra;
         }
 
-        public Obra ObterPorId(int idInformado)
+        public Obra ObterPorId(int id)
         {
-            var obraRequisitada = listaObra.Find(obra => obra.Id == idInformado)
-                ?? throw new Exception($"O ID informado ({idInformado}) é inválido. Obra não encontrada.");
+            var obraRequisitada = _listaObra.Find(obra => obra.Id == id)
+                ?? throw new Exception($"O ID informado ({id}) é inválido. Obra não encontrada.");
             return obraRequisitada;
         }
 
-        public Obra Criar(Obra novaObra)
+        public Obra Criar(Obra obra)
         { 
-            novaObra.Id = _obraId;
+            obra.Id = _obraId;
             _obraId++;
-            listaObra.Add(novaObra);
+            _listaObra.Add(obra);
 
-            return novaObra;
+            return obra;
         }
 
-        public Obra Editar(Obra obraEditada)
+        public Obra Editar(Obra obra)
         {
-            var obraNoBanco = ObterPorId(obraEditada.Id);
+            var obraNoBanco = ObterPorId(obra.Id);
 
-            obraNoBanco.Titulo = obraEditada.Titulo;
-            obraNoBanco.Autor = obraEditada.Autor;
-            obraNoBanco.NumeroCapitulos = obraEditada.NumeroCapitulos;
-            obraNoBanco.InicioPublicacao = obraEditada.InicioPublicacao;
-            obraNoBanco.ValorObra = obraEditada.ValorObra;
-            obraNoBanco.FoiFinalizada = obraEditada.FoiFinalizada;
-            obraNoBanco.Sinopse = obraEditada.Sinopse;
-            obraNoBanco.Formato = obraEditada.Formato;
-            obraNoBanco.Generos = obraEditada.Generos;
+            obraNoBanco.Titulo = obra.Titulo;
+            obraNoBanco.Autor = obra.Autor;
+            obraNoBanco.NumeroCapitulos = obra.NumeroCapitulos;
+            obraNoBanco.InicioPublicacao = obra.InicioPublicacao;
+            obraNoBanco.ValorObra = obra.ValorObra;
+            obraNoBanco.FoiFinalizada = obra.FoiFinalizada;
+            obraNoBanco.Sinopse = obra.Sinopse;
+            obraNoBanco.Formato = obra.Formato;
+            obraNoBanco.Generos = obra.Generos;
 
             return obraNoBanco;
         }
@@ -51,7 +51,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             var obra = ObterPorId(id);
 
-            listaObra.Remove(obra);
+            _listaObra.Remove(obra);
         }
     }
 }

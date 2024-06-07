@@ -10,7 +10,6 @@ namespace Cod3rsGrowth.Servico.Servicos
         private readonly IRepositorioObra _repositorioObra;
         private readonly ObraValidador _validadorObra;
 
-
         public ServicoObra(IRepositorioObra repositorioObra, ObraValidador validadorObra)
         {
             _repositorioObra = repositorioObra;
@@ -22,14 +21,14 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioObra.ObterTodos();
         }
 
-        public Obra ObterPorId(int idInformado)
+        public Obra ObterPorId(int id)
         {
-            return _repositorioObra.ObterPorId(idInformado);
+            return _repositorioObra.ObterPorId(id);
         }
 
-        public Obra Criar(Obra novaObra)
+        public Obra Criar(Obra obra)
         {
-            var resultadoValidacao = _validadorObra.Validate(novaObra);
+            var resultadoValidacao = _validadorObra.Validate(obra);
 
             if (!resultadoValidacao.IsValid)
             {
@@ -38,12 +37,12 @@ namespace Cod3rsGrowth.Servico.Servicos
                 throw new ValidationException(erros);
             }
            
-            return _repositorioObra.Criar(novaObra);
+            return _repositorioObra.Criar(obra);
         }
 
-        public Obra Editar(Obra obraEditada)
+        public Obra Editar(Obra obra)
         {
-            var resultadoValidacao = _validadorObra.Validate(obraEditada, options =>
+            var resultadoValidacao = _validadorObra.Validate(obra, options =>
             {
                 options.IncludeRuleSets("Editar").IncludeRulesNotInRuleSet();
             });
@@ -55,7 +54,7 @@ namespace Cod3rsGrowth.Servico.Servicos
                 throw new ValidationException(erros);
             }
 
-            return _repositorioObra.Editar(obraEditada);
+            return _repositorioObra.Editar(obra);
         }
 
         public void Remover(int id)

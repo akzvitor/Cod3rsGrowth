@@ -6,29 +6,29 @@ namespace Cod3rsGrowth.Testes.Repositorios
 {
     public class RepositorioCompraClienteMock : IRepositorioCompraCliente
     {
-        public List<CompraCliente> listaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
+        private List<CompraCliente> _listaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
         private int _compraClienteId = 100;
 
         public List<CompraCliente> ObterTodos()
         {
-            return listaCompraCliente;
+            return _listaCompraCliente;
         }
 
-        public CompraCliente ObterPorId(int idInformado)
+        public CompraCliente ObterPorId(int id)
         {
-            var compraRequisitada = listaCompraCliente.Find(compra => compra.Id == idInformado)
-                ?? throw new Exception($"O ID informado ({idInformado}) é inválido. Compra não encontrada.");
+            var compraRequisitada = _listaCompraCliente.Find(compra => compra.Id == id)
+                ?? throw new Exception($"O ID informado ({id}) é inválido. Compra não encontrada.");
 
             return compraRequisitada;
         }
 
-        public CompraCliente Criar(CompraCliente novaCompraCliente)
+        public CompraCliente Criar(CompraCliente compraCliente)
         {
-            novaCompraCliente.Id = _compraClienteId;
+            compraCliente.Id = _compraClienteId;
             _compraClienteId++;
-            listaCompraCliente.Add(novaCompraCliente);
+            _listaCompraCliente.Add(compraCliente);
 
-            return novaCompraCliente;
+            return compraCliente;
         }
 
         public CompraCliente Editar(CompraCliente compraCliente)
@@ -50,7 +50,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             var compra = ObterPorId(id);
 
-            listaCompraCliente.Remove(compra);
+            _listaCompraCliente.Remove(compra);
         }
     }
 }

@@ -21,14 +21,14 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioCompraCliente.ObterTodos();
         }
 
-        public CompraCliente ObterPorId(int idInformado)
+        public CompraCliente ObterPorId(int id)
         {
-            return _repositorioCompraCliente.ObterPorId(idInformado);
+            return _repositorioCompraCliente.ObterPorId(id);
         }
 
-        public CompraCliente Criar(CompraCliente novaCompraCliente)
+        public CompraCliente Criar(CompraCliente compraCliente)
         {
-            var resultadoValidacao = _validadorCompraCliente.Validate(novaCompraCliente);
+            var resultadoValidacao = _validadorCompraCliente.Validate(compraCliente);
 
             if(!resultadoValidacao.IsValid) 
             {
@@ -37,7 +37,7 @@ namespace Cod3rsGrowth.Servico.Servicos
                 throw new ValidationException(erros);
             }
 
-            return _repositorioCompraCliente.Criar(novaCompraCliente);
+            return _repositorioCompraCliente.Criar(compraCliente);
         }
 
         public CompraCliente Editar(CompraCliente compraCliente)
