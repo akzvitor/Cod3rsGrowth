@@ -8,5 +8,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
         Obra ObterPorId(int idInformado);
         Obra Criar(Obra novaObra);
         Obra Editar(Obra obraEditada);
+        void Remover(int id);
     }
 }

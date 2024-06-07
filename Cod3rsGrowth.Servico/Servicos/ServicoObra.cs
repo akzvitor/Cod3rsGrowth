@@ -58,9 +58,9 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioObra.Editar(obraEditada);
         }
 
-        public void Remover(Obra obra)
+        public void Remover(int id)
         {
-            throw new NotImplementedException();
+            _repositorioObra.Remover(id);
         }
     }
 }
