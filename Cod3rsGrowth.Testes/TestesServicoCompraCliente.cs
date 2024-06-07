@@ -1,5 +1,4 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
-using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using FluentValidation;
@@ -37,10 +36,10 @@ namespace Cod3rsGrowth.Testes
                     Telefone = "(64)99332-7668",
                     Email = "vitor@hotmail.com",
                     Produtos = new List<int>
-                        {
-                            100,
-                            103
-                        },
+                    {
+                        100,
+                        103
+                    },
                     ValorCompra = 12,
                     DataCompra = DateTime.Parse("May 29, 2024")
                 },
@@ -66,10 +65,10 @@ namespace Cod3rsGrowth.Testes
                     Telefone = "(11)99887-8022",
                     Email = "henrique@uol.com",
                     Produtos = new List<int>
-                        {
-                            102,
-                            105
-                        },
+                    {
+                        102,
+                        105
+                    },
                     ValorCompra = 120,
                     DataCompra = DateTime.Parse("May 07, 2024")
                 }
@@ -299,6 +298,7 @@ namespace Cod3rsGrowth.Testes
             var mensagemDeErro = "O CPF informado é inválido.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -314,6 +314,7 @@ namespace Cod3rsGrowth.Testes
             var mensagemDeErro = "O CPF do cliente é obrigatório.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -331,6 +332,7 @@ namespace Cod3rsGrowth.Testes
                 "(XX) XXXXX-XXXX ou (XX) XXXX-XXXX.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
@@ -343,10 +345,10 @@ namespace Cod3rsGrowth.Testes
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
             novaCompra.Telefone = telefoneInvalido;
-
             var mensagemDeErro = "O telefone do cliente é obrigatório.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));
+
             Assert.Equal(mensagemDeErro, excecao.Message);
         }
 
