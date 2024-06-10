@@ -2,11 +2,11 @@
 using LinqToDB;
 using LinqToDB.Data;
 
-namespace Cod3rsGrowth.Infra
+namespace Cod3rsGrowth.Infra.ConexaoDeDados
 {
-    public class BdCodersGrowth : DataConnection 
+    public class DbCodersGrowth : DataConnection
     {
-        public BdCodersGrowth() : base("StringConexao") { }
+        public DbCodersGrowth() : base("StringConexao") { }
 
         public ITable<CompraCliente> CompraCliente => this.GetTable<CompraCliente>();
         public ITable<Obra>          Obra          => this.GetTable<Obra>();
