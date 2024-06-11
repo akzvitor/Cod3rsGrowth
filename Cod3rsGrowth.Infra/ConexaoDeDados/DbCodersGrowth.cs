@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Infra.ConexaoDeDados
     {
         public DbCodersGrowth() : base("StringConexao") { }
 
-        public ITable<CompraCliente> CompraCliente => this.GetTable<CompraCliente>();
-        public ITable<Obra>          Obra          => this.GetTable<Obra>();
+        public ITable<CompraCliente> ComprasCliente => this.GetTable<CompraCliente>();
+        public ITable<Obra>          Obras          => this.GetTable<Obra>();
     }
 }

@@ -16,11 +16,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public List<Obra> ObterTodos()
         {
-            var query = from o in _db.Obra
-                        where o.FoiFinalizada == true
-                        select o;
+            var query = Filtro(_db.Obras, formato: Formato.Manhwa);
+            var obrasFiltradas = query.ToList();
 
-            return query.ToList();
+            return obrasFiltradas;
         }
 
         public Obra ObterPorId(int id)
@@ -43,7 +42,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public static IQueryable<Obra> Filtro(IQueryable<Obra> obras, string? autor = null, string? titulo = null, List<Genero> listaDeGeneros = null, Formato? formato = null, bool? foiFinalizada = null) 
+        public static IQueryable<Obra> Filtro(IQueryable<Obra> obras, string? autor = null, string? titulo = null, 
+                                                List<Genero> listaDeGeneros = null, Formato? formato = null, 
+                                                bool? foiFinalizada = null) 
         {
             if (!string.IsNullOrEmpty(autor))
             {
@@ -69,6 +70,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             {
                 obras = obras.Where(o => o.Generos.Any(g => listaDeGeneros.Contains(g)));
             }
+
             return obras;
         }
     }
