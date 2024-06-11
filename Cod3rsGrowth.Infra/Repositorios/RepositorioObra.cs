@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
+using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
@@ -14,9 +15,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<Obra> ObterTodos()
+        public List<Obra> ObterTodos(FiltroObra filtro)
         {
-            var query = Filtro(_db.Obras, formato: Formato.Manhwa);
+            var query = Filtrar(_db.Obras, filtro);
             var obrasFiltradas = query.ToList();
 
             return obrasFiltradas;
@@ -42,33 +43,31 @@ namespace Cod3rsGrowth.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public static IQueryable<Obra> Filtro(IQueryable<Obra> obras, string? autor = null, string? titulo = null, 
-                                                List<Genero> listaDeGeneros = null, Formato? formato = null, 
-                                                bool? foiFinalizada = null) 
+        public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
         {
-            if (!string.IsNullOrEmpty(autor))
+            if (!string.IsNullOrEmpty(filtro.Autor))
             {
-                obras = obras.Where(o => o.Autor.Contains(autor));
+                obras = obras.Where(o => o.Autor.Contains(filtro.Autor));
             }
 
-            if (!string.IsNullOrEmpty(titulo))
+            if (!string.IsNullOrEmpty(filtro.Titulo))
             {
-                obras = obras.Where(o => o.Titulo.Contains(titulo));
+                obras = obras.Where(o => o.Titulo.Contains(filtro.Titulo));
             }
 
-            if (formato.HasValue)
+            if (filtro.Formato.HasValue)
             {
-                obras = obras.Where(o => o.Formato == formato.Value);
+                obras = obras.Where(o => o.Formato == filtro.Formato.Value);
             }
 
-            if (foiFinalizada.HasValue)
+            if (filtro.FoiFinalizada.HasValue)
             {
-                obras = obras.Where(o => o.FoiFinalizada ==  foiFinalizada.Value);
+                obras = obras.Where(o => o.FoiFinalizada ==  filtro.FoiFinalizada.Value);
             }
             
-            if (listaDeGeneros != null && listaDeGeneros.Any())
+            if (filtro.ListaDeGeneros != null && filtro.ListaDeGeneros.Any())
             {
-                obras = obras.Where(o => o.Generos.Any(g => listaDeGeneros.Contains(g)));
+                obras = obras.Where(o => o.Generos.Any(g => filtro.ListaDeGeneros.Contains(g)));
             }
 
             return obras;
