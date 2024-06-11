@@ -48,7 +48,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             if (!string.IsNullOrEmpty(autor))
             {
-                obras = obras.Where(o => o.Autor == autor);
+                obras = obras.Where(o => o.Autor.Contains(autor));
             }
 
             if (!string.IsNullOrEmpty(titulo))
