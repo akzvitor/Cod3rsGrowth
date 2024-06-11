@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Classes;
+using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
 
@@ -13,9 +14,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<CompraCliente> ObterTodos()
+        public List<CompraCliente> ObterTodos(Filtro filtro)
         {
-            var query = Filtro(_db.ComprasCliente, nome: "Vitor");
+            var query = Filtro(_db.ComprasCliente, filtro);
             var comprasFiltradas = query.ToList();
 
             return comprasFiltradas;
@@ -41,22 +42,21 @@ namespace Cod3rsGrowth.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public static IQueryable<CompraCliente> Filtro(IQueryable<CompraCliente> compras, string? nome = null, 
-                                                        DateTime? dataDaCompra = null, decimal? valorDaCompra = null)
+        public static IQueryable<CompraCliente> Filtro(IQueryable<CompraCliente> compras, Filtro filtro)
         {
-            if (!string.IsNullOrEmpty(nome))
+            if (!string.IsNullOrEmpty(filtro.NomeCliente))
             {
-                compras = compras.Where(c => c.Nome.Contains(nome));
+                compras = compras.Where(c => c.Nome.Contains(filtro.NomeCliente));
             }
 
-            if (dataDaCompra.HasValue)
+            if (filtro.DataCompra.HasValue)
             {
-                compras = compras.Where(c => c.DataCompra == dataDaCompra.Value);
+                compras = compras.Where(c => c.DataCompra == filtro.DataCompra.Value);
             }
 
-            if(valorDaCompra.HasValue)
+            if(filtro.ValorCompra.HasValue)
             {
-                compras = compras.Where(c => c.ValorCompra == valorDaCompra.Value);
+                compras = compras.Where(c => c.ValorCompra == filtro.ValorCompra.Value);
             }
 
             return compras;

@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<Obra> ObterTodos(FiltroObra filtro)
+        public List<Obra> ObterTodos(Filtro filtro)
         {
             var query = Filtrar(_db.Obras, filtro);
             var obrasFiltradas = query.ToList();
@@ -43,31 +43,31 @@ namespace Cod3rsGrowth.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
+        public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, Filtro filtro) 
         {
-            if (!string.IsNullOrEmpty(filtro.Autor))
+            if (!string.IsNullOrEmpty(filtro.AutorObra))
             {
-                obras = obras.Where(o => o.Autor.Contains(filtro.Autor));
+                obras = obras.Where(o => o.Autor.Contains(filtro.AutorObra));
             }
 
-            if (!string.IsNullOrEmpty(filtro.Titulo))
+            if (!string.IsNullOrEmpty(filtro.TituloObra))
             {
-                obras = obras.Where(o => o.Titulo.Contains(filtro.Titulo));
+                obras = obras.Where(o => o.Titulo.Contains(filtro.TituloObra));
             }
 
-            if (filtro.Formato.HasValue)
+            if (filtro.FormatoObra.HasValue)
             {
-                obras = obras.Where(o => o.Formato == filtro.Formato.Value);
+                obras = obras.Where(o => o.Formato == filtro.FormatoObra.Value);
             }
 
-            if (filtro.FoiFinalizada.HasValue)
+            if (filtro.ObraFoiFinalizada.HasValue)
             {
-                obras = obras.Where(o => o.FoiFinalizada ==  filtro.FoiFinalizada.Value);
+                obras = obras.Where(o => o.FoiFinalizada ==  filtro.ObraFoiFinalizada.Value);
             }
             
-            if (filtro.ListaDeGeneros != null && filtro.ListaDeGeneros.Any())
+            if (filtro.ListaDeGenerosObra != null && filtro.ListaDeGenerosObra.Any())
             {
-                obras = obras.Where(o => o.Generos.Any(g => filtro.ListaDeGeneros.Contains(g)));
+                obras = obras.Where(o => o.Generos.Any(g => filtro.ListaDeGenerosObra.Contains(g)));
             }
 
             return obras;
