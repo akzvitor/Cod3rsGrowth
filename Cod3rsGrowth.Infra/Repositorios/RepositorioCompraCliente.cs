@@ -34,9 +34,30 @@ namespace Cod3rsGrowth.Infra.Repositorios
             return compraCliente;
         }
 
-        public CompraCliente Editar(CompraCliente compraCliente)
+        public CompraCliente Editar(CompraCliente compra)
         {
-            throw new NotImplementedException();
+            var compraNoBanco = _db.ComprasCliente.FirstOrDefault(c => c.Id == compra.Id)
+                ?? throw new Exception("Compra não encontrada.");
+            
+            try
+            {
+                _db.ComprasCliente
+                .Where(c => c.Id == compra.Id)
+                .Set(c => c.Cpf, compra.Cpf)
+                .Set(c => c.Nome, compra.Nome)
+                .Set(c => c.Telefone, compra.Telefone)
+                .Set(c => c.Email, compra.Email)
+                .Set(c => c.Produtos, compra.Produtos)
+                .Set(c => c.ValorCompra, compra.ValorCompra)
+                .Set(c => c.DataCompra, compra.DataCompra)
+                .Update();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível editar a compra.");
+            }
+            
+            return compra;
         }
 
         public void Remover(int id)
@@ -61,7 +82,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 compras = compras.Where(c => c.DataCompra == filtro.DataCompra.Value);
             }
 
-            if(filtro.ValorCompra.HasValue)
+            if (filtro.ValorCompra.HasValue)
             {
                 compras = compras.Where(c => c.ValorCompra == filtro.ValorCompra.Value);
             }

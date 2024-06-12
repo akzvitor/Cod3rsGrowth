@@ -36,7 +36,30 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Obra Editar(Obra obra)
         {
-            throw new NotImplementedException();
+            var obraNoBanco = _db.Obras.FirstOrDefault(o => o.Id == obra.Id)
+                ?? throw new Exception("Obra não encontrada.");
+
+            try   
+            {
+                _db.Obras
+                .Where(o => o.Id == obra.Id)
+                .Set(o => o.Titulo, obra.Titulo)
+                .Set(o => o.Autor, obra.Autor)
+                .Set(o => o.Generos, obra.Generos)
+                .Set(o => o.Sinopse, obra.Sinopse)
+                .Set(o => o.NumeroCapitulos, obra.NumeroCapitulos)
+                .Set(o => o.ValorObra, obra.ValorObra)
+                .Set(o => o.Formato, obra.Formato)
+                .Set(o => o.FoiFinalizada, obra.FoiFinalizada)
+                .Set(o => o.InicioPublicacao, obra.InicioPublicacao)
+                .Update();
+            }
+            catch (Exception ex) 
+            {
+                throw new Exception("Não foi possível editar a obra.");            
+            }
+
+            return obra;
         }
 
         public void Remover(int id)
