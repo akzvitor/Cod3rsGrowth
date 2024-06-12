@@ -29,7 +29,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Obra Criar(Obra obra)
         {
-            _db.Insert(obra);
+            obra.Id = _db.InsertWithInt32Identity(obra);
 
             return obra;
         }
