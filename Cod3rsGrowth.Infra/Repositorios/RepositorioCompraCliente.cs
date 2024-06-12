@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
 using Cod3rsGrowth.Infra.Interfaces;
+using LinqToDB;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -28,7 +29,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public CompraCliente Criar(CompraCliente compraCliente)
         {
-            throw new NotImplementedException();
+            compraCliente.Id = _db.InsertWithInt32Identity(compraCliente);
+
+            return compraCliente;
         }
 
         public CompraCliente Editar(CompraCliente compraCliente)
@@ -43,6 +46,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public static IQueryable<CompraCliente> Filtro(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)
         {
+            if (filtro == null)
+            {
+                return compras;
+            }
+
             if (!string.IsNullOrEmpty(filtro.NomeCliente))
             {
                 compras = compras.Where(c => c.Nome.Contains(filtro.NomeCliente));

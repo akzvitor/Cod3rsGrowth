@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
 using Cod3rsGrowth.Infra.Interfaces;
+using LinqToDB;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -28,7 +29,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Obra Criar(Obra obra)
         {
-            throw new NotImplementedException();
+            obra.Id = _db.InsertWithInt32Identity(obra);
+
+            return obra;
         }
 
         public Obra Editar(Obra obra)
@@ -43,6 +46,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
         {
+            if (filtro == null)
+            {
+                return obras;
+            }
+
             if (!string.IsNullOrEmpty(filtro.AutorObra))
             {
                 obras = obras.Where(o => o.Autor.Contains(filtro.AutorObra));
