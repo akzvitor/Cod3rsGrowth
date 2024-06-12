@@ -1,11 +1,10 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
-using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    public class RepositorioCompraCliente : IRepositorio<CompraCliente>
+    public class RepositorioCompraCliente : IRepositorioCompraCliente
     {
         private readonly DbCodersGrowth _db;
 
@@ -14,7 +13,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<CompraCliente> ObterTodos(Filtro filtro)
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
         {
             var query = Filtro(_db.ComprasCliente, filtro);
             var comprasFiltradas = query.ToList();
@@ -42,7 +41,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public static IQueryable<CompraCliente> Filtro(IQueryable<CompraCliente> compras, Filtro filtro)
+        public static IQueryable<CompraCliente> Filtro(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)
         {
             if (!string.IsNullOrEmpty(filtro.NomeCliente))
             {

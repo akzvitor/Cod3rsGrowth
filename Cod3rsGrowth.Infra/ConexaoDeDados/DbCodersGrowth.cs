@@ -1,4 +1,4 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using LinqToDB;
 using LinqToDB.Data;
 

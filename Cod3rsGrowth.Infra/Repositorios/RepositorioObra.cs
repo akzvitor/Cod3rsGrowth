@@ -1,12 +1,10 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
-using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    public class RepositorioObra : IRepositorio<Obra>
+    public class RepositorioObra : IRepositorioObra
     {
         private readonly DbCodersGrowth _db;
 
@@ -15,7 +13,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<Obra> ObterTodos(Filtro filtro)
+        public List<Obra> ObterTodos(FiltroObra filtro)
         {
             var query = Filtrar(_db.Obras, filtro);
             var obrasFiltradas = query.ToList();
@@ -43,7 +41,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, Filtro filtro) 
+        public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
         {
             if (!string.IsNullOrEmpty(filtro.AutorObra))
             {
