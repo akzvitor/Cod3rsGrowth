@@ -1,13 +1,24 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Infra.ConexaoDeDados;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    public class RepositorioCompraCliente : IRepositorio<CompraCliente>
+    public class RepositorioCompraCliente : IRepositorioCompraCliente
     {
-        public List<CompraCliente> ObterTodos()
+        private readonly DbCodersGrowth _db;
+
+        public RepositorioCompraCliente(DbCodersGrowth conexaoComBancoDeDados) 
         {
-            throw new NotImplementedException();
+            _db = conexaoComBancoDeDados;
+        }
+
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
+        {
+            var query = Filtro(_db.ComprasCliente, filtro);
+            var comprasFiltradas = query.ToList();
+
+            return comprasFiltradas;
         }
 
         public CompraCliente ObterPorId(int id)
@@ -28,6 +39,26 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public void Remover(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public static IQueryable<CompraCliente> Filtro(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)
+        {
+            if (!string.IsNullOrEmpty(filtro.NomeCliente))
+            {
+                compras = compras.Where(c => c.Nome.Contains(filtro.NomeCliente));
+            }
+
+            if (filtro.DataCompra.HasValue)
+            {
+                compras = compras.Where(c => c.DataCompra == filtro.DataCompra.Value);
+            }
+
+            if(filtro.ValorCompra.HasValue)
+            {
+                compras = compras.Where(c => c.ValorCompra == filtro.ValorCompra.Value);
+            }
+
+            return compras;
         }
     }
 }

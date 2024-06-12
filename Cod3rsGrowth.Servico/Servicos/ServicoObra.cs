@@ -1,4 +1,4 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servico.Validadores;
 using FluentValidation;
@@ -16,9 +16,9 @@ namespace Cod3rsGrowth.Servico.Servicos
             _validadorObra = validadorObra;
         }
 
-        public List<Obra> ObterTodos()
+        public List<Obra> ObterTodos(FiltroObra filtro)
         {
-            return _repositorioObra.ObterTodos();
+            return _repositorioObra.ObterTodos(filtro);
         }
 
         public Obra ObterPorId(int id)

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using Cod3rsGrowth.Dominio.Classes;
 using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.Entidades;
 
 namespace Cod3rsGrowth.Servico.Validadores
 {

@@ -1,10 +1,10 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 
-namespace Cod3rsGrowth.Dominio.Classes
+namespace Cod3rsGrowth.Dominio.Entidades
 {
     public class Obra
     {
-        public int Id {  get; set; }
+        public int Id { get; set; }
         public string Titulo { get; set; }
         public string Autor { get; set; }
         public List<Genero> Generos { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Cod3rsGrowth.Dominio.Classes
+﻿namespace Cod3rsGrowth.Dominio.Entidades
 {
     public class CompraCliente
     {

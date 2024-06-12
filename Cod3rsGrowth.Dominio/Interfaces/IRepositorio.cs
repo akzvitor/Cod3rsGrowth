@@ -1,8 +1,10 @@
-﻿namespace Cod3rsGrowth.Dominio.Interfaces
+﻿using Cod3rsGrowth.Dominio.Entidades;
+
+namespace Cod3rsGrowth.Dominio.Interfaces
 {
-    public interface IRepositorio<T> where T : class
+    public interface IRepositorio<T, TFiltro> where TFiltro : IFiltro
     {
-        List<T> ObterTodos();
+        List<T> ObterTodos(TFiltro filtro);
         T ObterPorId(int id);
         T Criar(T entidade);
         T Editar(T entidade);

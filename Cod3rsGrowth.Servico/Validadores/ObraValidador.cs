@@ -1,4 +1,4 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using FluentValidation;
 
 namespace Cod3rsGrowth.Servico.Validadores
