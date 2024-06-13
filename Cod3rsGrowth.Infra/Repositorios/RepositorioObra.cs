@@ -24,7 +24,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Obra ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var obraRequisitada = _db.Obras.FirstOrDefault(o => o.Id == id)
+                ?? throw new Exception("Obra não encontrada.");
+
+            return obraRequisitada;
         }
 
         public Obra Criar(Obra obra)
