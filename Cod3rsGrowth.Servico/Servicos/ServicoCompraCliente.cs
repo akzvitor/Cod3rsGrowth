@@ -1,4 +1,4 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servico.Validadores;
 using FluentValidation;
@@ -16,9 +16,9 @@ namespace Cod3rsGrowth.Servico.Servicos
             _validadorCompraCliente = validadorCompraCliente;
         }
 
-        public List<CompraCliente> ObterTodos()
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
         {
-            return _repositorioCompraCliente.ObterTodos();
+            return _repositorioCompraCliente.ObterTodos(filtro);
         }
 
         public CompraCliente ObterPorId(int id)

@@ -1,13 +1,10 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Interfaces
 {
-    public interface IRepositorioObra
+    public interface IRepositorioObra : IRepositorio<Obra, FiltroObra>
     {
-        List<Obra> ObterTodos();
-        Obra ObterPorId(int id);
-        Obra Criar(Obra obra);
-        Obra Editar(Obra obra);
-        void Remover(int id);
+
     }
 }
