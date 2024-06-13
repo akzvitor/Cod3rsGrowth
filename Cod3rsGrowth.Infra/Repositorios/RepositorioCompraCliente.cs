@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
         {
-            var query = Filtro(_db.ComprasCliente, filtro);
+            var query = Filtrar(_db.ComprasCliente, filtro);
             var comprasFiltradas = query.ToList();
 
             return comprasFiltradas;
@@ -65,7 +65,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             throw new NotImplementedException();
         }
 
-        public static IQueryable<CompraCliente> Filtro(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)
+        public static IQueryable<CompraCliente> Filtrar(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)
         {
             if (filtro == null)
             {
