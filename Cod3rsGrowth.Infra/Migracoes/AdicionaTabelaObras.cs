@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Infra.Migracoes
                 .WithColumn("Sinopse").AsString()
                 .WithColumn("Número de capítulos").AsInt32()
                 .WithColumn("Valor").AsDecimal()
-                //.WithColumn("Formato")
+                .WithColumn("Formato").AsInt32()
                 .WithColumn("Foi finalizada").AsBoolean()
                 .WithColumn("Início da publicação").AsDateTime();
         }
