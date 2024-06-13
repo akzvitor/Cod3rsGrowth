@@ -64,7 +64,19 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            var obraNoBanco = _db.Obras.FirstOrDefault(o => o.Id == id)
+                ?? throw new Exception("Obra não encontrada.");
+            
+            try
+            {
+                _db.Obras
+                    .Where(o => o.Id == id)
+                    .Delete();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível remover a obra selecionada.");
+            }
         }
 
         public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
