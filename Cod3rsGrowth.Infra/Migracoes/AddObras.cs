@@ -2,8 +2,8 @@
 
 namespace Cod3rsGrowth.Infra.Migracoes
 {
-    [Migration(20240613104400)]
-    public class AdicionaTabelaObras : Migration
+    [Migration(001)]
+    public class AddObras : Migration
     {
         public override void Up()
         {
@@ -11,7 +11,6 @@ namespace Cod3rsGrowth.Infra.Migracoes
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("Título").AsString()
                 .WithColumn("Autor").AsString()
-                //.WithColumn("Generos")
                 .WithColumn("Sinopse").AsString()
                 .WithColumn("Número de capítulos").AsInt32()
                 .WithColumn("Valor").AsDecimal()
