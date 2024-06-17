@@ -27,13 +27,13 @@ namespace Cod3rsGrowth.Forms
 
         private static ServiceProvider CriarServicos()
         {
-            var stringDeConexao = "Data Source=DESKTOP-PUMGKOJ\\SQLEXPRESS;Initial Catalog=CodersGrowth;Persist Security Info=True;User ID=sa;Password=sap@123;Trust Server Certificate=True";
+            var connectionstring = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
 
             return new ServiceCollection()
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
-                    .WithGlobalConnectionString(stringDeConexao)
+                    .WithGlobalConnectionString(connectionstring)
                     .ScanIn(typeof(AddObras).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
