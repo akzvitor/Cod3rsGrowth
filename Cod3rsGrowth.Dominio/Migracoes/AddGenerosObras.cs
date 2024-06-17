@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.Infra.Migracoes
+namespace Cod3rsGrowth.Dominio.Migracoes
 {
     [Migration(20240617082300)]
     public class AddGenerosObras : Migration

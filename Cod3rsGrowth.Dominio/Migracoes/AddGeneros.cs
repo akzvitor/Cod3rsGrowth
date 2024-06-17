@@ -1,7 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using FluentMigrator;
 
-namespace Cod3rsGrowth.Infra.Migracoes
+namespace Cod3rsGrowth.Dominio.Migracoes
 {
     [Migration(20240617082100)]
     public class AddGeneros : Migration
