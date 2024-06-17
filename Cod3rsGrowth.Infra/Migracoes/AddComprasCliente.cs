@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Infra.Migracoes
             Create.Table("ComprasCliente")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("CPF").AsString()
-                .WithColumn("Nome").AsString()
+                .WithColumn("Nome").AsString(100)
                 .WithColumn("Telefone").AsString()
                 .WithColumn("E-mail").AsString()
                 .WithColumn("Valor").AsDecimal()

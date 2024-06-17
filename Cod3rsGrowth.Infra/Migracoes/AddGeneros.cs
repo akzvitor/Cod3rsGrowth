@@ -1,4 +1,5 @@
-﻿using FluentMigrator;
+﻿using Cod3rsGrowth.Dominio.Enums;
+using FluentMigrator;
 
 namespace Cod3rsGrowth.Infra.Migracoes
 {
@@ -8,8 +9,18 @@ namespace Cod3rsGrowth.Infra.Migracoes
         public override void Up()
         {
             Create.Table("Generos")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Nome").AsInt32();
+                .WithColumn("Id").AsInt32().PrimaryKey()
+                .WithColumn("Nome").AsString(50).NotNullable();
+
+            InserirValoresNaTabela();
+        }
+
+        private void InserirValoresNaTabela()
+        {
+            foreach (Genero genero in Enum.GetValues(typeof(Genero)))
+            {
+                Insert.IntoTable("Generos").Row(new { Id = (int)genero, Nome = genero.ToString() });
+            }
         }
 
         public override void Down()

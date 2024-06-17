@@ -9,9 +9,9 @@ namespace Cod3rsGrowth.Infra.Migracoes
         {
             Create.Table("Obras")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Título").AsString()
-                .WithColumn("Autor").AsString()
-                .WithColumn("Sinopse").AsString()
+                .WithColumn("Título").AsString(2000)
+                .WithColumn("Autor").AsString(150)
+                .WithColumn("Sinopse").AsString(2000)
                 .WithColumn("Número de capítulos").AsInt32()
                 .WithColumn("Valor").AsDecimal()
                 .WithColumn("Formato").AsInt32()
