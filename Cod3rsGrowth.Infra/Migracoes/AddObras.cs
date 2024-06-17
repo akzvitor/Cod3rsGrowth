@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Infra.Migracoes
 {
-    [Migration(001)]
+    [Migration(20240617082000)]
     public class AddObras : Migration
     {
         public override void Up()

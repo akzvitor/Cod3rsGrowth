@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Infra.Migracoes
 {
-    [Migration(002)]
+    [Migration(20240617082100)]
     public class AddGeneros : Migration
     {
         public override void Up()

@@ -1,13 +1,8 @@
 ﻿using FluentMigrator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.Infra.Migracoes
 {
-    [Migration(005)]
+    [Migration(20240617082400)]
     public class AddComprasObras : Migration
     {
         public override void Up()

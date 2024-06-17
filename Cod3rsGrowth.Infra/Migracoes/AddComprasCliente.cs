@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Infra.Migracoes
 {
-    [Migration(003)]
+    [Migration(20240617082200)]
     public class AddComprasCliente : Migration
     {
         public override void Up()
