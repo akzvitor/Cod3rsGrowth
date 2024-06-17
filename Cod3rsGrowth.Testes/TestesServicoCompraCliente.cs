@@ -1,4 +1,4 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using FluentValidation;
@@ -10,11 +10,12 @@ namespace Cod3rsGrowth.Testes
     public class TestesServicoCompraCliente : TesteBase
     {
         private ServicoCompraCliente? _servicoCompraCliente;
+        private readonly FiltroCompraCliente _filtro;
 
         public TestesServicoCompraCliente()
         {
             CarregarServicos();
-            _servicoCompraCliente.ObterTodos().Clear();
+            _servicoCompraCliente.ObterTodos(_filtro).Clear();
             InicializarBancoDeDados();
         }
 
@@ -89,7 +90,7 @@ namespace Cod3rsGrowth.Testes
         {
             var listaMock = InicializarDadosMockados();
 
-            var listaDoBanco = _servicoCompraCliente.ObterTodos();
+            var listaDoBanco = _servicoCompraCliente.ObterTodos(_filtro);
 
             Assert.NotNull(listaDoBanco);
             Assert.Equivalent(listaMock, listaDoBanco);
@@ -98,7 +99,7 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarUmaListaDoTipoCompraCliente()
         {
-            var listaDoBanco = _servicoCompraCliente.ObterTodos();
+            var listaDoBanco = _servicoCompraCliente.ObterTodos(_filtro);
 
             Assert.NotNull(listaDoBanco);
             Assert.IsType<List<CompraCliente>>(listaDoBanco);

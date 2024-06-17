@@ -1,4 +1,4 @@
-using Cod3rsGrowth.Dominio.Classes;
+using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
@@ -11,11 +11,12 @@ namespace Cod3rsGrowth.Testes
     public class TestesServicoObra : TesteBase
     {
         private ServicoObra? _servicoObra;
+        private readonly FiltroObra _filtro;
 
         public TestesServicoObra()
         {
             CarregarServico();
-            _servicoObra.ObterTodos().Clear();
+            _servicoObra.ObterTodos(_filtro).Clear();
             InicializarBancoDeDados();
         }
 
@@ -120,7 +121,7 @@ namespace Cod3rsGrowth.Testes
         {
             var listaMock = InicializarDadosMockados();
 
-            var listaDoBanco = _servicoObra.ObterTodos();
+            var listaDoBanco = _servicoObra.ObterTodos(_filtro);
 
             Assert.NotNull(listaDoBanco);
             Assert.Equivalent(listaMock, listaDoBanco);
@@ -129,7 +130,7 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarUmaListaDoTipoObra()
         {
-            var listaDoBanco = _servicoObra.ObterTodos();
+            var listaDoBanco = _servicoObra.ObterTodos(_filtro);
 
             Assert.NotNull(listaDoBanco);
             Assert.IsType<List<Obra>>(listaDoBanco);

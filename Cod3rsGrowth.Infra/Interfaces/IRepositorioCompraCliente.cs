@@ -1,13 +1,10 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Interfaces
 {
-    public interface IRepositorioCompraCliente
+    public interface IRepositorioCompraCliente : IRepositorio<CompraCliente, FiltroCompraCliente>
     {
-        List<CompraCliente> ObterTodos();
-        CompraCliente ObterPorId(int id);
-        CompraCliente Criar(CompraCliente compraCliente);
-        CompraCliente Editar(CompraCliente compraCliente);
-        void Remover(int id);
+
     }
 }

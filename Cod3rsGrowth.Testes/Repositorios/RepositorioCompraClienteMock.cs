@@ -1,4 +1,4 @@
-﻿using Cod3rsGrowth.Dominio.Classes;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
 
@@ -9,7 +9,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         private List<CompraCliente> _listaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
         private int _compraClienteId = 100;
 
-        public List<CompraCliente> ObterTodos()
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
         {
             return _listaCompraCliente;
         }
