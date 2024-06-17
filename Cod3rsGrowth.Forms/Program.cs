@@ -1,6 +1,7 @@
 using Cod3rsGrowth.Dominio.Migracoes;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Configuration;
 
 namespace Cod3rsGrowth.Forms
@@ -11,6 +12,8 @@ namespace Cod3rsGrowth.Forms
         static void Main(string[] args)
         {
             ApplicationConfiguration.Initialize();
+            var host = CriarHostBuilder().Build();
+            ServiceProvider = host.Services;
             Application.Run(new Form1());
 
             using (var serviceProvider = CriarServicos())
@@ -39,6 +42,16 @@ namespace Cod3rsGrowth.Forms
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
             runner.MigrateUp();
+        }
+
+        public static IServiceProvider ServiceProvider { get; set; }
+
+        static IHostBuilder CriarHostBuilder()
+        {
+            return Host.CreateDefaultBuilder()
+                .ConfigureServices((contexto, servicos) => {
+
+                });
         }
     }
 }
