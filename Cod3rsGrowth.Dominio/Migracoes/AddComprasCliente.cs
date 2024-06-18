@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.Infra.Migracoes
+namespace Cod3rsGrowth.Dominio.Migracoes
 {
     [Migration(20240617082200)]
     public class AddComprasCliente : Migration
@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Infra.Migracoes
                 .WithColumn("Valor").AsDecimal()
                 .WithColumn("Data da compra").AsDateTime();
         }
- 
+
         public override void Down()
         {
             Delete.Table("ComprasCliente");
