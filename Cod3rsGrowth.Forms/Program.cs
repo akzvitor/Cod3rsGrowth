@@ -12,18 +12,22 @@ namespace Cod3rsGrowth.Forms
         static void Main(string[] args)
         {
             ApplicationConfiguration.Initialize();
-            var host = CriarHostBuilder().Build();
-            ServiceProvider = host.Services;
-            Application.Run(new Form1());
 
-            using (var serviceProvider = CriarServicos())
-            using (var escopo = serviceProvider.CreateScope()) 
+            using (var serviceProvider = CriarServicosDeMigracao())
+            using (var escopo = serviceProvider.CreateScope())
             {
                 AtualizarBancoDeDados(escopo.ServiceProvider);
             }
+
+            var host = CriarHostBuilder().Build();
+            ServiceProvider = host.Services;
+
+            Application.Run(ServiceProvider.GetRequiredService<Form1>());
         }
 
-        private static ServiceProvider CriarServicos()
+        public static IServiceProvider ServiceProvider { get; set; }
+
+        private static ServiceProvider CriarServicosDeMigracao()
         {
             var connectionstring = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
 
@@ -44,13 +48,11 @@ namespace Cod3rsGrowth.Forms
             runner.MigrateUp();
         }
 
-        public static IServiceProvider ServiceProvider { get; set; }
-
         static IHostBuilder CriarHostBuilder()
         {
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((contexto, servicos) => {
-
+                    servicos.AddTransient<Form1>();
                 });
         }
     }
