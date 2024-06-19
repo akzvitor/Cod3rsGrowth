@@ -14,9 +14,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
 
         [Column("Autor"), NotNull]
         public string Autor { get; set; }
-        public List<Genero> Generos { get; set; }
-        public string Sinopse { get; set; }
-        public string CapaImagemBase64 { get; set; }
 
         [Column("Número de capítulos"), NotNull]
         public int NumeroCapitulos { get; set; }
@@ -27,10 +24,13 @@ namespace Cod3rsGrowth.Dominio.Entidades
         [Column("Formato"), NotNull]
         public Formato Formato { get; set; }
 
-        [Column("Foi finalizada"), NotNull]
+        [Column("Finalizada"), NotNull]
         public bool FoiFinalizada { get; set; }
 
         [Column("Início da Publicação"), NotNull]
         public DateTime InicioPublicacao { get; set; }
+        public List<Genero> Generos { get; set; }
+        public string Sinopse { get; set; }
+        public string CapaImagemBase64 { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace Cod3rsGrowth.Dominio.Migracoes
                 .WithColumn("Autor").AsString(150)
                 .WithColumn("Sinopse").AsString(2000)
                 .WithColumn("Número de capítulos").AsInt32()
-                .WithColumn("Valor").AsDecimal()
+                .WithColumn("Valor").AsDecimal(10, 2)
                 .WithColumn("Formato").AsInt32()
-                .WithColumn("Foi finalizada").AsBoolean()
+                .WithColumn("Finalizada").AsBoolean()
                 .WithColumn("Início da publicação").AsDateTime();
         }
 

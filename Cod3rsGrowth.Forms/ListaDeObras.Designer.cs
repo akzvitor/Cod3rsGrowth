@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             dataGridView1 = new DataGridView();
+            obraBindingSource = new BindingSource(components);
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tituloDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             autorDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -38,7 +39,6 @@
             formatoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             foiFinalizadaDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             inicioPublicacaoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            obraBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             SuspendLayout();
@@ -52,16 +52,22 @@
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 0);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(747, 450);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // obraBindingSource
+            // 
+            obraBindingSource.DataSource = typeof(Dominio.Entidades.Obra);
             // 
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
             idDataGridViewTextBoxColumn.Width = 30;
             // 
             // tituloDataGridViewTextBoxColumn
@@ -69,36 +75,42 @@
             tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
             tituloDataGridViewTextBoxColumn.HeaderText = "Titulo";
             tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
+            tituloDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // autorDataGridViewTextBoxColumn
             // 
             autorDataGridViewTextBoxColumn.DataPropertyName = "Autor";
             autorDataGridViewTextBoxColumn.HeaderText = "Autor";
             autorDataGridViewTextBoxColumn.Name = "autorDataGridViewTextBoxColumn";
+            autorDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // numeroCapitulosDataGridViewTextBoxColumn
             // 
             numeroCapitulosDataGridViewTextBoxColumn.DataPropertyName = "NumeroCapitulos";
             numeroCapitulosDataGridViewTextBoxColumn.HeaderText = "Número de capítulos";
             numeroCapitulosDataGridViewTextBoxColumn.Name = "numeroCapitulosDataGridViewTextBoxColumn";
+            numeroCapitulosDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // valorObraDataGridViewTextBoxColumn
             // 
             valorObraDataGridViewTextBoxColumn.DataPropertyName = "ValorObra";
             valorObraDataGridViewTextBoxColumn.HeaderText = "Valor";
             valorObraDataGridViewTextBoxColumn.Name = "valorObraDataGridViewTextBoxColumn";
+            valorObraDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // formatoDataGridViewTextBoxColumn
             // 
             formatoDataGridViewTextBoxColumn.DataPropertyName = "Formato";
             formatoDataGridViewTextBoxColumn.HeaderText = "Formato";
             formatoDataGridViewTextBoxColumn.Name = "formatoDataGridViewTextBoxColumn";
+            formatoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // foiFinalizadaDataGridViewCheckBoxColumn
             // 
             foiFinalizadaDataGridViewCheckBoxColumn.DataPropertyName = "FoiFinalizada";
-            foiFinalizadaDataGridViewCheckBoxColumn.HeaderText = "Foi finalizada";
+            foiFinalizadaDataGridViewCheckBoxColumn.HeaderText = "Finalizada";
             foiFinalizadaDataGridViewCheckBoxColumn.Name = "foiFinalizadaDataGridViewCheckBoxColumn";
+            foiFinalizadaDataGridViewCheckBoxColumn.ReadOnly = true;
             foiFinalizadaDataGridViewCheckBoxColumn.Width = 75;
             // 
             // inicioPublicacaoDataGridViewTextBoxColumn
@@ -106,10 +118,7 @@
             inicioPublicacaoDataGridViewTextBoxColumn.DataPropertyName = "InicioPublicacao";
             inicioPublicacaoDataGridViewTextBoxColumn.HeaderText = "Início da Publicação";
             inicioPublicacaoDataGridViewTextBoxColumn.Name = "inicioPublicacaoDataGridViewTextBoxColumn";
-            // 
-            // obraBindingSource
-            // 
-            obraBindingSource.DataSource = typeof(Dominio.Entidades.Obra);
+            inicioPublicacaoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ListaDeObras
             // 
