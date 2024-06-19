@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             dataGridView1 = new DataGridView();
             obraBindingSource = new BindingSource(components);
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -45,7 +51,21 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
             dataGridView1.DataSource = obraBindingSource;
@@ -54,7 +74,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(747, 450);
+            dataGridView1.Size = new Size(968, 478);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -65,21 +85,30 @@
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            idDataGridViewTextBoxColumn.FillWeight = 6.272095F;
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
-            idDataGridViewTextBoxColumn.Width = 30;
             // 
             // tituloDataGridViewTextBoxColumn
             // 
             tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
-            tituloDataGridViewTextBoxColumn.HeaderText = "Titulo";
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            tituloDataGridViewTextBoxColumn.FillWeight = 30.26575F;
+            tituloDataGridViewTextBoxColumn.HeaderText = "Título";
             tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
             tituloDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // autorDataGridViewTextBoxColumn
             // 
             autorDataGridViewTextBoxColumn.DataPropertyName = "Autor";
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            autorDataGridViewTextBoxColumn.FillWeight = 30.3542786F;
             autorDataGridViewTextBoxColumn.HeaderText = "Autor";
             autorDataGridViewTextBoxColumn.Name = "autorDataGridViewTextBoxColumn";
             autorDataGridViewTextBoxColumn.ReadOnly = true;
@@ -87,13 +116,17 @@
             // numeroCapitulosDataGridViewTextBoxColumn
             // 
             numeroCapitulosDataGridViewTextBoxColumn.DataPropertyName = "NumeroCapitulos";
-            numeroCapitulosDataGridViewTextBoxColumn.HeaderText = "Número de capítulos";
+            numeroCapitulosDataGridViewTextBoxColumn.FillWeight = 13.3542786F;
+            numeroCapitulosDataGridViewTextBoxColumn.HeaderText = "Capítulos";
             numeroCapitulosDataGridViewTextBoxColumn.Name = "numeroCapitulosDataGridViewTextBoxColumn";
             numeroCapitulosDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // valorObraDataGridViewTextBoxColumn
             // 
             valorObraDataGridViewTextBoxColumn.DataPropertyName = "ValorObra";
+            dataGridViewCellStyle5.Padding = new Padding(10, 0, 0, 0);
+            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            valorObraDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
             valorObraDataGridViewTextBoxColumn.HeaderText = "Valor";
             valorObraDataGridViewTextBoxColumn.Name = "valorObraDataGridViewTextBoxColumn";
             valorObraDataGridViewTextBoxColumn.ReadOnly = true;
@@ -101,6 +134,7 @@
             // formatoDataGridViewTextBoxColumn
             // 
             formatoDataGridViewTextBoxColumn.DataPropertyName = "Formato";
+            formatoDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
             formatoDataGridViewTextBoxColumn.HeaderText = "Formato";
             formatoDataGridViewTextBoxColumn.Name = "formatoDataGridViewTextBoxColumn";
             formatoDataGridViewTextBoxColumn.ReadOnly = true;
@@ -108,14 +142,18 @@
             // foiFinalizadaDataGridViewCheckBoxColumn
             // 
             foiFinalizadaDataGridViewCheckBoxColumn.DataPropertyName = "FoiFinalizada";
+            foiFinalizadaDataGridViewCheckBoxColumn.FillWeight = 15.3542786F;
+            foiFinalizadaDataGridViewCheckBoxColumn.FlatStyle = FlatStyle.System;
             foiFinalizadaDataGridViewCheckBoxColumn.HeaderText = "Finalizada";
             foiFinalizadaDataGridViewCheckBoxColumn.Name = "foiFinalizadaDataGridViewCheckBoxColumn";
             foiFinalizadaDataGridViewCheckBoxColumn.ReadOnly = true;
-            foiFinalizadaDataGridViewCheckBoxColumn.Width = 75;
             // 
             // inicioPublicacaoDataGridViewTextBoxColumn
             // 
             inicioPublicacaoDataGridViewTextBoxColumn.DataPropertyName = "InicioPublicacao";
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            inicioPublicacaoDataGridViewTextBoxColumn.FillWeight = 20.3542786F;
             inicioPublicacaoDataGridViewTextBoxColumn.HeaderText = "Início da Publicação";
             inicioPublicacaoDataGridViewTextBoxColumn.Name = "inicioPublicacaoDataGridViewTextBoxColumn";
             inicioPublicacaoDataGridViewTextBoxColumn.ReadOnly = true;
@@ -124,7 +162,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(747, 450);
+            ClientSize = new Size(968, 478);
             Controls.Add(dataGridView1);
             Name = "ListaDeObras";
             Text = "Form1";
