@@ -4,14 +4,13 @@ using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms
 {
-    public partial class ListaDeObras : Form
+    public partial class MainForm : Form
     {
         private readonly ServicoObra _servicoObra;
-        public ListaDeObras(ServicoObra servicoObra)
+        public MainForm(ServicoObra servicoObra)
         {
             _servicoObra = servicoObra;
             InitializeComponent();
-            InicializarBancoDeDados();
         }
 
         private void InicializarBancoDeDados()
@@ -25,14 +24,14 @@ namespace Cod3rsGrowth.Forms
 
         }
 
-        private void ListaDeObras_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
 
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-
+            InicializarBancoDeDados();
         }
     }
 }
