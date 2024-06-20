@@ -7,31 +7,31 @@ namespace Cod3rsGrowth.Forms
     public partial class MainForm : Form
     {
         private readonly ServicoObra _servicoObra;
-        public MainForm(ServicoObra servicoObra)
+        private readonly ServicoCompraCliente _servicoCompraCliente;
+
+        public MainForm(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
             _servicoObra = servicoObra;
+            _servicoCompraCliente = servicoCompraCliente;
             InitializeComponent();
         }
 
-        private void InicializarBancoDeDados()
+        private void ListarObras()
         {
             FiltroObra filtro = new();
-            dataGridView1.DataSource = _servicoObra.ObterTodos(filtro);
+            dataGridObras.DataSource = _servicoObra.ObterTodos(filtro);
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ListarCompras()
         {
-
+            FiltroCompraCliente filtro = new();
+            dataGridCompras.DataSource = _servicoCompraCliente.ObterTodos(filtro);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            InicializarBancoDeDados();
+            ListarObras();
+            ListarCompras();
         }
     }
 }
