@@ -1,6 +1,6 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servico.Servicos;
-using System.Drawing.Text;
+using System.ComponentModel;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -18,7 +18,7 @@ namespace Cod3rsGrowth.Forms
 
         private void ListarObras()
         {
-            FiltroObra filtro = new();
+            FiltroObra filtro = new FiltroObra();
             dataGridObras.DataSource = _servicoObra.ObterTodos(filtro);
         }
 

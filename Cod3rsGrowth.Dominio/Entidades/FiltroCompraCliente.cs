@@ -6,6 +6,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
     {
         public string? NomeCliente { get; set; }
         public DateTime? DataCompra { get; set; }
-        public decimal? ValorCompra { get; set; }
+        public string? Cpf {  get; set; }
     }
 }
