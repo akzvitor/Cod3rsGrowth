@@ -62,7 +62,7 @@
             labelStatus = new Label();
             labelFormatoObra = new Label();
             comboBoxFormatoObra = new ComboBox();
-            textAutorObra = new TextBox();
+            textBoxAutorObra = new TextBox();
             labelAutorObra = new Label();
             textBoxTituloObra = new TextBox();
             labelTituloObra = new Label();
@@ -80,6 +80,7 @@
             compraClienteBindingSource = new BindingSource(components);
             panel2BottomCompras = new Panel();
             panelFiltroCompras = new Panel();
+            maskedTextBoxDataCompra = new MaskedTextBox();
             textBoxCpf = new TextBox();
             labelCpf = new Label();
             labelDataCompra = new Label();
@@ -87,17 +88,20 @@
             buttonLimparCompras = new Button();
             buttonFiltrarCompras = new Button();
             labelNomeCliente = new Label();
-            maskedTextBoxDataCompra = new MaskedTextBox();
+            obraBindingSource1 = new BindingSource(components);
+            dateTimePicker1 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).BeginInit();
             tabControl1.SuspendLayout();
             tabPageObras.SuspendLayout();
+            panelBottomObras.SuspendLayout();
             panelObras.SuspendLayout();
             tabPageCompras.SuspendLayout();
             panelCompras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridCompras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)compraClienteBindingSource).BeginInit();
             panelFiltroCompras.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)obraBindingSource1).BeginInit();
             SuspendLayout();
             // 
             // obraBindingSource
@@ -235,6 +239,7 @@
             // 
             // panelBottomObras
             // 
+            panelBottomObras.Controls.Add(dateTimePicker1);
             panelBottomObras.Dock = DockStyle.Bottom;
             panelBottomObras.Location = new Point(3, 369);
             panelBottomObras.Name = "panelBottomObras";
@@ -252,7 +257,7 @@
             panelObras.Controls.Add(labelStatus);
             panelObras.Controls.Add(labelFormatoObra);
             panelObras.Controls.Add(comboBoxFormatoObra);
-            panelObras.Controls.Add(textAutorObra);
+            panelObras.Controls.Add(textBoxAutorObra);
             panelObras.Controls.Add(labelAutorObra);
             panelObras.Controls.Add(textBoxTituloObra);
             panelObras.Controls.Add(labelTituloObra);
@@ -270,6 +275,7 @@
             buttonLimparObras.TabIndex = 12;
             buttonLimparObras.Text = "Limpar";
             buttonLimparObras.UseVisualStyleBackColor = true;
+            buttonLimparObras.Click += buttonLimparObras_Click;
             // 
             // buttonFiltroObra
             // 
@@ -279,6 +285,7 @@
             buttonFiltroObra.TabIndex = 11;
             buttonFiltroObra.Text = "Filtrar";
             buttonFiltroObra.UseVisualStyleBackColor = true;
+            buttonFiltroObra.Click += buttonFiltroObra_Click;
             // 
             // textBoxAnoObra
             // 
@@ -347,21 +354,20 @@
             // comboBoxFormatoObra
             // 
             comboBoxFormatoObra.FormattingEnabled = true;
-            comboBoxFormatoObra.Items.AddRange(new object[] { "Manga", "Manhua", "Manhwa", "WebNovel" });
             comboBoxFormatoObra.Location = new Point(294, 35);
             comboBoxFormatoObra.Name = "comboBoxFormatoObra";
             comboBoxFormatoObra.Size = new Size(121, 23);
             comboBoxFormatoObra.TabIndex = 4;
             // 
-            // textAutorObra
+            // textBoxAutorObra
             // 
-            textAutorObra.BackColor = SystemColors.Window;
-            textAutorObra.Cursor = Cursors.IBeam;
-            textAutorObra.Location = new Point(148, 35);
-            textAutorObra.Name = "textAutorObra";
-            textAutorObra.PlaceholderText = "Pesquisar";
-            textAutorObra.Size = new Size(123, 23);
-            textAutorObra.TabIndex = 3;
+            textBoxAutorObra.BackColor = SystemColors.Window;
+            textBoxAutorObra.Cursor = Cursors.IBeam;
+            textBoxAutorObra.Location = new Point(148, 35);
+            textBoxAutorObra.Name = "textBoxAutorObra";
+            textBoxAutorObra.PlaceholderText = "Pesquisar";
+            textBoxAutorObra.Size = new Size(123, 23);
+            textBoxAutorObra.TabIndex = 3;
             // 
             // labelAutorObra
             // 
@@ -537,6 +543,15 @@
             panelFiltroCompras.Size = new Size(1027, 78);
             panelFiltroCompras.TabIndex = 0;
             // 
+            // maskedTextBoxDataCompra
+            // 
+            maskedTextBoxDataCompra.Location = new Point(275, 38);
+            maskedTextBoxDataCompra.Mask = "00/00/0000";
+            maskedTextBoxDataCompra.Name = "maskedTextBoxDataCompra";
+            maskedTextBoxDataCompra.Size = new Size(73, 23);
+            maskedTextBoxDataCompra.TabIndex = 30;
+            maskedTextBoxDataCompra.ValidatingType = typeof(DateTime);
+            // 
             // textBoxCpf
             // 
             textBoxCpf.Location = new Point(138, 38);
@@ -601,14 +616,17 @@
             labelNomeCliente.TabIndex = 13;
             labelNomeCliente.Text = "Nome";
             // 
-            // maskedTextBoxDataCompra
+            // obraBindingSource1
             // 
-            maskedTextBoxDataCompra.Location = new Point(275, 38);
-            maskedTextBoxDataCompra.Mask = "00/00/0000";
-            maskedTextBoxDataCompra.Name = "maskedTextBoxDataCompra";
-            maskedTextBoxDataCompra.Size = new Size(73, 23);
-            maskedTextBoxDataCompra.TabIndex = 30;
-            maskedTextBoxDataCompra.ValidatingType = typeof(DateTime);
+            obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new Point(399, 22);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(94, 23);
+            dateTimePicker1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -623,6 +641,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridObras).EndInit();
             tabControl1.ResumeLayout(false);
             tabPageObras.ResumeLayout(false);
+            panelBottomObras.ResumeLayout(false);
             panelObras.ResumeLayout(false);
             panelObras.PerformLayout();
             tabPageCompras.ResumeLayout(false);
@@ -631,6 +650,7 @@
             ((System.ComponentModel.ISupportInitialize)compraClienteBindingSource).EndInit();
             panelFiltroCompras.ResumeLayout(false);
             panelFiltroCompras.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)obraBindingSource1).EndInit();
             ResumeLayout(false);
         }
 
@@ -665,7 +685,7 @@
         private DataGridViewTextBoxColumn dataCompraDataGridViewTextBoxColumn;
         private Label labelTituloObra;
         private TextBox textBoxTituloObra;
-        private TextBox textAutorObra;
+        private TextBox textBoxAutorObra;
         private Label labelAutorObra;
         private ComboBox comboBoxFormatoObra;
         private Label labelFormatoObra;
@@ -693,5 +713,7 @@
         private TextBox textBoxNomeCliente;
         private TextBox textBoxCpf;
         private MaskedTextBox maskedTextBoxDataCompra;
+        private BindingSource obraBindingSource1;
+        private DateTimePicker dateTimePicker1;
     }
 }
