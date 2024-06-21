@@ -11,8 +11,8 @@ namespace Cod3rsGrowth.Forms
     {
         private readonly ServicoObra _servicoObra;
         private readonly ServicoCompraCliente _servicoCompraCliente;
-        private FiltroObra _filtroObra = new();
-        private FiltroCompraCliente _filtroCompraCliente = new();
+        private readonly FiltroObra _filtroObra = new();
+        private readonly FiltroCompraCliente _filtroCompraCliente = new();
 
         public MainForm(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
@@ -60,6 +60,7 @@ namespace Cod3rsGrowth.Forms
                 _filtroObra.ObraFoiFinalizada = true;
             }
 
+            _filtroObra.AnoDaPublicacao = textBoxAnoObra.Text;
             ListarObras();
         }
 
@@ -74,6 +75,8 @@ namespace Cod3rsGrowth.Forms
             comboBoxFormatoObra.SelectedItem = null;
             radioButtonStatusObraEmLancamento.Checked = false;
             radioButtonStatusObraFinalizada.Checked = false;
+            _filtroObra.AnoDaPublicacao = null;
+            textBoxAnoObra.Text = null;
             ListarObras();
         }
     }

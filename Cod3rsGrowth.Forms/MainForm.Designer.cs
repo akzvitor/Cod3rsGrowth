@@ -89,12 +89,10 @@
             buttonFiltrarCompras = new Button();
             labelNomeCliente = new Label();
             obraBindingSource1 = new BindingSource(components);
-            dateTimePicker1 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).BeginInit();
             tabControl1.SuspendLayout();
             tabPageObras.SuspendLayout();
-            panelBottomObras.SuspendLayout();
             panelObras.SuspendLayout();
             tabPageCompras.SuspendLayout();
             panelCompras.SuspendLayout();
@@ -133,7 +131,7 @@
             dataGridObras.Name = "dataGridObras";
             dataGridObras.ReadOnly = true;
             dataGridObras.RowTemplate.Height = 25;
-            dataGridObras.Size = new Size(1027, 291);
+            dataGridObras.Size = new Size(1027, 272);
             dataGridObras.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
@@ -239,11 +237,10 @@
             // 
             // panelBottomObras
             // 
-            panelBottomObras.Controls.Add(dateTimePicker1);
             panelBottomObras.Dock = DockStyle.Bottom;
-            panelBottomObras.Location = new Point(3, 369);
+            panelBottomObras.Location = new Point(3, 350);
             panelBottomObras.Name = "panelBottomObras";
-            panelBottomObras.Size = new Size(1027, 56);
+            panelBottomObras.Size = new Size(1027, 75);
             panelBottomObras.TabIndex = 0;
             // 
             // panelObras
@@ -620,14 +617,6 @@
             // 
             obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
             // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(399, 22);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(94, 23);
-            dateTimePicker1.TabIndex = 0;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -641,7 +630,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridObras).EndInit();
             tabControl1.ResumeLayout(false);
             tabPageObras.ResumeLayout(false);
-            panelBottomObras.ResumeLayout(false);
             panelObras.ResumeLayout(false);
             panelObras.PerformLayout();
             tabPageCompras.ResumeLayout(false);
@@ -714,6 +702,5 @@
         private TextBox textBoxCpf;
         private MaskedTextBox maskedTextBoxDataCompra;
         private BindingSource obraBindingSource1;
-        private DateTimePicker dateTimePicker1;
     }
 }
