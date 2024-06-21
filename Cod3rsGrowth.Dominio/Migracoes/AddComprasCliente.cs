@@ -13,7 +13,7 @@ namespace Cod3rsGrowth.Dominio.Migracoes
                 .WithColumn("Nome").AsString(100)
                 .WithColumn("Telefone").AsString()
                 .WithColumn("E-mail").AsString()
-                .WithColumn("Valor").AsDecimal()
+                .WithColumn("Valor").AsDecimal(20, 2)
                 .WithColumn("Data da compra").AsDateTime();
         }
 

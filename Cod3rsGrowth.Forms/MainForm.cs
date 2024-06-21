@@ -34,12 +34,17 @@ namespace Cod3rsGrowth.Forms
             dataGridCompras.DataSource = _servicoCompraCliente.ObterTodos(_filtroCompraCliente);
         }
 
+        //Adicionar try catch em todos os eventos
+        //Renomear todos os eventos
+
+        //Ao carregar formulário...
         private void MainForm_Load(object sender, EventArgs e)
         {
             ListarObras();
             ListarCompras();
         }
 
+        //Ao clicar no botão filtrar obra
         private void buttonFiltroObra_Click(object sender, EventArgs e)
         {
             if (radioButtonStatusObraEmLancamento.Checked == false &&
