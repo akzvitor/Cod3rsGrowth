@@ -42,11 +42,7 @@ namespace Cod3rsGrowth.Forms
 
         private void buttonFiltroObra_Click(object sender, EventArgs e)
         {
-            _filtroObra.TituloObra = textBoxTituloObra.Text;
-            _filtroObra.AutorObra = textBoxAutorObra.Text;
-            _filtroObra.FormatoObra = (Formato?)comboBoxFormatoObra.SelectedItem;
-
-            if (radioButtonStatusObraEmLancamento.Checked == false && 
+            if (radioButtonStatusObraEmLancamento.Checked == false &&
                 radioButtonStatusObraFinalizada.Checked == false)
             {
                 _filtroObra.ObraFoiFinalizada = null;
@@ -60,24 +56,53 @@ namespace Cod3rsGrowth.Forms
                 _filtroObra.ObraFoiFinalizada = true;
             }
 
+            _filtroObra.TituloObra = textBoxTituloObra.Text;
+            _filtroObra.AutorObra = textBoxAutorObra.Text;
+            _filtroObra.FormatoObra = (Formato?)comboBoxFormatoObra.SelectedItem;
             _filtroObra.AnoDaPublicacao = textBoxAnoObra.Text;
+
             ListarObras();
         }
 
         private void buttonLimparObras_Click(object sender, EventArgs e)
         {
             _filtroObra.TituloObra = null;
-            _filtroObra.AutorObra = null;
-            _filtroObra.FormatoObra = null;
-            _filtroObra.ObraFoiFinalizada = null;
             textBoxTituloObra.Text = null;
+            _filtroObra.AutorObra = null;
             textBoxAutorObra.Text = null;
+            _filtroObra.FormatoObra = null;
             comboBoxFormatoObra.SelectedItem = null;
+            _filtroObra.ObraFoiFinalizada = null;
             radioButtonStatusObraEmLancamento.Checked = false;
             radioButtonStatusObraFinalizada.Checked = false;
             _filtroObra.AnoDaPublicacao = null;
             textBoxAnoObra.Text = null;
+
             ListarObras();
+        }
+
+        private void buttonFiltrarCompras_Click(object sender, EventArgs e)
+        {
+            _filtroCompraCliente.NomeCliente = textBoxNomeCliente.Text;
+            _filtroCompraCliente.Cpf = textBoxCpf.Text;
+            if (dateTimePickerDataCompra.Value != DateTime.Parse("Jul 22, 2002"))
+            {
+                _filtroCompraCliente.DataCompra = dateTimePickerDataCompra.Value;
+            }
+
+            ListarCompras();
+        }
+
+        private void buttonLimparCompras_Click(object sender, EventArgs e)
+        {
+            _filtroCompraCliente.NomeCliente = null;
+            textBoxNomeCliente.Text = null;
+            _filtroCompraCliente.Cpf = null;
+            textBoxCpf.Text = null;
+            _filtroCompraCliente.DataCompra = DateTime.MinValue;
+            dateTimePickerDataCompra.Value = DateTime.Parse("Jul 22, 2002");
+
+            ListarCompras();
         }
     }
 }
