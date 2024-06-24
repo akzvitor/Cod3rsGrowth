@@ -9,12 +9,12 @@ namespace Cod3rsGrowth.Dominio.Migracoes
         {
             Create.Table("ComprasCliente")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("CPF").AsString()
+                .WithColumn("Cpf").AsString()
                 .WithColumn("Nome").AsString(100)
                 .WithColumn("Telefone").AsString()
-                .WithColumn("E-mail").AsString()
+                .WithColumn("Email").AsString()
                 .WithColumn("Valor").AsDecimal(20, 2)
-                .WithColumn("Data da compra").AsDateTime();
+                .WithColumn("DataCompra").AsDateTime();
         }
 
         public override void Down()

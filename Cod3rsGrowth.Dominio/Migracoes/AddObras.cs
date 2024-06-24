@@ -9,14 +9,14 @@ namespace Cod3rsGrowth.Dominio.Migracoes
         {
             Create.Table("Obras")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Título").AsString(2000)
+                .WithColumn("Titulo").AsString(2000)
                 .WithColumn("Autor").AsString(150)
                 .WithColumn("Sinopse").AsString(2000)
-                .WithColumn("Número de capítulos").AsInt32()
+                .WithColumn("NumeroCapitulos").AsInt32()
                 .WithColumn("Valor").AsDecimal(10, 2)
                 .WithColumn("Formato").AsInt32()
                 .WithColumn("Finalizada").AsBoolean()
-                .WithColumn("Início da publicação").AsDateTime();
+                .WithColumn("InicioPublicacao").AsDateTime();
         }
 
         public override void Down()

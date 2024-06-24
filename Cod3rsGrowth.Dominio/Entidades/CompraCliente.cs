@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Dominio.Entidades
         [PrimaryKey, Identity]
         public int Id { get; set; }
 
-        [Column("CPF"), NotNull]
+        [Column("Cpf"), NotNull]
         public string Cpf { get; set; }
 
         [Column("Nome"), NotNull]
@@ -17,13 +17,13 @@ namespace Cod3rsGrowth.Dominio.Entidades
         [Column("Telefone"), NotNull]
         public string Telefone { get; set; }
 
-        [Column("E-mail"), NotNull]
+        [Column("Email"), NotNull]
         public string Email { get; set; }
 
         [Column("Valor"), NotNull]
         public decimal ValorCompra { get; set; }
 
-        [Column("Data da compra"), NotNull]
+        [Column("DataCompra"), NotNull]
         public DateTime DataCompra { get; set; }
         public List<int> Produtos { get; set; }
 

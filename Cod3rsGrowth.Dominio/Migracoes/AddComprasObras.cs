@@ -8,8 +8,8 @@ namespace Cod3rsGrowth.Dominio.Migracoes
         public override void Up()
         {
             Create.Table("ComprasObras")
-                .WithColumn("IdCompra").AsInt32().ForeignKey("ComprasCliente", "Id")
-                .WithColumn("IdObra").AsInt32().ForeignKey("Obras", "Id");
+                .WithColumn("CompraId").AsInt32().ForeignKey("ComprasCliente", "Id")
+                .WithColumn("ObraId").AsInt32().ForeignKey("Obras", "Id");
         }
 
         public override void Down()

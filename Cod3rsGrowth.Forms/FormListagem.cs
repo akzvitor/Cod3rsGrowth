@@ -5,14 +5,14 @@ using Cod3rsGrowth.Dominio.Enums;
 
 namespace Cod3rsGrowth.Forms
 {
-    public partial class MainForm : Form
+    public partial class FormListagem : Form
     {
         private readonly ServicoObra _servicoObra;
         private readonly ServicoCompraCliente _servicoCompraCliente;
         private readonly FiltroObra _filtroObra = new();
         private readonly FiltroCompraCliente _filtroCompraCliente = new();
 
-        public MainForm(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
+        public FormListagem(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
             _servicoObra = servicoObra;
             _servicoCompraCliente = servicoCompraCliente;

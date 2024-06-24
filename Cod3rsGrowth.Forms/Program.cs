@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.Forms
             var host = CriarHostBuilder().Build();
             ServiceProvider = host.Services;
 
-            Application.Run(ServiceProvider.GetRequiredService<MainForm>());
+            Application.Run(ServiceProvider.GetRequiredService<FormListagem>());
         }
 
         public static IServiceProvider ServiceProvider { get; set; }
@@ -59,7 +59,7 @@ namespace Cod3rsGrowth.Forms
                 .ConfigureServices((contexto, servicos) => {
                     var stringDeConexao = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
 
-                    servicos.AddTransient<MainForm>();
+                    servicos.AddTransient<FormListagem>();
 
                     servicos.AddScoped<ServicoObra>();
                     servicos.AddScoped<ServicoCompraCliente>();

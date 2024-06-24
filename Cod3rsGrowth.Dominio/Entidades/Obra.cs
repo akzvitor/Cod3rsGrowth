@@ -9,13 +9,13 @@ namespace Cod3rsGrowth.Dominio.Entidades
         [PrimaryKey, Identity]
         public int Id { get; set; }
 
-        [Column("Título"), NotNull]
+        [Column("Titulo"), NotNull]
         public string Titulo { get; set; }
 
         [Column("Autor"), NotNull]
         public string Autor { get; set; }
 
-        [Column("Número de capítulos"), NotNull]
+        [Column("NumeroCapitulos"), NotNull]
         public int NumeroCapitulos { get; set; }
 
         [Column("Valor"), NotNull]
@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.Dominio.Entidades
         [Column("Finalizada"), NotNull]
         public bool FoiFinalizada { get; set; }
 
-        [Column("Início da Publicação"), NotNull]
+        [Column("InicioPublicacao"), NotNull]
         public DateTime InicioPublicacao { get; set; }
         public List<Genero> Generos { get; set; }
         public string Sinopse { get; set; }
