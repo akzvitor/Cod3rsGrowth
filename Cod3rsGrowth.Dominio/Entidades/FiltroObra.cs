@@ -10,5 +10,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
         public List<Genero>? ListaDeGenerosObra { get; set; }
         public Formato? FormatoObra { get; set; }
         public bool? ObraFoiFinalizada { get; set; }
+        public string? AnoDaPublicacao { get; set; }
     }
 }

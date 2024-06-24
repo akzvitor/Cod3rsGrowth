@@ -92,14 +92,14 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 compras = compras.Where(c => c.Nome.Contains(filtro.NomeCliente));
             }
 
-            if (filtro.DataCompra.HasValue)
+            if (!string.IsNullOrEmpty(filtro.Cpf))
             {
-                compras = compras.Where(c => c.DataCompra == filtro.DataCompra.Value);
+                compras = compras.Where(c => c.Cpf.Contains(filtro.Cpf));
             }
 
-            if (filtro.ValorCompra.HasValue)
+            if (filtro.DataCompra.HasValue && filtro.DataCompra != DateTime.MinValue)
             {
-                compras = compras.Where(c => c.ValorCompra == filtro.ValorCompra.Value);
+                compras = compras.Where(c => c.DataCompra == filtro.DataCompra.Value);
             }
 
             return compras;

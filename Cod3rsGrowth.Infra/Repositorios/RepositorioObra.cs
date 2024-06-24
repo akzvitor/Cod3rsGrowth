@@ -114,6 +114,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 obras = obras.Where(o => o.Generos.Any(g => filtro.ListaDeGenerosObra.Contains(g)));
             }
 
+            if (!string.IsNullOrEmpty(filtro.AnoDaPublicacao))
+            {
+                obras = obras.Where(o => o.InicioPublicacao.Year.ToString() == filtro.AnoDaPublicacao);
+            }
+
             return obras;
         }
     }

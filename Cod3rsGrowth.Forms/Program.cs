@@ -1,4 +1,9 @@
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Migracoes;
+using Cod3rsGrowth.Infra.ConexaoDeDados;
+using Cod3rsGrowth.Infra.Repositorios;
+using Cod3rsGrowth.Servico.Servicos;
+using Cod3rsGrowth.Servico.Validadores;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,20 +27,20 @@ namespace Cod3rsGrowth.Forms
             var host = CriarHostBuilder().Build();
             ServiceProvider = host.Services;
 
-            Application.Run(ServiceProvider.GetRequiredService<Form1>());
+            Application.Run(ServiceProvider.GetRequiredService<FormListagem>());
         }
 
         public static IServiceProvider ServiceProvider { get; set; }
 
         private static ServiceProvider CriarServicosDeMigracao()
         {
-            var connectionstring = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
+            var stringDeConexao = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
 
             return new ServiceCollection()
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
-                    .WithGlobalConnectionString(connectionstring)
+                    .WithGlobalConnectionString(stringDeConexao)
                     .ScanIn(typeof(AddObras).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
@@ -52,7 +57,20 @@ namespace Cod3rsGrowth.Forms
         {
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((contexto, servicos) => {
-                    servicos.AddTransient<Form1>();
+                    var stringDeConexao = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
+
+                    servicos.AddTransient<FormListagem>();
+
+                    servicos.AddScoped<ServicoObra>();
+                    servicos.AddScoped<ServicoCompraCliente>();
+
+                    servicos.AddScoped<IRepositorioObra, RepositorioObra>();
+                    servicos.AddScoped<IRepositorioCompraCliente, RepositorioCompraCliente>();
+
+                    servicos.AddScoped<ObraValidador>();
+                    servicos.AddScoped<CompraClienteValidador>();
+
+                    servicos.AddScoped(provider => new DbCodersGrowth(stringDeConexao));
                 });
         }
     }
