@@ -283,7 +283,7 @@
             buttonLimparObras.TabIndex = 12;
             buttonLimparObras.Text = "Limpar";
             buttonLimparObras.UseVisualStyleBackColor = true;
-            buttonLimparObras.Click += buttonLimparObras_Click;
+            buttonLimparObras.Click += AoClicarNoBotaoLimparDaAbaObras;
             // 
             // textBoxAnoObra
             // 
@@ -305,7 +305,7 @@
             buttonFiltroObra.TabIndex = 11;
             buttonFiltroObra.Text = "Filtrar";
             buttonFiltroObra.UseVisualStyleBackColor = true;
-            buttonFiltroObra.Click += buttonFiltroObra_Click;
+            buttonFiltroObra.Click += AoClicarNoBotaoFiltrarDaAbaObras;
             // 
             // labelAnoObra
             // 
@@ -602,7 +602,7 @@
             buttonLimparCompras.TabIndex = 25;
             buttonLimparCompras.Text = "Limpar";
             buttonLimparCompras.UseVisualStyleBackColor = true;
-            buttonLimparCompras.Click += buttonLimparCompras_Click;
+            buttonLimparCompras.Click += AoClicarNoBotaoLimparDaAbaCompras;
             // 
             // buttonFiltrarCompras
             // 
@@ -613,7 +613,7 @@
             buttonFiltrarCompras.TabIndex = 24;
             buttonFiltrarCompras.Text = "Filtrar";
             buttonFiltrarCompras.UseVisualStyleBackColor = true;
-            buttonFiltrarCompras.Click += buttonFiltrarCompras_Click;
+            buttonFiltrarCompras.Click += AoClicarNoBotaoFiltrarDaAbaCompras;
             // 
             // labelNomeCliente
             // 
@@ -638,7 +638,7 @@
             Controls.Add(tabControl1);
             Name = "MainForm";
             Text = "Coders Growth";
-            Load += MainForm_Load;
+            Load += AoCarregarFormulario;
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).EndInit();
             tabControl1.ResumeLayout(false);
