@@ -17,9 +17,6 @@ namespace Cod3rsGrowth.Forms
             _servicoObra = servicoObra;
             _servicoCompraCliente = servicoCompraCliente;
             InitializeComponent();
-
-            comboBoxFormatoObra.DataSource = Enum.GetValues(typeof(Formato));
-            comboBoxFormatoObra.SelectedItem = null;
         }
 
         private void ListarObras()
@@ -32,8 +29,15 @@ namespace Cod3rsGrowth.Forms
             dataGridCompras.DataSource = _servicoCompraCliente.ObterTodos(_filtroCompraCliente);
         }
 
-        //Adicionar try catch em todos os eventos
-        //Renomear todos os eventos
+        private void InicializarValoresComboBox()
+        {
+            comboBoxFormatoObra.DataSource = Enum.GetValues(typeof(Formato));
+        }
+
+        private void LimparComboBox()
+        {
+            comboBoxFormatoObra.SelectedItem = null;
+        }
 
         private void AoCarregarFormulario(object sender, EventArgs e)
         {
@@ -41,6 +45,8 @@ namespace Cod3rsGrowth.Forms
             {
                 ListarObras();
                 ListarCompras();
+                InicializarValoresComboBox();
+                LimparComboBox();
             }
             catch (Exception ex)
             {
