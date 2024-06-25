@@ -150,8 +150,9 @@ namespace Cod3rsGrowth.Forms
 
         private void AoClicarNoBotaoAdicionar(object sender, EventArgs e)
         {
-            var formCriarObra = new FormCriarObra();
+            var formCriarObra = new FormCriarObra(_servicoObra);
             formCriarObra.ShowDialog();
+            ListarObras();
         }
     }
 }

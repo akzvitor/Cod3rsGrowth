@@ -45,6 +45,8 @@
             textBoxValor = new TextBox();
             buttonSalvar = new Button();
             buttonCancelar = new Button();
+            labelFormato = new Label();
+            comboBoxFormato = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapitulos).BeginInit();
             SuspendLayout();
             // 
@@ -72,7 +74,7 @@
             // 
             labelSinopse.AutoSize = true;
             labelSinopse.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelSinopse.Location = new Point(8, 222);
+            labelSinopse.Location = new Point(5, 277);
             labelSinopse.Name = "labelSinopse";
             labelSinopse.Size = new Size(56, 19);
             labelSinopse.TabIndex = 2;
@@ -92,7 +94,7 @@
             // 
             labelValor.AutoSize = true;
             labelValor.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelValor.Location = new Point(209, 68);
+            labelValor.Location = new Point(9, 138);
             labelValor.Name = "labelValor";
             labelValor.Size = new Size(40, 19);
             labelValor.TabIndex = 4;
@@ -102,7 +104,7 @@
             // 
             labelInicioPublicacao.AutoSize = true;
             labelInicioPublicacao.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelInicioPublicacao.Location = new Point(9, 138);
+            labelInicioPublicacao.Location = new Point(8, 212);
             labelInicioPublicacao.Name = "labelInicioPublicacao";
             labelInicioPublicacao.Size = new Size(128, 19);
             labelInicioPublicacao.TabIndex = 5;
@@ -140,9 +142,9 @@
             // 
             dateTimePickerInicioPublicacao.CalendarMonthBackground = SystemColors.Control;
             dateTimePickerInicioPublicacao.Format = DateTimePickerFormat.Short;
-            dateTimePickerInicioPublicacao.Location = new Point(12, 160);
+            dateTimePickerInicioPublicacao.Location = new Point(11, 234);
             dateTimePickerInicioPublicacao.Name = "dateTimePickerInicioPublicacao";
-            dateTimePickerInicioPublicacao.Size = new Size(150, 23);
+            dateTimePickerInicioPublicacao.Size = new Size(151, 23);
             dateTimePickerInicioPublicacao.TabIndex = 9;
             // 
             // radioButtonFinalizada
@@ -171,9 +173,9 @@
             // 
             richTextBoxSinopse.BackColor = SystemColors.Control;
             richTextBoxSinopse.BorderStyle = BorderStyle.FixedSingle;
-            richTextBoxSinopse.Location = new Point(12, 244);
+            richTextBoxSinopse.Location = new Point(9, 299);
             richTextBoxSinopse.Name = "richTextBoxSinopse";
-            richTextBoxSinopse.Size = new Size(311, 79);
+            richTextBoxSinopse.Size = new Size(314, 110);
             richTextBoxSinopse.TabIndex = 12;
             richTextBoxSinopse.Text = "";
             // 
@@ -189,9 +191,9 @@
             // 
             textBoxValor.BackColor = SystemColors.Control;
             textBoxValor.BorderStyle = BorderStyle.FixedSingle;
-            textBoxValor.Location = new Point(212, 90);
+            textBoxValor.Location = new Point(12, 160);
             textBoxValor.Name = "textBoxValor";
-            textBoxValor.Size = new Size(111, 23);
+            textBoxValor.Size = new Size(150, 23);
             textBoxValor.TabIndex = 14;
             textBoxValor.Text = "0,00";
             textBoxValor.TextAlign = HorizontalAlignment.Right;
@@ -201,29 +203,52 @@
             // buttonSalvar
             // 
             buttonSalvar.BackColor = SystemColors.ButtonHighlight;
-            buttonSalvar.Location = new Point(228, 356);
+            buttonSalvar.Location = new Point(228, 434);
             buttonSalvar.Name = "buttonSalvar";
             buttonSalvar.Size = new Size(95, 28);
             buttonSalvar.TabIndex = 15;
             buttonSalvar.Text = "Salvar";
             buttonSalvar.UseVisualStyleBackColor = false;
+            buttonSalvar.Click += AoClicarNoBotaoSalvar;
             // 
             // buttonCancelar
             // 
             buttonCancelar.BackColor = SystemColors.ButtonHighlight;
-            buttonCancelar.Location = new Point(12, 356);
+            buttonCancelar.Location = new Point(9, 434);
             buttonCancelar.Name = "buttonCancelar";
             buttonCancelar.Size = new Size(88, 28);
             buttonCancelar.TabIndex = 16;
             buttonCancelar.Text = "Cancelar";
             buttonCancelar.UseVisualStyleBackColor = false;
             // 
+            // labelFormato
+            // 
+            labelFormato.AutoSize = true;
+            labelFormato.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelFormato.Location = new Point(209, 68);
+            labelFormato.Name = "labelFormato";
+            labelFormato.Size = new Size(61, 19);
+            labelFormato.TabIndex = 17;
+            labelFormato.Text = "Formato";
+            // 
+            // comboBoxFormato
+            // 
+            comboBoxFormato.BackColor = SystemColors.Control;
+            comboBoxFormato.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxFormato.FormattingEnabled = true;
+            comboBoxFormato.Location = new Point(213, 90);
+            comboBoxFormato.Name = "comboBoxFormato";
+            comboBoxFormato.Size = new Size(110, 23);
+            comboBoxFormato.TabIndex = 18;
+            // 
             // FormCriarObra
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(342, 395);
+            ClientSize = new Size(337, 476);
+            Controls.Add(comboBoxFormato);
+            Controls.Add(labelFormato);
             Controls.Add(buttonCancelar);
             Controls.Add(buttonSalvar);
             Controls.Add(textBoxValor);
@@ -243,7 +268,7 @@
             Controls.Add(labelTitulo);
             Name = "FormCriarObra";
             Text = "Cadastrar Obra";
-            Load += FormCriarObra_Load;
+            Load += AoInicializarFormulario;
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapitulos).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -268,5 +293,7 @@
         private TextBox textBoxValor;
         private Button buttonSalvar;
         private Button buttonCancelar;
+        private Label labelFormato;
+        private ComboBox comboBoxFormato;
     }
 }

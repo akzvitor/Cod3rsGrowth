@@ -1,6 +1,7 @@
-﻿using FluentValidation;
-using Cod3rsGrowth.Dominio.Entidades;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
+using FluentValidation;
+using LinqToDB;
 
 namespace Cod3rsGrowth.Servico.Validadores
 {
@@ -50,11 +51,12 @@ namespace Cod3rsGrowth.Servico.Validadores
             RuleSet("Editar", () =>
             {
                 RuleFor(cliente => cliente)
-                .Must(EhDataIgual).WithMessage("A data de uma compra concluída não pode ser alterada.");
+                .Must(cliente => EhDataIgual(cliente.Id, cliente.DataCompra))
+                .WithMessage("A data de uma compra concluída não pode ser alterada.");
             });
         }
 
-        public static bool EhCpfValido(string cpf)
+        private static bool EhCpfValido(string cpf)
         {
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -65,15 +67,8 @@ namespace Cod3rsGrowth.Servico.Validadores
 
             cpf = new string(cpf.Where(char.IsDigit).ToArray());
 
-            if (cpf.Length != 11)
-            {
+            if (cpf.Length != 11 || cpf.Distinct().Count() == 1)
                 return false;
-            }
-
-            if (cpf.Distinct().Count() == 1)
-            { 
-                return false; 
-            }
 
             cpf = cpf.Trim();
             cpf = cpf.Replace(".", "").Replace("-", "");
@@ -127,11 +122,11 @@ namespace Cod3rsGrowth.Servico.Validadores
             return cpf.EndsWith(digito);
         }
 
-        public bool EhDataIgual(CompraCliente compraCliente)
+        private bool EhDataIgual(int idCompra, DateTime dataCompraCliente)
         {
-            var compraDoBanco = _repositorioCompraCliente.ObterPorId(compraCliente.Id);
-
-            return compraCliente.DataCompra == compraDoBanco.DataCompra;
+            return _repositorioCompraCliente
+                .ObterPorId(idCompra)
+                .DataCompra == dataCompraCliente;
         }
     }
 }

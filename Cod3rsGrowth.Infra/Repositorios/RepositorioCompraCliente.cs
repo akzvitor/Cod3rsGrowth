@@ -17,9 +17,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
         {
             var query = Filtrar(_db.ComprasCliente, filtro);
-            var comprasFiltradas = query.ToList();
-
-            return comprasFiltradas;
+            return query.ToList();
         }
 
         public CompraCliente ObterPorId(int id)
@@ -44,16 +42,18 @@ namespace Cod3rsGrowth.Infra.Repositorios
             
             try
             {
-                _db.ComprasCliente
-                .Where(c => c.Id == compra.Id)
-                .Set(c => c.Cpf, compra.Cpf)
-                .Set(c => c.Nome, compra.Nome)
-                .Set(c => c.Telefone, compra.Telefone)
-                .Set(c => c.Email, compra.Email)
-                .Set(c => c.Produtos, compra.Produtos)
-                .Set(c => c.ValorCompra, compra.ValorCompra)
-                .Set(c => c.DataCompra, compra.DataCompra)
-                .Update();
+                _db.Update(compra);
+             
+                //_db.ComprasCliente
+                //.Where(c => c.Id == compra.Id)
+                //.Set(c => c.Cpf, compra.Cpf)
+                //.Set(c => c.Nome, compra.Nome)
+                //.Set(c => c.Telefone, compra.Telefone)
+                //.Set(c => c.Email, compra.Email)
+                //.Set(c => c.Produtos, compra.Produtos)
+                //.Set(c => c.ValorCompra, compra.ValorCompra)
+                //.Set(c => c.DataCompra, compra.DataCompra)
+                //.Update();
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (filtro.DataCompra.HasValue && filtro.DataCompra != DateTime.MinValue)
             {
-                compras = compras.Where(c => c.DataCompra == filtro.DataCompra.Value);
+                compras = compras.Where(c => c.DataCompra.DayOfYear == filtro.DataCompra.Value.DayOfYear);
             }
 
             return compras;

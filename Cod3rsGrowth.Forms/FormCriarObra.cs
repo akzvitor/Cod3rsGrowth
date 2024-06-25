@@ -1,42 +1,59 @@
-﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Servico.ExtensaoDasStrings;
+using Cod3rsGrowth.Servico.Servicos;
+using FluentValidation;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Cod3rsGrowth.Forms
 {
     public partial class FormCriarObra : Form
     {
-        public FormCriarObra()
+        private readonly ServicoObra _servicoObra;
+
+        public FormCriarObra(ServicoObra servicoObra)
         {
+            _servicoObra = servicoObra;
             InitializeComponent();
         }
 
-        private void FormCriarObra_Load(object sender, EventArgs e)
+        private void InicializarValoresComboBox()
         {
+            comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
+        }
 
+        private void LimparComboBox()
+        {
+            comboBoxFormato.SelectedItem = null;
+        }
+
+        private void AoInicializarFormulario(object sender, EventArgs e)
+        {
+            try
+            {
+                InicializarValoresComboBox();
+                LimparComboBox();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AoAlterarTextoDoCampoValor(object sender, EventArgs e)
         {
             try
             {
-                TextBox textBox = sender as TextBox;
-
-                if (textBox.Text == string.Empty || textBox.Text == "")
+                TextBox textBox = sender as TextBox
+                    ?? throw new Exception("Texbox não foi encontrado");
+                
+                if (!textBox.Text.ContemValor())
                     throw new ValidationException("Campo valor da obra está vazio.");
 
                 int selectionStart = textBox.SelectionStart;
                 int length = textBox.Text.Length;
 
-                string text = textBox.Text.Replace(".", "").Replace(",", "").Replace("R", "").Replace("$","");
+                string text = textBox.Text.Replace(".", "").Replace(",", "").Replace("R", "").Replace("$", "");
 
                 if (!int.TryParse(text, out int value))
                 {
@@ -52,10 +69,11 @@ namespace Cod3rsGrowth.Forms
                 textBox.Text = formattedText;
 
                 selectionStart = selectionStart + (textBox.Text.Length - length);
-                if (selectionStart > textBox.Text.Length)
-                    selectionStart = textBox.Text.Length;
-                else if (selectionStart < 0)
-                    selectionStart = 0;
+
+                const int valorPadraoTextBox = 0;
+                selectionStart = selectionStart > textBox.Text.Length
+                    ? textBox.Text.Length
+                    : valorPadraoTextBox;
 
                 textBox.SelectionStart = selectionStart;
                 textBox.TextChanged += AoAlterarTextoDoCampoValor;
@@ -84,6 +102,24 @@ namespace Cod3rsGrowth.Forms
             {
                 MessageBox.Show($"{ex.Message}");
             }
+        }
+
+        private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
+        {
+            Obra novaObra = new()
+            {
+                Autor = textBoxAutor.Text,
+                Titulo = textBoxTitulo.Text,
+                ValorObra = decimal.Parse(textBoxValor.Text),
+                Sinopse = richTextBoxSinopse.Text,
+                NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value),
+                Formato = (Formato)comboBoxFormato.SelectedItem,
+                InicioPublicacao = dateTimePickerInicioPublicacao.Value,
+                FoiFinalizada = radioButtonFinalizada.Checked
+            };
+
+            _servicoObra.Criar(novaObra);
+            Close();
         }
     }
 }
