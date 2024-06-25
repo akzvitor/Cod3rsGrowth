@@ -29,8 +29,10 @@ namespace Cod3rsGrowth.Dominio.Entidades
 
         [Column("InicioPublicacao"), NotNull]
         public DateTime InicioPublicacao { get; set; }
-        public List<Genero> Generos { get; set; }
+
+        [Column("Sinopse"), NotNull]
         public string Sinopse { get; set; }
+        public List<Genero> Generos { get; set; }
         public string CapaImagemBase64 { get; set; }
     }
 }

@@ -94,7 +94,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (!string.IsNullOrEmpty(filtro.Cpf))
             {
-                compras = compras.Where(c => c.Cpf.Contains(filtro.Cpf));
+                compras = compras.Where(c => c.Cpf.Trim().Replace(".", "").Replace("-", "").Contains(filtro.Cpf.Trim().Replace(".", "").Replace("-", "")));
             }
 
             if (filtro.DataCompra.HasValue && filtro.DataCompra != DateTime.MinValue)

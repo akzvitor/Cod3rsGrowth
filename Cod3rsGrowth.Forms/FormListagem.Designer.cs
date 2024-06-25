@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
             obraBindingSource = new BindingSource(components);
             dataGridObras = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Sinopse = new DataGridViewTextBoxColumn();
             tituloDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             autorDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             numeroCapitulosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -80,8 +81,8 @@
             compraClienteBindingSource = new BindingSource(components);
             panel2BottomCompras = new Panel();
             panelFiltroCompras = new Panel();
+            maskedTextBoxCpf = new MaskedTextBox();
             dateTimePickerDataCompra = new DateTimePicker();
-            textBoxCpf = new TextBox();
             labelCpf = new Label();
             labelDataCompra = new Label();
             textBoxNomeCliente = new TextBox();
@@ -89,11 +90,13 @@
             buttonFiltrarCompras = new Button();
             labelNomeCliente = new Label();
             obraBindingSource1 = new BindingSource(components);
+            buttonAdicionar = new Button();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).BeginInit();
             tabControl1.SuspendLayout();
             tabPageObras.SuspendLayout();
             groupBox1.SuspendLayout();
+            panelBottomObras.SuspendLayout();
             panelFiltroObras.SuspendLayout();
             tabPageCompras.SuspendLayout();
             groupBoxCompras.SuspendLayout();
@@ -116,16 +119,16 @@
             dataGridObras.AutoGenerateColumns = false;
             dataGridObras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridObras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = SystemColors.Control;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            dataGridObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             dataGridObras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridObras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
+            dataGridObras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, Sinopse, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
             dataGridObras.DataSource = obraBindingSource;
             dataGridObras.Dock = DockStyle.Fill;
             dataGridObras.Location = new Point(3, 19);
@@ -138,19 +141,27 @@
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
             idDataGridViewTextBoxColumn.FillWeight = 6.272095F;
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // Sinopse
+            // 
+            Sinopse.DataPropertyName = "Sinopse";
+            Sinopse.HeaderText = "Sinopse";
+            Sinopse.Name = "Sinopse";
+            Sinopse.ReadOnly = true;
+            Sinopse.Visible = false;
+            // 
             // tituloDataGridViewTextBoxColumn
             // 
             tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
             tituloDataGridViewTextBoxColumn.FillWeight = 30.26575F;
             tituloDataGridViewTextBoxColumn.HeaderText = "Título";
             tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
@@ -159,8 +170,8 @@
             // autorDataGridViewTextBoxColumn
             // 
             autorDataGridViewTextBoxColumn.DataPropertyName = "Autor";
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
             autorDataGridViewTextBoxColumn.FillWeight = 30.3542786F;
             autorDataGridViewTextBoxColumn.HeaderText = "Autor";
             autorDataGridViewTextBoxColumn.Name = "autorDataGridViewTextBoxColumn";
@@ -177,8 +188,8 @@
             // valorObraDataGridViewTextBoxColumn
             // 
             valorObraDataGridViewTextBoxColumn.DataPropertyName = "ValorObra";
-            dataGridViewCellStyle5.Padding = new Padding(10, 0, 0, 0);
-            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.Padding = new Padding(10, 0, 0, 0);
+            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
             valorObraDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
             valorObraDataGridViewTextBoxColumn.HeaderText = "Valor";
             valorObraDataGridViewTextBoxColumn.Name = "valorObraDataGridViewTextBoxColumn";
@@ -204,8 +215,8 @@
             // inicioPublicacaoDataGridViewTextBoxColumn
             // 
             inicioPublicacaoDataGridViewTextBoxColumn.DataPropertyName = "InicioPublicacao";
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle16;
             inicioPublicacaoDataGridViewTextBoxColumn.FillWeight = 20.3542786F;
             inicioPublicacaoDataGridViewTextBoxColumn.HeaderText = "Início da Publicação";
             inicioPublicacaoDataGridViewTextBoxColumn.Name = "inicioPublicacaoDataGridViewTextBoxColumn";
@@ -247,6 +258,7 @@
             // 
             // panelBottomObras
             // 
+            panelBottomObras.Controls.Add(buttonAdicionar);
             panelBottomObras.Dock = DockStyle.Bottom;
             panelBottomObras.Location = new Point(3, 389);
             panelBottomObras.Name = "panelBottomObras";
@@ -277,12 +289,13 @@
             // buttonLimparObras
             // 
             buttonLimparObras.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonLimparObras.BackColor = Color.Transparent;
             buttonLimparObras.Location = new Point(937, 37);
             buttonLimparObras.Name = "buttonLimparObras";
             buttonLimparObras.Size = new Size(75, 23);
             buttonLimparObras.TabIndex = 12;
             buttonLimparObras.Text = "Limpar";
-            buttonLimparObras.UseVisualStyleBackColor = true;
+            buttonLimparObras.UseVisualStyleBackColor = false;
             buttonLimparObras.Click += AoClicarNoBotaoLimparDaAbaObras;
             // 
             // textBoxAnoObra
@@ -299,12 +312,13 @@
             // buttonFiltroObra
             // 
             buttonFiltroObra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonFiltroObra.BackColor = Color.Transparent;
             buttonFiltroObra.Location = new Point(856, 37);
             buttonFiltroObra.Name = "buttonFiltroObra";
             buttonFiltroObra.Size = new Size(75, 23);
             buttonFiltroObra.TabIndex = 11;
             buttonFiltroObra.Text = "Filtrar";
-            buttonFiltroObra.UseVisualStyleBackColor = true;
+            buttonFiltroObra.UseVisualStyleBackColor = false;
             buttonFiltroObra.Click += AoClicarNoBotaoFiltrarDaAbaObras;
             // 
             // labelAnoObra
@@ -363,6 +377,7 @@
             // 
             // comboBoxFormatoObra
             // 
+            comboBoxFormatoObra.BackColor = SystemColors.Window;
             comboBoxFormatoObra.FormattingEnabled = true;
             comboBoxFormatoObra.Location = new Point(322, 37);
             comboBoxFormatoObra.Name = "comboBoxFormatoObra";
@@ -441,14 +456,14 @@
             dataGridCompras.AutoGenerateColumns = false;
             dataGridCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridCompras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = SystemColors.Control;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dataGridCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = SystemColors.Control;
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            dataGridCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             dataGridCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridCompras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, cpfDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, valorCompraDataGridViewTextBoxColumn, dataCompraDataGridViewTextBoxColumn });
             dataGridCompras.DataSource = compraClienteBindingSource;
@@ -463,8 +478,8 @@
             // idDataGridViewTextBoxColumn1
             // 
             idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            idDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            idDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle18;
             idDataGridViewTextBoxColumn1.FillWeight = 20F;
             idDataGridViewTextBoxColumn1.HeaderText = "Id";
             idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
@@ -488,8 +503,8 @@
             // telefoneDataGridViewTextBoxColumn
             // 
             telefoneDataGridViewTextBoxColumn.DataPropertyName = "Telefone";
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            telefoneDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            telefoneDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle19;
             telefoneDataGridViewTextBoxColumn.FillWeight = 60F;
             telefoneDataGridViewTextBoxColumn.HeaderText = "Telefone";
             telefoneDataGridViewTextBoxColumn.Name = "telefoneDataGridViewTextBoxColumn";
@@ -513,8 +528,8 @@
             // dataCompraDataGridViewTextBoxColumn
             // 
             dataCompraDataGridViewTextBoxColumn.DataPropertyName = "DataCompra";
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle20;
             dataCompraDataGridViewTextBoxColumn.HeaderText = "Data da compra";
             dataCompraDataGridViewTextBoxColumn.Name = "dataCompraDataGridViewTextBoxColumn";
             dataCompraDataGridViewTextBoxColumn.ReadOnly = true;
@@ -534,8 +549,8 @@
             // panelFiltroCompras
             // 
             panelFiltroCompras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelFiltroCompras.Controls.Add(maskedTextBoxCpf);
             panelFiltroCompras.Controls.Add(dateTimePickerDataCompra);
-            panelFiltroCompras.Controls.Add(textBoxCpf);
             panelFiltroCompras.Controls.Add(labelCpf);
             panelFiltroCompras.Controls.Add(labelDataCompra);
             panelFiltroCompras.Controls.Add(textBoxNomeCliente);
@@ -547,6 +562,15 @@
             panelFiltroCompras.Size = new Size(1027, 94);
             panelFiltroCompras.TabIndex = 0;
             // 
+            // maskedTextBoxCpf
+            // 
+            maskedTextBoxCpf.Culture = new System.Globalization.CultureInfo("");
+            maskedTextBoxCpf.Location = new Point(150, 36);
+            maskedTextBoxCpf.Mask = "000.000.000-00";
+            maskedTextBoxCpf.Name = "maskedTextBoxCpf";
+            maskedTextBoxCpf.Size = new Size(100, 23);
+            maskedTextBoxCpf.TabIndex = 31;
+            // 
             // dateTimePickerDataCompra
             // 
             dateTimePickerDataCompra.Format = DateTimePickerFormat.Short;
@@ -555,14 +579,6 @@
             dateTimePickerDataCompra.Size = new Size(120, 23);
             dateTimePickerDataCompra.TabIndex = 30;
             dateTimePickerDataCompra.Value = new DateTime(2002, 7, 22, 0, 0, 0, 0);
-            // 
-            // textBoxCpf
-            // 
-            textBoxCpf.Location = new Point(150, 36);
-            textBoxCpf.Name = "textBoxCpf";
-            textBoxCpf.PlaceholderText = "Pesquisar";
-            textBoxCpf.Size = new Size(100, 23);
-            textBoxCpf.TabIndex = 29;
             // 
             // labelCpf
             // 
@@ -630,13 +646,23 @@
             // 
             obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
             // 
-            // MainForm
+            // buttonAdicionar
+            // 
+            buttonAdicionar.Location = new Point(916, 5);
+            buttonAdicionar.Name = "buttonAdicionar";
+            buttonAdicionar.Size = new Size(75, 23);
+            buttonAdicionar.TabIndex = 0;
+            buttonAdicionar.Text = "Adicionar";
+            buttonAdicionar.UseVisualStyleBackColor = true;
+            buttonAdicionar.Click += AoClicarNoBotaoAdicionar;
+            // 
+            // FormListagem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1013, 453);
             Controls.Add(tabControl1);
-            Name = "MainForm";
+            Name = "FormListagem";
             Text = "Coders Growth";
             Load += AoCarregarFormulario;
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).EndInit();
@@ -644,6 +670,7 @@
             tabControl1.ResumeLayout(false);
             tabPageObras.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
+            panelBottomObras.ResumeLayout(false);
             panelFiltroObras.ResumeLayout(false);
             panelFiltroObras.PerformLayout();
             tabPageCompras.ResumeLayout(false);
@@ -659,14 +686,6 @@
         #endregion
         private BindingSource obraBindingSource;
         private DataGridView dataGridObras;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn tituloDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn autorDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn numeroCapitulosDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn valorObraDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn formatoDataGridViewTextBoxColumn;
-        private DataGridViewCheckBoxColumn foiFinalizadaDataGridViewCheckBoxColumn;
-        private DataGridViewTextBoxColumn inicioPublicacaoDataGridViewTextBoxColumn;
         private TabControl tabControl1;
         private TabPage tabPageObras;
         private TabPage tabPageCompras;
@@ -703,7 +722,6 @@
         private Label labelCpf;
         private Label labelDataCompra;
         private TextBox textBoxNomeCliente;
-        private TextBox textBoxCpf;
         private BindingSource obraBindingSource1;
         private GroupBox groupBox1;
         private DataGridView dataGridCompras;
@@ -716,5 +734,16 @@
         private DataGridViewTextBoxColumn dataCompraDataGridViewTextBoxColumn;
         private GroupBox groupBoxCompras;
         private DateTimePicker dateTimePickerDataCompra;
+        private MaskedTextBox maskedTextBoxCpf;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn Sinopse;
+        private DataGridViewTextBoxColumn tituloDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn autorDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn numeroCapitulosDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn valorObraDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn formatoDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn foiFinalizadaDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn inicioPublicacaoDataGridViewTextBoxColumn;
+        private Button buttonAdicionar;
     }
 }
