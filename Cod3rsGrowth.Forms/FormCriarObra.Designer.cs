@@ -54,7 +54,7 @@
             // 
             labelTitulo.AutoSize = true;
             labelTitulo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelTitulo.Location = new Point(9, 10);
+            labelTitulo.Location = new Point(5, 10);
             labelTitulo.Name = "labelTitulo";
             labelTitulo.Size = new Size(43, 19);
             labelTitulo.TabIndex = 0;
@@ -94,7 +94,7 @@
             // 
             labelValor.AutoSize = true;
             labelValor.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelValor.Location = new Point(9, 138);
+            labelValor.Location = new Point(8, 138);
             labelValor.Name = "labelValor";
             labelValor.Size = new Size(40, 19);
             labelValor.TabIndex = 4;
@@ -220,6 +220,7 @@
             buttonCancelar.TabIndex = 16;
             buttonCancelar.Text = "Cancelar";
             buttonCancelar.UseVisualStyleBackColor = false;
+            buttonCancelar.Click += AoClicarNoBotaoCancelar;
             // 
             // labelFormato
             // 

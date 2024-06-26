@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
             obraBindingSource = new BindingSource(components);
             dataGridObras = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -54,7 +54,7 @@
             tabPageObras = new TabPage();
             groupBox1 = new GroupBox();
             panelBottomObras = new Panel();
-            buttonAdicionar = new Button();
+            buttonAdicionarObra = new Button();
             panelFiltroObras = new Panel();
             buttonLimparObras = new Button();
             textBoxAnoObra = new TextBox();
@@ -91,6 +91,7 @@
             buttonFiltrarCompras = new Button();
             labelNomeCliente = new Label();
             obraBindingSource1 = new BindingSource(components);
+            buttonAdicionarCompra = new Button();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).BeginInit();
             tabControl1.SuspendLayout();
@@ -102,6 +103,7 @@
             groupBoxCompras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridCompras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)compraClienteBindingSource).BeginInit();
+            panel2BottomCompras.SuspendLayout();
             panelFiltroCompras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource1).BeginInit();
             SuspendLayout();
@@ -119,14 +121,14 @@
             dataGridObras.AutoGenerateColumns = false;
             dataGridObras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridObras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = SystemColors.Control;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            dataGridObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             dataGridObras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridObras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, Sinopse, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
             dataGridObras.DataSource = obraBindingSource;
@@ -135,15 +137,15 @@
             dataGridObras.Name = "dataGridObras";
             dataGridObras.ReadOnly = true;
             dataGridObras.RowTemplate.Height = 25;
-            dataGridObras.Size = new Size(983, 255);
+            dataGridObras.Size = new Size(983, 241);
             dataGridObras.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
             idDataGridViewTextBoxColumn.FillWeight = 6.272095F;
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
@@ -160,8 +162,8 @@
             // tituloDataGridViewTextBoxColumn
             // 
             tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
             tituloDataGridViewTextBoxColumn.FillWeight = 30.26575F;
             tituloDataGridViewTextBoxColumn.HeaderText = "Título";
             tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
@@ -170,8 +172,8 @@
             // autorDataGridViewTextBoxColumn
             // 
             autorDataGridViewTextBoxColumn.DataPropertyName = "Autor";
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
             autorDataGridViewTextBoxColumn.FillWeight = 30.3542786F;
             autorDataGridViewTextBoxColumn.HeaderText = "Autor";
             autorDataGridViewTextBoxColumn.Name = "autorDataGridViewTextBoxColumn";
@@ -188,8 +190,8 @@
             // valorObraDataGridViewTextBoxColumn
             // 
             valorObraDataGridViewTextBoxColumn.DataPropertyName = "ValorObra";
-            dataGridViewCellStyle5.Padding = new Padding(10, 0, 0, 0);
-            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.Padding = new Padding(10, 0, 0, 0);
+            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
             valorObraDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
             valorObraDataGridViewTextBoxColumn.HeaderText = "Valor";
             valorObraDataGridViewTextBoxColumn.Name = "valorObraDataGridViewTextBoxColumn";
@@ -215,8 +217,8 @@
             // inicioPublicacaoDataGridViewTextBoxColumn
             // 
             inicioPublicacaoDataGridViewTextBoxColumn.DataPropertyName = "InicioPublicacao";
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle16;
             inicioPublicacaoDataGridViewTextBoxColumn.FillWeight = 20.3542786F;
             inicioPublicacaoDataGridViewTextBoxColumn.HeaderText = "Início da Publicação";
             inicioPublicacaoDataGridViewTextBoxColumn.Name = "inicioPublicacaoDataGridViewTextBoxColumn";
@@ -252,28 +254,31 @@
             groupBox1.Controls.Add(dataGridObras);
             groupBox1.Location = new Point(8, 106);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(989, 277);
+            groupBox1.Size = new Size(989, 263);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             // 
             // panelBottomObras
             // 
-            panelBottomObras.Controls.Add(buttonAdicionar);
-            panelBottomObras.Dock = DockStyle.Bottom;
-            panelBottomObras.Location = new Point(3, 389);
+            panelBottomObras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelBottomObras.Controls.Add(buttonAdicionarObra);
+            panelBottomObras.Location = new Point(3, 372);
             panelBottomObras.Name = "panelBottomObras";
-            panelBottomObras.Size = new Size(1002, 36);
+            panelBottomObras.Size = new Size(1002, 53);
             panelBottomObras.TabIndex = 0;
             // 
-            // buttonAdicionar
+            // buttonAdicionarObra
             // 
-            buttonAdicionar.Location = new Point(916, 5);
-            buttonAdicionar.Name = "buttonAdicionar";
-            buttonAdicionar.Size = new Size(75, 23);
-            buttonAdicionar.TabIndex = 0;
-            buttonAdicionar.Text = "Adicionar";
-            buttonAdicionar.UseVisualStyleBackColor = true;
-            buttonAdicionar.Click += AoClicarNoBotaoAdicionar;
+            buttonAdicionarObra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonAdicionarObra.BackColor = Color.LightGray;
+            buttonAdicionarObra.FlatStyle = FlatStyle.Flat;
+            buttonAdicionarObra.Location = new Point(916, 11);
+            buttonAdicionarObra.Name = "buttonAdicionarObra";
+            buttonAdicionarObra.Size = new Size(75, 34);
+            buttonAdicionarObra.TabIndex = 0;
+            buttonAdicionarObra.Text = "Adicionar";
+            buttonAdicionarObra.UseVisualStyleBackColor = false;
+            buttonAdicionarObra.Click += AoClicarNoBotaoAdicionar;
             // 
             // panelFiltroObras
             // 
@@ -454,7 +459,7 @@
             groupBoxCompras.Controls.Add(dataGridCompras);
             groupBoxCompras.Location = new Point(8, 106);
             groupBoxCompras.Name = "groupBoxCompras";
-            groupBoxCompras.Size = new Size(989, 276);
+            groupBoxCompras.Size = new Size(989, 264);
             groupBoxCompras.TabIndex = 4;
             groupBoxCompras.TabStop = false;
             // 
@@ -467,14 +472,14 @@
             dataGridCompras.AutoGenerateColumns = false;
             dataGridCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridCompras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = SystemColors.Control;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dataGridCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = SystemColors.Control;
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            dataGridCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             dataGridCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridCompras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, cpfDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, valorCompraDataGridViewTextBoxColumn, dataCompraDataGridViewTextBoxColumn });
             dataGridCompras.DataSource = compraClienteBindingSource;
@@ -483,14 +488,14 @@
             dataGridCompras.Name = "dataGridCompras";
             dataGridCompras.ReadOnly = true;
             dataGridCompras.RowTemplate.Height = 25;
-            dataGridCompras.Size = new Size(983, 254);
+            dataGridCompras.Size = new Size(983, 242);
             dataGridCompras.TabIndex = 3;
             // 
             // idDataGridViewTextBoxColumn1
             // 
             idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            idDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            idDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle18;
             idDataGridViewTextBoxColumn1.FillWeight = 20F;
             idDataGridViewTextBoxColumn1.HeaderText = "Id";
             idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
@@ -514,8 +519,8 @@
             // telefoneDataGridViewTextBoxColumn
             // 
             telefoneDataGridViewTextBoxColumn.DataPropertyName = "Telefone";
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            telefoneDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            telefoneDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle19;
             telefoneDataGridViewTextBoxColumn.FillWeight = 60F;
             telefoneDataGridViewTextBoxColumn.HeaderText = "Telefone";
             telefoneDataGridViewTextBoxColumn.Name = "telefoneDataGridViewTextBoxColumn";
@@ -539,8 +544,8 @@
             // dataCompraDataGridViewTextBoxColumn
             // 
             dataCompraDataGridViewTextBoxColumn.DataPropertyName = "DataCompra";
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle20;
             dataCompraDataGridViewTextBoxColumn.HeaderText = "Data da compra";
             dataCompraDataGridViewTextBoxColumn.Name = "dataCompraDataGridViewTextBoxColumn";
             dataCompraDataGridViewTextBoxColumn.ReadOnly = true;
@@ -551,10 +556,11 @@
             // 
             // panel2BottomCompras
             // 
+            panel2BottomCompras.Controls.Add(buttonAdicionarCompra);
             panel2BottomCompras.Dock = DockStyle.Bottom;
-            panel2BottomCompras.Location = new Point(3, 388);
+            panel2BottomCompras.Location = new Point(3, 376);
             panel2BottomCompras.Name = "panel2BottomCompras";
-            panel2BottomCompras.Size = new Size(1002, 37);
+            panel2BottomCompras.Size = new Size(1002, 49);
             panel2BottomCompras.TabIndex = 1;
             // 
             // panelFiltroCompras
@@ -657,6 +663,15 @@
             // 
             obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
             // 
+            // buttonAdicionarCompra
+            // 
+            buttonAdicionarCompra.Location = new Point(919, 18);
+            buttonAdicionarCompra.Name = "buttonAdicionarCompra";
+            buttonAdicionarCompra.Size = new Size(75, 23);
+            buttonAdicionarCompra.TabIndex = 0;
+            buttonAdicionarCompra.Text = "button1";
+            buttonAdicionarCompra.UseVisualStyleBackColor = true;
+            // 
             // FormListagem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -678,6 +693,7 @@
             groupBoxCompras.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridCompras).EndInit();
             ((System.ComponentModel.ISupportInitialize)compraClienteBindingSource).EndInit();
+            panel2BottomCompras.ResumeLayout(false);
             panelFiltroCompras.ResumeLayout(false);
             panelFiltroCompras.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource1).EndInit();
@@ -745,6 +761,7 @@
         private DataGridViewTextBoxColumn formatoDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn foiFinalizadaDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn inicioPublicacaoDataGridViewTextBoxColumn;
-        private Button buttonAdicionar;
+        private Button buttonAdicionarObra;
+        private Button buttonAdicionarCompra;
     }
 }

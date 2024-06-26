@@ -1,71 +1,19 @@
-﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Servico.ExtensaoDasStrings;
-using Cod3rsGrowth.Servico.Servicos;
+﻿using Cod3rsGrowth.Servico.ExtensaoDasStrings;
 using FluentValidation;
 using System.Globalization;
 
 namespace Cod3rsGrowth.Forms
 {
-    public partial class FormCriarObra : Form
+    public partial class FormCriarCompra : Form
     {
-        private readonly ServicoObra _servicoObra;
-
-        public FormCriarObra(ServicoObra servicoObra)
+        public FormCriarCompra()
         {
-            _servicoObra = servicoObra;
             InitializeComponent();
-        }
-
-        private void InicializarValoresComboBox()
-        {
-            comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
-        }
-
-        private void LimparComboBox()
-        {
-            comboBoxFormato.SelectedItem = null;
         }
 
         private void AoInicializarFormulario(object sender, EventArgs e)
         {
-            try
-            {
-                InicializarValoresComboBox();
-                LimparComboBox();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
-        private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
-        {
-            Obra novaObra = new()
-            {
-                Autor = textBoxAutor.Text,
-                Titulo = textBoxTitulo.Text,
-                ValorObra = decimal.Parse(textBoxValor.Text),
-                Sinopse = richTextBoxSinopse.Text,
-                NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value),
-                Formato = (Formato)comboBoxFormato.SelectedItem,
-                InicioPublicacao = dateTimePickerInicioPublicacao.Value,
-                FoiFinalizada = radioButtonFinalizada.Checked
-            };
-
-            DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
-                                                        "Salvar Obra", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                _servicoObra.Criar(novaObra);
-                Close();
-            }
-        }
-
-        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void AoAlterarTextoDoCampoValor(object sender, EventArgs e)
@@ -76,7 +24,7 @@ namespace Cod3rsGrowth.Forms
                     ?? throw new Exception("Texbox não foi encontrado");
 
                 if (textBox.Text.NaoContemValor())
-                    throw new ValidationException("Campo valor da obra está vazio.");
+                    throw new ValidationException("Campo valor da compra está vazio.");
 
                 int selectionStart = textBox.SelectionStart;
                 int length = textBox.Text.Length;

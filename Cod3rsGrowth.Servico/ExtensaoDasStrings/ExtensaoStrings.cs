@@ -2,9 +2,9 @@
 {
     public static class ExtensaoStrings
     {
-        public static bool ContemValor(this string? valor)
+        public static bool NaoContemValor(this string? valor)
         {
-            return string.IsNullOrWhiteSpace(valor);
+            return string.IsNullOrEmpty(valor);
         }
     }
 }
