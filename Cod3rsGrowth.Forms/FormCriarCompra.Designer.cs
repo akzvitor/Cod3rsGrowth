@@ -32,11 +32,9 @@
             labelNome = new Label();
             labelTelefone = new Label();
             labelEmail = new Label();
-            labelDataCompra = new Label();
             labelValorCompra = new Label();
             maskedTextBoxCpf = new MaskedTextBox();
-            maskedTextBox1 = new MaskedTextBox();
-            dateTimePickerDataCompra = new DateTimePicker();
+            maskedTextBoxTelefone = new MaskedTextBox();
             textBoxEmail = new TextBox();
             textBoxNome = new TextBox();
             textBoxValorCompra = new TextBox();
@@ -84,16 +82,6 @@
             labelEmail.TabIndex = 3;
             labelEmail.Text = "E-mail";
             // 
-            // labelDataCompra
-            // 
-            labelDataCompra.AutoSize = true;
-            labelDataCompra.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelDataCompra.Location = new Point(9, 260);
-            labelDataCompra.Name = "labelDataCompra";
-            labelDataCompra.Size = new Size(110, 19);
-            labelDataCompra.TabIndex = 4;
-            labelDataCompra.Text = "Data da Compra";
-            // 
             // labelValorCompra
             // 
             labelValorCompra.AutoSize = true;
@@ -114,22 +102,14 @@
             maskedTextBoxCpf.Size = new Size(89, 23);
             maskedTextBoxCpf.TabIndex = 6;
             // 
-            // maskedTextBox1
+            // maskedTextBoxTelefone
             // 
-            maskedTextBox1.BackColor = SystemColors.Control;
-            maskedTextBox1.Location = new Point(12, 123);
-            maskedTextBox1.Mask = "(99) 00000-0000";
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(89, 23);
-            maskedTextBox1.TabIndex = 7;
-            // 
-            // dateTimePickerDataCompra
-            // 
-            dateTimePickerDataCompra.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataCompra.Location = new Point(12, 282);
-            dateTimePickerDataCompra.Name = "dateTimePickerDataCompra";
-            dateTimePickerDataCompra.Size = new Size(297, 23);
-            dateTimePickerDataCompra.TabIndex = 8;
+            maskedTextBoxTelefone.BackColor = SystemColors.Control;
+            maskedTextBoxTelefone.Location = new Point(12, 123);
+            maskedTextBoxTelefone.Mask = "(00)00000-0000";
+            maskedTextBoxTelefone.Name = "maskedTextBoxTelefone";
+            maskedTextBoxTelefone.Size = new Size(89, 23);
+            maskedTextBoxTelefone.TabIndex = 7;
             // 
             // textBoxEmail
             // 
@@ -161,17 +141,18 @@
             // buttonSalvar
             // 
             buttonSalvar.BackColor = SystemColors.ButtonHighlight;
-            buttonSalvar.Location = new Point(214, 346);
+            buttonSalvar.Location = new Point(214, 264);
             buttonSalvar.Name = "buttonSalvar";
             buttonSalvar.Size = new Size(95, 28);
             buttonSalvar.TabIndex = 12;
             buttonSalvar.Text = "Salvar";
             buttonSalvar.UseVisualStyleBackColor = false;
+            buttonSalvar.Click += AoClicarNoBotaoSalvar;
             // 
             // buttonCancelar
             // 
             buttonCancelar.BackColor = SystemColors.ButtonHighlight;
-            buttonCancelar.Location = new Point(12, 346);
+            buttonCancelar.Location = new Point(12, 264);
             buttonCancelar.Name = "buttonCancelar";
             buttonCancelar.Size = new Size(95, 28);
             buttonCancelar.TabIndex = 13;
@@ -183,17 +164,15 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(326, 386);
+            ClientSize = new Size(326, 312);
             Controls.Add(buttonCancelar);
             Controls.Add(buttonSalvar);
             Controls.Add(textBoxValorCompra);
             Controls.Add(textBoxNome);
             Controls.Add(textBoxEmail);
-            Controls.Add(dateTimePickerDataCompra);
-            Controls.Add(maskedTextBox1);
+            Controls.Add(maskedTextBoxTelefone);
             Controls.Add(maskedTextBoxCpf);
             Controls.Add(labelValorCompra);
-            Controls.Add(labelDataCompra);
             Controls.Add(labelEmail);
             Controls.Add(labelTelefone);
             Controls.Add(labelNome);
@@ -211,11 +190,9 @@
         private Label labelNome;
         private Label labelTelefone;
         private Label labelEmail;
-        private Label labelDataCompra;
         private Label labelValorCompra;
         private MaskedTextBox maskedTextBoxCpf;
-        private MaskedTextBox maskedTextBox1;
-        private DateTimePicker dateTimePickerDataCompra;
+        private MaskedTextBox maskedTextBoxTelefone;
         private TextBox textBoxEmail;
         private TextBox textBoxNome;
         private TextBox textBoxValorCompra;

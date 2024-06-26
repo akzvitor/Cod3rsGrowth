@@ -148,11 +148,32 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void AoClicarNoBotaoAdicionar(object sender, EventArgs e)
+        private void AoClicarNoBotaoAdicionarObra(object sender, EventArgs e)
         {
-            var formCriarObra = new FormCriarObra(_servicoObra);
-            formCriarObra.ShowDialog();
-            ListarObras();
+            try
+            {
+                var formCriarObra = new FormCriarObra(_servicoObra);
+                formCriarObra.ShowDialog();
+                ListarObras();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoAdicionarCompra(object sender, EventArgs e)
+        {
+            try
+            {
+                var formCriarCompra = new FormCriarCompra(_servicoCompraCliente);
+                formCriarCompra.ShowDialog();
+                ListarCompras();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

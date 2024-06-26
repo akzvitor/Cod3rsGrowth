@@ -1,4 +1,6 @@
-﻿using Cod3rsGrowth.Servico.ExtensaoDasStrings;
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Servico.ExtensaoDasStrings;
+using Cod3rsGrowth.Servico.Servicos;
 using FluentValidation;
 using System.Globalization;
 
@@ -6,14 +8,46 @@ namespace Cod3rsGrowth.Forms
 {
     public partial class FormCriarCompra : Form
     {
-        public FormCriarCompra()
+        private readonly ServicoCompraCliente _servicoCompraCliente;
+
+        public FormCriarCompra(ServicoCompraCliente servicoCompraCliente)
         {
+            _servicoCompraCliente = servicoCompraCliente;
             InitializeComponent();
         }
 
         private void AoInicializarFormulario(object sender, EventArgs e)
         {
 
+        }
+
+        private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
+        {
+            try
+            {
+                CompraCliente novaCompra = new()
+                {
+                    Cpf = maskedTextBoxCpf.Text.Trim().Replace(".", "").Replace("-", ""),
+                    Nome = textBoxNome.Text,
+                    Telefone = maskedTextBoxTelefone.Text.Trim().Replace("(", "").Replace(")", "").Replace("-", ""),
+                    ValorCompra = decimal.Parse(textBoxValorCompra.Text),
+                    Email = textBoxEmail.Text,
+                    DataCompra = DateTime.Now
+                };
+
+                DialogResult dialogResult = MessageBox.Show("Deseja salvar a compra com os dados informados?",
+                                                            "Salvar Compra", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoCompraCliente.Criar(novaCompra);
+                    Close();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AoAlterarTextoDoCampoValor(object sender, EventArgs e)

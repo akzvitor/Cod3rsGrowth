@@ -42,30 +42,44 @@ namespace Cod3rsGrowth.Forms
 
         private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
         {
-            Obra novaObra = new()
+            try
             {
-                Autor = textBoxAutor.Text,
-                Titulo = textBoxTitulo.Text,
-                ValorObra = decimal.Parse(textBoxValor.Text),
-                Sinopse = richTextBoxSinopse.Text,
-                NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value),
-                Formato = (Formato)comboBoxFormato.SelectedItem,
-                InicioPublicacao = dateTimePickerInicioPublicacao.Value,
-                FoiFinalizada = radioButtonFinalizada.Checked
-            };
+                Obra novaObra = new()
+                {
+                    Autor = textBoxAutor.Text,
+                    Titulo = textBoxTitulo.Text,
+                    ValorObra = decimal.Parse(textBoxValor.Text),
+                    Sinopse = richTextBoxSinopse.Text,
+                    NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value),
+                    Formato = (Formato)comboBoxFormato.SelectedItem,
+                    InicioPublicacao = dateTimePickerInicioPublicacao.Value,
+                    FoiFinalizada = radioButtonFinalizada.Checked
+                };
 
-            DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
-                                                        "Salvar Obra", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+                DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
+                                                            "Salvar Obra", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoObra.Criar(novaObra);
+                    Close();
+                }
+            }
+            catch (ValidationException ex)
             {
-                _servicoObra.Criar(novaObra);
-                Close();
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
         {
-            Close();
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AoAlterarTextoDoCampoValor(object sender, EventArgs e)

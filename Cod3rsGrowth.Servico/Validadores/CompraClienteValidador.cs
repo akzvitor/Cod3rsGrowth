@@ -38,15 +38,15 @@ namespace Cod3rsGrowth.Servico.Validadores
                             "letras sem acento, números, espaços ou alguns símbolos, como - e _.")
                 .EmailAddress().WithMessage("Formato de e-mail inválido.");
 
-            RuleFor(cliente => cliente.Produtos)
-                .NotEmpty().WithMessage("A compra deve conter pelo menos um produto.");
+            //RuleFor(cliente => cliente.Produtos)
+            //    .NotEmpty().WithMessage("A compra deve conter pelo menos um produto.");
 
             RuleFor(cliente => cliente.ValorCompra)
                 .GreaterThanOrEqualTo(0).WithMessage("O valor da compra não pode ser negativo.");
 
-            RuleFor(cliente => cliente.DataCompra)
-                .NotEmpty().GreaterThan(DateTime.MinValue).WithMessage("A data da compra deve ser informada.")
-                .LessThanOrEqualTo(DateTime.Now).WithMessage("Não é possível informar uma data futura.");
+            //RuleFor(cliente => cliente.DataCompra)
+            //    .NotEmpty().GreaterThan(DateTime.MinValue).WithMessage("A data da compra deve ser informada.")
+            //    .Equal(DateTime.Now).WithMessage("Não é possível informar uma data futura.");
 
             RuleSet("Editar", () =>
             {
