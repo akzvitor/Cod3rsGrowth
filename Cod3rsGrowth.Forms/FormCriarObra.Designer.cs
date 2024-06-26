@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             labelTitulo = new Label();
             labelAutor = new Label();
             labelSinopse = new Label();
@@ -47,7 +48,15 @@
             buttonCancelar = new Button();
             labelFormato = new Label();
             comboBoxFormato = new ComboBox();
+            obraBindingSource = new BindingSource(components);
+            generosBindingSource = new BindingSource(components);
+            generosBindingSource1 = new BindingSource(components);
+            generosBindingSource2 = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapitulos).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)generosBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)generosBindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)generosBindingSource2).BeginInit();
             SuspendLayout();
             // 
             // labelTitulo
@@ -242,12 +251,31 @@
             comboBoxFormato.Size = new Size(110, 23);
             comboBoxFormato.TabIndex = 18;
             // 
+            // obraBindingSource
+            // 
+            obraBindingSource.DataSource = typeof(Dominio.Entidades.Obra);
+            // 
+            // generosBindingSource
+            // 
+            generosBindingSource.DataMember = "Generos";
+            generosBindingSource.DataSource = obraBindingSource;
+            // 
+            // generosBindingSource1
+            // 
+            generosBindingSource1.DataMember = "Generos";
+            generosBindingSource1.DataSource = obraBindingSource;
+            // 
+            // generosBindingSource2
+            // 
+            generosBindingSource2.DataMember = "Generos";
+            generosBindingSource2.DataSource = obraBindingSource;
+            // 
             // FormCriarObra
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(337, 476);
+            ClientSize = new Size(336, 476);
             Controls.Add(comboBoxFormato);
             Controls.Add(labelFormato);
             Controls.Add(buttonCancelar);
@@ -271,6 +299,10 @@
             Text = "Cadastrar Obra";
             Load += AoInicializarFormulario;
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapitulos).EndInit();
+            ((System.ComponentModel.ISupportInitialize)obraBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)generosBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)generosBindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)generosBindingSource2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -296,5 +328,9 @@
         private Button buttonCancelar;
         private Label labelFormato;
         private ComboBox comboBoxFormato;
+        private BindingSource generosBindingSource2;
+        private BindingSource obraBindingSource;
+        private BindingSource generosBindingSource;
+        private BindingSource generosBindingSource1;
     }
 }
