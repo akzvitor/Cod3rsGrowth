@@ -52,6 +52,7 @@
             generosBindingSource = new BindingSource(components);
             generosBindingSource1 = new BindingSource(components);
             generosBindingSource2 = new BindingSource(components);
+            checkedListBoxGeneros = new CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapitulos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)generosBindingSource).BeginInit();
@@ -270,12 +271,25 @@
             generosBindingSource2.DataMember = "Generos";
             generosBindingSource2.DataSource = obraBindingSource;
             // 
+            // checkedListBoxGeneros
+            // 
+            checkedListBoxGeneros.BackColor = SystemColors.Window;
+            checkedListBoxGeneros.BorderStyle = BorderStyle.None;
+            checkedListBoxGeneros.CheckOnClick = true;
+            checkedListBoxGeneros.FormattingEnabled = true;
+            checkedListBoxGeneros.Items.AddRange(new object[] { "Acao", "ArtesMarciais", "Aventura", "Comedia", "Drama", "Ecchi", "Espaco", "Esporte", "Fantasia", "Harem", "Historico", "Horror", "Jogos", "MahouShoujo", "Mecha", "Militar", "Misterio", "Musical", "Psicologico", "Romance", "Samurai", "SciFi", "Seinen", "Shoujo", "Shounen", "SliceOfLife", "Sobrenatural", "VidaEscolar", "Yaoi", "Yuri" });
+            checkedListBoxGeneros.Location = new Point(425, 32);
+            checkedListBoxGeneros.Name = "checkedListBoxGeneros";
+            checkedListBoxGeneros.Size = new Size(154, 234);
+            checkedListBoxGeneros.TabIndex = 19;
+            // 
             // FormCriarObra
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(336, 476);
+            ClientSize = new Size(891, 476);
+            Controls.Add(checkedListBoxGeneros);
             Controls.Add(comboBoxFormato);
             Controls.Add(labelFormato);
             Controls.Add(buttonCancelar);
@@ -332,5 +346,6 @@
         private BindingSource obraBindingSource;
         private BindingSource generosBindingSource;
         private BindingSource generosBindingSource1;
+        private CheckedListBox checkedListBoxGeneros;
     }
 }

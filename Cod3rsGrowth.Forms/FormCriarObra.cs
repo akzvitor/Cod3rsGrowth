@@ -4,6 +4,7 @@ using Cod3rsGrowth.Servico.ExtensaoDasStrings;
 using Cod3rsGrowth.Servico.Servicos;
 using FluentValidation;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -44,6 +45,15 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
+                List<string> generosSelecionados = new List<string>();
+                List<Genero> listaDeGeneros = new List<Genero>();
+
+                foreach (var item in checkedListBoxGeneros.CheckedItems)
+                {
+                    generosSelecionados.Add(item.ToString());
+                    listaDeGeneros.Add((Genero)Enum.Parse(typeof(Genero), item.ToString()));
+                }
+
                 Obra novaObra = new()
                 {
                     Autor = textBoxAutor.Text,
@@ -53,7 +63,8 @@ namespace Cod3rsGrowth.Forms
                     NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value),
                     Formato = (Formato)comboBoxFormato.SelectedItem,
                     InicioPublicacao = dateTimePickerInicioPublicacao.Value,
-                    FoiFinalizada = radioButtonFinalizada.Checked
+                    FoiFinalizada = radioButtonFinalizada.Checked,
+                    Generos = listaDeGeneros
                 };
 
                 DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
