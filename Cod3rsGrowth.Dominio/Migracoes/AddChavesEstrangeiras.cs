@@ -11,10 +11,6 @@ namespace Cod3rsGrowth.Dominio.Migracoes
                 .FromTable("GenerosObras").ForeignColumn("ObraId")
                 .ToTable("Obras").PrimaryColumn("Id");
 
-            Create.ForeignKey("FK_GenerosObras_GeneroId")
-                .FromTable("GenerosObras").ForeignColumn("GeneroId")
-                .ToTable("Generos").PrimaryColumn("Id");
-
             Create.ForeignKey("FK_ComprasObras_CompraId")
                 .FromTable("ComprasObras").ForeignColumn("CompraId")
                 .ToTable("ComprasCliente").PrimaryColumn("Id");
@@ -27,7 +23,6 @@ namespace Cod3rsGrowth.Dominio.Migracoes
         public override void Down()
         {
             Delete.ForeignKey("FK_GenerosObras_ObraId");
-            Delete.ForeignKey("FK_GenerosObras_GeneroId");
             Delete.ForeignKey("FK_ComprasObras_CompraId");
             Delete.ForeignKey("FK_ComprasObras_ObraId");
         }

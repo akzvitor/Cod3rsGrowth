@@ -53,6 +53,7 @@
             generosBindingSource1 = new BindingSource(components);
             generosBindingSource2 = new BindingSource(components);
             checkedListBoxGeneros = new CheckedListBox();
+            labelGeneros = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapitulos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)generosBindingSource).BeginInit();
@@ -104,7 +105,7 @@
             // 
             labelValor.AutoSize = true;
             labelValor.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelValor.Location = new Point(8, 138);
+            labelValor.Location = new Point(8, 129);
             labelValor.Name = "labelValor";
             labelValor.Size = new Size(40, 19);
             labelValor.TabIndex = 4;
@@ -114,7 +115,7 @@
             // 
             labelInicioPublicacao.AutoSize = true;
             labelInicioPublicacao.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelInicioPublicacao.Location = new Point(8, 212);
+            labelInicioPublicacao.Location = new Point(5, 221);
             labelInicioPublicacao.Name = "labelInicioPublicacao";
             labelInicioPublicacao.Size = new Size(128, 19);
             labelInicioPublicacao.TabIndex = 5;
@@ -124,7 +125,7 @@
             // 
             labelStatus.AutoSize = true;
             labelStatus.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelStatus.Location = new Point(209, 138);
+            labelStatus.Location = new Point(209, 129);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new Size(47, 19);
             labelStatus.TabIndex = 6;
@@ -152,7 +153,7 @@
             // 
             dateTimePickerInicioPublicacao.CalendarMonthBackground = SystemColors.Control;
             dateTimePickerInicioPublicacao.Format = DateTimePickerFormat.Short;
-            dateTimePickerInicioPublicacao.Location = new Point(11, 234);
+            dateTimePickerInicioPublicacao.Location = new Point(9, 243);
             dateTimePickerInicioPublicacao.Name = "dateTimePickerInicioPublicacao";
             dateTimePickerInicioPublicacao.Size = new Size(151, 23);
             dateTimePickerInicioPublicacao.TabIndex = 9;
@@ -160,7 +161,7 @@
             // radioButtonFinalizada
             // 
             radioButtonFinalizada.AutoSize = true;
-            radioButtonFinalizada.Location = new Point(212, 189);
+            radioButtonFinalizada.Location = new Point(212, 180);
             radioButtonFinalizada.Name = "radioButtonFinalizada";
             radioButtonFinalizada.Size = new Size(77, 19);
             radioButtonFinalizada.TabIndex = 10;
@@ -171,7 +172,7 @@
             // radioButtonEmLancamento
             // 
             radioButtonEmLancamento.AutoSize = true;
-            radioButtonEmLancamento.Location = new Point(212, 164);
+            radioButtonEmLancamento.Location = new Point(212, 155);
             radioButtonEmLancamento.Name = "radioButtonEmLancamento";
             radioButtonEmLancamento.Size = new Size(111, 19);
             radioButtonEmLancamento.TabIndex = 11;
@@ -185,7 +186,7 @@
             richTextBoxSinopse.BorderStyle = BorderStyle.FixedSingle;
             richTextBoxSinopse.Location = new Point(9, 299);
             richTextBoxSinopse.Name = "richTextBoxSinopse";
-            richTextBoxSinopse.Size = new Size(314, 110);
+            richTextBoxSinopse.Size = new Size(153, 110);
             richTextBoxSinopse.TabIndex = 12;
             richTextBoxSinopse.Text = "";
             // 
@@ -194,14 +195,14 @@
             numericUpDownCapitulos.BackColor = SystemColors.Control;
             numericUpDownCapitulos.Location = new Point(212, 32);
             numericUpDownCapitulos.Name = "numericUpDownCapitulos";
-            numericUpDownCapitulos.Size = new Size(111, 23);
+            numericUpDownCapitulos.Size = new Size(125, 23);
             numericUpDownCapitulos.TabIndex = 13;
             // 
             // textBoxValor
             // 
             textBoxValor.BackColor = SystemColors.Control;
             textBoxValor.BorderStyle = BorderStyle.FixedSingle;
-            textBoxValor.Location = new Point(12, 160);
+            textBoxValor.Location = new Point(12, 151);
             textBoxValor.Name = "textBoxValor";
             textBoxValor.Size = new Size(150, 23);
             textBoxValor.TabIndex = 14;
@@ -213,7 +214,7 @@
             // buttonSalvar
             // 
             buttonSalvar.BackColor = SystemColors.ButtonHighlight;
-            buttonSalvar.Location = new Point(228, 434);
+            buttonSalvar.Location = new Point(242, 434);
             buttonSalvar.Name = "buttonSalvar";
             buttonSalvar.Size = new Size(95, 28);
             buttonSalvar.TabIndex = 15;
@@ -249,7 +250,7 @@
             comboBoxFormato.FormattingEnabled = true;
             comboBoxFormato.Location = new Point(213, 90);
             comboBoxFormato.Name = "comboBoxFormato";
-            comboBoxFormato.Size = new Size(110, 23);
+            comboBoxFormato.Size = new Size(124, 23);
             comboBoxFormato.TabIndex = 18;
             // 
             // obraBindingSource
@@ -274,21 +275,31 @@
             // checkedListBoxGeneros
             // 
             checkedListBoxGeneros.BackColor = SystemColors.Window;
-            checkedListBoxGeneros.BorderStyle = BorderStyle.None;
             checkedListBoxGeneros.CheckOnClick = true;
             checkedListBoxGeneros.FormattingEnabled = true;
             checkedListBoxGeneros.Items.AddRange(new object[] { "Acao", "ArtesMarciais", "Aventura", "Comedia", "Drama", "Ecchi", "Espaco", "Esporte", "Fantasia", "Harem", "Historico", "Horror", "Jogos", "MahouShoujo", "Mecha", "Militar", "Misterio", "Musical", "Psicologico", "Romance", "Samurai", "SciFi", "Seinen", "Shoujo", "Shounen", "SliceOfLife", "Sobrenatural", "VidaEscolar", "Yaoi", "Yuri" });
-            checkedListBoxGeneros.Location = new Point(425, 32);
+            checkedListBoxGeneros.Location = new Point(212, 243);
             checkedListBoxGeneros.Name = "checkedListBoxGeneros";
-            checkedListBoxGeneros.Size = new Size(154, 234);
+            checkedListBoxGeneros.Size = new Size(124, 166);
             checkedListBoxGeneros.TabIndex = 19;
+            // 
+            // labelGeneros
+            // 
+            labelGeneros.AutoSize = true;
+            labelGeneros.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGeneros.Location = new Point(209, 221);
+            labelGeneros.Name = "labelGeneros";
+            labelGeneros.Size = new Size(60, 19);
+            labelGeneros.TabIndex = 20;
+            labelGeneros.Text = "Generos";
             // 
             // FormCriarObra
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(891, 476);
+            ClientSize = new Size(352, 476);
+            Controls.Add(labelGeneros);
             Controls.Add(checkedListBoxGeneros);
             Controls.Add(comboBoxFormato);
             Controls.Add(labelFormato);
@@ -347,5 +358,6 @@
         private BindingSource generosBindingSource;
         private BindingSource generosBindingSource1;
         private CheckedListBox checkedListBoxGeneros;
+        private Label labelGeneros;
     }
 }

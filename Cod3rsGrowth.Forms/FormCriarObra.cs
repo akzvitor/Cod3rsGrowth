@@ -72,6 +72,7 @@ namespace Cod3rsGrowth.Forms
                 if (dialogResult == DialogResult.Yes)
                 {
                     _servicoObra.Criar(novaObra);
+                    _servicoObra.SalvarGeneros(novaObra.Id, generosSelecionados);
                     Close();
                 }
             }

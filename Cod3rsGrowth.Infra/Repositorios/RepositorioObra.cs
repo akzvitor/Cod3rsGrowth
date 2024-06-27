@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
 using LinqToDB;
+using LinqToDB.Data;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -35,6 +36,18 @@ namespace Cod3rsGrowth.Infra.Repositorios
             obra.Id = _db.InsertWithInt32Identity(obra);
 
             return obra;
+        }
+
+        public void SalvarGeneros(int idObra, List<string> generos)
+        {
+            foreach (var item in generos)
+            {
+                _db.Execute(
+                    $"INSERT INTO GenerosObras (ObraId, Genero) VALUES (@idObra, @item)",
+                    new DataParameter("@idObra", idObra),
+                    new DataParameter("@item", @item)
+                );
+            }
         }
 
         public Obra Editar(Obra obra)
