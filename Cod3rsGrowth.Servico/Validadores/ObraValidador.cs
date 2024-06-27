@@ -8,6 +8,7 @@ namespace Cod3rsGrowth.Servico.Validadores
         public ObraValidador() 
         {
             const int tamanhoLimiteTitulo = 2000;
+
             RuleFor(obra => obra.Titulo)
                 .NotEmpty()
                 .WithMessage("O titulo da obra é obrigatório.")
@@ -46,9 +47,9 @@ namespace Cod3rsGrowth.Servico.Validadores
                 .IsInEnum()
                 .WithMessage("Formato de obra inválido.");
 
-            //RuleFor(obra => obra.Generos)
-            //    .NotEmpty().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).")
-            //    .Must(list => list.Count < 10).WithMessage("O limite de gêneros em uma única obra é 10.");
+            RuleFor(obra => obra.Generos)
+                .NotEmpty().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).")
+                .Must(list => list.Count < 10).WithMessage("O limite de gêneros em uma única obra é 10.");
 
             RuleForEach(obra => obra.Generos)
                 .IsInEnum()

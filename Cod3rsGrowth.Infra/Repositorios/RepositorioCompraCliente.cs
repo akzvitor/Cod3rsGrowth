@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
 using LinqToDB;
+using LinqToDB.Data;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -33,6 +34,18 @@ namespace Cod3rsGrowth.Infra.Repositorios
             compraCliente.Id = _db.InsertWithInt32Identity(compraCliente);
 
             return compraCliente;
+        }
+
+        public void AdicionarProdutos(int compraId, List<int> idProdutos)
+        {
+            foreach (var item in idProdutos)
+            {
+                _db.Execute(
+                    "INSERT INTO ComprasObras (CompraId, ObraId) VALUES (@compraId, @item)",
+                    new DataParameter("@compraId", compraId),
+                    new DataParameter("@item", item)
+                );
+            }
         }
 
         public CompraCliente Editar(CompraCliente compra)

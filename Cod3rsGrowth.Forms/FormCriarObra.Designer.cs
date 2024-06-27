@@ -161,13 +161,14 @@
             // radioButtonFinalizada
             // 
             radioButtonFinalizada.AutoSize = true;
+            radioButtonFinalizada.BackColor = SystemColors.Window;
             radioButtonFinalizada.Location = new Point(212, 180);
             radioButtonFinalizada.Name = "radioButtonFinalizada";
             radioButtonFinalizada.Size = new Size(77, 19);
             radioButtonFinalizada.TabIndex = 10;
             radioButtonFinalizada.TabStop = true;
             radioButtonFinalizada.Text = "Finalizada";
-            radioButtonFinalizada.UseVisualStyleBackColor = true;
+            radioButtonFinalizada.UseVisualStyleBackColor = false;
             // 
             // radioButtonEmLancamento
             // 
@@ -194,9 +195,12 @@
             // 
             numericUpDownCapitulos.BackColor = SystemColors.Control;
             numericUpDownCapitulos.Location = new Point(212, 32);
+            numericUpDownCapitulos.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numericUpDownCapitulos.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownCapitulos.Name = "numericUpDownCapitulos";
             numericUpDownCapitulos.Size = new Size(125, 23);
             numericUpDownCapitulos.TabIndex = 13;
+            numericUpDownCapitulos.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // textBoxValor
             // 
@@ -274,13 +278,14 @@
             // 
             // checkedListBoxGeneros
             // 
-            checkedListBoxGeneros.BackColor = SystemColors.Window;
+            checkedListBoxGeneros.BackColor = SystemColors.Control;
+            checkedListBoxGeneros.BorderStyle = BorderStyle.FixedSingle;
             checkedListBoxGeneros.CheckOnClick = true;
             checkedListBoxGeneros.FormattingEnabled = true;
             checkedListBoxGeneros.Items.AddRange(new object[] { "Acao", "ArtesMarciais", "Aventura", "Comedia", "Drama", "Ecchi", "Espaco", "Esporte", "Fantasia", "Harem", "Historico", "Horror", "Jogos", "MahouShoujo", "Mecha", "Militar", "Misterio", "Musical", "Psicologico", "Romance", "Samurai", "SciFi", "Seinen", "Shoujo", "Shounen", "SliceOfLife", "Sobrenatural", "VidaEscolar", "Yaoi", "Yuri" });
             checkedListBoxGeneros.Location = new Point(212, 243);
             checkedListBoxGeneros.Name = "checkedListBoxGeneros";
-            checkedListBoxGeneros.Size = new Size(124, 166);
+            checkedListBoxGeneros.Size = new Size(124, 164);
             checkedListBoxGeneros.TabIndex = 19;
             // 
             // labelGeneros

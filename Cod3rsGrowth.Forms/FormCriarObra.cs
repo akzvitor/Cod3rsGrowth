@@ -4,7 +4,6 @@ using Cod3rsGrowth.Servico.ExtensaoDasStrings;
 using Cod3rsGrowth.Servico.Servicos;
 using FluentValidation;
 using System.Globalization;
-using System.Windows.Forms;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -45,14 +44,8 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                List<string> generosSelecionados = new List<string>();
-                List<Genero> listaDeGeneros = new List<Genero>();
-
-                foreach (var item in checkedListBoxGeneros.CheckedItems)
-                {
-                    generosSelecionados.Add(item.ToString());
-                    listaDeGeneros.Add((Genero)Enum.Parse(typeof(Genero), item.ToString()));
-                }
+                List<string> generosSelecionados = ObterGenerosSelecionados();
+                List<Genero> listaDeGeneros = ObterListaDeEnumsGenero(generosSelecionados);
 
                 Obra novaObra = new()
                 {
@@ -156,6 +149,30 @@ namespace Cod3rsGrowth.Forms
             {
                 MessageBox.Show($"{ex.Message}");
             }
+        }
+
+        private List<string> ObterGenerosSelecionados()
+        {
+            List<string> generosSelecionados = new();
+
+            foreach (var item in checkedListBoxGeneros.CheckedItems)
+            {
+                generosSelecionados.Add(item.ToString());
+            }
+
+            return generosSelecionados;
+        }
+
+        private List<Genero> ObterListaDeEnumsGenero(List<string> generosSelecionados)
+        {
+            List<Genero> generosDaObra = new();
+
+            foreach (var item in generosSelecionados)
+            {
+                generosDaObra.Add((Genero)Enum.Parse(typeof(Genero), item.ToString()));
+            }
+
+            return generosDaObra;
         }
     }
 }

@@ -166,7 +166,7 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                var formCriarCompra = new FormCriarCompra(_servicoCompraCliente);
+                var formCriarCompra = new FormCriarCompra(_servicoCompraCliente, _servicoObra);
                 formCriarCompra.ShowDialog();
                 ListarCompras();
             }
