@@ -274,7 +274,7 @@
             buttonAdicionarObra.Location = new Point(916, 11);
             buttonAdicionarObra.Name = "buttonAdicionarObra";
             buttonAdicionarObra.Size = new Size(75, 34);
-            buttonAdicionarObra.TabIndex = 0;
+            buttonAdicionarObra.TabIndex = 9;
             buttonAdicionarObra.Text = "Adicionar";
             buttonAdicionarObra.UseVisualStyleBackColor = false;
             buttonAdicionarObra.Click += AoClicarNoBotaoAdicionarObra;
@@ -307,7 +307,7 @@
             buttonLimparObras.Location = new Point(937, 37);
             buttonLimparObras.Name = "buttonLimparObras";
             buttonLimparObras.Size = new Size(75, 23);
-            buttonLimparObras.TabIndex = 12;
+            buttonLimparObras.TabIndex = 8;
             buttonLimparObras.Text = "Limpar";
             buttonLimparObras.UseVisualStyleBackColor = false;
             buttonLimparObras.Click += AoClicarNoBotaoLimparDaAbaObras;
@@ -321,7 +321,7 @@
             textBoxAnoObra.Name = "textBoxAnoObra";
             textBoxAnoObra.PlaceholderText = "Pesquisar";
             textBoxAnoObra.Size = new Size(123, 23);
-            textBoxAnoObra.TabIndex = 10;
+            textBoxAnoObra.TabIndex = 6;
             // 
             // buttonFiltroObra
             // 
@@ -330,7 +330,7 @@
             buttonFiltroObra.Location = new Point(856, 37);
             buttonFiltroObra.Name = "buttonFiltroObra";
             buttonFiltroObra.Size = new Size(75, 23);
-            buttonFiltroObra.TabIndex = 11;
+            buttonFiltroObra.TabIndex = 7;
             buttonFiltroObra.Text = "Filtrar";
             buttonFiltroObra.UseVisualStyleBackColor = false;
             buttonFiltroObra.Click += AoClicarNoBotaoFiltrarDaAbaObras;
@@ -352,7 +352,7 @@
             radioButtonStatusObraEmLancamento.Location = new Point(472, 41);
             radioButtonStatusObraEmLancamento.Name = "radioButtonStatusObraEmLancamento";
             radioButtonStatusObraEmLancamento.Size = new Size(111, 19);
-            radioButtonStatusObraEmLancamento.TabIndex = 8;
+            radioButtonStatusObraEmLancamento.TabIndex = 4;
             radioButtonStatusObraEmLancamento.TabStop = true;
             radioButtonStatusObraEmLancamento.Text = "Em Lançamento";
             radioButtonStatusObraEmLancamento.UseVisualStyleBackColor = true;
@@ -364,7 +364,7 @@
             radioButtonStatusObraFinalizada.Location = new Point(589, 41);
             radioButtonStatusObraFinalizada.Name = "radioButtonStatusObraFinalizada";
             radioButtonStatusObraFinalizada.Size = new Size(77, 19);
-            radioButtonStatusObraFinalizada.TabIndex = 7;
+            radioButtonStatusObraFinalizada.TabIndex = 5;
             radioButtonStatusObraFinalizada.TabStop = true;
             radioButtonStatusObraFinalizada.Text = "Finalizada";
             radioButtonStatusObraFinalizada.UseVisualStyleBackColor = true;
@@ -397,7 +397,7 @@
             comboBoxFormatoObra.Location = new Point(322, 37);
             comboBoxFormatoObra.Name = "comboBoxFormatoObra";
             comboBoxFormatoObra.Size = new Size(121, 23);
-            comboBoxFormatoObra.TabIndex = 4;
+            comboBoxFormatoObra.TabIndex = 3;
             // 
             // textBoxAutorObra
             // 
@@ -407,7 +407,7 @@
             textBoxAutorObra.Name = "textBoxAutorObra";
             textBoxAutorObra.PlaceholderText = "Pesquisar";
             textBoxAutorObra.Size = new Size(123, 23);
-            textBoxAutorObra.TabIndex = 3;
+            textBoxAutorObra.TabIndex = 2;
             // 
             // labelAutorObra
             // 
@@ -569,7 +569,7 @@
             buttonAdicionarCompra.Location = new Point(919, 7);
             buttonAdicionarCompra.Name = "buttonAdicionarCompra";
             buttonAdicionarCompra.Size = new Size(75, 34);
-            buttonAdicionarCompra.TabIndex = 0;
+            buttonAdicionarCompra.TabIndex = 15;
             buttonAdicionarCompra.Text = "Adicionar";
             buttonAdicionarCompra.UseVisualStyleBackColor = false;
             buttonAdicionarCompra.Click += AoClicarNoBotaoAdicionarCompra;
@@ -597,7 +597,7 @@
             maskedTextBoxCpf.Mask = "000.000.000-00";
             maskedTextBoxCpf.Name = "maskedTextBoxCpf";
             maskedTextBoxCpf.Size = new Size(100, 23);
-            maskedTextBoxCpf.TabIndex = 31;
+            maskedTextBoxCpf.TabIndex = 11;
             // 
             // dateTimePickerDataCompra
             // 
@@ -605,7 +605,7 @@
             dateTimePickerDataCompra.Location = new Point(287, 36);
             dateTimePickerDataCompra.Name = "dateTimePickerDataCompra";
             dateTimePickerDataCompra.Size = new Size(120, 23);
-            dateTimePickerDataCompra.TabIndex = 30;
+            dateTimePickerDataCompra.TabIndex = 12;
             dateTimePickerDataCompra.Value = new DateTime(2002, 7, 22, 0, 0, 0, 0);
             // 
             // labelCpf
@@ -635,7 +635,7 @@
             textBoxNomeCliente.Name = "textBoxNomeCliente";
             textBoxNomeCliente.PlaceholderText = "Pesquisar";
             textBoxNomeCliente.Size = new Size(100, 23);
-            textBoxNomeCliente.TabIndex = 26;
+            textBoxNomeCliente.TabIndex = 10;
             // 
             // buttonLimparCompras
             // 
@@ -644,7 +644,7 @@
             buttonLimparCompras.Location = new Point(926, 36);
             buttonLimparCompras.Name = "buttonLimparCompras";
             buttonLimparCompras.Size = new Size(75, 23);
-            buttonLimparCompras.TabIndex = 25;
+            buttonLimparCompras.TabIndex = 14;
             buttonLimparCompras.Text = "Limpar";
             buttonLimparCompras.UseVisualStyleBackColor = false;
             buttonLimparCompras.Click += AoClicarNoBotaoLimparDaAbaCompras;
@@ -656,7 +656,7 @@
             buttonFiltrarCompras.Location = new Point(845, 36);
             buttonFiltrarCompras.Name = "buttonFiltrarCompras";
             buttonFiltrarCompras.Size = new Size(75, 23);
-            buttonFiltrarCompras.TabIndex = 24;
+            buttonFiltrarCompras.TabIndex = 13;
             buttonFiltrarCompras.Text = "Filtrar";
             buttonFiltrarCompras.UseVisualStyleBackColor = false;
             buttonFiltrarCompras.Click += AoClicarNoBotaoFiltrarDaAbaCompras;

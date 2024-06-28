@@ -52,8 +52,8 @@
             generosBindingSource = new BindingSource(components);
             generosBindingSource1 = new BindingSource(components);
             generosBindingSource2 = new BindingSource(components);
-            checkedListBoxGeneros = new CheckedListBox();
             labelGeneros = new Label();
+            checkedListBoxGeneros = new CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapitulos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)generosBindingSource).BeginInit();
@@ -138,7 +138,7 @@
             textBoxTitulo.Location = new Point(12, 32);
             textBoxTitulo.Name = "textBoxTitulo";
             textBoxTitulo.Size = new Size(150, 23);
-            textBoxTitulo.TabIndex = 7;
+            textBoxTitulo.TabIndex = 1;
             // 
             // textBoxAutor
             // 
@@ -147,7 +147,7 @@
             textBoxAutor.Location = new Point(12, 90);
             textBoxAutor.Name = "textBoxAutor";
             textBoxAutor.Size = new Size(150, 23);
-            textBoxAutor.TabIndex = 8;
+            textBoxAutor.TabIndex = 3;
             // 
             // dateTimePickerInicioPublicacao
             // 
@@ -156,7 +156,7 @@
             dateTimePickerInicioPublicacao.Location = new Point(9, 243);
             dateTimePickerInicioPublicacao.Name = "dateTimePickerInicioPublicacao";
             dateTimePickerInicioPublicacao.Size = new Size(151, 23);
-            dateTimePickerInicioPublicacao.TabIndex = 9;
+            dateTimePickerInicioPublicacao.TabIndex = 8;
             // 
             // radioButtonFinalizada
             // 
@@ -165,7 +165,7 @@
             radioButtonFinalizada.Location = new Point(212, 180);
             radioButtonFinalizada.Name = "radioButtonFinalizada";
             radioButtonFinalizada.Size = new Size(77, 19);
-            radioButtonFinalizada.TabIndex = 10;
+            radioButtonFinalizada.TabIndex = 7;
             radioButtonFinalizada.TabStop = true;
             radioButtonFinalizada.Text = "Finalizada";
             radioButtonFinalizada.UseVisualStyleBackColor = false;
@@ -176,7 +176,7 @@
             radioButtonEmLancamento.Location = new Point(212, 155);
             radioButtonEmLancamento.Name = "radioButtonEmLancamento";
             radioButtonEmLancamento.Size = new Size(111, 19);
-            radioButtonEmLancamento.TabIndex = 11;
+            radioButtonEmLancamento.TabIndex = 6;
             radioButtonEmLancamento.TabStop = true;
             radioButtonEmLancamento.Text = "Em Lançamento";
             radioButtonEmLancamento.UseVisualStyleBackColor = true;
@@ -188,7 +188,7 @@
             richTextBoxSinopse.Location = new Point(9, 299);
             richTextBoxSinopse.Name = "richTextBoxSinopse";
             richTextBoxSinopse.Size = new Size(153, 110);
-            richTextBoxSinopse.TabIndex = 12;
+            richTextBoxSinopse.TabIndex = 9;
             richTextBoxSinopse.Text = "";
             // 
             // numericUpDownCapitulos
@@ -199,7 +199,7 @@
             numericUpDownCapitulos.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownCapitulos.Name = "numericUpDownCapitulos";
             numericUpDownCapitulos.Size = new Size(125, 23);
-            numericUpDownCapitulos.TabIndex = 13;
+            numericUpDownCapitulos.TabIndex = 2;
             numericUpDownCapitulos.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // textBoxValor
@@ -209,7 +209,7 @@
             textBoxValor.Location = new Point(12, 151);
             textBoxValor.Name = "textBoxValor";
             textBoxValor.Size = new Size(150, 23);
-            textBoxValor.TabIndex = 14;
+            textBoxValor.TabIndex = 5;
             textBoxValor.Text = "0,00";
             textBoxValor.TextAlign = HorizontalAlignment.Right;
             textBoxValor.TextChanged += AoAlterarTextoDoCampoValor;
@@ -221,7 +221,7 @@
             buttonSalvar.Location = new Point(242, 434);
             buttonSalvar.Name = "buttonSalvar";
             buttonSalvar.Size = new Size(95, 28);
-            buttonSalvar.TabIndex = 15;
+            buttonSalvar.TabIndex = 11;
             buttonSalvar.Text = "Salvar";
             buttonSalvar.UseVisualStyleBackColor = false;
             buttonSalvar.Click += AoClicarNoBotaoSalvar;
@@ -232,7 +232,7 @@
             buttonCancelar.Location = new Point(9, 434);
             buttonCancelar.Name = "buttonCancelar";
             buttonCancelar.Size = new Size(88, 28);
-            buttonCancelar.TabIndex = 16;
+            buttonCancelar.TabIndex = 12;
             buttonCancelar.Text = "Cancelar";
             buttonCancelar.UseVisualStyleBackColor = false;
             buttonCancelar.Click += AoClicarNoBotaoCancelar;
@@ -255,7 +255,7 @@
             comboBoxFormato.Location = new Point(213, 90);
             comboBoxFormato.Name = "comboBoxFormato";
             comboBoxFormato.Size = new Size(124, 23);
-            comboBoxFormato.TabIndex = 18;
+            comboBoxFormato.TabIndex = 4;
             // 
             // obraBindingSource
             // 
@@ -276,6 +276,16 @@
             generosBindingSource2.DataMember = "Generos";
             generosBindingSource2.DataSource = obraBindingSource;
             // 
+            // labelGeneros
+            // 
+            labelGeneros.AutoSize = true;
+            labelGeneros.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGeneros.Location = new Point(209, 221);
+            labelGeneros.Name = "labelGeneros";
+            labelGeneros.Size = new Size(60, 19);
+            labelGeneros.TabIndex = 20;
+            labelGeneros.Text = "Generos";
+            // 
             // checkedListBoxGeneros
             // 
             checkedListBoxGeneros.BackColor = SystemColors.Control;
@@ -286,17 +296,7 @@
             checkedListBoxGeneros.Location = new Point(212, 243);
             checkedListBoxGeneros.Name = "checkedListBoxGeneros";
             checkedListBoxGeneros.Size = new Size(124, 164);
-            checkedListBoxGeneros.TabIndex = 19;
-            // 
-            // labelGeneros
-            // 
-            labelGeneros.AutoSize = true;
-            labelGeneros.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelGeneros.Location = new Point(209, 221);
-            labelGeneros.Name = "labelGeneros";
-            labelGeneros.Size = new Size(60, 19);
-            labelGeneros.TabIndex = 20;
-            labelGeneros.Text = "Generos";
+            checkedListBoxGeneros.TabIndex = 10;
             // 
             // FormCriarObra
             // 
@@ -362,7 +362,7 @@
         private BindingSource obraBindingSource;
         private BindingSource generosBindingSource;
         private BindingSource generosBindingSource1;
-        private CheckedListBox checkedListBoxGeneros;
         private Label labelGeneros;
+        private CheckedListBox checkedListBoxGeneros;
     }
 }

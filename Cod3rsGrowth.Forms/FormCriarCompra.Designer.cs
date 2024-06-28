@@ -45,8 +45,7 @@
             buttonSalvar = new Button();
             buttonCancelar = new Button();
             dataGridViewCatalogoObras = new DataGridView();
-            obraBindingSource = new BindingSource(components);
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            colunaId = new DataGridViewTextBoxColumn();
             tituloDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             formatoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             numeroCapitulosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -57,6 +56,7 @@
             inicioPublicacaoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             sinopseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             capaImagemBase64DataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            obraBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataGridViewCatalogoObras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             SuspendLayout();
@@ -65,7 +65,7 @@
             // 
             labelCpf.AutoSize = true;
             labelCpf.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCpf.Location = new Point(9, 9);
+            labelCpf.Location = new Point(9, 127);
             labelCpf.Name = "labelCpf";
             labelCpf.Size = new Size(33, 19);
             labelCpf.TabIndex = 0;
@@ -75,7 +75,7 @@
             // 
             labelNome.AutoSize = true;
             labelNome.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelNome.Location = new Point(138, 9);
+            labelNome.Location = new Point(9, 12);
             labelNome.Name = "labelNome";
             labelNome.Size = new Size(46, 19);
             labelNome.TabIndex = 1;
@@ -85,7 +85,7 @@
             // 
             labelTelefone.AutoSize = true;
             labelTelefone.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelTelefone.Location = new Point(9, 101);
+            labelTelefone.Location = new Point(9, 189);
             labelTelefone.Name = "labelTelefone";
             labelTelefone.Size = new Size(59, 19);
             labelTelefone.TabIndex = 2;
@@ -95,7 +95,7 @@
             // 
             labelEmail.AutoSize = true;
             labelEmail.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelEmail.Location = new Point(138, 101);
+            labelEmail.Location = new Point(9, 69);
             labelEmail.Name = "labelEmail";
             labelEmail.Size = new Size(47, 19);
             labelEmail.TabIndex = 3;
@@ -105,62 +105,64 @@
             // 
             labelValorCompra.AutoSize = true;
             labelValorCompra.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelValorCompra.Location = new Point(9, 242);
+            labelValorCompra.Location = new Point(184, 310);
             labelValorCompra.Name = "labelValorCompra";
             labelValorCompra.Size = new Size(145, 19);
             labelValorCompra.TabIndex = 5;
             labelValorCompra.Text = "Valor Total da Compra";
+            labelValorCompra.Visible = false;
             // 
             // maskedTextBoxCpf
             // 
             maskedTextBoxCpf.BackColor = SystemColors.Control;
             maskedTextBoxCpf.Culture = new System.Globalization.CultureInfo("");
-            maskedTextBoxCpf.Location = new Point(12, 31);
+            maskedTextBoxCpf.Location = new Point(12, 149);
             maskedTextBoxCpf.Mask = "000.000.000-00";
             maskedTextBoxCpf.Name = "maskedTextBoxCpf";
             maskedTextBoxCpf.Size = new Size(89, 23);
-            maskedTextBoxCpf.TabIndex = 6;
+            maskedTextBoxCpf.TabIndex = 3;
             // 
             // maskedTextBoxTelefone
             // 
             maskedTextBoxTelefone.BackColor = SystemColors.Control;
-            maskedTextBoxTelefone.Location = new Point(12, 123);
+            maskedTextBoxTelefone.Location = new Point(12, 211);
             maskedTextBoxTelefone.Mask = "(00)00000-0000";
             maskedTextBoxTelefone.Name = "maskedTextBoxTelefone";
             maskedTextBoxTelefone.Size = new Size(89, 23);
-            maskedTextBoxTelefone.TabIndex = 7;
+            maskedTextBoxTelefone.TabIndex = 4;
             // 
             // textBoxEmail
             // 
             textBoxEmail.BackColor = SystemColors.Control;
-            textBoxEmail.Location = new Point(141, 123);
+            textBoxEmail.Location = new Point(12, 91);
             textBoxEmail.Name = "textBoxEmail";
             textBoxEmail.Size = new Size(139, 23);
-            textBoxEmail.TabIndex = 9;
+            textBoxEmail.TabIndex = 2;
             // 
             // textBoxNome
             // 
             textBoxNome.BackColor = SystemColors.Control;
-            textBoxNome.Location = new Point(141, 31);
+            textBoxNome.Location = new Point(12, 34);
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(139, 23);
-            textBoxNome.TabIndex = 10;
+            textBoxNome.TabIndex = 1;
             // 
             // textBoxValorCompra
             // 
             textBoxValorCompra.BackColor = SystemColors.Window;
             textBoxValorCompra.BorderStyle = BorderStyle.None;
             textBoxValorCompra.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxValorCompra.Location = new Point(12, 264);
+            textBoxValorCompra.Location = new Point(187, 332);
             textBoxValorCompra.Name = "textBoxValorCompra";
             textBoxValorCompra.Size = new Size(164, 22);
             textBoxValorCompra.TabIndex = 11;
             textBoxValorCompra.Text = "0,00";
+            textBoxValorCompra.Visible = false;
             // 
             // buttonSalvar
             // 
             buttonSalvar.BackColor = SystemColors.ButtonHighlight;
-            buttonSalvar.Location = new Point(630, 334);
+            buttonSalvar.Location = new Point(500, 334);
             buttonSalvar.Name = "buttonSalvar";
             buttonSalvar.Size = new Size(95, 28);
             buttonSalvar.TabIndex = 12;
@@ -197,7 +199,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewCatalogoObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCatalogoObras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCatalogoObras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, tituloDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, ValorObra, colunaSelecao, autorDataGridViewTextBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn, sinopseDataGridViewTextBoxColumn, capaImagemBase64DataGridViewTextBoxColumn });
+            dataGridViewCatalogoObras.Columns.AddRange(new DataGridViewColumn[] { colunaId, tituloDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, ValorObra, colunaSelecao, autorDataGridViewTextBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn, sinopseDataGridViewTextBoxColumn, capaImagemBase64DataGridViewTextBoxColumn });
             dataGridViewCatalogoObras.DataSource = obraBindingSource;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
@@ -207,7 +209,7 @@
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dataGridViewCatalogoObras.DefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCatalogoObras.Location = new Point(314, 12);
+            dataGridViewCatalogoObras.Location = new Point(184, 12);
             dataGridViewCatalogoObras.Name = "dataGridViewCatalogoObras";
             dataGridViewCatalogoObras.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
             dataGridViewCatalogoObras.RowHeadersVisible = false;
@@ -215,16 +217,12 @@
             dataGridViewCatalogoObras.Size = new Size(411, 274);
             dataGridViewCatalogoObras.TabIndex = 14;
             // 
-            // obraBindingSource
+            // colunaId
             // 
-            obraBindingSource.DataSource = typeof(Dominio.Entidades.Obra);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.Visible = false;
+            colunaId.DataPropertyName = "Id";
+            colunaId.HeaderText = "Id";
+            colunaId.Name = "colunaId";
+            colunaId.Visible = false;
             // 
             // tituloDataGridViewTextBoxColumn
             // 
@@ -304,12 +302,16 @@
             capaImagemBase64DataGridViewTextBoxColumn.Name = "capaImagemBase64DataGridViewTextBoxColumn";
             capaImagemBase64DataGridViewTextBoxColumn.Visible = false;
             // 
+            // obraBindingSource
+            // 
+            obraBindingSource.DataSource = typeof(Dominio.Entidades.Obra);
+            // 
             // FormCriarCompra
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(744, 372);
+            ClientSize = new Size(608, 372);
             Controls.Add(dataGridViewCatalogoObras);
             Controls.Add(buttonCancelar);
             Controls.Add(buttonSalvar);
@@ -349,7 +351,7 @@
         private DataGridView dataGridViewCatalogoObras;
         private BindingSource obraBindingSource;
         private DataGridViewTextBoxColumn valorObraDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn colunaId;
         private DataGridViewTextBoxColumn tituloDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn formatoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn numeroCapitulosDataGridViewTextBoxColumn;
