@@ -48,16 +48,17 @@ namespace Cod3rsGrowth.Forms
                     ValorCompra = decimal.Parse(textBoxValorCompra.Text),
                     Email = textBoxEmail.Text,
                     DataCompra = DateTime.Now,
-                    IdProdutos = produtosSelecionados
+                    listaIdDosProdutos = produtosSelecionados
                 };
 
-                DialogResult dialogResult = MessageBox.Show("Deseja salvar a compra com os dados informados?",
+                DialogResult dialogResult = MessageBox.Show("Deseja salvar a compra com os dados informados?\n\n" +
+                                                            $"Valor total: R${novaCompra.ValorCompra}",
                                                             "Salvar Compra", MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
                 {
                     _servicoCompraCliente.Criar(novaCompra);
-                    _servicoCompraCliente.AdicionarProdutos(novaCompra.Id, novaCompra.IdProdutos);
+                    _servicoCompraCliente.AdicionarProdutos(novaCompra.Id, novaCompra.listaIdDosProdutos);
                     Close();
                 }
             }
@@ -85,6 +86,18 @@ namespace Cod3rsGrowth.Forms
             textBoxValorCompra.Text = valorDosProdutosSelecionados.ToString();
 
             return produtosSelecionados;
+        }
+
+        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
+        {
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

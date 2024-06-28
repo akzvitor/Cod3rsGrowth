@@ -325,6 +325,9 @@
             Controls.Add(labelSinopse);
             Controls.Add(labelAutor);
             Controls.Add(labelTitulo);
+            MaximizeBox = false;
+            MaximumSize = new Size(368, 515);
+            MinimumSize = new Size(368, 515);
             Name = "FormCriarObra";
             Text = "Cadastrar Obra";
             Load += AoInicializarFormulario;

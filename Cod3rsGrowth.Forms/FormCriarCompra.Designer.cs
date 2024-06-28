@@ -179,6 +179,7 @@
             buttonCancelar.TabIndex = 13;
             buttonCancelar.Text = "Cancelar";
             buttonCancelar.UseVisualStyleBackColor = false;
+            buttonCancelar.Click += AoClicarNoBotaoCancelar;
             // 
             // dataGridViewCatalogoObras
             // 
@@ -325,6 +326,9 @@
             Controls.Add(labelTelefone);
             Controls.Add(labelNome);
             Controls.Add(labelCpf);
+            MaximizeBox = false;
+            MaximumSize = new Size(624, 411);
+            MinimumSize = new Size(624, 411);
             Name = "FormCriarCompra";
             Text = "FormCriarCompra";
             Load += AoInicializarFormulario;
