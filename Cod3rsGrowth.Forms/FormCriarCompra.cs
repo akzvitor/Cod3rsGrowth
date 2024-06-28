@@ -68,6 +68,18 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
+        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
+        {
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private List<int> ObterProdutosSelecionados()
         {
             List<int> produtosSelecionados = new();
@@ -86,18 +98,6 @@ namespace Cod3rsGrowth.Forms
             textBoxValorCompra.Text = valorDosProdutosSelecionados.ToString();
 
             return produtosSelecionados;
-        }
-
-        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
-        {
-            try
-            {
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
     }
 }

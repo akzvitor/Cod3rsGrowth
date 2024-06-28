@@ -682,6 +682,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1013, 453);
             Controls.Add(tabControl1);
+            MinimumSize = new Size(1029, 492);
             Name = "FormListagem";
             Text = "Coders Growth";
             Load += AoCarregarFormulario;
