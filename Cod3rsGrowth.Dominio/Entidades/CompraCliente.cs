@@ -25,7 +25,7 @@ namespace Cod3rsGrowth.Dominio.Entidades
 
         [Column("DataCompra"), NotNull]
         public DateTime DataCompra { get; set; }
-        public List<int> IdProdutos { get; set; }
+        public List<int> listaIdDosProdutos { get; set; }
 
     }
 }
