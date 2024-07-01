@@ -2,6 +2,7 @@ using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Dominio.Enums;
 using System.Xml.Schema;
+using LinqToDB;
 
 
 namespace Cod3rsGrowth.Forms
@@ -148,7 +149,7 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void AoClicarNoBotaoAdicionarObra(object sender, EventArgs e)
+        private void AoClicarNoBotaoAdicionarDaAbaObras(object sender, EventArgs e)
         {
             try
             {
@@ -156,19 +157,55 @@ namespace Cod3rsGrowth.Forms
                 formCriarObra.ShowDialog();
                 ListarObras();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void AoClicarNoBotaoAdicionarCompra(object sender, EventArgs e)
+        private void AoClicarNoBotaoAdicionarDaAbaCompras(object sender, EventArgs e)
         {
             try
             {
                 var formCriarCompra = new FormCriarCompra(_servicoCompraCliente, _servicoObra);
                 formCriarCompra.ShowDialog();
                 ListarCompras();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoRemoverDaAbaObras(object sender, EventArgs e)
+        {
+            try
+            {
+                var tabelaObras = _servicoObra.ObterTodos(_filtroObra);
+
+                if (tabelaObras != null)
+                {
+                    var linhaSelecionada = dataGridObras.CurrentCell.RowIndex;
+                    var idDaObraSelecionada = Convert.ToInt32(dataGridObras.Rows[linhaSelecionada].Cells["colunaId"].Value);
+                    var listaDeComprasVinculadas = _servicoObra.ObterComprasVinculadas(idDaObraSelecionada);
+
+                    DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover" +
+                                                                $" a obra de ID {idDaObraSelecionada}?" +
+                                                                $" As compras vinculadas a ela também serão removidas.", 
+                                                                "Remover Obra", MessageBoxButtons.YesNo);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        //_servicoObra.RemoverComprasVinculadas(idDaObraSelecionada);
+                        _servicoObra.Remover(idDaObraSelecionada);
+                        //foreach (var item in listaDeComprasVinculadas)
+                        //{
+                        //    _servicoCompraCliente.Remover(item);
+                        //}
+                        ListarObras();
+                        ListarCompras();
+                    }
+                }
             }
             catch(Exception ex)
             {

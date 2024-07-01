@@ -1,4 +1,5 @@
 ﻿using FluentMigrator;
+using System.Data;
 
 namespace Cod3rsGrowth.Dominio.Migracoes
 {
@@ -9,15 +10,18 @@ namespace Cod3rsGrowth.Dominio.Migracoes
         {
             Create.ForeignKey("FK_GenerosObras_ObraId")
                 .FromTable("GenerosObras").ForeignColumn("ObraId")
-                .ToTable("Obras").PrimaryColumn("Id");
+                .ToTable("Obras").PrimaryColumn("Id")
+                .OnDeleteOrUpdate(Rule.Cascade);
 
             Create.ForeignKey("FK_ComprasObras_CompraId")
                 .FromTable("ComprasObras").ForeignColumn("CompraId")
-                .ToTable("ComprasCliente").PrimaryColumn("Id");
+                .ToTable("ComprasCliente").PrimaryColumn("Id")
+                .OnDeleteOrUpdate(Rule.Cascade);
 
             Create.ForeignKey("FK_ComprasObras_ObraId")
                 .FromTable("ComprasObras").ForeignColumn("ObraId")
-                .ToTable("Obras").PrimaryColumn("Id");
+                .ToTable("Obras").PrimaryColumn("Id")
+                .OnDeleteOrUpdate(Rule.SetNull);
         }
 
         public override void Down()
