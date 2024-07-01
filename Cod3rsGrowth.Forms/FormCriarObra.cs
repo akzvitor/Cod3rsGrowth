@@ -94,7 +94,7 @@ namespace Cod3rsGrowth.Forms
                 TextBox textBox = sender as TextBox
                     ?? throw new Exception("Texbox não foi encontrado");
 
-                if (textBox.Text.NaoContemValor())
+                if (textBox.Text.ContemValor())
                     throw new ValidationException("Campo valor da obra está vazio.");
 
                 int selectionStart = textBox.SelectionStart;
