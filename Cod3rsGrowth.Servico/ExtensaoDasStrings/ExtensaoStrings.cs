@@ -4,7 +4,7 @@
     {
         public static bool ContemValor(this string? valor)
         {
-            return string.IsNullOrEmpty(valor);
+            return !string.IsNullOrEmpty(valor);
         }
     }
 }
