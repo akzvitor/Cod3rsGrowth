@@ -36,7 +36,7 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Vitor",
                     Telefone = "(64)99332-7668",
                     Email = "vitor@hotmail.com",
-                    Produtos = new List<int>
+                    listaIdDosProdutos = new List<int>
                     {
                         100,
                         103
@@ -50,7 +50,7 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Matheus",
                     Telefone = "(63)99849-0887",
                     Email = "cascao@yahoo.com",
-                    Produtos = new List<int>
+                    listaIdDosProdutos = new List<int>
                     {
                         101,
                         104
@@ -65,7 +65,7 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Henrique",
                     Telefone = "(11)99887-8022",
                     Email = "henrique@uol.com",
-                    Produtos = new List<int>
+                    listaIdDosProdutos = new List<int>
                     {
                         102,
                         105
@@ -276,7 +276,7 @@ namespace Cod3rsGrowth.Testes
         {
             var listaMock = InicializarDadosMockados();
             var novaCompra = listaMock.FirstOrDefault();
-            novaCompra.Produtos = new List<int> { };
+            novaCompra.listaIdDosProdutos = new List<int> { };
             var mensagemDeErro = "A compra deve conter pelo menos um produto.";
 
             var excecao = Assert.Throws<ValidationException>(() => _servicoCompraCliente.Criar(novaCompra));

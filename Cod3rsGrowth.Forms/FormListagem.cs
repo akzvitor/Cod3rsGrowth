@@ -1,6 +1,7 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Dominio.Enums;
+using System.Xml.Schema;
 
 
 namespace Cod3rsGrowth.Forms
@@ -114,7 +115,7 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 _filtroCompraCliente.NomeCliente = textBoxNomeCliente.Text;
-                _filtroCompraCliente.Cpf = textBoxCpf.Text;
+                _filtroCompraCliente.Cpf = maskedTextBoxCpf.Text.Trim().Replace(".", "").Replace("-", "");
                 if (dateTimePickerDataCompra.Value != DateTime.Parse("Jul 22, 2002"))
                 {
                     _filtroCompraCliente.DataCompra = dateTimePickerDataCompra.Value;
@@ -131,17 +132,45 @@ namespace Cod3rsGrowth.Forms
         private void AoClicarNoBotaoLimparDaAbaCompras(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 _filtroCompraCliente.NomeCliente = null;
                 textBoxNomeCliente.Text = null;
                 _filtroCompraCliente.Cpf = null;
-                textBoxCpf.Text = null;
+                maskedTextBoxCpf.Text = null;
                 _filtroCompraCliente.DataCompra = DateTime.MinValue;
                 dateTimePickerDataCompra.Value = DateTime.Parse("Jul 22, 2002");
 
                 ListarCompras();
             }
             catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoAdicionarObra(object sender, EventArgs e)
+        {
+            try
+            {
+                var formCriarObra = new FormCriarObra(_servicoObra);
+                formCriarObra.ShowDialog();
+                ListarObras();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoAdicionarCompra(object sender, EventArgs e)
+        {
+            try
+            {
+                var formCriarCompra = new FormCriarCompra(_servicoCompraCliente, _servicoObra);
+                formCriarCompra.ShowDialog();
+                ListarCompras();
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

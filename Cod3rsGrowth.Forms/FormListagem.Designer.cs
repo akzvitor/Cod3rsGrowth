@@ -42,6 +42,7 @@
             obraBindingSource = new BindingSource(components);
             dataGridObras = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Sinopse = new DataGridViewTextBoxColumn();
             tituloDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             autorDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             numeroCapitulosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -53,6 +54,7 @@
             tabPageObras = new TabPage();
             groupBox1 = new GroupBox();
             panelBottomObras = new Panel();
+            buttonAdicionarObra = new Button();
             panelFiltroObras = new Panel();
             buttonLimparObras = new Button();
             textBoxAnoObra = new TextBox();
@@ -79,9 +81,10 @@
             dataCompraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             compraClienteBindingSource = new BindingSource(components);
             panel2BottomCompras = new Panel();
+            buttonAdicionarCompra = new Button();
             panelFiltroCompras = new Panel();
+            maskedTextBoxCpf = new MaskedTextBox();
             dateTimePickerDataCompra = new DateTimePicker();
-            textBoxCpf = new TextBox();
             labelCpf = new Label();
             labelDataCompra = new Label();
             textBoxNomeCliente = new TextBox();
@@ -94,11 +97,13 @@
             tabControl1.SuspendLayout();
             tabPageObras.SuspendLayout();
             groupBox1.SuspendLayout();
+            panelBottomObras.SuspendLayout();
             panelFiltroObras.SuspendLayout();
             tabPageCompras.SuspendLayout();
             groupBoxCompras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridCompras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)compraClienteBindingSource).BeginInit();
+            panel2BottomCompras.SuspendLayout();
             panelFiltroCompras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource1).BeginInit();
             SuspendLayout();
@@ -125,14 +130,14 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridObras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridObras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
+            dataGridObras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, Sinopse, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
             dataGridObras.DataSource = obraBindingSource;
             dataGridObras.Dock = DockStyle.Fill;
             dataGridObras.Location = new Point(3, 19);
             dataGridObras.Name = "dataGridObras";
             dataGridObras.ReadOnly = true;
             dataGridObras.RowTemplate.Height = 25;
-            dataGridObras.Size = new Size(983, 255);
+            dataGridObras.Size = new Size(983, 241);
             dataGridObras.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
@@ -145,6 +150,14 @@
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Sinopse
+            // 
+            Sinopse.DataPropertyName = "Sinopse";
+            Sinopse.HeaderText = "Sinopse";
+            Sinopse.Name = "Sinopse";
+            Sinopse.ReadOnly = true;
+            Sinopse.Visible = false;
             // 
             // tituloDataGridViewTextBoxColumn
             // 
@@ -241,17 +254,30 @@
             groupBox1.Controls.Add(dataGridObras);
             groupBox1.Location = new Point(8, 106);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(989, 277);
+            groupBox1.Size = new Size(989, 263);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             // 
             // panelBottomObras
             // 
-            panelBottomObras.Dock = DockStyle.Bottom;
-            panelBottomObras.Location = new Point(3, 389);
+            panelBottomObras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelBottomObras.Controls.Add(buttonAdicionarObra);
+            panelBottomObras.Location = new Point(3, 372);
             panelBottomObras.Name = "panelBottomObras";
-            panelBottomObras.Size = new Size(1002, 36);
+            panelBottomObras.Size = new Size(1002, 53);
             panelBottomObras.TabIndex = 0;
+            // 
+            // buttonAdicionarObra
+            // 
+            buttonAdicionarObra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonAdicionarObra.BackColor = SystemColors.ControlLight;
+            buttonAdicionarObra.Location = new Point(916, 11);
+            buttonAdicionarObra.Name = "buttonAdicionarObra";
+            buttonAdicionarObra.Size = new Size(75, 34);
+            buttonAdicionarObra.TabIndex = 9;
+            buttonAdicionarObra.Text = "Adicionar";
+            buttonAdicionarObra.UseVisualStyleBackColor = false;
+            buttonAdicionarObra.Click += AoClicarNoBotaoAdicionarObra;
             // 
             // panelFiltroObras
             // 
@@ -277,12 +303,13 @@
             // buttonLimparObras
             // 
             buttonLimparObras.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonLimparObras.BackColor = SystemColors.ControlLight;
             buttonLimparObras.Location = new Point(937, 37);
             buttonLimparObras.Name = "buttonLimparObras";
             buttonLimparObras.Size = new Size(75, 23);
-            buttonLimparObras.TabIndex = 12;
+            buttonLimparObras.TabIndex = 8;
             buttonLimparObras.Text = "Limpar";
-            buttonLimparObras.UseVisualStyleBackColor = true;
+            buttonLimparObras.UseVisualStyleBackColor = false;
             buttonLimparObras.Click += AoClicarNoBotaoLimparDaAbaObras;
             // 
             // textBoxAnoObra
@@ -294,17 +321,18 @@
             textBoxAnoObra.Name = "textBoxAnoObra";
             textBoxAnoObra.PlaceholderText = "Pesquisar";
             textBoxAnoObra.Size = new Size(123, 23);
-            textBoxAnoObra.TabIndex = 10;
+            textBoxAnoObra.TabIndex = 6;
             // 
             // buttonFiltroObra
             // 
             buttonFiltroObra.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonFiltroObra.BackColor = SystemColors.ControlLight;
             buttonFiltroObra.Location = new Point(856, 37);
             buttonFiltroObra.Name = "buttonFiltroObra";
             buttonFiltroObra.Size = new Size(75, 23);
-            buttonFiltroObra.TabIndex = 11;
+            buttonFiltroObra.TabIndex = 7;
             buttonFiltroObra.Text = "Filtrar";
-            buttonFiltroObra.UseVisualStyleBackColor = true;
+            buttonFiltroObra.UseVisualStyleBackColor = false;
             buttonFiltroObra.Click += AoClicarNoBotaoFiltrarDaAbaObras;
             // 
             // labelAnoObra
@@ -324,7 +352,7 @@
             radioButtonStatusObraEmLancamento.Location = new Point(472, 41);
             radioButtonStatusObraEmLancamento.Name = "radioButtonStatusObraEmLancamento";
             radioButtonStatusObraEmLancamento.Size = new Size(111, 19);
-            radioButtonStatusObraEmLancamento.TabIndex = 8;
+            radioButtonStatusObraEmLancamento.TabIndex = 4;
             radioButtonStatusObraEmLancamento.TabStop = true;
             radioButtonStatusObraEmLancamento.Text = "Em Lançamento";
             radioButtonStatusObraEmLancamento.UseVisualStyleBackColor = true;
@@ -336,7 +364,7 @@
             radioButtonStatusObraFinalizada.Location = new Point(589, 41);
             radioButtonStatusObraFinalizada.Name = "radioButtonStatusObraFinalizada";
             radioButtonStatusObraFinalizada.Size = new Size(77, 19);
-            radioButtonStatusObraFinalizada.TabIndex = 7;
+            radioButtonStatusObraFinalizada.TabIndex = 5;
             radioButtonStatusObraFinalizada.TabStop = true;
             radioButtonStatusObraFinalizada.Text = "Finalizada";
             radioButtonStatusObraFinalizada.UseVisualStyleBackColor = true;
@@ -363,11 +391,13 @@
             // 
             // comboBoxFormatoObra
             // 
+            comboBoxFormatoObra.BackColor = SystemColors.Window;
+            comboBoxFormatoObra.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxFormatoObra.FormattingEnabled = true;
             comboBoxFormatoObra.Location = new Point(322, 37);
             comboBoxFormatoObra.Name = "comboBoxFormatoObra";
             comboBoxFormatoObra.Size = new Size(121, 23);
-            comboBoxFormatoObra.TabIndex = 4;
+            comboBoxFormatoObra.TabIndex = 3;
             // 
             // textBoxAutorObra
             // 
@@ -377,7 +407,7 @@
             textBoxAutorObra.Name = "textBoxAutorObra";
             textBoxAutorObra.PlaceholderText = "Pesquisar";
             textBoxAutorObra.Size = new Size(123, 23);
-            textBoxAutorObra.TabIndex = 3;
+            textBoxAutorObra.TabIndex = 2;
             // 
             // labelAutorObra
             // 
@@ -428,7 +458,7 @@
             groupBoxCompras.Controls.Add(dataGridCompras);
             groupBoxCompras.Location = new Point(8, 106);
             groupBoxCompras.Name = "groupBoxCompras";
-            groupBoxCompras.Size = new Size(989, 276);
+            groupBoxCompras.Size = new Size(989, 264);
             groupBoxCompras.TabIndex = 4;
             groupBoxCompras.TabStop = false;
             // 
@@ -457,7 +487,7 @@
             dataGridCompras.Name = "dataGridCompras";
             dataGridCompras.ReadOnly = true;
             dataGridCompras.RowTemplate.Height = 25;
-            dataGridCompras.Size = new Size(983, 254);
+            dataGridCompras.Size = new Size(983, 242);
             dataGridCompras.TabIndex = 3;
             // 
             // idDataGridViewTextBoxColumn1
@@ -525,17 +555,30 @@
             // 
             // panel2BottomCompras
             // 
-            panel2BottomCompras.Dock = DockStyle.Bottom;
-            panel2BottomCompras.Location = new Point(3, 388);
+            panel2BottomCompras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2BottomCompras.Controls.Add(buttonAdicionarCompra);
+            panel2BottomCompras.Location = new Point(3, 376);
             panel2BottomCompras.Name = "panel2BottomCompras";
-            panel2BottomCompras.Size = new Size(1002, 37);
+            panel2BottomCompras.Size = new Size(1002, 49);
             panel2BottomCompras.TabIndex = 1;
+            // 
+            // buttonAdicionarCompra
+            // 
+            buttonAdicionarCompra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonAdicionarCompra.BackColor = SystemColors.ControlLight;
+            buttonAdicionarCompra.Location = new Point(919, 7);
+            buttonAdicionarCompra.Name = "buttonAdicionarCompra";
+            buttonAdicionarCompra.Size = new Size(75, 34);
+            buttonAdicionarCompra.TabIndex = 15;
+            buttonAdicionarCompra.Text = "Adicionar";
+            buttonAdicionarCompra.UseVisualStyleBackColor = false;
+            buttonAdicionarCompra.Click += AoClicarNoBotaoAdicionarCompra;
             // 
             // panelFiltroCompras
             // 
             panelFiltroCompras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelFiltroCompras.Controls.Add(maskedTextBoxCpf);
             panelFiltroCompras.Controls.Add(dateTimePickerDataCompra);
-            panelFiltroCompras.Controls.Add(textBoxCpf);
             panelFiltroCompras.Controls.Add(labelCpf);
             panelFiltroCompras.Controls.Add(labelDataCompra);
             panelFiltroCompras.Controls.Add(textBoxNomeCliente);
@@ -547,22 +590,23 @@
             panelFiltroCompras.Size = new Size(1027, 94);
             panelFiltroCompras.TabIndex = 0;
             // 
+            // maskedTextBoxCpf
+            // 
+            maskedTextBoxCpf.Culture = new System.Globalization.CultureInfo("");
+            maskedTextBoxCpf.Location = new Point(150, 36);
+            maskedTextBoxCpf.Mask = "000.000.000-00";
+            maskedTextBoxCpf.Name = "maskedTextBoxCpf";
+            maskedTextBoxCpf.Size = new Size(100, 23);
+            maskedTextBoxCpf.TabIndex = 11;
+            // 
             // dateTimePickerDataCompra
             // 
             dateTimePickerDataCompra.Format = DateTimePickerFormat.Short;
             dateTimePickerDataCompra.Location = new Point(287, 36);
             dateTimePickerDataCompra.Name = "dateTimePickerDataCompra";
             dateTimePickerDataCompra.Size = new Size(120, 23);
-            dateTimePickerDataCompra.TabIndex = 30;
+            dateTimePickerDataCompra.TabIndex = 12;
             dateTimePickerDataCompra.Value = new DateTime(2002, 7, 22, 0, 0, 0, 0);
-            // 
-            // textBoxCpf
-            // 
-            textBoxCpf.Location = new Point(150, 36);
-            textBoxCpf.Name = "textBoxCpf";
-            textBoxCpf.PlaceholderText = "Pesquisar";
-            textBoxCpf.Size = new Size(100, 23);
-            textBoxCpf.TabIndex = 29;
             // 
             // labelCpf
             // 
@@ -591,28 +635,30 @@
             textBoxNomeCliente.Name = "textBoxNomeCliente";
             textBoxNomeCliente.PlaceholderText = "Pesquisar";
             textBoxNomeCliente.Size = new Size(100, 23);
-            textBoxNomeCliente.TabIndex = 26;
+            textBoxNomeCliente.TabIndex = 10;
             // 
             // buttonLimparCompras
             // 
             buttonLimparCompras.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonLimparCompras.BackColor = SystemColors.ControlLight;
             buttonLimparCompras.Location = new Point(926, 36);
             buttonLimparCompras.Name = "buttonLimparCompras";
             buttonLimparCompras.Size = new Size(75, 23);
-            buttonLimparCompras.TabIndex = 25;
+            buttonLimparCompras.TabIndex = 14;
             buttonLimparCompras.Text = "Limpar";
-            buttonLimparCompras.UseVisualStyleBackColor = true;
+            buttonLimparCompras.UseVisualStyleBackColor = false;
             buttonLimparCompras.Click += AoClicarNoBotaoLimparDaAbaCompras;
             // 
             // buttonFiltrarCompras
             // 
             buttonFiltrarCompras.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonFiltrarCompras.BackColor = SystemColors.ControlLight;
             buttonFiltrarCompras.Location = new Point(845, 36);
             buttonFiltrarCompras.Name = "buttonFiltrarCompras";
             buttonFiltrarCompras.Size = new Size(75, 23);
-            buttonFiltrarCompras.TabIndex = 24;
+            buttonFiltrarCompras.TabIndex = 13;
             buttonFiltrarCompras.Text = "Filtrar";
-            buttonFiltrarCompras.UseVisualStyleBackColor = true;
+            buttonFiltrarCompras.UseVisualStyleBackColor = false;
             buttonFiltrarCompras.Click += AoClicarNoBotaoFiltrarDaAbaCompras;
             // 
             // labelNomeCliente
@@ -630,13 +676,14 @@
             // 
             obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
             // 
-            // MainForm
+            // FormListagem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1013, 453);
             Controls.Add(tabControl1);
-            Name = "MainForm";
+            MinimumSize = new Size(1029, 492);
+            Name = "FormListagem";
             Text = "Coders Growth";
             Load += AoCarregarFormulario;
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).EndInit();
@@ -644,12 +691,14 @@
             tabControl1.ResumeLayout(false);
             tabPageObras.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
+            panelBottomObras.ResumeLayout(false);
             panelFiltroObras.ResumeLayout(false);
             panelFiltroObras.PerformLayout();
             tabPageCompras.ResumeLayout(false);
             groupBoxCompras.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridCompras).EndInit();
             ((System.ComponentModel.ISupportInitialize)compraClienteBindingSource).EndInit();
+            panel2BottomCompras.ResumeLayout(false);
             panelFiltroCompras.ResumeLayout(false);
             panelFiltroCompras.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource1).EndInit();
@@ -659,14 +708,6 @@
         #endregion
         private BindingSource obraBindingSource;
         private DataGridView dataGridObras;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn tituloDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn autorDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn numeroCapitulosDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn valorObraDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn formatoDataGridViewTextBoxColumn;
-        private DataGridViewCheckBoxColumn foiFinalizadaDataGridViewCheckBoxColumn;
-        private DataGridViewTextBoxColumn inicioPublicacaoDataGridViewTextBoxColumn;
         private TabControl tabControl1;
         private TabPage tabPageObras;
         private TabPage tabPageCompras;
@@ -703,7 +744,6 @@
         private Label labelCpf;
         private Label labelDataCompra;
         private TextBox textBoxNomeCliente;
-        private TextBox textBoxCpf;
         private BindingSource obraBindingSource1;
         private GroupBox groupBox1;
         private DataGridView dataGridCompras;
@@ -716,5 +756,17 @@
         private DataGridViewTextBoxColumn dataCompraDataGridViewTextBoxColumn;
         private GroupBox groupBoxCompras;
         private DateTimePicker dateTimePickerDataCompra;
+        private MaskedTextBox maskedTextBoxCpf;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn Sinopse;
+        private DataGridViewTextBoxColumn tituloDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn autorDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn numeroCapitulosDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn valorObraDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn formatoDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn foiFinalizadaDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn inicioPublicacaoDataGridViewTextBoxColumn;
+        private Button buttonAdicionarObra;
+        private Button buttonAdicionarCompra;
     }
 }

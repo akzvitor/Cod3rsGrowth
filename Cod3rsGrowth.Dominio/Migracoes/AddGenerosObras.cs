@@ -9,7 +9,7 @@ namespace Cod3rsGrowth.Dominio.Migracoes
         {
             Create.Table("GenerosObras")
                 .WithColumn("ObraId").AsInt32().ForeignKey("Obras", "Id")
-                .WithColumn("GeneroId").AsInt32().ForeignKey("Generos", "Id");
+                .WithColumn("Genero").AsString();
         }
 
         public override void Down()
