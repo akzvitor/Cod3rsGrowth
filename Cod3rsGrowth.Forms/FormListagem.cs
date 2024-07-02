@@ -1,9 +1,6 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Dominio.Enums;
-using System.Xml.Schema;
-using LinqToDB;
-
 
 namespace Cod3rsGrowth.Forms
 {
@@ -191,23 +188,44 @@ namespace Cod3rsGrowth.Forms
 
                     DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover" +
                                                                 $" a obra de ID {idDaObraSelecionada}?" +
-                                                                $" As compras vinculadas a ela também serão removidas.", 
+                                                                $" As compras vinculadas a ela também serão removidas.",
                                                                 "Remover Obra", MessageBoxButtons.YesNo);
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        //_servicoObra.RemoverComprasVinculadas(idDaObraSelecionada);
                         _servicoObra.Remover(idDaObraSelecionada);
-                        //foreach (var item in listaDeComprasVinculadas)
-                        //{
-                        //    _servicoCompraCliente.Remover(item);
-                        //}
                         ListarObras();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoRemoverDaAbaCompras(object sender, EventArgs e)
+        {
+            try
+            {
+                var tabelaCompras = _servicoCompraCliente.ObterTodos(_filtroCompraCliente);
+
+                if (tabelaCompras != null)
+                {
+                    var linhaSelecionada = dataGridCompras.CurrentCell.RowIndex;
+                    var idDaCompraSelecionada = Convert.ToInt32(dataGridCompras.Rows[linhaSelecionada].Cells["colunaIdCompras"].Value);
+
+                    DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover a compra de ID {idDaCompraSelecionada}?",
+                                                                 "Remover Compra", MessageBoxButtons.YesNo);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        _servicoCompraCliente.Remover(idDaCompraSelecionada);
                         ListarCompras();
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
