@@ -84,8 +84,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
             try
             {
                 _db.ComprasCliente
-                      .Where(c => c.Id == id)
-                      .Delete();
+                    .Where(c => c.Id == id)
+                    .Delete();
             }
             catch (Exception ex)
             {
