@@ -39,18 +39,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
             return obra;
         }
 
-        private void SalvarGeneros(int idObra, List<string> generos)
-        {
-            foreach (var item in generos)
-            {
-                _db.Execute(
-                    $"INSERT INTO GenerosObras (ObraId, Genero) VALUES (@idObra, @item)",
-                    new DataParameter("@idObra", idObra),
-                    new DataParameter("@item", @item)
-                );
-            }
-        }
-
         public Obra Editar(Obra obra)
         {
             var obraNoBanco = _db.Obras.FirstOrDefault(o => o.Id == obra.Id)
@@ -95,6 +83,18 @@ namespace Cod3rsGrowth.Infra.Repositorios
             catch (Exception ex)
             {
                 throw new Exception("Não foi possível remover a obra selecionada.");
+            }
+        }
+
+        private void SalvarGeneros(int idObra, List<string> generos)
+        {
+            foreach (var item in generos)
+            {
+                _db.Execute(
+                    $"INSERT INTO GenerosObras (ObraId, Genero) VALUES (@idObra, @item)",
+                    new DataParameter("@idObra", idObra),
+                    new DataParameter("@item", @item)
+                );
             }
         }
 

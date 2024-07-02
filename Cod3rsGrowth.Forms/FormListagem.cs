@@ -219,6 +219,7 @@ namespace Cod3rsGrowth.Forms
                 DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover " +
                                                             $"a compra de ID {idDaCompraSelecionada}?",
                                                              "Remover Compra", MessageBoxButtons.YesNo);
+
                 if (dialogResult == DialogResult.Yes)
                 {
                     _servicoCompraCliente.Remover(idDaCompraSelecionada);
