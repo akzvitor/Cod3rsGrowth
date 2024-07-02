@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Forms
         private readonly ServicoCompraCliente _servicoCompraCliente;
         private readonly FiltroObra _filtroObra = new();
         private readonly FiltroCompraCliente _filtroCompraCliente = new();
-
+        const int dataGridVazio = -1;
         public FormListagem(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
             _servicoObra = servicoObra;
@@ -178,22 +178,23 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                var tabelaObras = _servicoObra.ObterTodos(_filtroObra);
+                const string colunaIdObra = "colunaIdObras";
+                var idDaObraSelecionada = ObterIdDoObjetoSelecionado(colunaIdObra, dataGridObras);
 
-                if (tabelaObras != null)
+                if (idDaObraSelecionada == dataGridVazio)
                 {
-                    var linhaSelecionada = dataGridObras.CurrentCell.RowIndex;
-                    var idDaObraSelecionada = Convert.ToInt32(dataGridObras.Rows[linhaSelecionada].Cells["colunaId"].Value);
+                    MessageBox.Show("Não foi possível remover, não há obras cadastradas.", "Lista de obras vazia");
+                    return;
+                }
 
-                    DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover" +
-                                                                $" a obra de ID {idDaObraSelecionada}?",
-                                                                "Remover Obra", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover" +
+                                                            $" a obra de ID {idDaObraSelecionada}?",
+                                                            "Remover Obra", MessageBoxButtons.YesNo);
 
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        _servicoObra.Remover(idDaObraSelecionada);
-                        ListarObras();
-                    }
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoObra.Remover(idDaObraSelecionada);
+                    ListarObras();
                 }
             }
             catch (Exception ex)
@@ -206,28 +207,41 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                var tabelaCompras = _servicoCompraCliente.ObterTodos(_filtroCompraCliente);
+                const string nomeColunaIdCompras = "colunaIdCompras";
+                var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(nomeColunaIdCompras, dataGridCompras);
 
-                if (tabelaCompras != null)
+                if (idDaCompraSelecionada == dataGridVazio)
                 {
-                    var linhaSelecionada = dataGridCompras.CurrentCell.RowIndex;
-                    var idDaCompraSelecionada = Convert.ToInt32(dataGridCompras.Rows[linhaSelecionada].Cells["colunaIdCompras"].Value);
+                    MessageBox.Show("Não foi possível remover, não há compras cadastradas.", "Lista de compras vazia.");
+                    return;
+                }
 
-                    DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover " +
-                                                                $"a compra de ID {idDaCompraSelecionada}?",
-                                                                 "Remover Compra", MessageBoxButtons.YesNo);
-
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        _servicoCompraCliente.Remover(idDaCompraSelecionada);
-                        ListarCompras();
-                    }
+                DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover " +
+                                                            $"a compra de ID {idDaCompraSelecionada}?",
+                                                             "Remover Compra", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoCompraCliente.Remover(idDaCompraSelecionada);
+                    ListarCompras();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private static int ObterIdDoObjetoSelecionado(string nomeColuna, DataGridView dataGrid)
+        {
+            if (dataGrid.CurrentCell == null)
+            {
+                return dataGridVazio;
+            }
+
+            var linhaSelecionada = dataGrid.CurrentCell.RowIndex;
+            var idDoObjetoSelecionado = Convert.ToInt32(dataGrid.Rows[linhaSelecionada].Cells[nomeColuna].Value);
+
+            return idDoObjetoSelecionado;
         }
     }
 }

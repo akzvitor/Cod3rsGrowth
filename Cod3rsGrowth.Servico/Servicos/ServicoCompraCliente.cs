@@ -40,11 +40,6 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioCompraCliente.Criar(compraCliente);
         }
 
-        public void AdicionarProdutos(int compraId, List<int> idProdutos)
-        {
-            _repositorioCompraCliente.AdicionarProdutos(compraId, idProdutos);
-        }
-
         public CompraCliente Editar(CompraCliente compraCliente)
         {
             var resultadoValidacao = _validadorCompraCliente.Validate(compraCliente, options =>

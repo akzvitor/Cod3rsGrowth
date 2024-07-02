@@ -58,7 +58,6 @@ namespace Cod3rsGrowth.Forms
                 if (dialogResult == DialogResult.Yes)
                 {
                     _servicoCompraCliente.Criar(novaCompra);
-                    _servicoCompraCliente.AdicionarProdutos(novaCompra.Id, novaCompra.listaIdDosProdutos);
                     Close();
                 }
             }

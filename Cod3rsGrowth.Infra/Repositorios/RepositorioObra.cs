@@ -34,11 +34,12 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public Obra Criar(Obra obra)
         {
             obra.Id = _db.InsertWithInt32Identity(obra);
+            SalvarGeneros(obra.Id, obra.GenerosParaCriacao);
 
             return obra;
         }
 
-        public void SalvarGeneros(int idObra, List<string> generos)
+        private void SalvarGeneros(int idObra, List<string> generos)
         {
             foreach (var item in generos)
             {
