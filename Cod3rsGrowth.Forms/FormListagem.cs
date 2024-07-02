@@ -184,11 +184,9 @@ namespace Cod3rsGrowth.Forms
                 {
                     var linhaSelecionada = dataGridObras.CurrentCell.RowIndex;
                     var idDaObraSelecionada = Convert.ToInt32(dataGridObras.Rows[linhaSelecionada].Cells["colunaId"].Value);
-                    var listaDeComprasVinculadas = _servicoObra.ObterComprasVinculadas(idDaObraSelecionada);
 
                     DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover" +
-                                                                $" a obra de ID {idDaObraSelecionada}?" +
-                                                                $" As compras vinculadas a ela também serão removidas.",
+                                                                $" a obra de ID {idDaObraSelecionada}?",
                                                                 "Remover Obra", MessageBoxButtons.YesNo);
 
                     if (dialogResult == DialogResult.Yes)

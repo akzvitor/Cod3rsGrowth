@@ -66,15 +66,5 @@ namespace Cod3rsGrowth.Servico.Servicos
         {
             _repositorioObra.Remover(id);
         }
-
-        public List<int> ObterComprasVinculadas(int idDaObra)
-        {
-            return _repositorioObra.ObterComprasVinculadas(idDaObra);
-        }
-
-        public void RemoverComprasVinculadas(int idDaObra)
-        {
-            _repositorioObra.RemoverComprasVinculadas(idDaObra);
-        }
     }
 }

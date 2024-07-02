@@ -47,8 +47,6 @@ namespace Cod3rsGrowth.Forms
                 List<string> generosSelecionados = ObterGenerosSelecionados();
                 List<Genero> listaDeGeneros = ObterListaDeEnumsGenero(generosSelecionados);
 
-             
-
                 Obra novaObra = new()
                 {
                     Autor = textBoxAutor.Text,

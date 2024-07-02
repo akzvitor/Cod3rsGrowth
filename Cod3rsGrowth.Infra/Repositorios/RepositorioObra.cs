@@ -83,30 +83,23 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var obraNoBanco = _db.Obras.FirstOrDefault(o => o.Id == id)
                 ?? throw new Exception("Obra não encontrada.");
 
-            _db.Obras
+            try
+            {
+                _db.Obras
                     .Where(o => o.Id == id)
                     .Delete();
-            //try
-            //{
-                
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception("Não foi possível remover a obra selecionada.");
-            //}
+
+                RemoverComprasVinculadas();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível remover a obra selecionada.");
+            }
         }
 
-        public List<int> ObterComprasVinculadas(int idDaObra)
+        private void RemoverComprasVinculadas()
         {
-            var listaDeCompras = _db.Query<int>("SELECT CompraId FROM ComprasObras WHERE ObraId = @idDaObra",
-                                                new { idDaObra }).ToList();
-
-            return listaDeCompras;
-        }
-
-        public void RemoverComprasVinculadas(int idDaObra)
-        {
-            _db.Execute($"DELETE FROM ComprasObras Where ObraId = {idDaObra}");
+            _db.Execute($"DELETE FROM ComprasObras Where ObraId = NULL");
         }
 
         public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
