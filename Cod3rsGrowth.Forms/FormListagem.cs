@@ -213,7 +213,8 @@ namespace Cod3rsGrowth.Forms
                     var linhaSelecionada = dataGridCompras.CurrentCell.RowIndex;
                     var idDaCompraSelecionada = Convert.ToInt32(dataGridCompras.Rows[linhaSelecionada].Cells["colunaIdCompras"].Value);
 
-                    DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover a compra de ID {idDaCompraSelecionada}?",
+                    DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover " +
+                                                                $"a compra de ID {idDaCompraSelecionada}?",
                                                                  "Remover Compra", MessageBoxButtons.YesNo);
 
                     if (dialogResult == DialogResult.Yes)

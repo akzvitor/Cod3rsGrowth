@@ -81,18 +81,16 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var compraNoBanco = _db.ComprasCliente.FirstOrDefault(c => c.Id == id)
                 ?? throw new Exception("Compra não encontrada.");
 
-            _db.ComprasCliente
-                    .Where(c => c.Id == id)
-                    .Delete();
-
-            //try
-            //{
-                
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception("Não foi possível remover a compra.");
-            //}
+            try
+            {
+                _db.ComprasCliente
+                      .Where(c => c.Id == id)
+                      .Delete();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível remover a compra.");
+            }
         }
 
         public static IQueryable<CompraCliente> Filtrar(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)
