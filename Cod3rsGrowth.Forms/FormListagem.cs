@@ -232,19 +232,6 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private static int ObterIdDoObjetoSelecionado(string nomeColuna, DataGridView dataGrid)
-        {
-            if (dataGrid.CurrentCell == null)
-            {
-                return dataGridVazio;
-            }
-
-            var linhaSelecionada = dataGrid.CurrentCell.RowIndex;
-            var idDoObjetoSelecionado = Convert.ToInt32(dataGrid.Rows[linhaSelecionada].Cells[nomeColuna].Value);
-
-            return idDoObjetoSelecionado;
-        }
-
         private void AoClicarNoBotaoEditarDaAbaObras(object sender, EventArgs e)
         {
             try
@@ -274,6 +261,43 @@ namespace Cod3rsGrowth.Forms
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void AoClicarNoBotaoEditarDaAbaCompras(object sender, EventArgs e)
+        {
+            const string colunaIdCompra = "colunaIdCompras";
+            var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(colunaIdCompra, dataGridCompras);
+
+            if (idDaCompraSelecionada == dataGridVazio)
+            {
+                MessageBox.Show("Não foi possível editar, não há compras cadastradas.", "Lista de compras vazia");
+                return;
+            }
+
+            DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja editar os dados " +
+                                                        $"da compra de ID {idDaCompraSelecionada}?",
+                                                        "Editar Compra", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                var compraASerEditada = _servicoCompraCliente.ObterPorId(idDaCompraSelecionada);
+                var formEditarCompra = new FormEditarCompra(_servicoCompraCliente, _servicoObra, compraASerEditada);
+                formEditarCompra.ShowDialog();
+                ListarObras();
+            }
+        }
+
+        private static int ObterIdDoObjetoSelecionado(string nomeColuna, DataGridView dataGrid)
+        {
+            if (dataGrid.CurrentCell == null)
+            {
+                return dataGridVazio;
+            }
+
+            var linhaSelecionada = dataGrid.CurrentCell.RowIndex;
+            var idDoObjetoSelecionado = Convert.ToInt32(dataGrid.Rows[linhaSelecionada].Cells[nomeColuna].Value);
+
+            return idDoObjetoSelecionado;
         }
     }
 }
