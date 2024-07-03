@@ -103,6 +103,7 @@
             buttonCancelar.TabIndex = 39;
             buttonCancelar.Text = "Cancelar";
             buttonCancelar.UseVisualStyleBackColor = false;
+            buttonCancelar.Click += AoClicarNoBotaoCancelar;
             // 
             // buttonSalvar
             // 
@@ -113,6 +114,7 @@
             buttonSalvar.TabIndex = 38;
             buttonSalvar.Text = "Salvar";
             buttonSalvar.UseVisualStyleBackColor = false;
+            buttonSalvar.Click += AoClicarNoBotaoSalvar;
             // 
             // textBoxValor
             // 
@@ -293,6 +295,9 @@
             Controls.Add(labelSinopse);
             Controls.Add(labelAutor);
             Controls.Add(labelTitulo);
+            MaximizeBox = false;
+            MaximumSize = new Size(381, 521);
+            MinimumSize = new Size(381, 521);
             Name = "FormEditarObra";
             Text = "Editar Obra";
             Load += AoInicializarFormulario;

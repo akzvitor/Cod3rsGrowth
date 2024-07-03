@@ -54,6 +54,7 @@
             tabPageObras = new TabPage();
             groupBox1 = new GroupBox();
             panelBottomObras = new Panel();
+            buttonEditarObra = new Button();
             buttonRemoverObra = new Button();
             buttonAdicionarObra = new Button();
             panelFiltroObras = new Panel();
@@ -94,7 +95,6 @@
             buttonFiltrarCompras = new Button();
             labelNomeCliente = new Label();
             obraBindingSource1 = new BindingSource(components);
-            buttonEditarObra = new Button();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).BeginInit();
             tabControl1.SuspendLayout();
@@ -271,6 +271,17 @@
             panelBottomObras.Name = "panelBottomObras";
             panelBottomObras.Size = new Size(1002, 53);
             panelBottomObras.TabIndex = 0;
+            // 
+            // buttonEditarObra
+            // 
+            buttonEditarObra.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonEditarObra.Location = new Point(8, 11);
+            buttonEditarObra.Name = "buttonEditarObra";
+            buttonEditarObra.Size = new Size(75, 34);
+            buttonEditarObra.TabIndex = 11;
+            buttonEditarObra.Text = "Editar";
+            buttonEditarObra.UseVisualStyleBackColor = true;
+            buttonEditarObra.Click += AoClicarNoBotaoEditarDaAbaObras;
             // 
             // buttonRemoverObra
             // 
@@ -703,16 +714,6 @@
             // obraBindingSource1
             // 
             obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
-            // 
-            // buttonEditarObra
-            // 
-            buttonEditarObra.Location = new Point(8, 11);
-            buttonEditarObra.Name = "buttonEditarObra";
-            buttonEditarObra.Size = new Size(75, 34);
-            buttonEditarObra.TabIndex = 11;
-            buttonEditarObra.Text = "Editar";
-            buttonEditarObra.UseVisualStyleBackColor = true;
-            buttonEditarObra.Click += AoClicarNoBotaoEditarDaAbaObras;
             // 
             // FormListagem
             // 

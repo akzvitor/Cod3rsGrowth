@@ -46,18 +46,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             try   
             {
-                _db.Obras
-                .Where(o => o.Id == obra.Id)
-                .Set(o => o.Titulo, obra.Titulo)
-                .Set(o => o.Autor, obra.Autor)
-                .Set(o => o.Generos, obra.Generos)
-                .Set(o => o.Sinopse, obra.Sinopse)
-                .Set(o => o.NumeroCapitulos, obra.NumeroCapitulos)
-                .Set(o => o.ValorObra, obra.ValorObra)
-                .Set(o => o.Formato, obra.Formato)
-                .Set(o => o.FoiFinalizada, obra.FoiFinalizada)
-                .Set(o => o.InicioPublicacao, obra.InicioPublicacao)
-                .Update();
+                _db.Update(obra);
             }
             catch (Exception ex) 
             {

@@ -45,17 +45,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
             try
             {
                 _db.Update(compra);
-             
-                //_db.ComprasCliente
-                //.Where(c => c.Id == compra.Id)
-                //.Set(c => c.Cpf, compra.Cpf)
-                //.Set(c => c.Nome, compra.Nome)
-                //.Set(c => c.Telefone, compra.Telefone)
-                //.Set(c => c.Email, compra.Email)
-                //.Set(c => c.Produtos, compra.Produtos)
-                //.Set(c => c.ValorCompra, compra.ValorCompra)
-                //.Set(c => c.DataCompra, compra.DataCompra)
-                //.Update();
             }
             catch (Exception ex)
             {

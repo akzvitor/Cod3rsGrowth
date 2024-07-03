@@ -32,6 +32,16 @@ namespace Cod3rsGrowth.Forms
             comboBoxFormato.SelectedItem = _obraASerEditada.Formato;
             _ = _obraASerEditada.FoiFinalizada == true ?
                 radioButtonFinalizada.Checked = true : radioButtonEmLancamento.Checked = true;
+
+            //foreach (var item in _obraASerEditada.GenerosParaCriacao)
+            //{
+            //    var index = checkedListBoxGeneros.Items.IndexOf(item);
+
+            //    if (index != -1)
+            //    {
+            //        checkedListBoxGeneros.SetItemChecked(index, true);
+            //    }
+            //}
         }
 
         private void AoInicializarFormulario(object sender, EventArgs e)
@@ -40,6 +50,45 @@ namespace Cod3rsGrowth.Forms
             {
                 InicializarValoresComboBox();
                 InicializarValoresDosCamposDeDados();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
+        {
+            try
+            {
+                _obraASerEditada.Autor = textBoxAutor.Text;
+                _obraASerEditada.Titulo = textBoxTitulo.Text;
+                _obraASerEditada.ValorObra = decimal.Parse(textBoxValor.Text);
+                _obraASerEditada.Sinopse = richTextBoxSinopse.Text;
+                _obraASerEditada.NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value);
+                _obraASerEditada.Formato = (Formato)comboBoxFormato.SelectedIndex;
+                _obraASerEditada.InicioPublicacao = dateTimePickerInicioPublicacao.Value;
+                _obraASerEditada.FoiFinalizada = radioButtonFinalizada.Checked;
+
+                DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
+                                                            "Salvar Obra", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoObra.Editar(_obraASerEditada);
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
+        {
+            try
+            {
+                Close();
             }
             catch (Exception ex)
             {
