@@ -30,30 +30,22 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             obraBindingSource = new BindingSource(components);
             dataGridObras = new DataGridView();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            Sinopse = new DataGridViewTextBoxColumn();
-            tituloDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            autorDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            numeroCapitulosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            valorObraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            formatoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            foiFinalizadaDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            inicioPublicacaoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tabControl1 = new TabControl();
             tabPageObras = new TabPage();
             groupBox1 = new GroupBox();
             panelBottomObras = new Panel();
+            buttonRemoverObra = new Button();
             buttonAdicionarObra = new Button();
             panelFiltroObras = new Panel();
             buttonLimparObras = new Button();
@@ -72,7 +64,7 @@
             tabPageCompras = new TabPage();
             groupBoxCompras = new GroupBox();
             dataGridCompras = new DataGridView();
-            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            colunaIdCompras = new DataGridViewTextBoxColumn();
             cpfDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             telefoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -81,6 +73,7 @@
             dataCompraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             compraClienteBindingSource = new BindingSource(components);
             panel2BottomCompras = new Panel();
+            buttonRemoverCompra = new Button();
             buttonAdicionarCompra = new Button();
             panelFiltroCompras = new Panel();
             maskedTextBoxCpf = new MaskedTextBox();
@@ -92,6 +85,15 @@
             buttonFiltrarCompras = new Button();
             labelNomeCliente = new Label();
             obraBindingSource1 = new BindingSource(components);
+            colunaIdObras = new DataGridViewTextBoxColumn();
+            Sinopse = new DataGridViewTextBoxColumn();
+            tituloDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            autorDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            numeroCapitulosDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            valorObraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            formatoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            foiFinalizadaDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            inicioPublicacaoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).BeginInit();
             tabControl1.SuspendLayout();
@@ -130,7 +132,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridObras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridObras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, Sinopse, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
+            dataGridObras.Columns.AddRange(new DataGridViewColumn[] { colunaIdObras, Sinopse, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
             dataGridObras.DataSource = obraBindingSource;
             dataGridObras.Dock = DockStyle.Fill;
             dataGridObras.Location = new Point(3, 19);
@@ -139,90 +141,6 @@
             dataGridObras.RowTemplate.Height = 25;
             dataGridObras.Size = new Size(983, 241);
             dataGridObras.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            idDataGridViewTextBoxColumn.FillWeight = 6.272095F;
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Sinopse
-            // 
-            Sinopse.DataPropertyName = "Sinopse";
-            Sinopse.HeaderText = "Sinopse";
-            Sinopse.Name = "Sinopse";
-            Sinopse.ReadOnly = true;
-            Sinopse.Visible = false;
-            // 
-            // tituloDataGridViewTextBoxColumn
-            // 
-            tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            tituloDataGridViewTextBoxColumn.FillWeight = 30.26575F;
-            tituloDataGridViewTextBoxColumn.HeaderText = "Título";
-            tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
-            tituloDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // autorDataGridViewTextBoxColumn
-            // 
-            autorDataGridViewTextBoxColumn.DataPropertyName = "Autor";
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            autorDataGridViewTextBoxColumn.FillWeight = 30.3542786F;
-            autorDataGridViewTextBoxColumn.HeaderText = "Autor";
-            autorDataGridViewTextBoxColumn.Name = "autorDataGridViewTextBoxColumn";
-            autorDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // numeroCapitulosDataGridViewTextBoxColumn
-            // 
-            numeroCapitulosDataGridViewTextBoxColumn.DataPropertyName = "NumeroCapitulos";
-            numeroCapitulosDataGridViewTextBoxColumn.FillWeight = 13.3542786F;
-            numeroCapitulosDataGridViewTextBoxColumn.HeaderText = "Capítulos";
-            numeroCapitulosDataGridViewTextBoxColumn.Name = "numeroCapitulosDataGridViewTextBoxColumn";
-            numeroCapitulosDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // valorObraDataGridViewTextBoxColumn
-            // 
-            valorObraDataGridViewTextBoxColumn.DataPropertyName = "ValorObra";
-            dataGridViewCellStyle5.Padding = new Padding(10, 0, 0, 0);
-            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            valorObraDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
-            valorObraDataGridViewTextBoxColumn.HeaderText = "Valor";
-            valorObraDataGridViewTextBoxColumn.Name = "valorObraDataGridViewTextBoxColumn";
-            valorObraDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // formatoDataGridViewTextBoxColumn
-            // 
-            formatoDataGridViewTextBoxColumn.DataPropertyName = "Formato";
-            formatoDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
-            formatoDataGridViewTextBoxColumn.HeaderText = "Formato";
-            formatoDataGridViewTextBoxColumn.Name = "formatoDataGridViewTextBoxColumn";
-            formatoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // foiFinalizadaDataGridViewCheckBoxColumn
-            // 
-            foiFinalizadaDataGridViewCheckBoxColumn.DataPropertyName = "FoiFinalizada";
-            foiFinalizadaDataGridViewCheckBoxColumn.FillWeight = 15.3542786F;
-            foiFinalizadaDataGridViewCheckBoxColumn.FlatStyle = FlatStyle.System;
-            foiFinalizadaDataGridViewCheckBoxColumn.HeaderText = "Finalizada";
-            foiFinalizadaDataGridViewCheckBoxColumn.Name = "foiFinalizadaDataGridViewCheckBoxColumn";
-            foiFinalizadaDataGridViewCheckBoxColumn.ReadOnly = true;
-            // 
-            // inicioPublicacaoDataGridViewTextBoxColumn
-            // 
-            inicioPublicacaoDataGridViewTextBoxColumn.DataPropertyName = "InicioPublicacao";
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
-            inicioPublicacaoDataGridViewTextBoxColumn.FillWeight = 20.3542786F;
-            inicioPublicacaoDataGridViewTextBoxColumn.HeaderText = "Início da Publicação";
-            inicioPublicacaoDataGridViewTextBoxColumn.Name = "inicioPublicacaoDataGridViewTextBoxColumn";
-            inicioPublicacaoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // tabControl1
             // 
@@ -261,23 +179,35 @@
             // panelBottomObras
             // 
             panelBottomObras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelBottomObras.Controls.Add(buttonRemoverObra);
             panelBottomObras.Controls.Add(buttonAdicionarObra);
             panelBottomObras.Location = new Point(3, 372);
             panelBottomObras.Name = "panelBottomObras";
             panelBottomObras.Size = new Size(1002, 53);
             panelBottomObras.TabIndex = 0;
             // 
+            // buttonRemoverObra
+            // 
+            buttonRemoverObra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonRemoverObra.Location = new Point(916, 11);
+            buttonRemoverObra.Name = "buttonRemoverObra";
+            buttonRemoverObra.Size = new Size(75, 34);
+            buttonRemoverObra.TabIndex = 10;
+            buttonRemoverObra.Text = "Remover";
+            buttonRemoverObra.UseVisualStyleBackColor = true;
+            buttonRemoverObra.Click += AoClicarNoBotaoRemoverDaAbaObras;
+            // 
             // buttonAdicionarObra
             // 
             buttonAdicionarObra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonAdicionarObra.BackColor = SystemColors.ControlLight;
-            buttonAdicionarObra.Location = new Point(916, 11);
+            buttonAdicionarObra.Location = new Point(835, 11);
             buttonAdicionarObra.Name = "buttonAdicionarObra";
             buttonAdicionarObra.Size = new Size(75, 34);
             buttonAdicionarObra.TabIndex = 9;
             buttonAdicionarObra.Text = "Adicionar";
             buttonAdicionarObra.UseVisualStyleBackColor = false;
-            buttonAdicionarObra.Click += AoClicarNoBotaoAdicionarObra;
+            buttonAdicionarObra.Click += AoClicarNoBotaoAdicionarDaAbaObras;
             // 
             // panelFiltroObras
             // 
@@ -480,7 +410,7 @@
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
             dataGridCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dataGridCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridCompras.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, cpfDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, valorCompraDataGridViewTextBoxColumn, dataCompraDataGridViewTextBoxColumn });
+            dataGridCompras.Columns.AddRange(new DataGridViewColumn[] { colunaIdCompras, cpfDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, valorCompraDataGridViewTextBoxColumn, dataCompraDataGridViewTextBoxColumn });
             dataGridCompras.DataSource = compraClienteBindingSource;
             dataGridCompras.Dock = DockStyle.Fill;
             dataGridCompras.Location = new Point(3, 19);
@@ -490,15 +420,15 @@
             dataGridCompras.Size = new Size(983, 242);
             dataGridCompras.TabIndex = 3;
             // 
-            // idDataGridViewTextBoxColumn1
+            // colunaIdCompras
             // 
-            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            colunaIdCompras.DataPropertyName = "Id";
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            idDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle8;
-            idDataGridViewTextBoxColumn1.FillWeight = 20F;
-            idDataGridViewTextBoxColumn1.HeaderText = "Id";
-            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
-            idDataGridViewTextBoxColumn1.ReadOnly = true;
+            colunaIdCompras.DefaultCellStyle = dataGridViewCellStyle8;
+            colunaIdCompras.FillWeight = 20F;
+            colunaIdCompras.HeaderText = "Id";
+            colunaIdCompras.Name = "colunaIdCompras";
+            colunaIdCompras.ReadOnly = true;
             // 
             // cpfDataGridViewTextBoxColumn
             // 
@@ -556,23 +486,35 @@
             // panel2BottomCompras
             // 
             panel2BottomCompras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2BottomCompras.Controls.Add(buttonRemoverCompra);
             panel2BottomCompras.Controls.Add(buttonAdicionarCompra);
             panel2BottomCompras.Location = new Point(3, 376);
             panel2BottomCompras.Name = "panel2BottomCompras";
             panel2BottomCompras.Size = new Size(1002, 49);
             panel2BottomCompras.TabIndex = 1;
             // 
+            // buttonRemoverCompra
+            // 
+            buttonRemoverCompra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonRemoverCompra.Location = new Point(919, 7);
+            buttonRemoverCompra.Name = "buttonRemoverCompra";
+            buttonRemoverCompra.Size = new Size(75, 34);
+            buttonRemoverCompra.TabIndex = 16;
+            buttonRemoverCompra.Text = "Remover";
+            buttonRemoverCompra.UseVisualStyleBackColor = true;
+            buttonRemoverCompra.Click += AoClicarNoBotaoRemoverDaAbaCompras;
+            // 
             // buttonAdicionarCompra
             // 
             buttonAdicionarCompra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonAdicionarCompra.BackColor = SystemColors.ControlLight;
-            buttonAdicionarCompra.Location = new Point(919, 7);
+            buttonAdicionarCompra.Location = new Point(838, 7);
             buttonAdicionarCompra.Name = "buttonAdicionarCompra";
             buttonAdicionarCompra.Size = new Size(75, 34);
             buttonAdicionarCompra.TabIndex = 15;
             buttonAdicionarCompra.Text = "Adicionar";
             buttonAdicionarCompra.UseVisualStyleBackColor = false;
-            buttonAdicionarCompra.Click += AoClicarNoBotaoAdicionarCompra;
+            buttonAdicionarCompra.Click += AoClicarNoBotaoAdicionarDaAbaCompras;
             // 
             // panelFiltroCompras
             // 
@@ -676,6 +618,90 @@
             // 
             obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
             // 
+            // colunaIdObras
+            // 
+            colunaIdObras.DataPropertyName = "Id";
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            colunaIdObras.DefaultCellStyle = dataGridViewCellStyle2;
+            colunaIdObras.FillWeight = 6.272095F;
+            colunaIdObras.HeaderText = "Id";
+            colunaIdObras.Name = "colunaIdObras";
+            colunaIdObras.ReadOnly = true;
+            // 
+            // Sinopse
+            // 
+            Sinopse.DataPropertyName = "Sinopse";
+            Sinopse.HeaderText = "Sinopse";
+            Sinopse.Name = "Sinopse";
+            Sinopse.ReadOnly = true;
+            Sinopse.Visible = false;
+            // 
+            // tituloDataGridViewTextBoxColumn
+            // 
+            tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            tituloDataGridViewTextBoxColumn.FillWeight = 30.26575F;
+            tituloDataGridViewTextBoxColumn.HeaderText = "Título";
+            tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
+            tituloDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // autorDataGridViewTextBoxColumn
+            // 
+            autorDataGridViewTextBoxColumn.DataPropertyName = "Autor";
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            autorDataGridViewTextBoxColumn.FillWeight = 30.3542786F;
+            autorDataGridViewTextBoxColumn.HeaderText = "Autor";
+            autorDataGridViewTextBoxColumn.Name = "autorDataGridViewTextBoxColumn";
+            autorDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numeroCapitulosDataGridViewTextBoxColumn
+            // 
+            numeroCapitulosDataGridViewTextBoxColumn.DataPropertyName = "NumeroCapitulos";
+            numeroCapitulosDataGridViewTextBoxColumn.FillWeight = 13.3542786F;
+            numeroCapitulosDataGridViewTextBoxColumn.HeaderText = "Capítulos";
+            numeroCapitulosDataGridViewTextBoxColumn.Name = "numeroCapitulosDataGridViewTextBoxColumn";
+            numeroCapitulosDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // valorObraDataGridViewTextBoxColumn
+            // 
+            valorObraDataGridViewTextBoxColumn.DataPropertyName = "ValorObra";
+            dataGridViewCellStyle5.Padding = new Padding(10, 0, 0, 0);
+            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            valorObraDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
+            valorObraDataGridViewTextBoxColumn.HeaderText = "Valor";
+            valorObraDataGridViewTextBoxColumn.Name = "valorObraDataGridViewTextBoxColumn";
+            valorObraDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // formatoDataGridViewTextBoxColumn
+            // 
+            formatoDataGridViewTextBoxColumn.DataPropertyName = "Formato";
+            formatoDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
+            formatoDataGridViewTextBoxColumn.HeaderText = "Formato";
+            formatoDataGridViewTextBoxColumn.Name = "formatoDataGridViewTextBoxColumn";
+            formatoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // foiFinalizadaDataGridViewCheckBoxColumn
+            // 
+            foiFinalizadaDataGridViewCheckBoxColumn.DataPropertyName = "FoiFinalizada";
+            foiFinalizadaDataGridViewCheckBoxColumn.FillWeight = 15.3542786F;
+            foiFinalizadaDataGridViewCheckBoxColumn.FlatStyle = FlatStyle.System;
+            foiFinalizadaDataGridViewCheckBoxColumn.HeaderText = "Finalizada";
+            foiFinalizadaDataGridViewCheckBoxColumn.Name = "foiFinalizadaDataGridViewCheckBoxColumn";
+            foiFinalizadaDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // inicioPublicacaoDataGridViewTextBoxColumn
+            // 
+            inicioPublicacaoDataGridViewTextBoxColumn.DataPropertyName = "InicioPublicacao";
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            inicioPublicacaoDataGridViewTextBoxColumn.FillWeight = 20.3542786F;
+            inicioPublicacaoDataGridViewTextBoxColumn.HeaderText = "Início da Publicação";
+            inicioPublicacaoDataGridViewTextBoxColumn.Name = "inicioPublicacaoDataGridViewTextBoxColumn";
+            inicioPublicacaoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // FormListagem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -747,17 +773,21 @@
         private BindingSource obraBindingSource1;
         private GroupBox groupBox1;
         private DataGridView dataGridCompras;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private GroupBox groupBoxCompras;
+        private DateTimePicker dateTimePickerDataCompra;
+        private MaskedTextBox maskedTextBoxCpf;
+        private Button buttonAdicionarObra;
+        private Button buttonAdicionarCompra;
+        private Button buttonRemoverObra;
+        private Button buttonRemoverCompra;
+        private DataGridViewTextBoxColumn colunaIdCompras;
         private DataGridViewTextBoxColumn cpfDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn telefoneDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valorCompraDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dataCompraDataGridViewTextBoxColumn;
-        private GroupBox groupBoxCompras;
-        private DateTimePicker dateTimePickerDataCompra;
-        private MaskedTextBox maskedTextBoxCpf;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn colunaIdObras;
         private DataGridViewTextBoxColumn Sinopse;
         private DataGridViewTextBoxColumn tituloDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn autorDataGridViewTextBoxColumn;
@@ -766,7 +796,5 @@
         private DataGridViewTextBoxColumn formatoDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn foiFinalizadaDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn inicioPublicacaoDataGridViewTextBoxColumn;
-        private Button buttonAdicionarObra;
-        private Button buttonAdicionarCompra;
     }
 }

@@ -1,8 +1,6 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Dominio.Enums;
-using System.Xml.Schema;
-
 
 namespace Cod3rsGrowth.Forms
 {
@@ -12,7 +10,7 @@ namespace Cod3rsGrowth.Forms
         private readonly ServicoCompraCliente _servicoCompraCliente;
         private readonly FiltroObra _filtroObra = new();
         private readonly FiltroCompraCliente _filtroCompraCliente = new();
-
+        const int dataGridVazio = -1;
         public FormListagem(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
             _servicoObra = servicoObra;
@@ -148,7 +146,7 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void AoClicarNoBotaoAdicionarObra(object sender, EventArgs e)
+        private void AoClicarNoBotaoAdicionarDaAbaObras(object sender, EventArgs e)
         {
             try
             {
@@ -156,13 +154,13 @@ namespace Cod3rsGrowth.Forms
                 formCriarObra.ShowDialog();
                 ListarObras();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void AoClicarNoBotaoAdicionarCompra(object sender, EventArgs e)
+        private void AoClicarNoBotaoAdicionarDaAbaCompras(object sender, EventArgs e)
         {
             try
             {
@@ -170,10 +168,81 @@ namespace Cod3rsGrowth.Forms
                 formCriarCompra.ShowDialog();
                 ListarCompras();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void AoClicarNoBotaoRemoverDaAbaObras(object sender, EventArgs e)
+        {
+            try
+            {
+                const string colunaIdObra = "colunaIdObras";
+                var idDaObraSelecionada = ObterIdDoObjetoSelecionado(colunaIdObra, dataGridObras);
+
+                if (idDaObraSelecionada == dataGridVazio)
+                {
+                    MessageBox.Show("Não foi possível remover, não há obras cadastradas.", "Lista de obras vazia");
+                    return;
+                }
+
+                DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover" +
+                                                            $" a obra de ID {idDaObraSelecionada}?",
+                                                            "Remover Obra", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoObra.Remover(idDaObraSelecionada);
+                    ListarObras();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoRemoverDaAbaCompras(object sender, EventArgs e)
+        {
+            try
+            {
+                const string nomeColunaIdCompras = "colunaIdCompras";
+                var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(nomeColunaIdCompras, dataGridCompras);
+
+                if (idDaCompraSelecionada == dataGridVazio)
+                {
+                    MessageBox.Show("Não foi possível remover, não há compras cadastradas.", "Lista de compras vazia.");
+                    return;
+                }
+
+                DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover " +
+                                                            $"a compra de ID {idDaCompraSelecionada}?",
+                                                             "Remover Compra", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoCompraCliente.Remover(idDaCompraSelecionada);
+                    ListarCompras();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private static int ObterIdDoObjetoSelecionado(string nomeColuna, DataGridView dataGrid)
+        {
+            if (dataGrid.CurrentCell == null)
+            {
+                return dataGridVazio;
+            }
+
+            var linhaSelecionada = dataGrid.CurrentCell.RowIndex;
+            var idDoObjetoSelecionado = Convert.ToInt32(dataGrid.Rows[linhaSelecionada].Cells[nomeColuna].Value);
+
+            return idDoObjetoSelecionado;
         }
     }
 }

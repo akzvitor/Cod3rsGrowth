@@ -34,20 +34,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public Obra Criar(Obra obra)
         {
             obra.Id = _db.InsertWithInt32Identity(obra);
+            SalvarGeneros(obra.Id, obra.GenerosParaCriacao);
 
             return obra;
-        }
-
-        public void SalvarGeneros(int idObra, List<string> generos)
-        {
-            foreach (var item in generos)
-            {
-                _db.Execute(
-                    $"INSERT INTO GenerosObras (ObraId, Genero) VALUES (@idObra, @item)",
-                    new DataParameter("@idObra", idObra),
-                    new DataParameter("@item", @item)
-                );
-            }
         }
 
         public Obra Editar(Obra obra)
@@ -82,17 +71,36 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             var obraNoBanco = _db.Obras.FirstOrDefault(o => o.Id == id)
                 ?? throw new Exception("Obra não encontrada.");
-            
+
             try
             {
                 _db.Obras
                     .Where(o => o.Id == id)
                     .Delete();
+
+                RemoverComprasVinculadas();
             }
             catch (Exception ex)
             {
                 throw new Exception("Não foi possível remover a obra selecionada.");
             }
+        }
+
+        private void SalvarGeneros(int idObra, List<string> generos)
+        {
+            foreach (var item in generos)
+            {
+                _db.Execute(
+                    $"INSERT INTO GenerosObras (ObraId, Genero) VALUES (@idObra, @item)",
+                    new DataParameter("@idObra", idObra),
+                    new DataParameter("@item", @item)
+                );
+            }
+        }
+
+        private void RemoverComprasVinculadas()
+        {
+            _db.Execute($"DELETE FROM ComprasObras Where ObraId = NULL");
         }
 
         public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 

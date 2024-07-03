@@ -44,9 +44,6 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                List<string> generosSelecionados = ObterGenerosSelecionados();
-                List<Genero> listaDeGeneros = ObterListaDeEnumsGenero(generosSelecionados);
-
                 Obra novaObra = new()
                 {
                     Autor = textBoxAutor.Text,
@@ -54,10 +51,11 @@ namespace Cod3rsGrowth.Forms
                     ValorObra = decimal.Parse(textBoxValor.Text),
                     Sinopse = richTextBoxSinopse.Text,
                     NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value),
-                    Formato = (Formato)comboBoxFormato.SelectedItem,
+                    Formato = (Formato)comboBoxFormato.SelectedIndex,
                     InicioPublicacao = dateTimePickerInicioPublicacao.Value,
                     FoiFinalizada = radioButtonFinalizada.Checked,
-                    Generos = listaDeGeneros
+                    GenerosParaCriacao = ObterGenerosSelecionados(),
+                    Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados())
                 };
 
                 DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
@@ -65,7 +63,6 @@ namespace Cod3rsGrowth.Forms
                 if (dialogResult == DialogResult.Yes)
                 {
                     _servicoObra.Criar(novaObra);
-                    _servicoObra.SalvarGeneros(novaObra.Id, generosSelecionados);
                     Close();
                 }
             }
@@ -94,7 +91,7 @@ namespace Cod3rsGrowth.Forms
                 TextBox textBox = sender as TextBox
                     ?? throw new Exception("Texbox não foi encontrado");
 
-                if (textBox.Text.ContemValor())
+                if (!textBox.Text.ContemValor())
                     throw new ValidationException("Campo valor da obra está vazio.");
 
                 int selectionStart = textBox.SelectionStart;

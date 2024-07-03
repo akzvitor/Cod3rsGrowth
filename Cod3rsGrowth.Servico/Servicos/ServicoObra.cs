@@ -40,11 +40,6 @@ namespace Cod3rsGrowth.Servico.Servicos
             return _repositorioObra.Criar(obra);
         }
 
-        public void SalvarGeneros(int idObra, List<string> generos)
-        {
-            _repositorioObra.SalvarGeneros(idObra, generos);
-        }
-
         public Obra Editar(Obra obra)
         {
             var resultadoValidacao = _validadorObra.Validate(obra, options =>

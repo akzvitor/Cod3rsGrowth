@@ -32,20 +32,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public CompraCliente Criar(CompraCliente compraCliente)
         {
             compraCliente.Id = _db.InsertWithInt32Identity(compraCliente);
+            AdicionarProdutos(compraCliente.Id, compraCliente.listaIdDosProdutos);
 
             return compraCliente;
-        }
-
-        public void AdicionarProdutos(int compraId, List<int> idProdutos)
-        {
-            foreach (var item in idProdutos)
-            {
-                _db.Execute(
-                    "INSERT INTO ComprasObras (CompraId, ObraId) VALUES (@compraId, @item)",
-                    new DataParameter("@compraId", compraId),
-                    new DataParameter("@item", item)
-                );
-            }
         }
 
         public CompraCliente Editar(CompraCliente compra)
@@ -90,6 +79,18 @@ namespace Cod3rsGrowth.Infra.Repositorios
             catch (Exception ex)
             {
                 throw new Exception("Não foi possível remover a compra.");
+            }
+        }
+
+        private void AdicionarProdutos(int compraId, List<int> idProdutos)
+        {
+            foreach (var item in idProdutos)
+            {
+                _db.Execute(
+                    "INSERT INTO ComprasObras (CompraId, ObraId) VALUES (@compraId, @item)",
+                    new DataParameter("@compraId", compraId),
+                    new DataParameter("@item", item)
+                );
             }
         }
 
