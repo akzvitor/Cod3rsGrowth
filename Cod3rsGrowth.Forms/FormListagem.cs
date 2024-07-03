@@ -244,5 +244,36 @@ namespace Cod3rsGrowth.Forms
 
             return idDoObjetoSelecionado;
         }
+
+        private void AoClicarNoBotaoEditarDaAbaObras(object sender, EventArgs e)
+        {
+            try
+            {
+                const string colunaIdObra = "colunaIdObras";
+                var idDaObraSelecionada = ObterIdDoObjetoSelecionado(colunaIdObra, dataGridObras);
+
+                if (idDaObraSelecionada == dataGridVazio)
+                {
+                    MessageBox.Show("Não foi possível editar, não há obras cadastradas.", "Lista de obras vazia");
+                    return;
+                }
+
+                DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja editar os dados " +
+                                                            $"da obra de ID {idDaObraSelecionada}?",
+                                                            "Editar Obra", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    var obraASerEditada = _servicoObra.ObterPorId(idDaObraSelecionada);
+                    var formEditarObra = new FormEditarObra(_servicoObra, obraASerEditada);
+                    formEditarObra.ShowDialog();
+                    ListarObras();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
