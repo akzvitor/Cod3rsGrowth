@@ -45,6 +45,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             try
             {
                 _db.Update(compra);
+                AdicionarProdutos(compra.Id, compra.listaIdDosProdutos);
             }
             catch (Exception ex)
             {
@@ -73,14 +74,23 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         private void AdicionarProdutos(int compraId, List<int> idProdutos)
         {
-            foreach (var item in idProdutos)
+            idProdutos.ForEach(id =>
             {
                 _db.Execute(
                     "INSERT INTO ComprasObras (CompraId, ObraId) VALUES (@compraId, @item)",
                     new DataParameter("@compraId", compraId),
-                    new DataParameter("@item", item)
+                    new DataParameter("@item", id)
                 );
-            }
+            });
+        }
+
+        public List<int> ObterProdutosVinculados(int compraId)
+        {
+            List<int> produtosVinculados = new();
+
+            produtosVinculados = _db.Query<int>($"SELECT ObraId FROM ComprasObras WHERE CompraId = @compraId", new { compraId }).ToList();
+
+            return produtosVinculados;
         }
 
         public static IQueryable<CompraCliente> Filtrar(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)

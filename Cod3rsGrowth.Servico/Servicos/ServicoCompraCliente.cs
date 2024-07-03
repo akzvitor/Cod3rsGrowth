@@ -61,5 +61,10 @@ namespace Cod3rsGrowth.Servico.Servicos
         {
             _repositorioCompraCliente.Remover(id);
         }
+
+        public List<int> ObterProdutosVinculados(int compraId)
+        {
+            return _repositorioCompraCliente.ObterProdutosVinculados(compraId);
+        }
     }
 }

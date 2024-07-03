@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -33,6 +34,7 @@ namespace Cod3rsGrowth.Forms
             textBoxEmail.Text = _compraASerEditada.Email;
             maskedTextBoxCpf.Text = _compraASerEditada.Cpf;
             maskedTextBoxTelefone.Text = _compraASerEditada.Telefone;
+
         }
 
         private void InicializarCatalogo()
@@ -46,10 +48,83 @@ namespace Cod3rsGrowth.Forms
             {
                 InicializarCatalogo();
                 InicializarCamposDeDados();
+                InicializarProdutosSelecionados();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
+        {
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
+        {
+            try
+            {
+                List<int> produtosSelecionados = ObterProdutosSelecionados();
+
+                _compraASerEditada.Cpf = maskedTextBoxCpf.Text.Trim().Replace(".", "").Replace("-", "");
+                _compraASerEditada.Nome = textBoxNome.Text;
+                _compraASerEditada.Telefone = maskedTextBoxTelefone.Text.Trim().Replace("(", "").Replace(")", "").Replace("-", "");
+                _compraASerEditada.ValorCompra = decimal.Parse(textBoxValorCompra.Text);
+                _compraASerEditada.Email = textBoxEmail.Text;
+                _compraASerEditada.listaIdDosProdutos = produtosSelecionados;
+
+                DialogResult dialogResult = MessageBox.Show("Deseja salvar a compra com os dados informados?",
+                                                            "Salvar Compra", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoCompraCliente.Editar(_compraASerEditada);
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private List<int> ObterProdutosSelecionados()
+        {
+            List<int> produtosSelecionados = new();
+            decimal valorDosProdutosSelecionados = 0;
+
+            foreach (DataGridViewRow linha in dataGridViewCatalogoObras.Rows)
+            {
+                if (Convert.ToBoolean(linha.Cells["colunaSelecao"].Value))
+                {
+                    int produtoId = Convert.ToInt32(linha.Cells["colunaId"].Value);
+                    produtosSelecionados.Add(produtoId);
+                    valorDosProdutosSelecionados += Convert.ToDecimal(linha.Cells["ValorObra"].Value);
+                }
+            }
+
+            textBoxValorCompra.Text = valorDosProdutosSelecionados.ToString();
+
+            return produtosSelecionados;
+        }
+
+        private void InicializarProdutosSelecionados()
+        {
+            List<int> produtosSelecionados = _servicoCompraCliente.ObterProdutosVinculados(_compraASerEditada.Id);
+
+            foreach (DataGridViewRow linha in dataGridViewCatalogoObras.Rows)
+            {
+                if (produtosSelecionados.Contains(Convert.ToInt32(linha.Cells["colunaId"].Value)))
+                {
+                    linha.Cells["colunaSelecao"].Value = true;
+                }
             }
         }
     }

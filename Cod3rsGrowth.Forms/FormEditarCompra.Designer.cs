@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             obraBindingSource = new BindingSource(components);
             dataGridViewCatalogoObras = new DataGridView();
             colunaId = new DataGridViewTextBoxColumn();
@@ -75,25 +75,25 @@
             dataGridViewCatalogoObras.BorderStyle = BorderStyle.None;
             dataGridViewCatalogoObras.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
             dataGridViewCatalogoObras.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dataGridViewCatalogoObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridViewCatalogoObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCatalogoObras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCatalogoObras.Columns.AddRange(new DataGridViewColumn[] { colunaId, tituloDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, ValorObra, colunaSelecao, autorDataGridViewTextBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn, sinopseDataGridViewTextBoxColumn, capaImagemBase64DataGridViewTextBoxColumn });
             dataGridViewCatalogoObras.DataSource = obraBindingSource;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.Control;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dataGridViewCatalogoObras.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridViewCatalogoObras.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewCatalogoObras.Location = new Point(181, 12);
             dataGridViewCatalogoObras.Name = "dataGridViewCatalogoObras";
             dataGridViewCatalogoObras.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
@@ -112,8 +112,8 @@
             // tituloDataGridViewTextBoxColumn
             // 
             tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             tituloDataGridViewTextBoxColumn.HeaderText = "Titulo";
             tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
             tituloDataGridViewTextBoxColumn.ReadOnly = true;
@@ -196,6 +196,7 @@
             buttonCancelar.TabIndex = 38;
             buttonCancelar.Text = "Cancelar";
             buttonCancelar.UseVisualStyleBackColor = false;
+            buttonCancelar.Click += AoClicarNoBotaoCancelar;
             // 
             // buttonSalvar
             // 
@@ -206,6 +207,7 @@
             buttonSalvar.TabIndex = 37;
             buttonSalvar.Text = "Salvar";
             buttonSalvar.UseVisualStyleBackColor = false;
+            buttonSalvar.Click += AoClicarNoBotaoSalvar;
             // 
             // textBoxValorCompra
             // 
@@ -310,7 +312,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(617, 385);
+            ClientSize = new Size(600, 370);
             Controls.Add(dataGridViewCatalogoObras);
             Controls.Add(buttonCancelar);
             Controls.Add(buttonSalvar);
@@ -324,8 +326,9 @@
             Controls.Add(labelTelefone);
             Controls.Add(labelNome);
             Controls.Add(labelCpf);
+            MaximizeBox = false;
             Name = "FormEditarCompra";
-            Text = "FormEditarCompra";
+            Text = "Editar Compra";
             Load += AoInicializarFormulario;
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCatalogoObras).EndInit();

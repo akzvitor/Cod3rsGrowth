@@ -283,7 +283,7 @@ namespace Cod3rsGrowth.Forms
                 var compraASerEditada = _servicoCompraCliente.ObterPorId(idDaCompraSelecionada);
                 var formEditarCompra = new FormEditarCompra(_servicoCompraCliente, _servicoObra, compraASerEditada);
                 formEditarCompra.ShowDialog();
-                ListarObras();
+                ListarCompras();
             }
         }
 
