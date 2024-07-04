@@ -147,9 +147,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 compras = compras.Where(c => c.Cpf.Trim().Replace(".", "").Replace("-", "").Contains(filtro.Cpf.Trim().Replace(".", "").Replace("-", "")));
             }
 
-            if (filtro.DataCompra.HasValue && filtro.DataCompra != DateTime.MinValue)
+            if ((filtro.DataInicial.HasValue && filtro.DataInicial != DateTime.MinValue) && (filtro.DataFinal.HasValue && filtro.DataFinal != DateTime.MaxValue))
             {
-                compras = compras.Where(c => c.DataCompra.DayOfYear == filtro.DataCompra.Value.DayOfYear);
+                compras = compras.Where(c => (c.DataCompra >= filtro.DataInicial.Value) && (c.DataCompra <= filtro.DataFinal.Value));
             }
 
             return compras;

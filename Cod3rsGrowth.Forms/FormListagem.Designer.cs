@@ -83,19 +83,21 @@
             dataCompraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             compraClienteBindingSource = new BindingSource(components);
             panel2BottomCompras = new Panel();
+            buttonEditarCompra = new Button();
             buttonRemoverCompra = new Button();
             buttonAdicionarCompra = new Button();
             panelFiltroCompras = new Panel();
+            dateTimePickerDataCompraFinal = new DateTimePicker();
             maskedTextBoxCpf = new MaskedTextBox();
-            dateTimePickerDataCompra = new DateTimePicker();
+            dateTimePickerDataCompraInicial = new DateTimePicker();
             labelCpf = new Label();
-            labelDataCompra = new Label();
+            labelDataCompraInicial = new Label();
             textBoxNomeCliente = new TextBox();
             buttonLimparCompras = new Button();
             buttonFiltrarCompras = new Button();
             labelNomeCliente = new Label();
             obraBindingSource1 = new BindingSource(components);
-            buttonEditarCompra = new Button();
+            labelDataCompraFinal = new Label();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).BeginInit();
             tabControl1.SuspendLayout();
@@ -592,6 +594,16 @@
             panel2BottomCompras.Size = new Size(1002, 49);
             panel2BottomCompras.TabIndex = 1;
             // 
+            // buttonEditarCompra
+            // 
+            buttonEditarCompra.Location = new Point(8, 7);
+            buttonEditarCompra.Name = "buttonEditarCompra";
+            buttonEditarCompra.Size = new Size(75, 34);
+            buttonEditarCompra.TabIndex = 17;
+            buttonEditarCompra.Text = "Editar";
+            buttonEditarCompra.UseVisualStyleBackColor = true;
+            buttonEditarCompra.Click += AoClicarNoBotaoEditarDaAbaCompras;
+            // 
             // buttonRemoverCompra
             // 
             buttonRemoverCompra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -618,10 +630,12 @@
             // panelFiltroCompras
             // 
             panelFiltroCompras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelFiltroCompras.Controls.Add(labelDataCompraFinal);
+            panelFiltroCompras.Controls.Add(dateTimePickerDataCompraFinal);
             panelFiltroCompras.Controls.Add(maskedTextBoxCpf);
-            panelFiltroCompras.Controls.Add(dateTimePickerDataCompra);
+            panelFiltroCompras.Controls.Add(dateTimePickerDataCompraInicial);
             panelFiltroCompras.Controls.Add(labelCpf);
-            panelFiltroCompras.Controls.Add(labelDataCompra);
+            panelFiltroCompras.Controls.Add(labelDataCompraInicial);
             panelFiltroCompras.Controls.Add(textBoxNomeCliente);
             panelFiltroCompras.Controls.Add(buttonLimparCompras);
             panelFiltroCompras.Controls.Add(buttonFiltrarCompras);
@@ -630,6 +644,15 @@
             panelFiltroCompras.Name = "panelFiltroCompras";
             panelFiltroCompras.Size = new Size(1027, 94);
             panelFiltroCompras.TabIndex = 0;
+            // 
+            // dateTimePickerDataCompraFinal
+            // 
+            dateTimePickerDataCompraFinal.Format = DateTimePickerFormat.Short;
+            dateTimePickerDataCompraFinal.Location = new Point(439, 36);
+            dateTimePickerDataCompraFinal.Name = "dateTimePickerDataCompraFinal";
+            dateTimePickerDataCompraFinal.Size = new Size(114, 23);
+            dateTimePickerDataCompraFinal.TabIndex = 29;
+            dateTimePickerDataCompraFinal.ValueChanged += AoAlterarValorDataFinal;
             // 
             // maskedTextBoxCpf
             // 
@@ -640,14 +663,15 @@
             maskedTextBoxCpf.Size = new Size(100, 23);
             maskedTextBoxCpf.TabIndex = 11;
             // 
-            // dateTimePickerDataCompra
+            // dateTimePickerDataCompraInicial
             // 
-            dateTimePickerDataCompra.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataCompra.Location = new Point(287, 36);
-            dateTimePickerDataCompra.Name = "dateTimePickerDataCompra";
-            dateTimePickerDataCompra.Size = new Size(120, 23);
-            dateTimePickerDataCompra.TabIndex = 12;
-            dateTimePickerDataCompra.Value = new DateTime(2002, 7, 22, 0, 0, 0, 0);
+            dateTimePickerDataCompraInicial.Format = DateTimePickerFormat.Short;
+            dateTimePickerDataCompraInicial.Location = new Point(287, 36);
+            dateTimePickerDataCompraInicial.Name = "dateTimePickerDataCompraInicial";
+            dateTimePickerDataCompraInicial.Size = new Size(120, 23);
+            dateTimePickerDataCompraInicial.TabIndex = 12;
+            dateTimePickerDataCompraInicial.Value = new DateTime(2024, 7, 4, 0, 0, 0, 0);
+            dateTimePickerDataCompraInicial.ValueChanged += AoMudarValorDataInicial;
             // 
             // labelCpf
             // 
@@ -659,15 +683,15 @@
             labelCpf.TabIndex = 28;
             labelCpf.Text = "CPF";
             // 
-            // labelDataCompra
+            // labelDataCompraInicial
             // 
-            labelDataCompra.AutoSize = true;
-            labelDataCompra.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelDataCompra.Location = new Point(287, 11);
-            labelDataCompra.Name = "labelDataCompra";
-            labelDataCompra.Size = new Size(120, 21);
-            labelDataCompra.TabIndex = 27;
-            labelDataCompra.Text = "Data da compra";
+            labelDataCompraInicial.AutoSize = true;
+            labelDataCompraInicial.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDataCompraInicial.Location = new Point(287, 11);
+            labelDataCompraInicial.Name = "labelDataCompraInicial";
+            labelDataCompraInicial.Size = new Size(86, 21);
+            labelDataCompraInicial.TabIndex = 27;
+            labelDataCompraInicial.Text = "Data inicial";
             // 
             // textBoxNomeCliente
             // 
@@ -717,15 +741,15 @@
             // 
             obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
             // 
-            // buttonEditarCompra
+            // labelDataCompraFinal
             // 
-            buttonEditarCompra.Location = new Point(8, 7);
-            buttonEditarCompra.Name = "buttonEditarCompra";
-            buttonEditarCompra.Size = new Size(75, 34);
-            buttonEditarCompra.TabIndex = 17;
-            buttonEditarCompra.Text = "Editar";
-            buttonEditarCompra.UseVisualStyleBackColor = true;
-            buttonEditarCompra.Click += AoClicarNoBotaoEditarDaAbaCompras;
+            labelDataCompraFinal.AutoSize = true;
+            labelDataCompraFinal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDataCompraFinal.Location = new Point(439, 11);
+            labelDataCompraFinal.Name = "labelDataCompraFinal";
+            labelDataCompraFinal.Size = new Size(76, 21);
+            labelDataCompraFinal.TabIndex = 30;
+            labelDataCompraFinal.Text = "Data final";
             // 
             // FormListagem
             // 
@@ -782,7 +806,7 @@
         private Button buttonFiltroObra;
         private Button buttonLimparCompras;
         private Button buttonFiltrarCompras;
-        private Label label1;
+        private Label labelDataCompraFinal;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
         private Label label2;
@@ -793,13 +817,13 @@
         private TextBox textBox3;
         private Label labelNomeCliente;
         private Label labelCpf;
-        private Label labelDataCompra;
+        private Label labelDataCompraInicial;
         private TextBox textBoxNomeCliente;
         private BindingSource obraBindingSource1;
         private GroupBox groupBox1;
         private DataGridView dataGridCompras;
         private GroupBox groupBoxCompras;
-        private DateTimePicker dateTimePickerDataCompra;
+        private DateTimePicker dateTimePickerDataCompraInicial;
         private MaskedTextBox maskedTextBoxCpf;
         private Button buttonAdicionarObra;
         private Button buttonAdicionarCompra;
@@ -823,5 +847,6 @@
         private DataGridViewTextBoxColumn inicioPublicacaoDataGridViewTextBoxColumn;
         private Button buttonEditarObra;
         private Button buttonEditarCompra;
+        private DateTimePicker dateTimePickerDataCompraFinal;
     }
 }

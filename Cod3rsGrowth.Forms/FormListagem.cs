@@ -114,10 +114,6 @@ namespace Cod3rsGrowth.Forms
             {
                 _filtroCompraCliente.NomeCliente = textBoxNomeCliente.Text;
                 _filtroCompraCliente.Cpf = maskedTextBoxCpf.Text.Trim().Replace(".", "").Replace("-", "");
-                if (dateTimePickerDataCompra.Value != DateTime.Parse("Jul 22, 2002"))
-                {
-                    _filtroCompraCliente.DataCompra = dateTimePickerDataCompra.Value;
-                }
 
                 ListarCompras();
             }
@@ -135,8 +131,8 @@ namespace Cod3rsGrowth.Forms
                 textBoxNomeCliente.Text = null;
                 _filtroCompraCliente.Cpf = null;
                 maskedTextBoxCpf.Text = null;
-                _filtroCompraCliente.DataCompra = DateTime.MinValue;
-                dateTimePickerDataCompra.Value = DateTime.Parse("Jul 22, 2002");
+                _filtroCompraCliente.DataInicial = DateTime.MinValue;
+                _filtroCompraCliente.DataFinal = DateTime.MaxValue;
 
                 ListarCompras();
             }
@@ -284,6 +280,16 @@ namespace Cod3rsGrowth.Forms
             var idDoObjetoSelecionado = Convert.ToInt32(dataGrid.Rows[linhaSelecionada].Cells[nomeColuna].Value);
 
             return idDoObjetoSelecionado;
+        }
+
+        private void AoMudarValorDataInicial(object sender, EventArgs e)
+        {
+            _filtroCompraCliente.DataInicial = dateTimePickerDataCompraInicial.Value;
+        }
+
+        private void AoAlterarValorDataFinal(object sender, EventArgs e)
+        {
+            _filtroCompraCliente.DataFinal = dateTimePickerDataCompraFinal.Value;
         }
     }
 }
