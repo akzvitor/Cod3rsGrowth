@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             obraBindingSource = new BindingSource(components);
             dataGridObras = new DataGridView();
             colunaIdObras = new DataGridViewTextBoxColumn();
@@ -58,8 +58,10 @@
             buttonRemoverObra = new Button();
             buttonAdicionarObra = new Button();
             panelFiltroObras = new Panel();
+            label1 = new Label();
+            textBoxAnoFinalObra = new TextBox();
             buttonLimparObras = new Button();
-            textBoxAnoObra = new TextBox();
+            textBoxAnoInicalObra = new TextBox();
             buttonFiltroObra = new Button();
             labelAnoObra = new Label();
             radioButtonStatusObraEmLancamento = new RadioButton();
@@ -87,6 +89,7 @@
             buttonRemoverCompra = new Button();
             buttonAdicionarCompra = new Button();
             panelFiltroCompras = new Panel();
+            labelDataCompraFinal = new Label();
             dateTimePickerDataCompraFinal = new DateTimePicker();
             maskedTextBoxCpf = new MaskedTextBox();
             dateTimePickerDataCompraInicial = new DateTimePicker();
@@ -97,7 +100,6 @@
             buttonFiltrarCompras = new Button();
             labelNomeCliente = new Label();
             obraBindingSource1 = new BindingSource(components);
-            labelDataCompraFinal = new Label();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridObras).BeginInit();
             tabControl1.SuspendLayout();
@@ -127,14 +129,14 @@
             dataGridObras.AutoGenerateColumns = false;
             dataGridObras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridObras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = SystemColors.Control;
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dataGridObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridObras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridObras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridObras.Columns.AddRange(new DataGridViewColumn[] { colunaIdObras, Sinopse, tituloDataGridViewTextBoxColumn, autorDataGridViewTextBoxColumn, numeroCapitulosDataGridViewTextBoxColumn, valorObraDataGridViewTextBoxColumn, formatoDataGridViewTextBoxColumn, foiFinalizadaDataGridViewCheckBoxColumn, inicioPublicacaoDataGridViewTextBoxColumn });
             dataGridObras.DataSource = obraBindingSource;
@@ -149,9 +151,9 @@
             // colunaIdObras
             // 
             colunaIdObras.DataPropertyName = "Id";
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
-            colunaIdObras.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            colunaIdObras.DefaultCellStyle = dataGridViewCellStyle2;
             colunaIdObras.FillWeight = 6.272095F;
             colunaIdObras.HeaderText = "Id";
             colunaIdObras.Name = "colunaIdObras";
@@ -168,8 +170,8 @@
             // tituloDataGridViewTextBoxColumn
             // 
             tituloDataGridViewTextBoxColumn.DataPropertyName = "Titulo";
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
-            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            tituloDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             tituloDataGridViewTextBoxColumn.FillWeight = 30.26575F;
             tituloDataGridViewTextBoxColumn.HeaderText = "Título";
             tituloDataGridViewTextBoxColumn.Name = "tituloDataGridViewTextBoxColumn";
@@ -178,8 +180,8 @@
             // autorDataGridViewTextBoxColumn
             // 
             autorDataGridViewTextBoxColumn.DataPropertyName = "Autor";
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
-            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            autorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             autorDataGridViewTextBoxColumn.FillWeight = 30.3542786F;
             autorDataGridViewTextBoxColumn.HeaderText = "Autor";
             autorDataGridViewTextBoxColumn.Name = "autorDataGridViewTextBoxColumn";
@@ -196,8 +198,8 @@
             // valorObraDataGridViewTextBoxColumn
             // 
             valorObraDataGridViewTextBoxColumn.DataPropertyName = "ValorObra";
-            dataGridViewCellStyle15.Padding = new Padding(10, 0, 0, 0);
-            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Padding = new Padding(10, 0, 0, 0);
+            valorObraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             valorObraDataGridViewTextBoxColumn.FillWeight = 15.3542786F;
             valorObraDataGridViewTextBoxColumn.HeaderText = "Valor";
             valorObraDataGridViewTextBoxColumn.Name = "valorObraDataGridViewTextBoxColumn";
@@ -223,8 +225,8 @@
             // inicioPublicacaoDataGridViewTextBoxColumn
             // 
             inicioPublicacaoDataGridViewTextBoxColumn.DataPropertyName = "InicioPublicacao";
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            inicioPublicacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
             inicioPublicacaoDataGridViewTextBoxColumn.FillWeight = 20.3542786F;
             inicioPublicacaoDataGridViewTextBoxColumn.HeaderText = "Início da Publicação";
             inicioPublicacaoDataGridViewTextBoxColumn.Name = "inicioPublicacaoDataGridViewTextBoxColumn";
@@ -312,8 +314,10 @@
             // panelFiltroObras
             // 
             panelFiltroObras.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelFiltroObras.Controls.Add(label1);
+            panelFiltroObras.Controls.Add(textBoxAnoFinalObra);
             panelFiltroObras.Controls.Add(buttonLimparObras);
-            panelFiltroObras.Controls.Add(textBoxAnoObra);
+            panelFiltroObras.Controls.Add(textBoxAnoInicalObra);
             panelFiltroObras.Controls.Add(buttonFiltroObra);
             panelFiltroObras.Controls.Add(labelAnoObra);
             panelFiltroObras.Controls.Add(radioButtonStatusObraEmLancamento);
@@ -330,6 +334,25 @@
             panelFiltroObras.Size = new Size(1041, 94);
             panelFiltroObras.TabIndex = 2;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(733, 43);
+            label1.Name = "label1";
+            label1.Size = new Size(12, 15);
+            label1.TabIndex = 11;
+            label1.Text = "-";
+            // 
+            // textBoxAnoFinalObra
+            // 
+            textBoxAnoFinalObra.Location = new Point(751, 38);
+            textBoxAnoFinalObra.MaxLength = 4;
+            textBoxAnoFinalObra.Name = "textBoxAnoFinalObra";
+            textBoxAnoFinalObra.PlaceholderText = "yyyy";
+            textBoxAnoFinalObra.Size = new Size(38, 23);
+            textBoxAnoFinalObra.TabIndex = 10;
+            textBoxAnoFinalObra.TextChanged += AoAlterarAnoFinal;
+            // 
             // buttonLimparObras
             // 
             buttonLimparObras.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -342,16 +365,17 @@
             buttonLimparObras.UseVisualStyleBackColor = false;
             buttonLimparObras.Click += AoClicarNoBotaoLimparDaAbaObras;
             // 
-            // textBoxAnoObra
+            // textBoxAnoInicalObra
             // 
-            textBoxAnoObra.BackColor = SystemColors.Window;
-            textBoxAnoObra.Cursor = Cursors.IBeam;
-            textBoxAnoObra.Location = new Point(689, 37);
-            textBoxAnoObra.MaxLength = 4;
-            textBoxAnoObra.Name = "textBoxAnoObra";
-            textBoxAnoObra.PlaceholderText = "Pesquisar";
-            textBoxAnoObra.Size = new Size(123, 23);
-            textBoxAnoObra.TabIndex = 6;
+            textBoxAnoInicalObra.BackColor = SystemColors.Window;
+            textBoxAnoInicalObra.Cursor = Cursors.IBeam;
+            textBoxAnoInicalObra.Location = new Point(689, 37);
+            textBoxAnoInicalObra.MaxLength = 4;
+            textBoxAnoInicalObra.Name = "textBoxAnoInicalObra";
+            textBoxAnoInicalObra.PlaceholderText = "yyyy";
+            textBoxAnoInicalObra.Size = new Size(38, 23);
+            textBoxAnoInicalObra.TabIndex = 6;
+            textBoxAnoInicalObra.TextChanged += AoAlterarAnoInicial;
             // 
             // buttonFiltroObra
             // 
@@ -369,11 +393,11 @@
             // 
             labelAnoObra.AutoSize = true;
             labelAnoObra.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelAnoObra.Location = new Point(689, 13);
+            labelAnoObra.Location = new Point(694, 13);
             labelAnoObra.Name = "labelAnoObra";
-            labelAnoObra.Size = new Size(38, 21);
+            labelAnoObra.Size = new Size(95, 21);
             labelAnoObra.TabIndex = 9;
-            labelAnoObra.Text = "Ano";
+            labelAnoObra.Text = "Lançamento";
             // 
             // radioButtonStatusObraEmLancamento
             // 
@@ -501,14 +525,14 @@
             dataGridCompras.AutoGenerateColumns = false;
             dataGridCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridCompras.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = SystemColors.Control;
-            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            dataGridCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dataGridCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dataGridCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridCompras.Columns.AddRange(new DataGridViewColumn[] { colunaIdCompras, cpfDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, valorCompraDataGridViewTextBoxColumn, dataCompraDataGridViewTextBoxColumn });
             dataGridCompras.DataSource = compraClienteBindingSource;
@@ -523,8 +547,8 @@
             // colunaIdCompras
             // 
             colunaIdCompras.DataPropertyName = "Id";
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            colunaIdCompras.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colunaIdCompras.DefaultCellStyle = dataGridViewCellStyle8;
             colunaIdCompras.FillWeight = 20F;
             colunaIdCompras.HeaderText = "Id";
             colunaIdCompras.Name = "colunaIdCompras";
@@ -548,8 +572,8 @@
             // telefoneDataGridViewTextBoxColumn
             // 
             telefoneDataGridViewTextBoxColumn.DataPropertyName = "Telefone";
-            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            telefoneDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            telefoneDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
             telefoneDataGridViewTextBoxColumn.FillWeight = 60F;
             telefoneDataGridViewTextBoxColumn.HeaderText = "Telefone";
             telefoneDataGridViewTextBoxColumn.Name = "telefoneDataGridViewTextBoxColumn";
@@ -573,8 +597,8 @@
             // dataCompraDataGridViewTextBoxColumn
             // 
             dataCompraDataGridViewTextBoxColumn.DataPropertyName = "DataCompra";
-            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
             dataCompraDataGridViewTextBoxColumn.HeaderText = "Data da compra";
             dataCompraDataGridViewTextBoxColumn.Name = "dataCompraDataGridViewTextBoxColumn";
             dataCompraDataGridViewTextBoxColumn.ReadOnly = true;
@@ -644,6 +668,16 @@
             panelFiltroCompras.Name = "panelFiltroCompras";
             panelFiltroCompras.Size = new Size(1027, 94);
             panelFiltroCompras.TabIndex = 0;
+            // 
+            // labelDataCompraFinal
+            // 
+            labelDataCompraFinal.AutoSize = true;
+            labelDataCompraFinal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDataCompraFinal.Location = new Point(439, 11);
+            labelDataCompraFinal.Name = "labelDataCompraFinal";
+            labelDataCompraFinal.Size = new Size(76, 21);
+            labelDataCompraFinal.TabIndex = 30;
+            labelDataCompraFinal.Text = "Data final";
             // 
             // dateTimePickerDataCompraFinal
             // 
@@ -741,16 +775,6 @@
             // 
             obraBindingSource1.DataSource = typeof(Dominio.Entidades.Obra);
             // 
-            // labelDataCompraFinal
-            // 
-            labelDataCompraFinal.AutoSize = true;
-            labelDataCompraFinal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelDataCompraFinal.Location = new Point(439, 11);
-            labelDataCompraFinal.Name = "labelDataCompraFinal";
-            labelDataCompraFinal.Size = new Size(76, 21);
-            labelDataCompraFinal.TabIndex = 30;
-            labelDataCompraFinal.Text = "Data final";
-            // 
             // FormListagem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -800,7 +824,7 @@
         private RadioButton radioButtonStatusObraFinalizada;
         private Label labelStatus;
         private RadioButton radioButtonStatusObraEmLancamento;
-        private TextBox textBoxAnoObra;
+        private TextBox textBoxAnoInicalObra;
         private Label labelAnoObra;
         private Button buttonLimparObras;
         private Button buttonFiltroObra;
@@ -848,5 +872,7 @@
         private Button buttonEditarObra;
         private Button buttonEditarCompra;
         private DateTimePicker dateTimePickerDataCompraFinal;
+        private TextBox textBoxAnoFinalObra;
+        private Label label1;
     }
 }

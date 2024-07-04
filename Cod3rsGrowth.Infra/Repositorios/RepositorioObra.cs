@@ -171,9 +171,12 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 obras = obras.Where(o => o.Generos.Any(g => filtro.ListaDeGenerosObra.Contains(g)));
             }
 
-            if (!string.IsNullOrEmpty(filtro.AnoDaPublicacao))
+            if (!string.IsNullOrEmpty(filtro.AnoInicialLancamento) && !string.IsNullOrEmpty(filtro.AnoFinalLancamento))
             {
-                obras = obras.Where(o => o.InicioPublicacao.Year.ToString() == filtro.AnoDaPublicacao);
+                var intAnoInicial = Convert.ToInt32(filtro.AnoInicialLancamento);
+                var intAnoFinal = Convert.ToInt32(filtro.AnoFinalLancamento);
+
+                obras = obras.Where(o => o.InicioPublicacao.Year >= intAnoInicial && o.InicioPublicacao.Year <= intAnoFinal);
             }
 
             return obras;

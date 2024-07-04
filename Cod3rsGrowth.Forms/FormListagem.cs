@@ -74,7 +74,6 @@ namespace Cod3rsGrowth.Forms
                 _filtroObra.TituloObra = textBoxTituloObra.Text;
                 _filtroObra.AutorObra = textBoxAutorObra.Text;
                 _filtroObra.FormatoObra = (Formato?)comboBoxFormatoObra.SelectedItem;
-                _filtroObra.AnoDaPublicacao = textBoxAnoObra.Text;
 
                 ListarObras();
             }
@@ -97,8 +96,10 @@ namespace Cod3rsGrowth.Forms
                 _filtroObra.ObraFoiFinalizada = null;
                 radioButtonStatusObraEmLancamento.Checked = false;
                 radioButtonStatusObraFinalizada.Checked = false;
-                _filtroObra.AnoDaPublicacao = null;
-                textBoxAnoObra.Text = null;
+                _filtroObra.AnoInicialLancamento = null;
+                textBoxAnoInicalObra.Text = null;
+                _filtroObra.AnoFinalLancamento = null;
+                textBoxAnoFinalObra.Text = null;
 
                 ListarObras();
             }
@@ -290,6 +291,16 @@ namespace Cod3rsGrowth.Forms
         private void AoAlterarValorDataFinal(object sender, EventArgs e)
         {
             _filtroCompraCliente.DataFinal = dateTimePickerDataCompraFinal.Value;
+        }
+
+        private void AoAlterarAnoInicial(object sender, EventArgs e)
+        {
+            _filtroObra.AnoInicialLancamento = textBoxAnoInicalObra.Text;
+        }
+
+        private void AoAlterarAnoFinal(object sender, EventArgs e)
+        {
+            _filtroObra.AnoFinalLancamento = textBoxAnoFinalObra.Text;
         }
     }
 }
