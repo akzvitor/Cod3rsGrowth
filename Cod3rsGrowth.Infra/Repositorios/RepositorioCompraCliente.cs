@@ -45,15 +45,15 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var produtosAnteriores = ObterProdutosVinculados(compra.Id);
             var produtosAtualizados = compra.listaIdDosProdutos;
 
-            var hashSetAnteriores = new HashSet<int>(produtosAnteriores);
-            var hashSetAtualizados = new HashSet<int>(produtosAtualizados);
+            var hashSetProdutosAnteriores = new HashSet<int>(produtosAnteriores);
+            var hashSetProdutosAtualizados = new HashSet<int>(produtosAtualizados);
 
             List<int> produtosParaRemover = new();
             List<int> produtosParaAdicionar = new();
 
             produtosAnteriores.ForEach(item =>
             {
-                if (!hashSetAtualizados.Contains(item))
+                if (!hashSetProdutosAtualizados.Contains(item))
                 {
                     produtosParaRemover.Add(item);
                 }
@@ -61,7 +61,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             produtosAtualizados.ForEach(item =>
             {
-                if (!hashSetAnteriores.Contains(item))
+                if (!hashSetProdutosAnteriores.Contains(item))
                 {
                     produtosParaAdicionar.Add(item);
                 }
@@ -70,7 +70,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             try
             {
                 _db.Update(compra);
-                RemoverProdutos(produtosParaRemover);
+                RemoverProdutos(compra.Id, produtosParaRemover);
                 AdicionarProdutos(compra.Id, produtosParaAdicionar);
             }
             catch (Exception ex)
@@ -110,13 +110,14 @@ namespace Cod3rsGrowth.Infra.Repositorios
             });
         }
 
-        private void RemoverProdutos(List<int> idsDosProdutos)
+        private void RemoverProdutos(int compraId, List<int> idsDosProdutos)
         {
-            idsDosProdutos.ForEach(id =>
+            idsDosProdutos.ForEach(obraId =>
             {
                 _db.Execute(
-                    $"DELETE FROM ComprasObras WHERE ObraId = @id",
-                    new DataParameter("@id", id)    
+                    $"DELETE FROM ComprasObras WHERE CompraId = @compraId AND ObraId = @obraId",
+                    new DataParameter("@compraId", compraId),
+                    new DataParameter("@obraId", obraId)
                 );
             });
         }

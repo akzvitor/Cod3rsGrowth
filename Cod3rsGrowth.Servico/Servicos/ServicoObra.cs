@@ -61,5 +61,10 @@ namespace Cod3rsGrowth.Servico.Servicos
         {
             _repositorioObra.Remover(id);
         }
+
+        public List<string> ObterGenerosVinculados(int obraId)
+        {
+            return _repositorioObra.ObterGenerosVinculados(obraId);
+        }
     }
 }

@@ -28,20 +28,6 @@ namespace Cod3rsGrowth.Forms
             InitializeComponent();
         }
 
-        private void InicializarCamposDeDados()
-        {
-            textBoxNome.Text = _compraASerEditada.Nome;
-            textBoxEmail.Text = _compraASerEditada.Email;
-            maskedTextBoxCpf.Text = _compraASerEditada.Cpf;
-            maskedTextBoxTelefone.Text = _compraASerEditada.Telefone;
-
-        }
-
-        private void InicializarCatalogo()
-        {
-            dataGridViewCatalogoObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
-        }
-
         private void AoInicializarFormulario(object sender, EventArgs e)
         {
             try
@@ -54,6 +40,33 @@ namespace Cod3rsGrowth.Forms
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void InicializarCatalogo()
+        {
+            dataGridViewCatalogoObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
+        }
+
+        private void InicializarProdutosSelecionadosNoCatalogo()
+        {
+            List<int> produtosSelecionados = _servicoCompraCliente.ObterProdutosVinculados(_compraASerEditada.Id);
+
+            foreach (DataGridViewRow linha in dataGridViewCatalogoObras.Rows)
+            {
+                if (produtosSelecionados.Contains(Convert.ToInt32(linha.Cells["colunaId"].Value)))
+                {
+                    linha.Cells["colunaSelecao"].Value = true;
+                }
+            }
+        }
+
+        private void InicializarCamposDeDados()
+        {
+            textBoxNome.Text = _compraASerEditada.Nome;
+            textBoxEmail.Text = _compraASerEditada.Email;
+            maskedTextBoxCpf.Text = _compraASerEditada.Cpf;
+            maskedTextBoxTelefone.Text = _compraASerEditada.Telefone;
+
         }
 
         private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
@@ -113,19 +126,6 @@ namespace Cod3rsGrowth.Forms
             textBoxValorCompra.Text = valorDosProdutosSelecionados.ToString();
 
             return produtosSelecionados;
-        }
-
-        private void InicializarProdutosSelecionadosNoCatalogo()
-        {
-            List<int> produtosSelecionados = _servicoCompraCliente.ObterProdutosVinculados(_compraASerEditada.Id);
-
-            foreach (DataGridViewRow linha in dataGridViewCatalogoObras.Rows)
-            {
-                if (produtosSelecionados.Contains(Convert.ToInt32(linha.Cells["colunaId"].Value)))
-                {
-                    linha.Cells["colunaSelecao"].Value = true;
-                }
-            }
         }
     }
 }

@@ -19,6 +19,20 @@ namespace Cod3rsGrowth.Forms
             InitializeComponent();
         }
 
+        private void AoInicializarFormulario(object sender, EventArgs e)
+        {
+            try
+            {
+                InicializarValoresComboBox();
+                InicializarValoresDosCamposDeDados();
+                InicializarGenerosSelecionados();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void InicializarValoresComboBox()
         {
             comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
@@ -35,35 +49,41 @@ namespace Cod3rsGrowth.Forms
             comboBoxFormato.SelectedItem = _obraASerEditada.Formato;
             _ = _obraASerEditada.FoiFinalizada == true ?
                 radioButtonFinalizada.Checked = true : radioButtonEmLancamento.Checked = true;
-
-            //foreach (var item in _obraASerEditada.GenerosParaCriacao)
-            //{
-            //    var index = checkedListBoxGeneros.Items.IndexOf(item);
-
-            //    if (index != -1)
-            //    {
-            //        checkedListBoxGeneros.SetItemChecked(index, true);
-            //    }
-            //}
         }
 
-        private void AoInicializarFormulario(object sender, EventArgs e)
+        private void InicializarGenerosSelecionados()
         {
-            try
+            var generosSelecionados = _servicoObra.ObterGenerosVinculados(_obraASerEditada.Id);
+
+            foreach (var item in generosSelecionados)
             {
-                InicializarValoresComboBox();
-                InicializarValoresDosCamposDeDados();
+                var index = checkedListBoxGeneros.Items.IndexOf(item);
+
+                if (index != -1)
+                {
+                    checkedListBoxGeneros.SetItemChecked(index, true);
+                }
             }
-            catch (Exception ex)
+        }
+
+        private List<string> ObterGenerosSelecionados()
+        {
+            List<string> generosSelecionados = new();
+
+            foreach (var item in checkedListBoxGeneros.CheckedItems)
             {
-                MessageBox.Show(ex.Message);
+                generosSelecionados.Add(item.ToString());
             }
+
+            return generosSelecionados;
         }
 
         private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
         {
             try
             {
+                List<string> generosSelecionados = ObterGenerosSelecionados();
+
                 _obraASerEditada.Autor = textBoxAutor.Text;
                 _obraASerEditada.Titulo = textBoxTitulo.Text;
                 _obraASerEditada.ValorObra = decimal.Parse(textBoxValor.Text);
@@ -72,6 +92,7 @@ namespace Cod3rsGrowth.Forms
                 _obraASerEditada.Formato = (Formato)comboBoxFormato.SelectedIndex;
                 _obraASerEditada.InicioPublicacao = dateTimePickerInicioPublicacao.Value;
                 _obraASerEditada.FoiFinalizada = radioButtonFinalizada.Checked;
+                _obraASerEditada.GenerosParaCriacao = generosSelecionados;
 
                 DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
                                                             "Salvar Obra", MessageBoxButtons.YesNo);
