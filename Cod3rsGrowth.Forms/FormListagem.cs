@@ -245,17 +245,10 @@ namespace Cod3rsGrowth.Forms
                     return;
                 }
 
-                DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja editar os dados " +
-                                                            $"da obra de ID {idDaObraSelecionada}?",
-                                                            "Editar Obra", MessageBoxButtons.YesNo);
-
-                if (dialogResult == DialogResult.Yes)
-                {
-                    var obraASerEditada = _servicoObra.ObterPorId(idDaObraSelecionada);
-                    var formEditarObra = new FormEditarObra(_servicoObra, obraASerEditada);
-                    formEditarObra.ShowDialog();
-                    ListarObras();
-                }
+                var obraASerEditada = _servicoObra.ObterPorId(idDaObraSelecionada);
+                var formEditarObra = new FormEditarObra(_servicoObra, obraASerEditada);
+                formEditarObra.ShowDialog();
+                ListarObras();
             }
             catch (Exception ex)
             {
@@ -274,17 +267,10 @@ namespace Cod3rsGrowth.Forms
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja editar os dados " +
-                                                        $"da compra de ID {idDaCompraSelecionada}?",
-                                                        "Editar Compra", MessageBoxButtons.YesNo);
-
-            if (dialogResult == DialogResult.Yes)
-            {
-                var compraASerEditada = _servicoCompraCliente.ObterPorId(idDaCompraSelecionada);
-                var formEditarCompra = new FormEditarCompra(_servicoCompraCliente, _servicoObra, compraASerEditada);
-                formEditarCompra.ShowDialog();
-                ListarCompras();
-            }
+            var compraASerEditada = _servicoCompraCliente.ObterPorId(idDaCompraSelecionada);
+            var formEditarCompra = new FormEditarCompra(_servicoCompraCliente, _servicoObra, compraASerEditada);
+            formEditarCompra.ShowDialog();
+            ListarCompras();
         }
 
         private static int ObterIdDoObjetoSelecionado(string nomeColuna, DataGridView dataGrid)
