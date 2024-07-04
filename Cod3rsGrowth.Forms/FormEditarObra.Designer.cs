@@ -126,6 +126,8 @@
             textBoxValor.TabIndex = 31;
             textBoxValor.Text = "0,00";
             textBoxValor.TextAlign = HorizontalAlignment.Right;
+            textBoxValor.TextChanged += AoAlterarTextoDoCampoValor;
+            textBoxValor.KeyPress += AoPressionarTeclaNoCampoValor;
             // 
             // numericUpDownCapitulos
             // 

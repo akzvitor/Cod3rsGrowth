@@ -41,11 +41,37 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             var compraNoBanco = _db.ComprasCliente.FirstOrDefault(c => c.Id == compra.Id)
                 ?? throw new Exception("Compra não encontrada.");
-            
+
+            var produtosAnteriores = ObterProdutosVinculados(compra.Id);
+            var produtosAtualizados = compra.listaIdDosProdutos;
+
+            var hashSetAnteriores = new HashSet<int>(produtosAnteriores);
+            var hashSetAtualizados = new HashSet<int>(produtosAtualizados);
+
+            List<int> produtosParaRemover = new();
+            List<int> produtosParaAdicionar = new();
+
+            produtosAnteriores.ForEach(item =>
+            {
+                if (!hashSetAtualizados.Contains(item))
+                {
+                    produtosParaRemover.Add(item);
+                }
+            });
+
+            produtosAtualizados.ForEach(item =>
+            {
+                if (!hashSetAnteriores.Contains(item))
+                {
+                    produtosParaAdicionar.Add(item);
+                }
+            });
+
             try
             {
                 _db.Update(compra);
-                AdicionarProdutos(compra.Id, compra.listaIdDosProdutos);
+                RemoverProdutos(produtosParaRemover);
+                AdicionarProdutos(compra.Id, produtosParaAdicionar);
             }
             catch (Exception ex)
             {
@@ -84,11 +110,21 @@ namespace Cod3rsGrowth.Infra.Repositorios
             });
         }
 
+        private void RemoverProdutos(List<int> idsDosProdutos)
+        {
+            idsDosProdutos.ForEach(id =>
+            {
+                _db.Execute(
+                    $"DELETE FROM ComprasObras WHERE ObraId = @id",
+                    new DataParameter("@id", id)    
+                );
+            });
+        }
+
         public List<int> ObterProdutosVinculados(int compraId)
         {
-            List<int> produtosVinculados = new();
-
-            produtosVinculados = _db.Query<int>($"SELECT ObraId FROM ComprasObras WHERE CompraId = @compraId", new { compraId }).ToList();
+            List<int> produtosVinculados = _db.Query<int>($"SELECT ObraId FROM ComprasObras " +
+                                                          $"WHERE CompraId = @compraId", new { compraId }).ToList();
 
             return produtosVinculados;
         }

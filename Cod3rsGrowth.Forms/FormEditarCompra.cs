@@ -48,7 +48,7 @@ namespace Cod3rsGrowth.Forms
             {
                 InicializarCatalogo();
                 InicializarCamposDeDados();
-                InicializarProdutosSelecionados();
+                InicializarProdutosSelecionadosNoCatalogo();
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                List<int> produtosSelecionados = ObterProdutosSelecionados();
+                List<int> produtosSelecionados = ObterIdDosProdutosSelecionados();
 
                 _compraASerEditada.Cpf = maskedTextBoxCpf.Text.Trim().Replace(".", "").Replace("-", "");
                 _compraASerEditada.Nome = textBoxNome.Text;
@@ -95,7 +95,7 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private List<int> ObterProdutosSelecionados()
+        private List<int> ObterIdDosProdutosSelecionados()
         {
             List<int> produtosSelecionados = new();
             decimal valorDosProdutosSelecionados = 0;
@@ -115,7 +115,7 @@ namespace Cod3rsGrowth.Forms
             return produtosSelecionados;
         }
 
-        private void InicializarProdutosSelecionados()
+        private void InicializarProdutosSelecionadosNoCatalogo()
         {
             List<int> produtosSelecionados = _servicoCompraCliente.ObterProdutosVinculados(_compraASerEditada.Id);
 
