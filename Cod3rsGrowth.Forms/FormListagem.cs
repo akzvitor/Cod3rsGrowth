@@ -235,39 +235,74 @@ namespace Cod3rsGrowth.Forms
 
         private void AoClicarNoBotaoEditarDaAbaCompras(object sender, EventArgs e)
         {
-            const string colunaIdCompra = "colunaIdCompras";
-            var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(colunaIdCompra, dataGridCompras);
-
-            if (idDaCompraSelecionada == ErroDataGridVazio)
+            try
             {
-                MessageBox.Show("Não foi possível editar, não há compras cadastradas.", "Lista de compras vazia");
-                return;
-            }
+                const string colunaIdCompra = "colunaIdCompras";
+                var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(colunaIdCompra, dataGridCompras);
 
-            var compraASerEditada = _servicoCompraCliente.ObterPorId(idDaCompraSelecionada);
-            var formEditarCompra = new FormEditarCompra(_servicoCompraCliente, _servicoObra, compraASerEditada);
-            formEditarCompra.ShowDialog();
-            ListarCompras();
+                if (idDaCompraSelecionada == ErroDataGridVazio)
+                {
+                    MessageBox.Show("Não foi possível editar, não há compras cadastradas.", "Lista de compras vazia");
+                    return;
+                }
+
+                var compraASerEditada = _servicoCompraCliente.ObterPorId(idDaCompraSelecionada);
+                var formEditarCompra = new FormEditarCompra(_servicoCompraCliente, _servicoObra, compraASerEditada);
+                formEditarCompra.ShowDialog();
+                ListarCompras();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AoMudarValorDataInicial(object sender, EventArgs e)
         {
-            _filtroCompraCliente.DataInicial = dateTimePickerDataCompraInicial.Value;
+            try
+            {
+                _filtroCompraCliente.DataInicial = dateTimePickerDataCompraInicial.Value;
+            }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message); 
+            }
         }
 
         private void AoAlterarValorDataFinal(object sender, EventArgs e)
         {
-            _filtroCompraCliente.DataFinal = dateTimePickerDataCompraFinal.Value;
+            try
+            {
+                _filtroCompraCliente.DataFinal = dateTimePickerDataCompraFinal.Value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AoAlterarAnoInicial(object sender, EventArgs e)
         {
-            _filtroObra.AnoInicialLancamento = textBoxAnoInicalObra.Text;
+            try
+            {
+                _filtroObra.AnoInicialLancamento = textBoxAnoInicalObra.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AoAlterarAnoFinal(object sender, EventArgs e)
         {
-            _filtroObra.AnoFinalLancamento = textBoxAnoFinalObra.Text;
+            try
+            {
+                _filtroObra.AnoFinalLancamento = textBoxAnoFinalObra.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ListarObras()
