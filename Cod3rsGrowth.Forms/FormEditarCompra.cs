@@ -1,15 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servico.Servicos;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -33,8 +23,8 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 InicializarCatalogo();
-                InicializarCamposDeDados();
                 InicializarProdutosSelecionadosNoCatalogo();
+                InicializarCamposDeDados();
             }
             catch (Exception ex)
             {
