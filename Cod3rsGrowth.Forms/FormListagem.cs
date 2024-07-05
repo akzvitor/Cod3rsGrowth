@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Forms
         private readonly ServicoCompraCliente _servicoCompraCliente;
         private readonly FiltroObra _filtroObra = new();
         private readonly FiltroCompraCliente _filtroCompraCliente = new();
-        const int dataGridVazio = -1;
+        private const int ErroDataGridVazio = -1;
         public FormListagem(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
             _servicoObra = servicoObra;
@@ -158,7 +158,7 @@ namespace Cod3rsGrowth.Forms
                 const string colunaIdObra = "colunaIdObras";
                 var idDaObraSelecionada = ObterIdDoObjetoSelecionado(colunaIdObra, dataGridObras);
 
-                if (idDaObraSelecionada == dataGridVazio)
+                if (idDaObraSelecionada == ErroDataGridVazio)
                 {
                     MessageBox.Show("Não foi possível remover, não há obras cadastradas.", "Lista de obras vazia");
                     return;
@@ -187,7 +187,7 @@ namespace Cod3rsGrowth.Forms
                 const string nomeColunaIdCompras = "colunaIdCompras";
                 var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(nomeColunaIdCompras, dataGridCompras);
 
-                if (idDaCompraSelecionada == dataGridVazio)
+                if (idDaCompraSelecionada == ErroDataGridVazio)
                 {
                     MessageBox.Show("Não foi possível remover, não há compras cadastradas.", "Lista de compras vazia.");
                     return;
@@ -216,7 +216,7 @@ namespace Cod3rsGrowth.Forms
                 const string colunaIdObra = "colunaIdObras";
                 var idDaObraSelecionada = ObterIdDoObjetoSelecionado(colunaIdObra, dataGridObras);
 
-                if (idDaObraSelecionada == dataGridVazio)
+                if (idDaObraSelecionada == ErroDataGridVazio)
                 {
                     MessageBox.Show("Não foi possível editar, não há obras cadastradas.", "Lista de obras vazia");
                     return;
@@ -238,7 +238,7 @@ namespace Cod3rsGrowth.Forms
             const string colunaIdCompra = "colunaIdCompras";
             var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(colunaIdCompra, dataGridCompras);
 
-            if (idDaCompraSelecionada == dataGridVazio)
+            if (idDaCompraSelecionada == ErroDataGridVazio)
             {
                 MessageBox.Show("Não foi possível editar, não há compras cadastradas.", "Lista de compras vazia");
                 return;
@@ -294,7 +294,7 @@ namespace Cod3rsGrowth.Forms
         {
             if (dataGrid.CurrentCell == null)
             {
-                return dataGridVazio;
+                return ErroDataGridVazio;
             }
 
             var linhaSelecionada = dataGrid.CurrentCell.RowIndex;

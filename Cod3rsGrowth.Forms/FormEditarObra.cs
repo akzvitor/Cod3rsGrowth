@@ -10,7 +10,8 @@ namespace Cod3rsGrowth.Forms
     public partial class FormEditarObra : Form
     {
         private readonly ServicoObra _servicoObra;
-        private Obra _obraASerEditada = new();
+        private readonly Obra _obraASerEditada = new();
+        private const int ItemCheckListDesmarcado = -1;
 
         public FormEditarObra(ServicoObra servicoObra, Obra obraASerEditada)
         {
@@ -26,6 +27,18 @@ namespace Cod3rsGrowth.Forms
                 InicializarValoresComboBox();
                 InicializarValoresDosCamposDeDados();
                 InicializarGenerosSelecionados();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
+        {
+            try
+            {
+                Close();
             }
             catch (Exception ex)
             {
@@ -55,18 +68,6 @@ namespace Cod3rsGrowth.Forms
                     _servicoObra.Editar(_obraASerEditada);
                     Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
-        {
-            try
-            {
-                Close();
             }
             catch (Exception ex)
             {
@@ -164,7 +165,7 @@ namespace Cod3rsGrowth.Forms
             {
                 var index = checkedListBoxGeneros.Items.IndexOf(item);
 
-                if (index != -1)
+                if (index != ItemCheckListDesmarcado)
                 {
                     checkedListBoxGeneros.SetItemChecked(index, true);
                 }
