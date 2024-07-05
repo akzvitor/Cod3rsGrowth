@@ -48,14 +48,12 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                List<int> produtosSelecionados = ObterIdDosProdutosSelecionados();
-
                 _compraASerEditada.Cpf = maskedTextBoxCpf.Text.Trim().Replace(".", "").Replace("-", "");
                 _compraASerEditada.Nome = textBoxNome.Text;
                 _compraASerEditada.Telefone = maskedTextBoxTelefone.Text.Trim().Replace("(", "").Replace(")", "").Replace("-", "");
                 _compraASerEditada.ValorCompra = decimal.Parse(textBoxValorCompra.Text);
                 _compraASerEditada.Email = textBoxEmail.Text;
-                _compraASerEditada.listaIdDosProdutos = produtosSelecionados;
+                _compraASerEditada.listaIdDosProdutos = ObterIdDosProdutosSelecionados();
 
                 DialogResult dialogResult = MessageBox.Show("Deseja salvar a compra com os dados informados?",
                                                             "Salvar Compra", MessageBoxButtons.YesNo);
@@ -95,7 +93,6 @@ namespace Cod3rsGrowth.Forms
             textBoxEmail.Text = _compraASerEditada.Email;
             maskedTextBoxCpf.Text = _compraASerEditada.Cpf;
             maskedTextBoxTelefone.Text = _compraASerEditada.Telefone;
-
         }
 
         private List<int> ObterIdDosProdutosSelecionados()
