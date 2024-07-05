@@ -33,57 +33,10 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void InicializarValoresComboBox()
-        {
-            comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
-        }
-
-        private void InicializarValoresDosCamposDeDados()
-        {
-            textBoxTitulo.Text = _obraASerEditada.Titulo;
-            textBoxAutor.Text = _obraASerEditada.Autor;
-            textBoxValor.Text = _obraASerEditada.ValorObra.ToString();
-            dateTimePickerInicioPublicacao.Value = _obraASerEditada.InicioPublicacao;
-            richTextBoxSinopse.Text = _obraASerEditada.Sinopse;
-            numericUpDownCapitulos.Value = _obraASerEditada.NumeroCapitulos;
-            comboBoxFormato.SelectedItem = _obraASerEditada.Formato;
-            _ = _obraASerEditada.FoiFinalizada == true ?
-                radioButtonFinalizada.Checked = true : radioButtonEmLancamento.Checked = true;
-        }
-
-        private void InicializarGenerosSelecionados()
-        {
-            var generosSelecionados = _servicoObra.ObterGenerosVinculados(_obraASerEditada.Id);
-
-            foreach (var item in generosSelecionados)
-            {
-                var index = checkedListBoxGeneros.Items.IndexOf(item);
-
-                if (index != -1)
-                {
-                    checkedListBoxGeneros.SetItemChecked(index, true);
-                }
-            }
-        }
-
-        private List<string> ObterGenerosSelecionados()
-        {
-            List<string> generosSelecionados = new();
-
-            foreach (var item in checkedListBoxGeneros.CheckedItems)
-            {
-                generosSelecionados.Add(item.ToString());
-            }
-
-            return generosSelecionados;
-        }
-
         private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
         {
             try
             {
-                List<string> generosSelecionados = ObterGenerosSelecionados();
-
                 _obraASerEditada.Autor = textBoxAutor.Text;
                 _obraASerEditada.Titulo = textBoxTitulo.Text;
                 _obraASerEditada.ValorObra = decimal.Parse(textBoxValor.Text);
@@ -92,7 +45,8 @@ namespace Cod3rsGrowth.Forms
                 _obraASerEditada.Formato = (Formato)comboBoxFormato.SelectedIndex;
                 _obraASerEditada.InicioPublicacao = dateTimePickerInicioPublicacao.Value;
                 _obraASerEditada.FoiFinalizada = radioButtonFinalizada.Checked;
-                _obraASerEditada.GenerosParaCriacao = generosSelecionados;
+                _obraASerEditada.GenerosParaCriacao = ObterGenerosSelecionados();
+                _obraASerEditada.Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados());
 
                 DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
                                                             "Salvar Obra", MessageBoxButtons.YesNo);
@@ -182,6 +136,63 @@ namespace Cod3rsGrowth.Forms
             {
                 MessageBox.Show($"{ex.Message}");
             }
+        }
+
+        private void InicializarValoresComboBox()
+        {
+            comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
+        }
+
+        private void InicializarValoresDosCamposDeDados()
+        {
+            textBoxTitulo.Text = _obraASerEditada.Titulo;
+            textBoxAutor.Text = _obraASerEditada.Autor;
+            textBoxValor.Text = _obraASerEditada.ValorObra.ToString();
+            dateTimePickerInicioPublicacao.Value = _obraASerEditada.InicioPublicacao;
+            richTextBoxSinopse.Text = _obraASerEditada.Sinopse;
+            numericUpDownCapitulos.Value = _obraASerEditada.NumeroCapitulos;
+            comboBoxFormato.SelectedItem = _obraASerEditada.Formato;
+            _ = _obraASerEditada.FoiFinalizada == true ?
+                radioButtonFinalizada.Checked = true : radioButtonEmLancamento.Checked = true;
+        }
+
+        private void InicializarGenerosSelecionados()
+        {
+            var generosSelecionados = _servicoObra.ObterGenerosVinculados(_obraASerEditada.Id);
+
+            foreach (var item in generosSelecionados)
+            {
+                var index = checkedListBoxGeneros.Items.IndexOf(item);
+
+                if (index != -1)
+                {
+                    checkedListBoxGeneros.SetItemChecked(index, true);
+                }
+            }
+        }
+
+        private List<string> ObterGenerosSelecionados()
+        {
+            List<string> generosSelecionados = new();
+
+            foreach (var item in checkedListBoxGeneros.CheckedItems)
+            {
+                generosSelecionados.Add(item.ToString());
+            }
+
+            return generosSelecionados;
+        }
+
+        private static List<Genero> ObterListaDeEnumsGenero(List<string> generosSelecionados)
+        {
+            List<Genero> generosDaObra = new();
+
+            foreach (var item in generosSelecionados)
+            {
+                generosDaObra.Add((Genero)Enum.Parse(typeof(Genero), item.ToString()));
+            }
+
+            return generosDaObra;
         }
     }
 }

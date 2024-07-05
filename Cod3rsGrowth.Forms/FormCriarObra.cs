@@ -17,16 +17,6 @@ namespace Cod3rsGrowth.Forms
             InitializeComponent();
         }
 
-        private void InicializarValoresComboBox()
-        {
-            comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
-        }
-
-        private void LimparComboBox()
-        {
-            comboBoxFormato.SelectedItem = null;
-        }
-
         private void AoInicializarFormulario(object sender, EventArgs e)
         {
             try
@@ -160,7 +150,7 @@ namespace Cod3rsGrowth.Forms
             return generosSelecionados;
         }
 
-        private List<Genero> ObterListaDeEnumsGenero(List<string> generosSelecionados)
+        private static List<Genero> ObterListaDeEnumsGenero(List<string> generosSelecionados)
         {
             List<Genero> generosDaObra = new();
 
@@ -170,6 +160,16 @@ namespace Cod3rsGrowth.Forms
             }
 
             return generosDaObra;
+        }
+
+        private void InicializarValoresComboBox()
+        {
+            comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
+        }
+
+        private void LimparComboBox()
+        {
+            comboBoxFormato.SelectedItem = null;
         }
     }
 }

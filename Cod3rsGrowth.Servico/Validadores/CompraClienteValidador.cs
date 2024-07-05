@@ -45,9 +45,9 @@ namespace Cod3rsGrowth.Servico.Validadores
                 .EmailAddress()
                 .WithMessage("Formato de e-mail inválido.");
 
-            //RuleFor(cliente => cliente.listaIdDosProdutos)
-            //    .NotEmpty()
-            //    .WithMessage("A compra deve conter pelo menos um produto.");
+            RuleFor(cliente => cliente.listaIdDosProdutos)
+                .NotEmpty()
+                .WithMessage("A compra deve conter pelo menos um produto.");
 
             RuleFor(cliente => cliente.ValorCompra)
                 .GreaterThanOrEqualTo(0)

@@ -18,26 +18,6 @@ namespace Cod3rsGrowth.Forms
             InitializeComponent();
         }
 
-        private void ListarObras()
-        {
-            dataGridObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
-        }
-
-        private void ListarCompras()
-        {
-            dataGridCompras.DataSource = _servicoCompraCliente.ObterTodos(_filtroCompraCliente);
-        }
-
-        private void InicializarValoresComboBox()
-        {
-            comboBoxFormatoObra.DataSource = Enum.GetValues(typeof(Formato));
-        }
-
-        private void LimparComboBox()
-        {
-            comboBoxFormatoObra.SelectedItem = null;
-        }
-
         private void AoCarregarFormulario(object sender, EventArgs e)
         {
             try
@@ -270,19 +250,6 @@ namespace Cod3rsGrowth.Forms
             ListarCompras();
         }
 
-        private static int ObterIdDoObjetoSelecionado(string nomeColuna, DataGridView dataGrid)
-        {
-            if (dataGrid.CurrentCell == null)
-            {
-                return dataGridVazio;
-            }
-
-            var linhaSelecionada = dataGrid.CurrentCell.RowIndex;
-            var idDoObjetoSelecionado = Convert.ToInt32(dataGrid.Rows[linhaSelecionada].Cells[nomeColuna].Value);
-
-            return idDoObjetoSelecionado;
-        }
-
         private void AoMudarValorDataInicial(object sender, EventArgs e)
         {
             _filtroCompraCliente.DataInicial = dateTimePickerDataCompraInicial.Value;
@@ -301,6 +268,39 @@ namespace Cod3rsGrowth.Forms
         private void AoAlterarAnoFinal(object sender, EventArgs e)
         {
             _filtroObra.AnoFinalLancamento = textBoxAnoFinalObra.Text;
+        }
+
+        private void ListarObras()
+        {
+            dataGridObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
+        }
+
+        private void ListarCompras()
+        {
+            dataGridCompras.DataSource = _servicoCompraCliente.ObterTodos(_filtroCompraCliente);
+        }
+
+        private void InicializarValoresComboBox()
+        {
+            comboBoxFormatoObra.DataSource = Enum.GetValues(typeof(Formato));
+        }
+
+        private void LimparComboBox()
+        {
+            comboBoxFormatoObra.SelectedItem = null;
+        }
+
+        private static int ObterIdDoObjetoSelecionado(string nomeColuna, DataGridView dataGrid)
+        {
+            if (dataGrid.CurrentCell == null)
+            {
+                return dataGridVazio;
+            }
+
+            var linhaSelecionada = dataGrid.CurrentCell.RowIndex;
+            var idDoObjetoSelecionado = Convert.ToInt32(dataGrid.Rows[linhaSelecionada].Cells[nomeColuna].Value);
+
+            return idDoObjetoSelecionado;
         }
     }
 }
