@@ -44,20 +44,36 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var obraNoBanco = _db.Obras.FirstOrDefault(o => o.Id == obra.Id)
                 ?? throw new Exception("Obra não encontrada.");
 
+            var generosAnteriores = ObterGenerosVinculados(obra.Id);
+            var generosAtualizados = obra.GenerosParaCriacao;
+
+            var hashSetGenerosAnteriores = new HashSet<string>(generosAnteriores);
+            var hashSetGenerosAtualizados = new HashSet<string>(generosAtualizados);
+
+            List<string> generosParaRemover = new();
+            List<string> generosParaAdicionar = new();
+
+            generosAnteriores.ForEach(genero =>
+            {
+                if (!hashSetGenerosAtualizados.Contains(genero))
+                {
+                    generosParaRemover.Add(genero);
+                }
+            });
+
+            generosAtualizados.ForEach(genero =>
+            {
+                if (!hashSetGenerosAnteriores.Contains(genero))
+                {
+                    generosParaAdicionar.Add(genero);
+                }
+            });
+
             try   
             {
-                _db.Obras
-                .Where(o => o.Id == obra.Id)
-                .Set(o => o.Titulo, obra.Titulo)
-                .Set(o => o.Autor, obra.Autor)
-                .Set(o => o.Generos, obra.Generos)
-                .Set(o => o.Sinopse, obra.Sinopse)
-                .Set(o => o.NumeroCapitulos, obra.NumeroCapitulos)
-                .Set(o => o.ValorObra, obra.ValorObra)
-                .Set(o => o.Formato, obra.Formato)
-                .Set(o => o.FoiFinalizada, obra.FoiFinalizada)
-                .Set(o => o.InicioPublicacao, obra.InicioPublicacao)
-                .Update();
+                _db.Update(obra);
+                RemoverGeneros(obra.Id, generosParaRemover);
+                SalvarGeneros(obra.Id, generosParaAdicionar);
             }
             catch (Exception ex) 
             {
@@ -98,9 +114,29 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
         }
 
+        private void RemoverGeneros(int obraId, List<string> generos)
+        {
+            generos.ForEach(genero =>
+            {
+                _db.Execute(
+                    $"DELETE FROM GenerosObras WHERE ObraId = @obraId AND Genero = @genero",
+                    new DataParameter("@obraId", obraId),
+                    new DataParameter("@genero", genero) 
+                );
+            });
+        }
+
         private void RemoverComprasVinculadas()
         {
             _db.Execute($"DELETE FROM ComprasObras Where ObraId = NULL");
+        }
+
+        public List<string> ObterGenerosVinculados(int obraId)
+        {
+            var generosVinculados = _db.Query<string>($"SELECT Genero FROM GenerosObras " +
+                                                      $"WHERE ObraId = @obraId", new { obraId }).ToList();
+
+            return generosVinculados;
         }
 
         public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
@@ -135,9 +171,12 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 obras = obras.Where(o => o.Generos.Any(g => filtro.ListaDeGenerosObra.Contains(g)));
             }
 
-            if (!string.IsNullOrEmpty(filtro.AnoDaPublicacao))
+            if (!string.IsNullOrEmpty(filtro.AnoInicialLancamento) && !string.IsNullOrEmpty(filtro.AnoFinalLancamento))
             {
-                obras = obras.Where(o => o.InicioPublicacao.Year.ToString() == filtro.AnoDaPublicacao);
+                var intAnoInicial = Convert.ToInt32(filtro.AnoInicialLancamento);
+                var intAnoFinal = Convert.ToInt32(filtro.AnoFinalLancamento);
+
+                obras = obras.Where(o => o.InicioPublicacao.Year >= intAnoInicial && o.InicioPublicacao.Year <= intAnoFinal);
             }
 
             return obras;

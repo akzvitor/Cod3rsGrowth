@@ -17,11 +17,6 @@ namespace Cod3rsGrowth.Forms
             InitializeComponent();
         }
 
-        private void InicializarCatalogo()
-        {
-            dataGridViewCatalogoObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
-        }
-
         private void AoInicializarFormulario(object sender, EventArgs e)
         {
             try
@@ -97,6 +92,11 @@ namespace Cod3rsGrowth.Forms
             textBoxValorCompra.Text = valorDosProdutosSelecionados.ToString();
 
             return produtosSelecionados;
+        }
+
+        private void InicializarCatalogo()
+        {
+            dataGridViewCatalogoObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
         }
     }
 }

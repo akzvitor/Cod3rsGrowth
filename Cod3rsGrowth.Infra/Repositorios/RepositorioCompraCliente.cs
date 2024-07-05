@@ -41,21 +41,37 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             var compraNoBanco = _db.ComprasCliente.FirstOrDefault(c => c.Id == compra.Id)
                 ?? throw new Exception("Compra não encontrada.");
-            
+
+            var produtosAnteriores = ObterProdutosVinculados(compra.Id);
+            var produtosAtualizados = compra.listaIdDosProdutos;
+
+            var hashSetProdutosAnteriores = new HashSet<int>(produtosAnteriores);
+            var hashSetProdutosAtualizados = new HashSet<int>(produtosAtualizados);
+
+            List<int> produtosParaRemover = new();
+            List<int> produtosParaAdicionar = new();
+
+            produtosAnteriores.ForEach(item =>
+            {
+                if (!hashSetProdutosAtualizados.Contains(item))
+                {
+                    produtosParaRemover.Add(item);
+                }
+            });
+
+            produtosAtualizados.ForEach(item =>
+            {
+                if (!hashSetProdutosAnteriores.Contains(item))
+                {
+                    produtosParaAdicionar.Add(item);
+                }
+            });
+
             try
             {
                 _db.Update(compra);
-             
-                //_db.ComprasCliente
-                //.Where(c => c.Id == compra.Id)
-                //.Set(c => c.Cpf, compra.Cpf)
-                //.Set(c => c.Nome, compra.Nome)
-                //.Set(c => c.Telefone, compra.Telefone)
-                //.Set(c => c.Email, compra.Email)
-                //.Set(c => c.Produtos, compra.Produtos)
-                //.Set(c => c.ValorCompra, compra.ValorCompra)
-                //.Set(c => c.DataCompra, compra.DataCompra)
-                //.Update();
+                RemoverProdutos(compra.Id, produtosParaRemover);
+                AdicionarProdutos(compra.Id, produtosParaAdicionar);
             }
             catch (Exception ex)
             {
@@ -84,14 +100,34 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         private void AdicionarProdutos(int compraId, List<int> idProdutos)
         {
-            foreach (var item in idProdutos)
+            idProdutos.ForEach(id =>
             {
                 _db.Execute(
                     "INSERT INTO ComprasObras (CompraId, ObraId) VALUES (@compraId, @item)",
                     new DataParameter("@compraId", compraId),
-                    new DataParameter("@item", item)
+                    new DataParameter("@item", id)
                 );
-            }
+            });
+        }
+
+        private void RemoverProdutos(int compraId, List<int> idsDosProdutos)
+        {
+            idsDosProdutos.ForEach(obraId =>
+            {
+                _db.Execute(
+                    $"DELETE FROM ComprasObras WHERE CompraId = @compraId AND ObraId = @obraId",
+                    new DataParameter("@compraId", compraId),
+                    new DataParameter("@obraId", obraId)
+                );
+            });
+        }
+
+        public List<int> ObterProdutosVinculados(int compraId)
+        {
+            List<int> produtosVinculados = _db.Query<int>($"SELECT ObraId FROM ComprasObras " +
+                                                          $"WHERE CompraId = @compraId", new { compraId }).ToList();
+
+            return produtosVinculados;
         }
 
         public static IQueryable<CompraCliente> Filtrar(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)
@@ -111,9 +147,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 compras = compras.Where(c => c.Cpf.Trim().Replace(".", "").Replace("-", "").Contains(filtro.Cpf.Trim().Replace(".", "").Replace("-", "")));
             }
 
-            if (filtro.DataCompra.HasValue && filtro.DataCompra != DateTime.MinValue)
+            if ((filtro.DataInicial.HasValue && filtro.DataInicial != DateTime.MinValue) && (filtro.DataFinal.HasValue && filtro.DataFinal != DateTime.MaxValue))
             {
-                compras = compras.Where(c => c.DataCompra.DayOfYear == filtro.DataCompra.Value.DayOfYear);
+                compras = compras.Where(c => (c.DataCompra >= filtro.DataInicial.Value) && (c.DataCompra <= filtro.DataFinal.Value));
             }
 
             return compras;

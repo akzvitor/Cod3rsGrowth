@@ -34,8 +34,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
         public string Sinopse { get; set; }
         public List<Genero> Generos { get; set; }
         public string CapaImagemBase64 { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped] //TODO - VERIFICAR SE ESTA IGNORANDO DENTRO DO BANCO DE DADOS
         public List<string> GenerosParaCriacao { get; set; }
     }
 }

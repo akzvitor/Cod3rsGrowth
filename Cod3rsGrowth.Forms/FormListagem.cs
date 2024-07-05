@@ -10,32 +10,12 @@ namespace Cod3rsGrowth.Forms
         private readonly ServicoCompraCliente _servicoCompraCliente;
         private readonly FiltroObra _filtroObra = new();
         private readonly FiltroCompraCliente _filtroCompraCliente = new();
-        const int dataGridVazio = -1;
+        private const int ErroDataGridVazio = -1;
         public FormListagem(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
             _servicoObra = servicoObra;
             _servicoCompraCliente = servicoCompraCliente;
             InitializeComponent();
-        }
-
-        private void ListarObras()
-        {
-            dataGridObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
-        }
-
-        private void ListarCompras()
-        {
-            dataGridCompras.DataSource = _servicoCompraCliente.ObterTodos(_filtroCompraCliente);
-        }
-
-        private void InicializarValoresComboBox()
-        {
-            comboBoxFormatoObra.DataSource = Enum.GetValues(typeof(Formato));
-        }
-
-        private void LimparComboBox()
-        {
-            comboBoxFormatoObra.SelectedItem = null;
         }
 
         private void AoCarregarFormulario(object sender, EventArgs e)
@@ -74,7 +54,6 @@ namespace Cod3rsGrowth.Forms
                 _filtroObra.TituloObra = textBoxTituloObra.Text;
                 _filtroObra.AutorObra = textBoxAutorObra.Text;
                 _filtroObra.FormatoObra = (Formato?)comboBoxFormatoObra.SelectedItem;
-                _filtroObra.AnoDaPublicacao = textBoxAnoObra.Text;
 
                 ListarObras();
             }
@@ -97,8 +76,10 @@ namespace Cod3rsGrowth.Forms
                 _filtroObra.ObraFoiFinalizada = null;
                 radioButtonStatusObraEmLancamento.Checked = false;
                 radioButtonStatusObraFinalizada.Checked = false;
-                _filtroObra.AnoDaPublicacao = null;
-                textBoxAnoObra.Text = null;
+                _filtroObra.AnoInicialLancamento = null;
+                textBoxAnoInicalObra.Text = null;
+                _filtroObra.AnoFinalLancamento = null;
+                textBoxAnoFinalObra.Text = null;
 
                 ListarObras();
             }
@@ -114,10 +95,6 @@ namespace Cod3rsGrowth.Forms
             {
                 _filtroCompraCliente.NomeCliente = textBoxNomeCliente.Text;
                 _filtroCompraCliente.Cpf = maskedTextBoxCpf.Text.Trim().Replace(".", "").Replace("-", "");
-                if (dateTimePickerDataCompra.Value != DateTime.Parse("Jul 22, 2002"))
-                {
-                    _filtroCompraCliente.DataCompra = dateTimePickerDataCompra.Value;
-                }
 
                 ListarCompras();
             }
@@ -135,8 +112,8 @@ namespace Cod3rsGrowth.Forms
                 textBoxNomeCliente.Text = null;
                 _filtroCompraCliente.Cpf = null;
                 maskedTextBoxCpf.Text = null;
-                _filtroCompraCliente.DataCompra = DateTime.MinValue;
-                dateTimePickerDataCompra.Value = DateTime.Parse("Jul 22, 2002");
+                _filtroCompraCliente.DataInicial = DateTime.MinValue;
+                _filtroCompraCliente.DataFinal = DateTime.MaxValue;
 
                 ListarCompras();
             }
@@ -181,7 +158,7 @@ namespace Cod3rsGrowth.Forms
                 const string colunaIdObra = "colunaIdObras";
                 var idDaObraSelecionada = ObterIdDoObjetoSelecionado(colunaIdObra, dataGridObras);
 
-                if (idDaObraSelecionada == dataGridVazio)
+                if (idDaObraSelecionada == ErroDataGridVazio)
                 {
                     MessageBox.Show("Não foi possível remover, não há obras cadastradas.", "Lista de obras vazia");
                     return;
@@ -210,7 +187,7 @@ namespace Cod3rsGrowth.Forms
                 const string nomeColunaIdCompras = "colunaIdCompras";
                 var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(nomeColunaIdCompras, dataGridCompras);
 
-                if (idDaCompraSelecionada == dataGridVazio)
+                if (idDaCompraSelecionada == ErroDataGridVazio)
                 {
                     MessageBox.Show("Não foi possível remover, não há compras cadastradas.", "Lista de compras vazia.");
                     return;
@@ -232,11 +209,127 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
+        private void AoClicarNoBotaoEditarDaAbaObras(object sender, EventArgs e)
+        {
+            try
+            {
+                const string colunaIdObra = "colunaIdObras";
+                var idDaObraSelecionada = ObterIdDoObjetoSelecionado(colunaIdObra, dataGridObras);
+
+                if (idDaObraSelecionada == ErroDataGridVazio)
+                {
+                    MessageBox.Show("Não foi possível editar, não há obras cadastradas.", "Lista de obras vazia");
+                    return;
+                }
+
+                var obraASerEditada = _servicoObra.ObterPorId(idDaObraSelecionada);
+                var formEditarObra = new FormEditarObra(_servicoObra, obraASerEditada);
+                formEditarObra.ShowDialog();
+                ListarObras();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoEditarDaAbaCompras(object sender, EventArgs e)
+        {
+            try
+            {
+                const string colunaIdCompra = "colunaIdCompras";
+                var idDaCompraSelecionada = ObterIdDoObjetoSelecionado(colunaIdCompra, dataGridCompras);
+
+                if (idDaCompraSelecionada == ErroDataGridVazio)
+                {
+                    MessageBox.Show("Não foi possível editar, não há compras cadastradas.", "Lista de compras vazia");
+                    return;
+                }
+
+                var compraASerEditada = _servicoCompraCliente.ObterPorId(idDaCompraSelecionada);
+                var formEditarCompra = new FormEditarCompra(_servicoCompraCliente, _servicoObra, compraASerEditada);
+                formEditarCompra.ShowDialog();
+                ListarCompras();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoMudarValorDataInicial(object sender, EventArgs e)
+        {
+            try
+            {
+                _filtroCompraCliente.DataInicial = dateTimePickerDataCompraInicial.Value;
+            }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message); 
+            }
+        }
+
+        private void AoAlterarValorDataFinal(object sender, EventArgs e)
+        {
+            try
+            {
+                _filtroCompraCliente.DataFinal = dateTimePickerDataCompraFinal.Value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoAlterarAnoInicial(object sender, EventArgs e)
+        {
+            try
+            {
+                _filtroObra.AnoInicialLancamento = textBoxAnoInicalObra.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoAlterarAnoFinal(object sender, EventArgs e)
+        {
+            try
+            {
+                _filtroObra.AnoFinalLancamento = textBoxAnoFinalObra.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ListarObras()
+        {
+            dataGridObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
+        }
+
+        private void ListarCompras()
+        {
+            dataGridCompras.DataSource = _servicoCompraCliente.ObterTodos(_filtroCompraCliente);
+        }
+
+        private void InicializarValoresComboBox()
+        {
+            comboBoxFormatoObra.DataSource = Enum.GetValues(typeof(Formato));
+        }
+
+        private void LimparComboBox()
+        {
+            comboBoxFormatoObra.SelectedItem = null;
+        }
+
         private static int ObterIdDoObjetoSelecionado(string nomeColuna, DataGridView dataGrid)
         {
             if (dataGrid.CurrentCell == null)
             {
-                return dataGridVazio;
+                return ErroDataGridVazio;
             }
 
             var linhaSelecionada = dataGrid.CurrentCell.RowIndex;

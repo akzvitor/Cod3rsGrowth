@@ -7,12 +7,15 @@ using System.Globalization;
 
 namespace Cod3rsGrowth.Forms
 {
-    public partial class FormCriarObra : Form
+    public partial class FormEditarObra : Form
     {
         private readonly ServicoObra _servicoObra;
+        private readonly Obra _obraASerEditada = new();
+        private const int ItemCheckListDesmarcado = -1;
 
-        public FormCriarObra(ServicoObra servicoObra)
+        public FormEditarObra(ServicoObra servicoObra, Obra obraASerEditada)
         {
+            _obraASerEditada = obraASerEditada;
             _servicoObra = servicoObra;
             InitializeComponent();
         }
@@ -22,7 +25,20 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 InicializarValoresComboBox();
-                LimparComboBox();
+                InicializarValoresDosCamposDeDados();
+                InicializarGenerosSelecionados();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
+        {
+            try
+            {
+                Close();
             }
             catch (Exception ex)
             {
@@ -34,39 +50,24 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                Obra novaObra = new()
-                {
-                    Autor = textBoxAutor.Text,
-                    Titulo = textBoxTitulo.Text,
-                    ValorObra = decimal.Parse(textBoxValor.Text),
-                    Sinopse = richTextBoxSinopse.Text,
-                    NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value),
-                    Formato = (Formato)comboBoxFormato.SelectedIndex,
-                    InicioPublicacao = dateTimePickerInicioPublicacao.Value,
-                    FoiFinalizada = radioButtonFinalizada.Checked,
-                    GenerosParaCriacao = ObterGenerosSelecionados(),
-                    Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados())
-                };
+                _obraASerEditada.Autor = textBoxAutor.Text;
+                _obraASerEditada.Titulo = textBoxTitulo.Text;
+                _obraASerEditada.ValorObra = decimal.Parse(textBoxValor.Text);
+                _obraASerEditada.Sinopse = richTextBoxSinopse.Text;
+                _obraASerEditada.NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value);
+                _obraASerEditada.Formato = (Formato)comboBoxFormato.SelectedIndex;
+                _obraASerEditada.InicioPublicacao = dateTimePickerInicioPublicacao.Value;
+                _obraASerEditada.FoiFinalizada = radioButtonFinalizada.Checked;
+                _obraASerEditada.GenerosParaCriacao = ObterGenerosSelecionados();
+                _obraASerEditada.Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados());
 
                 DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
                                                             "Salvar Obra", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    _servicoObra.Criar(novaObra);
+                    _servicoObra.Editar(_obraASerEditada);
                     Close();
                 }
-            }
-            catch (ValidationException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void AoClicarNoBotaoCancelar(object sender, EventArgs e)
-        {
-            try
-            {
-                Close();
             }
             catch (Exception ex)
             {
@@ -138,6 +139,39 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
+        private void InicializarValoresComboBox()
+        {
+            comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
+        }
+
+        private void InicializarValoresDosCamposDeDados()
+        {
+            textBoxTitulo.Text = _obraASerEditada.Titulo;
+            textBoxAutor.Text = _obraASerEditada.Autor;
+            textBoxValor.Text = _obraASerEditada.ValorObra.ToString();
+            dateTimePickerInicioPublicacao.Value = _obraASerEditada.InicioPublicacao;
+            richTextBoxSinopse.Text = _obraASerEditada.Sinopse;
+            numericUpDownCapitulos.Value = _obraASerEditada.NumeroCapitulos;
+            comboBoxFormato.SelectedItem = _obraASerEditada.Formato;
+            _ = _obraASerEditada.FoiFinalizada == true ?
+                radioButtonFinalizada.Checked = true : radioButtonEmLancamento.Checked = true;
+        }
+
+        private void InicializarGenerosSelecionados()
+        {
+            var generosSelecionados = _servicoObra.ObterGenerosVinculados(_obraASerEditada.Id);
+
+            foreach (var item in generosSelecionados)
+            {
+                var index = checkedListBoxGeneros.Items.IndexOf(item);
+
+                if (index != ItemCheckListDesmarcado)
+                {
+                    checkedListBoxGeneros.SetItemChecked(index, true);
+                }
+            }
+        }
+
         private List<string> ObterGenerosSelecionados()
         {
             List<string> generosSelecionados = new();
@@ -160,16 +194,6 @@ namespace Cod3rsGrowth.Forms
             }
 
             return generosDaObra;
-        }
-
-        private void InicializarValoresComboBox()
-        {
-            comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
-        }
-
-        private void LimparComboBox()
-        {
-            comboBoxFormato.SelectedItem = null;
         }
     }
 }
