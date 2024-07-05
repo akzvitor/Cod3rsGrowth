@@ -51,9 +51,9 @@ namespace Cod3rsGrowth.Forms
                 _compraASerEditada.Cpf = maskedTextBoxCpf.Text.Trim().Replace(".", "").Replace("-", "");
                 _compraASerEditada.Nome = textBoxNome.Text;
                 _compraASerEditada.Telefone = maskedTextBoxTelefone.Text.Trim().Replace("(", "").Replace(")", "").Replace("-", "");
+                _compraASerEditada.listaIdDosProdutos = ObterIdDosProdutosSelecionados();
                 _compraASerEditada.ValorCompra = decimal.Parse(textBoxValorCompra.Text);
                 _compraASerEditada.Email = textBoxEmail.Text;
-                _compraASerEditada.listaIdDosProdutos = ObterIdDosProdutosSelecionados();
 
                 DialogResult dialogResult = MessageBox.Show("Deseja salvar a compra com os dados informados?",
                                                             "Salvar Compra", MessageBoxButtons.YesNo);
