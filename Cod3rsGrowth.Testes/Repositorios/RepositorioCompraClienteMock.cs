@@ -1,5 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Testes.Repositorios
@@ -39,7 +39,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
             compraNoBanco.Nome = compraCliente.Nome;
             compraNoBanco.Telefone = compraCliente.Telefone;
             compraNoBanco.Email = compraCliente.Email;
-            compraNoBanco.Produtos = compraCliente.Produtos;
+            compraNoBanco.listaIdDosProdutos = compraCliente.listaIdDosProdutos;
             compraNoBanco.ValorCompra = compraCliente.ValorCompra;
             compraNoBanco.DataCompra = compraCliente.DataCompra;
 

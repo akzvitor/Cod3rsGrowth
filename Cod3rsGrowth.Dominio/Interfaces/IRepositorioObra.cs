@@ -1,10 +1,9 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Interfaces;
 
-namespace Cod3rsGrowth.Infra.Interfaces
+namespace Cod3rsGrowth.Dominio.Interfaces
 {
     public interface IRepositorioObra : IRepositorio<Obra, FiltroObra>
     {
-
+        List<string> ObterGenerosVinculados(int obraId);
     }
 }

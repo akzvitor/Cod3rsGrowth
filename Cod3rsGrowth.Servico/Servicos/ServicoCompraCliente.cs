@@ -1,5 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servico.Validadores;
 using FluentValidation;
 
@@ -60,6 +60,11 @@ namespace Cod3rsGrowth.Servico.Servicos
         public void Remover(int id)
         {
             _repositorioCompraCliente.Remover(id);
+        }
+
+        public List<int> ObterProdutosVinculados(int compraId)
+        {
+            return _repositorioCompraCliente.ObterProdutosVinculados(compraId);
         }
     }
 }

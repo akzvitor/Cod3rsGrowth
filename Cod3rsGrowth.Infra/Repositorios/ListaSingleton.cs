@@ -4,7 +4,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     public sealed class ListaSingleton
     {
-        private static ListaSingleton? _instancia;
+        private static readonly ListaSingleton? _instancia;
 
         public List<CompraCliente> ListaCompraCliente { get; set; } = new List<CompraCliente> { };
         public List<Obra> ListaObra { get; set; } = new List<Obra> { };
@@ -13,11 +13,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             get
             {
-                if (_instancia == null)
-                {
-                    _instancia = new ListaSingleton();
-                }
-                return _instancia;
+                return _instancia
+                    ?? new ListaSingleton();
             }
         }
     }
