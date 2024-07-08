@@ -15,9 +15,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtroCompra)
         {
-            var query = Filtrar(filtro);
+            var query = Filtrar(filtroCompra);
             return query.ToList();
         }
 
@@ -39,8 +39,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public CompraCliente Editar(CompraCliente compra)
         {
-            var compraNoBanco = _db.ComprasCliente.FirstOrDefault(c => c.Id == compra.Id)
-                ?? throw new Exception("Compra não encontrada.");
+            var compraNoBanco = ObterPorId(compra.Id);
 
             var produtosAnteriores = ObterProdutosVinculados(compra.Id);
             var produtosAtualizados = compra.listaIdDosProdutos;
@@ -130,28 +129,28 @@ namespace Cod3rsGrowth.Infra.Repositorios
             return produtosVinculados;
         }
 
-        public IQueryable<CompraCliente> Filtrar(FiltroCompraCliente filtro)
+        public IQueryable<CompraCliente> Filtrar(FiltroCompraCliente filtroCompra)
         {
             IQueryable<CompraCliente> compras = _db.ComprasCliente;
 
-            if (filtro == null)
+            if (filtroCompra == null)
             {
                 return compras;
             }
 
-            if (!string.IsNullOrEmpty(filtro.NomeCliente))
+            if (!string.IsNullOrEmpty(filtroCompra.NomeCliente))
             {
-                compras = compras.Where(c => c.Nome.Contains(filtro.NomeCliente));
+                compras = compras.Where(c => c.Nome.Contains(filtroCompra.NomeCliente));
             }
 
-            if (!string.IsNullOrEmpty(filtro.Cpf))
+            if (!string.IsNullOrEmpty(filtroCompra.Cpf))
             {
-                compras = compras.Where(c => c.Cpf.Trim().Replace(".", "").Replace("-", "").Contains(filtro.Cpf.Trim().Replace(".", "").Replace("-", "")));
+                compras = compras.Where(c => c.Cpf.Trim().Replace(".", "").Replace("-", "").Contains(filtroCompra.Cpf.Trim().Replace(".", "").Replace("-", "")));
             }
 
-            if ((filtro.DataInicial.HasValue && filtro.DataInicial != DateTime.MinValue) && (filtro.DataFinal.HasValue && filtro.DataFinal != DateTime.MaxValue))
+            if ((filtroCompra.DataInicial.HasValue && filtroCompra.DataInicial != DateTime.MinValue) && (filtroCompra.DataFinal.HasValue && filtroCompra.DataFinal != DateTime.MaxValue))
             {
-                compras = compras.Where(c => (c.DataCompra >= filtro.DataInicial.Value) && (c.DataCompra <= filtro.DataFinal.Value));
+                compras = compras.Where(c => (c.DataCompra >= filtroCompra.DataInicial.Value) && (c.DataCompra <= filtroCompra.DataFinal.Value));
             }
 
             return compras;
