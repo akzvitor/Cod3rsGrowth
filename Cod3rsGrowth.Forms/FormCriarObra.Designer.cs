@@ -224,7 +224,6 @@
             buttonSalvar.TabIndex = 11;
             buttonSalvar.Text = "Salvar";
             buttonSalvar.UseVisualStyleBackColor = false;
-            buttonSalvar.Click += AoClicarNoBotaoSalvar;
             // 
             // buttonCancelar
             // 

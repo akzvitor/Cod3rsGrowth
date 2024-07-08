@@ -10,6 +10,7 @@ namespace Cod3rsGrowth.Forms
     public partial class FormCriarObra : Form
     {
         private readonly ServicoObra _servicoObra;
+        private const int ItemCheckListDesmarcado = -1;
 
         public FormCriarObra(ServicoObra servicoObra)
         {
@@ -30,7 +31,7 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void AoClicarNoBotaoSalvar(object sender, EventArgs e)
+        private void AoClicarNoBotaoSalvarCriacaoObra(object sender, EventArgs e)
         {
             try
             {
@@ -57,6 +58,37 @@ namespace Cod3rsGrowth.Forms
                 }
             }
             catch (ValidationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AoClicarNoBotaoSalvarEdicaoObra(object sender, EventArgs e, int idDaObraASerEditada)
+        {
+            try
+            {
+                var obraASerEditada = _servicoObra.ObterPorId(idDaObraASerEditada);
+
+                obraASerEditada.Autor = textBoxAutor.Text;
+                obraASerEditada.Titulo = textBoxTitulo.Text;
+                obraASerEditada.ValorObra = decimal.Parse(textBoxValor.Text);
+                obraASerEditada.Sinopse = richTextBoxSinopse.Text;
+                obraASerEditada.NumeroCapitulos = Convert.ToInt32(numericUpDownCapitulos.Value);
+                obraASerEditada.Formato = (Formato)comboBoxFormato.SelectedIndex;
+                obraASerEditada.InicioPublicacao = dateTimePickerInicioPublicacao.Value;
+                obraASerEditada.FoiFinalizada = radioButtonFinalizada.Checked;
+                obraASerEditada.GenerosParaCriacao = ObterGenerosSelecionados();
+                obraASerEditada.Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados());
+
+                DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
+                                                            "Salvar Obra", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _servicoObra.Editar(obraASerEditada);
+                    Close();
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -170,6 +202,46 @@ namespace Cod3rsGrowth.Forms
         private void LimparComboBox()
         {
             comboBoxFormato.SelectedItem = null;
+        }
+
+        public void InicializarValoresDosCamposDeDados(int idDaObraSelecionada)
+        {
+            var obraSelecionadaParaEdicao = _servicoObra.ObterPorId(idDaObraSelecionada);
+
+            textBoxTitulo.Text = obraSelecionadaParaEdicao.Titulo;
+            textBoxAutor.Text = obraSelecionadaParaEdicao.Autor;
+            textBoxValor.Text = obraSelecionadaParaEdicao.ValorObra.ToString();
+            dateTimePickerInicioPublicacao.Value = obraSelecionadaParaEdicao.InicioPublicacao;
+            richTextBoxSinopse.Text = obraSelecionadaParaEdicao.Sinopse;
+            numericUpDownCapitulos.Value = obraSelecionadaParaEdicao.NumeroCapitulos;
+            comboBoxFormato.SelectedItem = obraSelecionadaParaEdicao.Formato;
+            _ = obraSelecionadaParaEdicao.FoiFinalizada == true ?
+                radioButtonFinalizada.Checked = true : radioButtonEmLancamento.Checked = true;
+        }
+
+        public void InicializarGenerosSelecionados(int idDaObraSelecionada)
+        {
+            var generosSelecionados = _servicoObra.ObterGenerosVinculados(idDaObraSelecionada);
+
+            foreach (var item in generosSelecionados)
+            {
+                var index = checkedListBoxGeneros.Items.IndexOf(item);
+
+                if (index != ItemCheckListDesmarcado)
+                {
+                    checkedListBoxGeneros.SetItemChecked(index, true);
+                }
+            }
+        }
+
+        public void AdicionaEventoCriacaoNoBotaoSalvar()
+        {
+            buttonSalvar.Click += (sender, e) => AoClicarNoBotaoSalvarCriacaoObra(sender, e);
+        }
+
+        public void AdicionaEventoEdicaoNoBotaoSalvar(int idDaObraASerEditada)
+        {
+            buttonSalvar.Click += (sender, e) => AoClicarNoBotaoSalvarEdicaoObra(sender, e, idDaObraASerEditada);
         }
     }
 }

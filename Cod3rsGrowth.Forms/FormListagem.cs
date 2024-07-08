@@ -129,6 +129,7 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 var formCriarObra = new FormCriarObra(_servicoObra);
+                formCriarObra.AdicionaEventoCriacaoNoBotaoSalvar();
                 formCriarObra.ShowDialog();
                 ListarObras();
             }
@@ -224,9 +225,13 @@ namespace Cod3rsGrowth.Forms
                     return;
                 }
 
-                var obraASerEditada = _servicoObra.ObterPorId(idDaObraSelecionada);
-                var formEditarObra = new FormEditarObra(_servicoObra, obraASerEditada);
-                formEditarObra.ShowDialog();
+                var formCriarObra = new FormCriarObra(_servicoObra);
+
+                formCriarObra.InicializarValoresDosCamposDeDados(idDaObraSelecionada);
+                formCriarObra.InicializarGenerosSelecionados(idDaObraSelecionada);
+                formCriarObra.AdicionaEventoEdicaoNoBotaoSalvar(idDaObraSelecionada);
+                formCriarObra.ShowDialog();
+                //TODO - MUDAR LABEL E PREENCHER COMBOBOX AO INICIALIZAR FORMULARIO
                 ListarObras();
             }
             catch (Exception ex)
