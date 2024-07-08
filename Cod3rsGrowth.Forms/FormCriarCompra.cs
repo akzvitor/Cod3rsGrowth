@@ -46,9 +46,8 @@ namespace Cod3rsGrowth.Forms
                     listaIdDosProdutos = produtosSelecionados
                 };
 
-                DialogResult dialogResult = MessageBox.Show("Deseja salvar a compra com os dados informados?\n\n" +
-                                                            $"Valor total: R${novaCompra.ValorCompra}",
-                                                            "Salvar Compra", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(ConstantesDoForms.MENSAGEM_SALVAR_COMPRA + novaCompra.ValorCompra,
+                                                            ConstantesDoForms.TITULO_SALVAR_COMPRA, MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
                 {

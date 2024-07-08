@@ -11,6 +11,7 @@ namespace Cod3rsGrowth.Forms
         private readonly FiltroObra _filtroObra = new();
         private readonly FiltroCompraCliente _filtroCompraCliente = new();
         private const int ErroDataGridVazio = -1;
+
         public FormListagem(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
             _servicoObra = servicoObra;
@@ -160,13 +161,13 @@ namespace Cod3rsGrowth.Forms
 
                 if (idDaObraSelecionada == ErroDataGridVazio)
                 {
-                    MessageBox.Show("Não foi possível remover, não há obras cadastradas.", "Lista de obras vazia");
+                    MessageBox.Show(ConstantesDoForms.MENSAGEM_DATAGRID_OBRAS_VAZIO_ERRO_AO_REMOVER, 
+                                    ConstantesDoForms.TITULO_DATAGRID_OBRAS_VAZIO);
                     return;
                 }
 
-                DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover" +
-                                                            $" a obra de ID {idDaObraSelecionada}?",
-                                                            "Remover Obra", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(ConstantesDoForms.MENSAGEM_REMOVER_OBRA + idDaObraSelecionada,
+                                                            ConstantesDoForms.TITULO_REMOVER_OBRA, MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -189,13 +190,13 @@ namespace Cod3rsGrowth.Forms
 
                 if (idDaCompraSelecionada == ErroDataGridVazio)
                 {
-                    MessageBox.Show("Não foi possível remover, não há compras cadastradas.", "Lista de compras vazia.");
+                    MessageBox.Show(ConstantesDoForms.MENSAGEM_DATAGRID_COMPRAS_VAZIO_ERRO_AO_REMOVER, 
+                                    ConstantesDoForms.TITULO_DATAGRID_COMPRAS_VAZIO);
                     return;
                 }
 
-                DialogResult dialogResult = MessageBox.Show($"Tem certeza que deseja remover " +
-                                                            $"a compra de ID {idDaCompraSelecionada}?",
-                                                             "Remover Compra", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(ConstantesDoForms.MENSAGEM_REMOVER_COMPRA + idDaCompraSelecionada,
+                                                            ConstantesDoForms.TITULO_REMOVER_COMPRA, MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -218,7 +219,8 @@ namespace Cod3rsGrowth.Forms
 
                 if (idDaObraSelecionada == ErroDataGridVazio)
                 {
-                    MessageBox.Show("Não foi possível editar, não há obras cadastradas.", "Lista de obras vazia");
+                    MessageBox.Show(ConstantesDoForms.MENSAGEM_DATAGRID_OBRAS_VAZIO_ERRO_AO_EDITAR, 
+                                    ConstantesDoForms.TITULO_DATAGRID_OBRAS_VAZIO);
                     return;
                 }
 
@@ -242,7 +244,8 @@ namespace Cod3rsGrowth.Forms
 
                 if (idDaCompraSelecionada == ErroDataGridVazio)
                 {
-                    MessageBox.Show("Não foi possível editar, não há compras cadastradas.", "Lista de compras vazia");
+                    MessageBox.Show(ConstantesDoForms.MENSAGEM_DATAGRID_COMPRAS_VAZIO_ERRO_AO_EDITAR, 
+                                    ConstantesDoForms.TITULO_DATAGRID_COMPRAS_VAZIO);
                     return;
                 }
 

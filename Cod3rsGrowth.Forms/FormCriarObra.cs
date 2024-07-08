@@ -48,8 +48,8 @@ namespace Cod3rsGrowth.Forms
                     Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados())
                 };
 
-                DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
-                                                            "Salvar Obra", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(ConstantesDoForms.MENSAGEM_SALVAR_OBRA,
+                                                            ConstantesDoForms.TITULO_SALVAR_OBRA, MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     _servicoObra.Criar(novaObra);
