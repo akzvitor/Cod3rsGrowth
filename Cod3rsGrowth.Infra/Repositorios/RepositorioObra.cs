@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public List<Obra> ObterTodos(FiltroObra filtro)
         {
-            var query = Filtrar(_db.Obras, filtro);
+            var query = Filtrar(filtro);
             var obrasFiltradas = query.ToList();
 
             return obrasFiltradas;
@@ -139,8 +139,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
             return generosVinculados;
         }
 
-        public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
+        public IQueryable<Obra> Filtrar(FiltroObra filtro) 
         {
+            IQueryable<Obra> obras = _db.Obras;
+
             if (filtro == null)
             {
                 return obras;
