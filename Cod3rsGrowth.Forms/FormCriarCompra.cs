@@ -21,7 +21,7 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                InicializarCatalogo();
+                CarregarDataSourceCatalogoObras();
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace Cod3rsGrowth.Forms
             return produtosSelecionados;
         }
 
-        private void InicializarCatalogo()
+        private void CarregarDataSourceCatalogoObras()
         {
             dataGridViewCatalogoObras.DataSource = _servicoObra.ObterTodos(_filtroObra);
         }
