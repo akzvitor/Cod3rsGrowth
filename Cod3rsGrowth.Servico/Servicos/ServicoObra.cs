@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Servico.Servicos
             _validadorObra = validadorObra;
         }
 
-        public List<Obra> ObterTodos(FiltroObra filtro)
+        public List<Obra> ObterTodos(FiltroObra? filtro = null)
         {
             return _repositorioObra.ObterTodos(filtro);
         }

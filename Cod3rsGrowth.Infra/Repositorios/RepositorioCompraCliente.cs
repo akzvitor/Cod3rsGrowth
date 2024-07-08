@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtroCompra)
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente? filtroCompra = null)
         {
             var query = Filtrar(filtroCompra);
             return query.ToList();

@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Servico.Servicos
             _validadorCompraCliente = validadorCompraCliente;
         }
 
-        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente? filtro = null)
         {
             return _repositorioCompraCliente.ObterTodos(filtro);
         }

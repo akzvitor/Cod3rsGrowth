@@ -9,7 +9,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         private List<CompraCliente> _listaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
         private int _compraClienteId = 100;
 
-        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente? filtro = null)
         {
             return _listaCompraCliente;
         }

@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<Obra> ObterTodos(FiltroObra filtroObra)
+        public List<Obra> ObterTodos(FiltroObra? filtroObra = null)
         {
             var query = Filtrar(filtroObra);
             var obrasFiltradas = query.ToList();
