@@ -1,7 +1,8 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
-using Cod3rsGrowth.Infra.Interfaces;
 using LinqToDB;
+using LinqToDB.Data;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -14,12 +15,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<CompraCliente> ObterTodos(FiltroCompraCliente filtro)
+        public List<CompraCliente> ObterTodos(FiltroCompraCliente? filtroCompra = null)
         {
-            var query = Filtrar(_db.ComprasCliente, filtro);
-            var comprasFiltradas = query.ToList();
-
-            return comprasFiltradas;
+            var query = Filtrar(filtroCompra);
+            return query.ToList();
         }
 
         public CompraCliente ObterPorId(int id)
@@ -33,27 +32,45 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public CompraCliente Criar(CompraCliente compraCliente)
         {
             compraCliente.Id = _db.InsertWithInt32Identity(compraCliente);
+            AdicionarProdutos(compraCliente.Id, compraCliente.listaIdDosProdutos);
 
             return compraCliente;
         }
 
         public CompraCliente Editar(CompraCliente compra)
         {
-            var compraNoBanco = _db.ComprasCliente.FirstOrDefault(c => c.Id == compra.Id)
-                ?? throw new Exception("Compra não encontrada.");
-            
+            var compraNoBanco = ObterPorId(compra.Id);
+
+            var produtosAnteriores = ObterProdutosVinculados(compra.Id);
+            var produtosAtualizados = compra.listaIdDosProdutos;
+
+            var hashSetProdutosAnteriores = new HashSet<int>(produtosAnteriores);
+            var hashSetProdutosAtualizados = new HashSet<int>(produtosAtualizados);
+
+            List<int> produtosParaRemover = new();
+            List<int> produtosParaAdicionar = new();
+
+            produtosAnteriores.ForEach(item =>
+            {
+                if (!hashSetProdutosAtualizados.Contains(item))
+                {
+                    produtosParaRemover.Add(item);
+                }
+            });
+
+            produtosAtualizados.ForEach(item =>
+            {
+                if (!hashSetProdutosAnteriores.Contains(item))
+                {
+                    produtosParaAdicionar.Add(item);
+                }
+            });
+
             try
             {
-                _db.ComprasCliente
-                .Where(c => c.Id == compra.Id)
-                .Set(c => c.Cpf, compra.Cpf)
-                .Set(c => c.Nome, compra.Nome)
-                .Set(c => c.Telefone, compra.Telefone)
-                .Set(c => c.Email, compra.Email)
-                .Set(c => c.Produtos, compra.Produtos)
-                .Set(c => c.ValorCompra, compra.ValorCompra)
-                .Set(c => c.DataCompra, compra.DataCompra)
-                .Update();
+                _db.Update(compra);
+                RemoverProdutos(compra.Id, produtosParaRemover);
+                AdicionarProdutos(compra.Id, produtosParaAdicionar);
             }
             catch (Exception ex)
             {
@@ -80,26 +97,60 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
         }
 
-        public static IQueryable<CompraCliente> Filtrar(IQueryable<CompraCliente> compras, FiltroCompraCliente filtro)
+        private void AdicionarProdutos(int compraId, List<int> idProdutos)
         {
-            if (filtro == null)
+            idProdutos.ForEach(id =>
+            {
+                _db.Execute(
+                    "INSERT INTO ComprasObras (CompraId, ObraId) VALUES (@compraId, @item)",
+                    new DataParameter("@compraId", compraId),
+                    new DataParameter("@item", id)
+                );
+            });
+        }
+
+        private void RemoverProdutos(int compraId, List<int> idsDosProdutos)
+        {
+            idsDosProdutos.ForEach(obraId =>
+            {
+                _db.Execute(
+                    $"DELETE FROM ComprasObras WHERE CompraId = @compraId AND ObraId = @obraId",
+                    new DataParameter("@compraId", compraId),
+                    new DataParameter("@obraId", obraId)
+                );
+            });
+        }
+
+        public List<int> ObterProdutosVinculados(int compraId)
+        {
+            List<int> produtosVinculados = _db.Query<int>($"SELECT ObraId FROM ComprasObras " +
+                                                          $"WHERE CompraId = @compraId", new { compraId }).ToList();
+
+            return produtosVinculados;
+        }
+
+        public IQueryable<CompraCliente> Filtrar(FiltroCompraCliente filtroCompra)
+        {
+            IQueryable<CompraCliente> compras = _db.ComprasCliente;
+
+            if (filtroCompra == null)
             {
                 return compras;
             }
 
-            if (!string.IsNullOrEmpty(filtro.NomeCliente))
+            if (!string.IsNullOrEmpty(filtroCompra.NomeCliente))
             {
-                compras = compras.Where(c => c.Nome.Contains(filtro.NomeCliente));
+                compras = compras.Where(c => c.Nome.Contains(filtroCompra.NomeCliente));
             }
 
-            if (filtro.DataCompra.HasValue)
+            if (!string.IsNullOrEmpty(filtroCompra.Cpf))
             {
-                compras = compras.Where(c => c.DataCompra == filtro.DataCompra.Value);
+                compras = compras.Where(c => c.Cpf.Trim().Replace(".", "").Replace("-", "").Contains(filtroCompra.Cpf.Trim().Replace(".", "").Replace("-", "")));
             }
 
-            if (filtro.ValorCompra.HasValue)
+            if ((filtroCompra.DataInicial.HasValue && filtroCompra.DataInicial != DateTime.MinValue) && (filtroCompra.DataFinal.HasValue && filtroCompra.DataFinal != DateTime.MaxValue))
             {
-                compras = compras.Where(c => c.ValorCompra == filtro.ValorCompra.Value);
+                compras = compras.Where(c => (c.DataCompra >= filtroCompra.DataInicial.Value) && (c.DataCompra <= filtroCompra.DataFinal.Value));
             }
 
             return compras;

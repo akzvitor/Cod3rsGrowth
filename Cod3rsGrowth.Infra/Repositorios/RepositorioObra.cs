@@ -1,7 +1,8 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
-using Cod3rsGrowth.Infra.Interfaces;
 using LinqToDB;
+using LinqToDB.Data;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -14,9 +15,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = conexaoComBancoDeDados;
         }
 
-        public List<Obra> ObterTodos(FiltroObra filtro)
+        public List<Obra> ObterTodos(FiltroObra? filtroObra = null)
         {
-            var query = Filtrar(_db.Obras, filtro);
+            var query = Filtrar(filtroObra);
             var obrasFiltradas = query.ToList();
 
             return obrasFiltradas;
@@ -33,29 +34,45 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public Obra Criar(Obra obra)
         {
             obra.Id = _db.InsertWithInt32Identity(obra);
+            SalvarGeneros(obra.Id, obra.GenerosParaCriacao);
 
             return obra;
         }
 
         public Obra Editar(Obra obra)
         {
-            var obraNoBanco = _db.Obras.FirstOrDefault(o => o.Id == obra.Id)
-                ?? throw new Exception("Obra não encontrada.");
+            var obraNoBanco = ObterPorId(obra.Id);
+
+            var generosAnteriores = ObterGenerosVinculados(obra.Id);
+            var generosAtualizados = obra.GenerosParaCriacao;
+
+            var hashSetGenerosAnteriores = new HashSet<string>(generosAnteriores);
+            var hashSetGenerosAtualizados = new HashSet<string>(generosAtualizados);
+
+            List<string> generosParaRemover = new();
+            List<string> generosParaAdicionar = new();
+
+            generosAnteriores.ForEach(genero =>
+            {
+                if (!hashSetGenerosAtualizados.Contains(genero))
+                {
+                    generosParaRemover.Add(genero);
+                }
+            });
+
+            generosAtualizados.ForEach(genero =>
+            {
+                if (!hashSetGenerosAnteriores.Contains(genero))
+                {
+                    generosParaAdicionar.Add(genero);
+                }
+            });
 
             try   
             {
-                _db.Obras
-                .Where(o => o.Id == obra.Id)
-                .Set(o => o.Titulo, obra.Titulo)
-                .Set(o => o.Autor, obra.Autor)
-                .Set(o => o.Generos, obra.Generos)
-                .Set(o => o.Sinopse, obra.Sinopse)
-                .Set(o => o.NumeroCapitulos, obra.NumeroCapitulos)
-                .Set(o => o.ValorObra, obra.ValorObra)
-                .Set(o => o.Formato, obra.Formato)
-                .Set(o => o.FoiFinalizada, obra.FoiFinalizada)
-                .Set(o => o.InicioPublicacao, obra.InicioPublicacao)
-                .Update();
+                _db.Update(obra);
+                RemoverGeneros(obra.Id, generosParaRemover);
+                SalvarGeneros(obra.Id, generosParaAdicionar);
             }
             catch (Exception ex) 
             {
@@ -69,12 +86,14 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             var obraNoBanco = _db.Obras.FirstOrDefault(o => o.Id == id)
                 ?? throw new Exception("Obra não encontrada.");
-            
+
             try
             {
                 _db.Obras
                     .Where(o => o.Id == id)
                     .Delete();
+
+                RemoverComprasVinculadas();
             }
             catch (Exception ex)
             {
@@ -82,36 +101,83 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
         }
 
-        public static IQueryable<Obra> Filtrar(IQueryable<Obra> obras, FiltroObra filtro) 
+        private void SalvarGeneros(int idObra, List<string> generos)
         {
-            if (filtro == null)
+            foreach (var item in generos)
+            {
+                _db.Execute(
+                    $"INSERT INTO GenerosObras (ObraId, Genero) VALUES (@idObra, @item)",
+                    new DataParameter("@idObra", idObra),
+                    new DataParameter("@item", @item)
+                );
+            }
+        }
+
+        private void RemoverGeneros(int obraId, List<string> generos)
+        {
+            generos.ForEach(genero =>
+            {
+                _db.Execute(
+                    $"DELETE FROM GenerosObras WHERE ObraId = @obraId AND Genero = @genero",
+                    new DataParameter("@obraId", obraId),
+                    new DataParameter("@genero", genero) 
+                );
+            });
+        }
+
+        private void RemoverComprasVinculadas()
+        {
+            _db.Execute($"DELETE FROM ComprasObras Where ObraId = NULL");
+        }
+
+        public List<string> ObterGenerosVinculados(int obraId)
+        {
+            var generosVinculados = _db.Query<string>($"SELECT Genero FROM GenerosObras " +
+                                                      $"WHERE ObraId = @obraId", new { obraId }).ToList();
+
+            return generosVinculados;
+        }
+
+        public IQueryable<Obra> Filtrar(FiltroObra filtroObra) 
+        {
+            IQueryable<Obra> obras = _db.Obras;
+
+            if (filtroObra == null)
             {
                 return obras;
             }
 
-            if (!string.IsNullOrEmpty(filtro.AutorObra))
+            if (!string.IsNullOrEmpty(filtroObra.AutorObra))
             {
-                obras = obras.Where(o => o.Autor.Contains(filtro.AutorObra));
+                obras = obras.Where(o => o.Autor.Contains(filtroObra.AutorObra));
             }
 
-            if (!string.IsNullOrEmpty(filtro.TituloObra))
+            if (!string.IsNullOrEmpty(filtroObra.TituloObra))
             {
-                obras = obras.Where(o => o.Titulo.Contains(filtro.TituloObra));
+                obras = obras.Where(o => o.Titulo.Contains(filtroObra.TituloObra));
             }
 
-            if (filtro.FormatoObra.HasValue)
+            if (filtroObra.FormatoObra.HasValue)
             {
-                obras = obras.Where(o => o.Formato == filtro.FormatoObra.Value);
+                obras = obras.Where(o => o.Formato == filtroObra.FormatoObra.Value);
             }
 
-            if (filtro.ObraFoiFinalizada.HasValue)
+            if (filtroObra.ObraFoiFinalizada.HasValue)
             {
-                obras = obras.Where(o => o.FoiFinalizada ==  filtro.ObraFoiFinalizada.Value);
+                obras = obras.Where(o => o.FoiFinalizada ==  filtroObra.ObraFoiFinalizada.Value);
             }
             
-            if (filtro.ListaDeGenerosObra != null && filtro.ListaDeGenerosObra.Any())
+            if (filtroObra.ListaDeGenerosObra != null && filtroObra.ListaDeGenerosObra.Any())
             {
-                obras = obras.Where(o => o.Generos.Any(g => filtro.ListaDeGenerosObra.Contains(g)));
+                obras = obras.Where(o => o.Generos.Any(g => filtroObra.ListaDeGenerosObra.Contains(g)));
+            }
+
+            if (!string.IsNullOrEmpty(filtroObra.AnoInicialLancamento) && !string.IsNullOrEmpty(filtroObra.AnoFinalLancamento))
+            {
+                var intAnoInicial = Convert.ToInt32(filtroObra.AnoInicialLancamento);
+                var intAnoFinal = Convert.ToInt32(filtroObra.AnoFinalLancamento);
+
+                obras = obras.Where(o => o.InicioPublicacao.Year >= intAnoInicial && o.InicioPublicacao.Year <= intAnoFinal);
             }
 
             return obras;

@@ -1,39 +1,46 @@
-using Cod3rsGrowth.Infra.Migracoes;
+using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.Migracoes;
+using Cod3rsGrowth.Infra.ConexaoDeDados;
+using Cod3rsGrowth.Infra.Repositorios;
+using Cod3rsGrowth.Servico.Servicos;
+using Cod3rsGrowth.Servico.Validadores;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Configuration;
 
 namespace Cod3rsGrowth.Forms
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
 
-            using (var serviceProvider = CriarServicos())
-            using (var escopo = serviceProvider.CreateScope()) 
+            using (var serviceProvider = CriarServicosDeMigracao())
+            using (var escopo = serviceProvider.CreateScope())
             {
                 AtualizarBancoDeDados(escopo.ServiceProvider);
             }
+
+            var host = CriarHostBuilder().Build();
+            ServiceProvider = host.Services;
+
+            Application.Run(ServiceProvider.GetRequiredService<FormListagem>());
         }
 
-        private static ServiceProvider CriarServicos()
+        public static IServiceProvider ServiceProvider { get; set; }
+
+        private static ServiceProvider CriarServicosDeMigracao()
         {
-            var connectionstring = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
+            var stringDeConexao = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
 
             return new ServiceCollection()
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
-                    .WithGlobalConnectionString(connectionstring)
+                    .WithGlobalConnectionString(stringDeConexao)
                     .ScanIn(typeof(AddObras).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
@@ -44,6 +51,27 @@ namespace Cod3rsGrowth.Forms
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
             runner.MigrateUp();
+        }
+
+        static IHostBuilder CriarHostBuilder()
+        {
+            return Host.CreateDefaultBuilder()
+                .ConfigureServices((contexto, servicos) => {
+                    var stringDeConexao = ConfigurationManager.ConnectionStrings["StringConexao"].ToString();
+
+                    servicos.AddTransient<FormListagem>();
+
+                    servicos.AddScoped<ServicoObra>();
+                    servicos.AddScoped<ServicoCompraCliente>();
+
+                    servicos.AddScoped<IRepositorioObra, RepositorioObra>();
+                    servicos.AddScoped<IRepositorioCompraCliente, RepositorioCompraCliente>();
+
+                    servicos.AddScoped<ObraValidador>();
+                    servicos.AddScoped<CompraClienteValidador>();
+
+                    servicos.AddScoped(provider => new DbCodersGrowth(stringDeConexao));
+                });
         }
     }
 }

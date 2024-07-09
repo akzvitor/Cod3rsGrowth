@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.Infra.Migracoes
+namespace Cod3rsGrowth.Dominio.Migracoes
 {
     [Migration(20240617082400)]
     public class AddComprasObras : Migration
@@ -8,8 +8,8 @@ namespace Cod3rsGrowth.Infra.Migracoes
         public override void Up()
         {
             Create.Table("ComprasObras")
-                .WithColumn("IdCompra").AsInt32().ForeignKey("ComprasCliente", "Id")
-                .WithColumn("IdObra").AsInt32().ForeignKey("Obras", "Id");
+                .WithColumn("CompraId").AsInt32().ForeignKey("ComprasCliente", "Id")
+                .WithColumn("ObraId").AsInt32().ForeignKey("Obras", "Id").Nullable();
         }
 
         public override void Down()

@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.Infra.Migracoes
+namespace Cod3rsGrowth.Dominio.Migracoes
 {
     [Migration(20240617082000)]
     public class AddObras : Migration
@@ -9,14 +9,14 @@ namespace Cod3rsGrowth.Infra.Migracoes
         {
             Create.Table("Obras")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Título").AsString(2000)
+                .WithColumn("Titulo").AsString(2000)
                 .WithColumn("Autor").AsString(150)
                 .WithColumn("Sinopse").AsString(2000)
-                .WithColumn("Número de capítulos").AsInt32()
-                .WithColumn("Valor").AsDecimal()
+                .WithColumn("NumeroCapitulos").AsInt32()
+                .WithColumn("Valor").AsDecimal(10, 2)
                 .WithColumn("Formato").AsInt32()
-                .WithColumn("Foi finalizada").AsBoolean()
-                .WithColumn("Início da publicação").AsDateTime();
+                .WithColumn("Finalizada").AsBoolean()
+                .WithColumn("InicioPublicacao").AsDateTime();
         }
 
         public override void Down()

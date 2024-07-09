@@ -1,5 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Testes.Repositorios
@@ -9,7 +9,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         private List<Obra> _listaObra = ListaSingleton.Instancia.ListaObra;
         private int _obraId = 100;
 
-        public List<Obra> ObterTodos(FiltroObra filtro)
+        public List<Obra> ObterTodos(FiltroObra? filtro = null)
         {
             return _listaObra;
         }
