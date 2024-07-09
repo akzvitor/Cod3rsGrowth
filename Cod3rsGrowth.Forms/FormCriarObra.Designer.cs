@@ -328,8 +328,7 @@
             MaximumSize = new Size(368, 515);
             MinimumSize = new Size(368, 515);
             Name = "FormCriarObra";
-            Text = "Cadastrar Obra";
-            Load += AoInicializarFormulario;
+            Text = "Cadastro de Obra";
             ((System.ComponentModel.ISupportInitialize)numericUpDownCapitulos).EndInit();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)generosBindingSource).EndInit();

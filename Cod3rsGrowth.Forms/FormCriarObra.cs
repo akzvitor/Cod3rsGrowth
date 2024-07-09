@@ -18,19 +18,6 @@ namespace Cod3rsGrowth.Forms
             InitializeComponent();
         }
 
-        private void AoInicializarFormulario(object sender, EventArgs e)
-        {
-            try
-            {
-                InicializarValoresComboBox();
-                LimparComboBox();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void AoClicarNoBotaoSalvarCriacaoObra(object sender, EventArgs e)
         {
             try
@@ -80,8 +67,8 @@ namespace Cod3rsGrowth.Forms
                 obraASerEditada.GenerosParaCriacao = ObterGenerosSelecionados();
                 obraASerEditada.Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados());
 
-                DialogResult dialogResult = MessageBox.Show("Deseja salvar a obra com os dados informados?",
-                                                            "Salvar Obra", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(ConstantesDoForms.MENSAGEM_SALVAR_OBRA,
+                                                            ConstantesDoForms.TITULO_SALVAR_OBRA, MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     _servicoObra.Editar(obraASerEditada);
@@ -194,12 +181,12 @@ namespace Cod3rsGrowth.Forms
             return generosDaObra;
         }
 
-        private void InicializarValoresComboBox()
+        public void InicializarValoresComboBox()
         {
             comboBoxFormato.DataSource = Enum.GetValues(typeof(Formato));
         }
 
-        private void LimparComboBox()
+        public void LimparComboBox()
         {
             comboBoxFormato.SelectedItem = null;
         }
@@ -236,12 +223,12 @@ namespace Cod3rsGrowth.Forms
 
         public void AdicionaEventoCriacaoNoBotaoSalvar()
         {
-            buttonSalvar.Click += (sender, e) => AoClicarNoBotaoSalvarCriacaoObra(sender, e);
+            buttonSalvar.Click += (s, e) => AoClicarNoBotaoSalvarCriacaoObra(s, e);
         }
 
         public void AdicionaEventoEdicaoNoBotaoSalvar(int idDaObraASerEditada)
         {
-            buttonSalvar.Click += (sender, e) => AoClicarNoBotaoSalvarEdicaoObra(sender, e, idDaObraASerEditada);
+            buttonSalvar.Click += (s, e) => AoClicarNoBotaoSalvarEdicaoObra(s, e, idDaObraASerEditada);
         }
     }
 }

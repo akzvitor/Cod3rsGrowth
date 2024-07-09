@@ -129,8 +129,12 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 var formCriarObra = new FormCriarObra(_servicoObra);
+
                 formCriarObra.AdicionaEventoCriacaoNoBotaoSalvar();
+                formCriarObra.InicializarValoresComboBox();
+                formCriarObra.LimparComboBox();
                 formCriarObra.ShowDialog();
+
                 ListarObras();
             }
             catch (Exception ex)
@@ -144,7 +148,11 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 var formCriarCompra = new FormCriarCompra(_servicoCompraCliente, _servicoObra);
+
+                formCriarCompra.CarregarDataSourceCatalogoObras();
+                formCriarCompra.AdicionarEventoCriacaoNoBotaoSalvar();
                 formCriarCompra.ShowDialog();
+
                 ListarCompras();
             }
             catch (Exception ex)
@@ -227,11 +235,12 @@ namespace Cod3rsGrowth.Forms
 
                 var formCriarObra = new FormCriarObra(_servicoObra);
 
+                formCriarObra.InicializarValoresComboBox();
                 formCriarObra.InicializarValoresDosCamposDeDados(idDaObraSelecionada);
                 formCriarObra.InicializarGenerosSelecionados(idDaObraSelecionada);
                 formCriarObra.AdicionaEventoEdicaoNoBotaoSalvar(idDaObraSelecionada);
                 formCriarObra.ShowDialog();
-                //TODO - MUDAR LABEL E PREENCHER COMBOBOX AO INICIALIZAR FORMULARIO
+
                 ListarObras();
             }
             catch (Exception ex)
@@ -254,9 +263,13 @@ namespace Cod3rsGrowth.Forms
                     return;
                 }
 
-                var compraASerEditada = _servicoCompraCliente.ObterPorId(idDaCompraSelecionada);
-                var formEditarCompra = new FormEditarCompra(_servicoCompraCliente, _servicoObra, compraASerEditada);
-                formEditarCompra.ShowDialog();
+                var formCriarCompra = new FormCriarCompra(_servicoCompraCliente, _servicoObra, idDaCompraSelecionada);
+
+                formCriarCompra.CarregarDataSourceCatalogoObras();
+                formCriarCompra.InicializarCamposDeDados(idDaCompraSelecionada);
+                formCriarCompra.AdicionarEventoEdicaoNoBotaoSalvar(idDaCompraSelecionada);
+                formCriarCompra.ShowDialog();
+
                 ListarCompras();
             }
             catch (Exception ex)

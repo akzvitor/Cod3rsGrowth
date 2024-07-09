@@ -168,7 +168,6 @@
             buttonSalvar.TabIndex = 12;
             buttonSalvar.Text = "Salvar";
             buttonSalvar.UseVisualStyleBackColor = false;
-            buttonSalvar.Click += AoClicarNoBotaoSalvar;
             // 
             // buttonCancelar
             // 
@@ -330,8 +329,8 @@
             MaximumSize = new Size(624, 411);
             MinimumSize = new Size(624, 411);
             Name = "FormCriarCompra";
-            Text = "FormCriarCompra";
-            Load += AoInicializarFormulario;
+            Text = "Cadastro de Compra";
+            Load += AoCarregarFormulario;
             ((System.ComponentModel.ISupportInitialize)dataGridViewCatalogoObras).EndInit();
             ((System.ComponentModel.ISupportInitialize)obraBindingSource).EndInit();
             ResumeLayout(false);
