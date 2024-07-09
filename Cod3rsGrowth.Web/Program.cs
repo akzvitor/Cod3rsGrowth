@@ -1,3 +1,5 @@
+using Cod3rsGrowth.Infra.InjecaoDeDependencia;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
