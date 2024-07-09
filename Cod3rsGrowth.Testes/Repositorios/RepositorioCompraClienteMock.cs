@@ -52,5 +52,13 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
             _listaCompraCliente.Remove(compra);
         }
+
+        public List<int> ObterProdutosVinculados(int compraId)
+        {
+            var compraSelecionada = ObterPorId(compraId);
+            var produtosVinculados = compraSelecionada.listaIdDosProdutos;
+
+            return produtosVinculados;
+        }
     }
 }
