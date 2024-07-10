@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Web.ModuloDeInjecao
 {
     public static class ModuloDeInjecaoWeb
     {
-        public static void BindService(ServiceCollection servicos)
+        public static void BindService(IServiceCollection servicos, string  stringDeConexao)
         {
             servicos.AddScoped<ServicoObra>();
             servicos.AddScoped<ServicoCompraCliente>();
@@ -19,7 +19,11 @@ namespace Cod3rsGrowth.Web.ModuloDeInjecao
             servicos.AddScoped<ObraValidador>();
             servicos.AddScoped<CompraClienteValidador>();
 
-            //servicos.AddScoped(provider => new DbCodersGrowth(stringDeConexao));
+            servicos.AddScoped(provider => new DbCodersGrowth(stringDeConexao));
+
+            servicos.AddControllers();
+            servicos.AddEndpointsApiExplorer();
+            servicos.AddSwaggerGen();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servico.Servicos;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cod3rsGrowth.Web.Controllers
@@ -26,6 +26,19 @@ namespace Cod3rsGrowth.Web.Controllers
             var novaObra = _servicoObra.Criar(obra);
 
             return Created($"obra/{novaObra.Id}", novaObra);
+        }
+
+        [HttpPut]
+        public IActionResult Editar([FromBody]Obra obra)
+        {
+            if (obra == null)
+            {
+                return BadRequest();
+            }
+
+            var obraEditada = _servicoObra.Editar(obra);
+
+            return Ok(obraEditada);
         }
     }
 }
