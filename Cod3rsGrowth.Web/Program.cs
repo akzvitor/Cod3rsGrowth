@@ -1,15 +1,14 @@
+using Cod3rsGrowth.Web.ModuloDeInjecao;
+
 var builder = WebApplication.CreateBuilder(args);
+var servicos = builder.Services;
+var stringDeConexao = builder.Configuration.GetConnectionString("StringConexao") ??
+    throw new Exception("Não foi possível obter a string de conexão.");
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+ModuloDeInjecaoWeb.BindService(servicos, stringDeConexao);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

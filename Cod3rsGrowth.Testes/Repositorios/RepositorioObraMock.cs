@@ -53,5 +53,13 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
             _listaObra.Remove(obra);
         }
+
+        public List<string> ObterGenerosVinculados(int obraId)
+        {
+            var obraSelecionada = ObterPorId(obraId);
+            var generosVinculados = obraSelecionada.GenerosParaCriacao;
+
+            return generosVinculados;
+        }
     }
 }
