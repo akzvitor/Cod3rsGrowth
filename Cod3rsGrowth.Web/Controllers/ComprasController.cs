@@ -16,8 +16,21 @@ namespace Cod3rsGrowth.Web.Controllers
             _servicoCompraCliente = servicoCompraCliente;
         }
 
+        [HttpGet("Compra")]
+        public IActionResult ObterTodos([FromQuery]FiltroCompraCliente? filtro)
+        {
+            var listaDeCompras = _servicoCompraCliente.ObterTodos(filtro);
+
+            if (listaDeCompras == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(listaDeCompras);
+        }
+
         [HttpPost]
-        public IActionResult Criar([FromBody] CompraCliente compra)
+        public IActionResult Criar([FromBody]CompraCliente compra)
         {
             if (compra == null)
             {
@@ -30,7 +43,7 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpPut]
-        public IActionResult Editar([FromBody] CompraCliente compra)
+        public IActionResult Editar([FromBody]CompraCliente compra)
         {
             if (compra == null)
             {

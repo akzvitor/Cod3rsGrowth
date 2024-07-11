@@ -18,7 +18,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public List<CompraCliente> ObterTodos(FiltroCompraCliente? filtroCompra = null)
         {
             var query = Filtrar(filtroCompra);
-            return query.ToList();
+            var comprasFiltradas = query.ToList();
+
+            return comprasFiltradas;
         }
 
         public CompraCliente ObterPorId(int id)
