@@ -9,10 +9,12 @@ namespace Cod3rsGrowth.Servico.Servicos
     {
         private readonly IRepositorioCompraCliente _repositorioCompraCliente;
         private readonly CompraClienteValidador _validadorCompraCliente;
+        private readonly IRepositorioObra _repositorioObra;
 
-        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente, CompraClienteValidador validadorCompraCliente)
+        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente, IRepositorioObra repositorioObra, CompraClienteValidador validadorCompraCliente)
         {
             _repositorioCompraCliente = repositorioCompraCliente;
+            _repositorioObra = repositorioObra;
             _validadorCompraCliente = validadorCompraCliente;
         }
 
@@ -37,6 +39,13 @@ namespace Cod3rsGrowth.Servico.Servicos
                 throw new ValidationException(erros);
             }
 
+            var listaDeIdProdutos = compraCliente.listaIdDosProdutos;
+
+            foreach (var item in listaDeIdProdutos)
+            {
+                _repositorioObra.ObterPorId(item);
+            }
+
             return _repositorioCompraCliente.Criar(compraCliente);
         }
 
@@ -52,6 +61,13 @@ namespace Cod3rsGrowth.Servico.Servicos
                 var erros = string.Join(Environment.NewLine, resultadoValidacao.Errors.Select(x => x.ErrorMessage).ToArray());
 
                 throw new ValidationException(erros);
+            }
+
+            var listaDeIdProdutos = compraCliente.listaIdDosProdutos;
+
+            foreach (var item in listaDeIdProdutos)
+            {
+                _repositorioObra.ObterPorId(item);
             }
 
             return _repositorioCompraCliente.Editar(compraCliente);
