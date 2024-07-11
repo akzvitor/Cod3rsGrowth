@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
 using LinqToDB;
@@ -34,7 +35,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public Obra Criar(Obra obra)
         {
             obra.Id = _db.InsertWithInt32Identity(obra);
-            SalvarGeneros(obra.Id, obra.GenerosParaCriacao);
+            SalvarGeneros(obra.Id, obra.Generos);
 
             return obra;
         }
@@ -44,13 +45,13 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var obraNoBanco = ObterPorId(obra.Id);
 
             var generosAnteriores = ObterGenerosVinculados(obra.Id);
-            var generosAtualizados = obra.GenerosParaCriacao;
+            var generosAtualizados = obra.Generos;
 
-            var hashSetGenerosAnteriores = new HashSet<string>(generosAnteriores);
-            var hashSetGenerosAtualizados = new HashSet<string>(generosAtualizados);
+            var hashSetGenerosAnteriores = new HashSet<Genero>(generosAnteriores);
+            var hashSetGenerosAtualizados = new HashSet<Genero>(generosAtualizados);
 
-            List<string> generosParaRemover = new();
-            List<string> generosParaAdicionar = new();
+            List<Genero> generosParaRemover = new();
+            List<Genero> generosParaAdicionar = new();
 
             generosAnteriores.ForEach(genero =>
             {
@@ -101,7 +102,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
         }
 
-        private void SalvarGeneros(int idObra, List<string> generos)
+        private void SalvarGeneros(int idObra, List<Genero> generos)
         {
             foreach (var item in generos)
             {
@@ -113,7 +114,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
         }
 
-        private void RemoverGeneros(int obraId, List<string> generos)
+        private void RemoverGeneros(int obraId, List<Genero> generos)
         {
             generos.ForEach(genero =>
             {
@@ -130,9 +131,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db.Execute($"DELETE FROM ComprasObras Where ObraId = NULL");
         }
 
-        public List<string> ObterGenerosVinculados(int obraId)
+        public List<Genero> ObterGenerosVinculados(int obraId)
         {
-            var generosVinculados = _db.Query<string>($"SELECT Genero FROM GenerosObras " +
+            var generosVinculados = _db.Query<Genero>($"SELECT Genero FROM GenerosObras " +
                                                       $"WHERE ObraId = @obraId", new { obraId }).ToList();
 
             return generosVinculados;

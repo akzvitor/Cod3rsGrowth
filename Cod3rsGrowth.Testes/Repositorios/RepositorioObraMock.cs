@@ -56,10 +56,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
         public List<string> ObterGenerosVinculados(int obraId)
         {
-            var obraSelecionada = ObterPorId(obraId);
-            var generosVinculados = obraSelecionada.GenerosParaCriacao;
-
-            return generosVinculados;
+            throw new NotImplementedException();
         }
     }
 }
