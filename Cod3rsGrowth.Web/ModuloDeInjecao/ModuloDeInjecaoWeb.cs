@@ -3,6 +3,7 @@ using Cod3rsGrowth.Infra.ConexaoDeDados;
 using Cod3rsGrowth.Infra.Repositorios;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Servico.Validadores;
+using Cod3rsGrowth.Web.Extensoes;
 
 namespace Cod3rsGrowth.Web.ModuloDeInjecao
 {
@@ -24,6 +25,9 @@ namespace Cod3rsGrowth.Web.ModuloDeInjecao
             servicos.AddControllers();
             servicos.AddEndpointsApiExplorer();
             servicos.AddSwaggerGen();
+
+            servicos.AddMvc();
+            servicos.ConfigureProblemDetailsModelState();
         }
     }
 }
