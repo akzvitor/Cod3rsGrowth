@@ -153,29 +153,29 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 return obras;
             }
 
-            if (!string.IsNullOrEmpty(filtroObra.AutorObra))
+            if (!string.IsNullOrEmpty(filtroObra.Autor))
             {
-                obras = obras.Where(o => o.Autor.Contains(filtroObra.AutorObra));
+                obras = obras.Where(o => o.Autor.Contains(filtroObra.Autor));
             }
 
-            if (!string.IsNullOrEmpty(filtroObra.TituloObra))
+            if (!string.IsNullOrEmpty(filtroObra.Titulo))
             {
-                obras = obras.Where(o => o.Titulo.Contains(filtroObra.TituloObra));
+                obras = obras.Where(o => o.Titulo.Contains(filtroObra.Titulo));
             }
 
-            if (filtroObra.FormatoObra.HasValue)
+            if (filtroObra.Formato.HasValue)
             {
-                obras = obras.Where(o => o.Formato == filtroObra.FormatoObra.Value);
+                obras = obras.Where(o => o.Formato == filtroObra.Formato.Value);
             }
 
-            if (filtroObra.ObraFoiFinalizada.HasValue)
+            if (filtroObra.Finalizada.HasValue)
             {
-                obras = obras.Where(o => o.FoiFinalizada ==  filtroObra.ObraFoiFinalizada.Value);
+                obras = obras.Where(o => o.FoiFinalizada ==  filtroObra.Finalizada.Value);
             }
             
-            if (filtroObra.ListaDeGenerosObra != null && filtroObra.ListaDeGenerosObra.Any())
+            if (filtroObra.Generos != null && filtroObra.Generos.Any())
             {
-                obras = obras.Where(o => o.Generos.Any(g => filtroObra.ListaDeGenerosObra.Contains(g)));
+                obras = obras.Where(o => o.Generos.Any(g => filtroObra.Generos.Contains(g)));
             }
 
             if (!string.IsNullOrEmpty(filtroObra.AnoInicialLancamento) && !string.IsNullOrEmpty(filtroObra.AnoFinalLancamento))
