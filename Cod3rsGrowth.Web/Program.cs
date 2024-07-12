@@ -1,3 +1,4 @@
+using Cod3rsGrowth.Web.Extensoes;
 using Cod3rsGrowth.Web.ModuloDeInjecao;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseProblemDetailsExceptionHandler(app.Services.GetRequiredService<ILoggerFactory>());
 
 app.UseHttpsRedirection();
 

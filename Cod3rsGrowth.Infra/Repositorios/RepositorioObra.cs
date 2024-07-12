@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoDeDados;
 using LinqToDB;
@@ -20,6 +21,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var query = Filtrar(filtroObra);
             var obrasFiltradas = query.ToList();
 
+            foreach (var item in obrasFiltradas)
+            {
+                item.Generos = ObterGenerosVinculados(item.Id);
+            }
+
             return obrasFiltradas;
         }
 
@@ -28,13 +34,15 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var obraRequisitada = _db.Obras.FirstOrDefault(o => o.Id == id)
                 ?? throw new Exception("Obra não encontrada.");
 
+            obraRequisitada.Generos = ObterGenerosVinculados(id);
+
             return obraRequisitada;
         }
 
         public Obra Criar(Obra obra)
         {
             obra.Id = _db.InsertWithInt32Identity(obra);
-            SalvarGeneros(obra.Id, obra.GenerosParaCriacao);
+            SalvarGeneros(obra.Id, obra.Generos);
 
             return obra;
         }
@@ -44,13 +52,13 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var obraNoBanco = ObterPorId(obra.Id);
 
             var generosAnteriores = ObterGenerosVinculados(obra.Id);
-            var generosAtualizados = obra.GenerosParaCriacao;
+            var generosAtualizados = obra.Generos;
 
-            var hashSetGenerosAnteriores = new HashSet<string>(generosAnteriores);
-            var hashSetGenerosAtualizados = new HashSet<string>(generosAtualizados);
+            var hashSetGenerosAnteriores = new HashSet<Genero>(generosAnteriores);
+            var hashSetGenerosAtualizados = new HashSet<Genero>(generosAtualizados);
 
-            List<string> generosParaRemover = new();
-            List<string> generosParaAdicionar = new();
+            List<Genero> generosParaRemover = new();
+            List<Genero> generosParaAdicionar = new();
 
             generosAnteriores.ForEach(genero =>
             {
@@ -101,7 +109,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
         }
 
-        private void SalvarGeneros(int idObra, List<string> generos)
+        private void SalvarGeneros(int idObra, List<Genero> generos)
         {
             foreach (var item in generos)
             {
@@ -113,7 +121,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
         }
 
-        private void RemoverGeneros(int obraId, List<string> generos)
+        private void RemoverGeneros(int obraId, List<Genero> generos)
         {
             generos.ForEach(genero =>
             {
@@ -127,12 +135,12 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         private void RemoverComprasVinculadas()
         {
-            _db.Execute($"DELETE FROM ComprasObras Where ObraId = NULL");
+            _db.Execute($"DELETE FROM ComprasObras Where ObraId IS NULL");
         }
 
-        public List<string> ObterGenerosVinculados(int obraId)
+        public List<Genero> ObterGenerosVinculados(int obraId)
         {
-            var generosVinculados = _db.Query<string>($"SELECT Genero FROM GenerosObras " +
+            var generosVinculados = _db.Query<Genero>($"SELECT Genero FROM GenerosObras " +
                                                       $"WHERE ObraId = @obraId", new { obraId }).ToList();
 
             return generosVinculados;
@@ -147,29 +155,29 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 return obras;
             }
 
-            if (!string.IsNullOrEmpty(filtroObra.AutorObra))
+            if (!string.IsNullOrEmpty(filtroObra.Autor))
             {
-                obras = obras.Where(o => o.Autor.Contains(filtroObra.AutorObra));
+                obras = obras.Where(o => o.Autor.Contains(filtroObra.Autor));
             }
 
-            if (!string.IsNullOrEmpty(filtroObra.TituloObra))
+            if (!string.IsNullOrEmpty(filtroObra.Titulo))
             {
-                obras = obras.Where(o => o.Titulo.Contains(filtroObra.TituloObra));
+                obras = obras.Where(o => o.Titulo.Contains(filtroObra.Titulo));
             }
 
-            if (filtroObra.FormatoObra.HasValue)
+            if (filtroObra.Formato.HasValue)
             {
-                obras = obras.Where(o => o.Formato == filtroObra.FormatoObra.Value);
+                obras = obras.Where(o => o.Formato == filtroObra.Formato.Value);
             }
 
-            if (filtroObra.ObraFoiFinalizada.HasValue)
+            if (filtroObra.Finalizada.HasValue)
             {
-                obras = obras.Where(o => o.FoiFinalizada ==  filtroObra.ObraFoiFinalizada.Value);
+                obras = obras.Where(o => o.FoiFinalizada ==  filtroObra.Finalizada.Value);
             }
             
-            if (filtroObra.ListaDeGenerosObra != null && filtroObra.ListaDeGenerosObra.Any())
+            if (filtroObra.Generos != null && filtroObra.Generos.Any())
             {
-                obras = obras.Where(o => o.Generos.Any(g => filtroObra.ListaDeGenerosObra.Contains(g)));
+                obras = obras.Where(o => o.Generos.Any(g => filtroObra.Generos.Contains(g)));
             }
 
             if (!string.IsNullOrEmpty(filtroObra.AnoInicialLancamento) && !string.IsNullOrEmpty(filtroObra.AnoFinalLancamento))

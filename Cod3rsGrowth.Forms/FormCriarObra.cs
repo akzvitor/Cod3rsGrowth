@@ -32,7 +32,6 @@ namespace Cod3rsGrowth.Forms
                     Formato = (Formato)comboBoxFormato.SelectedIndex,
                     InicioPublicacao = dateTimePickerInicioPublicacao.Value,
                     FoiFinalizada = radioButtonFinalizada.Checked,
-                    GenerosParaCriacao = ObterGenerosSelecionados(),
                     Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados())
                 };
 
@@ -64,7 +63,6 @@ namespace Cod3rsGrowth.Forms
                 obraASerEditada.Formato = (Formato)comboBoxFormato.SelectedIndex;
                 obraASerEditada.InicioPublicacao = dateTimePickerInicioPublicacao.Value;
                 obraASerEditada.FoiFinalizada = radioButtonFinalizada.Checked;
-                obraASerEditada.GenerosParaCriacao = ObterGenerosSelecionados();
                 obraASerEditada.Generos = ObterListaDeEnumsGenero(ObterGenerosSelecionados());
 
                 DialogResult dialogResult = MessageBox.Show(ConstantesDoForms.MENSAGEM_SALVAR_OBRA,
@@ -209,8 +207,14 @@ namespace Cod3rsGrowth.Forms
         public void InicializarGenerosSelecionados(int idDaObraSelecionada)
         {
             var generosSelecionados = _servicoObra.ObterGenerosVinculados(idDaObraSelecionada);
+            List<string> generosString = new();
 
             foreach (var item in generosSelecionados)
+            {
+                generosString.Add(item.ToString());
+            }
+
+            foreach (var item in generosString)
             {
                 var index = checkedListBoxGeneros.Items.IndexOf(item);
 

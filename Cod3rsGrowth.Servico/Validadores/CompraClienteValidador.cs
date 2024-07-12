@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Servico.Servicos;
 using FluentValidation;
 using LinqToDB;
 
@@ -8,11 +9,13 @@ namespace Cod3rsGrowth.Servico.Validadores
     public class CompraClienteValidador : AbstractValidator<CompraCliente>
     {
         private readonly IRepositorioCompraCliente _repositorioCompraCliente;
+        private readonly ServicoObra _servicoObra;
 
-        public CompraClienteValidador(IRepositorioCompraCliente repositorioCompraCliente)
+        public CompraClienteValidador(IRepositorioCompraCliente repositorioCompraCliente, ServicoObra servicoObra)
         {
             _repositorioCompraCliente = repositorioCompraCliente;
-
+            _servicoObra = servicoObra;
+            
             RuleFor(cliente => cliente.Cpf)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
@@ -47,7 +50,9 @@ namespace Cod3rsGrowth.Servico.Validadores
 
             RuleFor(cliente => cliente.listaIdDosProdutos)
                 .NotEmpty()
-                .WithMessage("A compra deve conter pelo menos um produto.");
+                .WithMessage("A compra deve conter pelo menos um produto.")
+                .Must(ContemApenasProdutosValidos)
+                .WithMessage("Alguns produtos na compra não estão cadastrados no sistema.");
 
             RuleFor(cliente => cliente.ValorCompra)
                 .GreaterThanOrEqualTo(0)
@@ -137,6 +142,20 @@ namespace Cod3rsGrowth.Servico.Validadores
             return _repositorioCompraCliente
                 .ObterPorId(idCompra)
                 .DataCompra == dataCompraCliente;
+        }
+
+        private bool ContemApenasProdutosValidos(List<int> listaDeIdProdutosDaRequisicao)
+        {
+            List<int> listaDeIdObrasDoBanco = _servicoObra.ObterTodos().Select(obj => obj.Id).ToList();
+
+            var listaDeProdutosInvalidos = listaDeIdProdutosDaRequisicao.Except(listaDeIdObrasDoBanco).ToList();
+
+            if (listaDeProdutosInvalidos.Any())
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

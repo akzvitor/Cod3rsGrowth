@@ -41,20 +41,20 @@ namespace Cod3rsGrowth.Forms
                 if (radioButtonStatusObraEmLancamento.Checked == false &&
                 radioButtonStatusObraFinalizada.Checked == false)
                 {
-                    _filtroObra.ObraFoiFinalizada = null;
+                    _filtroObra.Finalizada = null;
                 }
                 else if (radioButtonStatusObraEmLancamento.Checked == true)
                 {
-                    _filtroObra.ObraFoiFinalizada = false;
+                    _filtroObra.Finalizada = false;
                 }
                 else if (radioButtonStatusObraFinalizada.Checked == true)
                 {
-                    _filtroObra.ObraFoiFinalizada = true;
+                    _filtroObra.Finalizada = true;
                 }
 
-                _filtroObra.TituloObra = textBoxTituloObra.Text;
-                _filtroObra.AutorObra = textBoxAutorObra.Text;
-                _filtroObra.FormatoObra = (Formato?)comboBoxFormatoObra.SelectedItem;
+                _filtroObra.Titulo = textBoxTituloObra.Text;
+                _filtroObra.Autor = textBoxAutorObra.Text;
+                _filtroObra.Formato = (Formato?)comboBoxFormatoObra.SelectedItem;
 
                 ListarObras();
             }
@@ -68,13 +68,13 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                _filtroObra.TituloObra = null;
+                _filtroObra.Titulo = null;
                 textBoxTituloObra.Text = null;
-                _filtroObra.AutorObra = null;
+                _filtroObra.Autor = null;
                 textBoxAutorObra.Text = null;
-                _filtroObra.FormatoObra = null;
+                _filtroObra.Formato = null;
                 comboBoxFormatoObra.SelectedItem = null;
-                _filtroObra.ObraFoiFinalizada = null;
+                _filtroObra.Finalizada = null;
                 radioButtonStatusObraEmLancamento.Checked = false;
                 radioButtonStatusObraFinalizada.Checked = false;
                 _filtroObra.AnoInicialLancamento = null;

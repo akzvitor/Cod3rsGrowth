@@ -18,13 +18,22 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public List<CompraCliente> ObterTodos(FiltroCompraCliente? filtroCompra = null)
         {
             var query = Filtrar(filtroCompra);
-            return query.ToList();
+            var comprasFiltradas = query.ToList();
+
+            foreach (var item in comprasFiltradas)
+            {
+                item.listaIdDosProdutos = ObterProdutosVinculados(item.Id);
+            }
+
+            return comprasFiltradas;
         }
 
         public CompraCliente ObterPorId(int id)
         {
             var compraRequisitada = _db.ComprasCliente.FirstOrDefault(c => c.Id == id)
                 ?? throw new Exception("Compra não encontrada.");
+
+            compraRequisitada.listaIdDosProdutos = ObterProdutosVinculados(id);
 
             return compraRequisitada;
         }
