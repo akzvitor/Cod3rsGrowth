@@ -39,13 +39,6 @@ namespace Cod3rsGrowth.Servico.Servicos
                 throw new ValidationException(erros);
             }
 
-            var listaDeIdProdutos = compraCliente.listaIdDosProdutos;
-
-            foreach (var item in listaDeIdProdutos)
-            {
-                _repositorioObra.ObterPorId(item);
-            }
-
             return _repositorioCompraCliente.Criar(compraCliente);
         }
 

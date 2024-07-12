@@ -38,8 +38,8 @@ namespace Cod3rsGrowth.Testes
                     Email = "vitor@hotmail.com",
                     listaIdDosProdutos = new List<int>
                     {
-                        100,
-                        103
+                        7,
+                        8
                     },
                     ValorCompra = 12,
                     DataCompra = DateTime.Parse("May 29, 2024")
@@ -52,8 +52,8 @@ namespace Cod3rsGrowth.Testes
                     Email = "cascao@yahoo.com",
                     listaIdDosProdutos = new List<int>
                     {
-                        101,
-                        104
+                        9,
+                        10
                     },
                     ValorCompra = 60,
                     DataCompra = DateTime.Parse("Mar 28, 2024")
@@ -67,8 +67,8 @@ namespace Cod3rsGrowth.Testes
                     Email = "henrique@uol.com",
                     listaIdDosProdutos = new List<int>
                     {
-                        102,
-                        105
+                        11,
+                        12
                     },
                     ValorCompra = 120,
                     DataCompra = DateTime.Parse("May 07, 2024")
