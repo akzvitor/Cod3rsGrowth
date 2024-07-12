@@ -133,7 +133,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         private void RemoverComprasVinculadas()
         {
-            _db.Execute($"DELETE FROM ComprasObras Where ObraId = NULL");
+            _db.Execute($"DELETE FROM ComprasObras Where ObraId IS NULL");
         }
 
         public List<Genero> ObterGenerosVinculados(int obraId)
