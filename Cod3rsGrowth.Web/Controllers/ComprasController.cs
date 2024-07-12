@@ -16,8 +16,8 @@ namespace Cod3rsGrowth.Web.Controllers
             _servicoCompraCliente = servicoCompraCliente;
         }
 
-        [HttpGet("Compra")]
-        public IActionResult ObterTodos([FromQuery]FiltroCompraCliente? filtro)
+        [HttpGet]
+        public IActionResult ObterTodos([FromQuery] FiltroCompraCliente? filtro)
         {
             var listaDeCompras = _servicoCompraCliente.ObterTodos(filtro);
 
@@ -29,8 +29,21 @@ namespace Cod3rsGrowth.Web.Controllers
             return Ok(listaDeCompras);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult ObterPorId(int id)
+        {
+            var compraRequisitada = _servicoCompraCliente.ObterPorId(id);
+
+            if (compraRequisitada == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(compraRequisitada);
+        }
+
         [HttpPost]
-        public IActionResult Criar([FromBody]CompraCliente compra)
+        public IActionResult Criar([FromBody] CompraCliente compra)
         {
             if (compra == null)
             {
@@ -43,7 +56,7 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpPut]
-        public IActionResult Editar([FromBody]CompraCliente compra)
+        public IActionResult Editar([FromBody] CompraCliente compra)
         {
             if (compra == null)
             {
@@ -53,6 +66,14 @@ namespace Cod3rsGrowth.Web.Controllers
             var compraEditada = _servicoCompraCliente.Editar(compra);
 
             return Ok(compraEditada);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Remover(int id) 
+        {
+            _servicoCompraCliente.Remover(id);
+
+            return NoContent();
         }
     }
 }
