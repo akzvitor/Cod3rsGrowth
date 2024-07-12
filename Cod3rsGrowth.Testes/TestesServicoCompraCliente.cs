@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Servicos;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using FluentValidation;
@@ -11,6 +12,7 @@ namespace Cod3rsGrowth.Testes
     {
         private ServicoCompraCliente? _servicoCompraCliente;
         private readonly FiltroCompraCliente _filtro;
+        private ServicoObra? _servicoObra;
 
         public TestesServicoCompraCliente()
         {
@@ -23,6 +25,9 @@ namespace Cod3rsGrowth.Testes
         {
             _servicoCompraCliente = ServiceProvider.GetService<ServicoCompraCliente>()
                 ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoCompraCliente)}]");
+
+            _servicoObra = ServiceProvider.GetService<ServicoObra>()
+                ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoObra)}]");
         }
 
         private List<CompraCliente> InicializarDadosMockados()
@@ -38,8 +43,8 @@ namespace Cod3rsGrowth.Testes
                     Email = "vitor@hotmail.com",
                     listaIdDosProdutos = new List<int>
                     {
-                        7,
-                        8
+                        100,
+                        101
                     },
                     ValorCompra = 12,
                     DataCompra = DateTime.Parse("May 29, 2024")
@@ -52,8 +57,8 @@ namespace Cod3rsGrowth.Testes
                     Email = "cascao@yahoo.com",
                     listaIdDosProdutos = new List<int>
                     {
-                        9,
-                        10
+                        100,
+                        101
                     },
                     ValorCompra = 60,
                     DataCompra = DateTime.Parse("Mar 28, 2024")
@@ -67,8 +72,8 @@ namespace Cod3rsGrowth.Testes
                     Email = "henrique@uol.com",
                     listaIdDosProdutos = new List<int>
                     {
-                        11,
-                        12
+                        100,
+                        101
                     },
                     ValorCompra = 120,
                     DataCompra = DateTime.Parse("May 07, 2024")
@@ -78,10 +83,95 @@ namespace Cod3rsGrowth.Testes
             return listaCompras;
         }
 
+        private List<Obra> InicializarObrasTeste()
+        {
+            List<Obra> listaDeObras = new()
+            {
+                new Obra
+                {
+                    Id = 100,
+                    Titulo = "Re:Zero kara Hajimeru Isekai Seikatsu",
+                    Autor = "Tappei Nagatsuki",
+                    FoiFinalizada = false,
+                    Formato = Formato.WebNovel,
+                    Generos = new List<Genero>
+                    {
+                        Genero.Sobrenatural,
+                        Genero.Psicologico,
+                        Genero.Misterio
+                    },
+                    InicioPublicacao = DateTime.Parse("Jan 24, 2014"),
+                    NumeroCapitulos = 20,
+                    ValorObra = 0,
+                    Sinopse = "Subaru Natsuki estava apenas tentando chegar à loja de conveniência, " +
+                    "mas acabou convocado para outro mundo. Ele encontra coisas comuns – situações de " +
+                    "risco de vida, belezas de cabelos prateados, fadas felinas – você sabe, coisas normais. " +
+                    "Tudo isso já seria ruim o suficiente, mas ele também ganhou a habilidade mágica " +
+                    "mais inconveniente de todas: viajar no tempo, mas ele precisa morrer para usá-la. " +
+                    "Como você retribui alguém que salvou sua vida quando tudo o que você pode fazer é morrer?"
+                },
+                new Obra
+                {
+                    Id = 101,
+                    Titulo = "Hagane no Renkinjutsushi",
+                    Autor = "Hiromu Arakawa",
+                    FoiFinalizada = true,
+                    Formato = Formato.Manga,
+                    Generos = new List<Genero>
+                    {
+                        Genero.Acao,
+                        Genero.Aventura,
+                        Genero.Drama,
+                        Genero.Fantasia
+                    },
+                    InicioPublicacao = DateTime.Parse("Jul 12, 2001"),
+                    NumeroCapitulos = 116,
+                    ValorObra = 20,
+                    Sinopse = "A alquimia destruiu os corpos dos irmãos Elric. O vínculo deles pode torná-los " +
+                    "inteiros novamente? Neste mundo, os alquimistas são aqueles que estudam e realizam a " +
+                    "arte da transmutação alquímica – a ciência da manipulação e transformação da matéria. Eles estão " +
+                    "sujeitos à Lei da Troca Equivalente: para ganhar algo, é preciso sacrificar algo de igual valor. " +
+                    "Em um ritual alquímico que deu errado, Edward Elric perdeu o braço e a perna, e seu irmão Alphonse " +
+                    "se tornou nada além de uma alma em uma armadura. Equipado com membros mecânicos de “correio " +
+                    "automático”, Edward se torna um alquimista do estado, buscando a única coisa que pode restaurar o " +
+                    "corpo dele e de seu irmão... a lendária Pedra Filosofal."
+                },
+                new Obra
+                {
+                    Id = 102,
+                    Titulo = "Na Honjaman Level Up",
+                    Autor = "Chu-Gong",
+                    FoiFinalizada = true,
+                    Formato = Formato.Manhwa,
+                    Generos = new List<Genero>
+                    {
+                        Genero.Acao,
+                        Genero.Aventura,
+                        Genero.Fantasia
+                    },
+                    InicioPublicacao = DateTime.Parse("Mar 4, 2018"),
+                    NumeroCapitulos = 201,
+                    ValorObra = 70,
+                    Sinopse = "Num mundo onde seres despertos chamados “Caçadores” devem lutar contra monstros mortais " +
+                    "para proteger a humanidade, Sung Jinwoo, apelidado de “o caçador mais fraco de toda a humanidade”, " +
+                    "encontra-se numa luta constante pela sobrevivência. Um dia, depois de um encontro brutal em uma " +
+                    "masmorra dominada destruir seu grupo e ameaçar acabar com sua vida, um misterioso Sistema o escolhe " +
+                    "como único jogador: Jinwoo teve a rara oportunidade de aprimorar suas habilidades, possivelmente além " +
+                    "de quaisquer limites conhecidos. . Acompanhe a jornada de Jinwoo enquanto ele enfrenta inimigos cada " +
+                    "vez mais fortes, tanto humanos quanto monstros, para descobrir os segredos profundos das masmorras e a " +
+                    "extensão máxima de seus poderes."
+                }
+            };
+
+            return listaDeObras;
+        }
+
         private void InicializarBancoDeDados()
         {
             var listaMock = InicializarDadosMockados();
+            var listaDeObras = InicializarObrasTeste();
 
+            listaDeObras.ForEach(item => _servicoObra.Criar(item));
             listaMock.ForEach(item => _servicoCompraCliente.Criar(item));
         }
 
