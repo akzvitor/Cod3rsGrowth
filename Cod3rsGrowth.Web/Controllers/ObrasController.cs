@@ -15,6 +15,32 @@ namespace Cod3rsGrowth.Web.Controllers
             _servicoObra = servicoObra;
         }
 
+        [HttpGet]
+        public IActionResult ObterTodos([FromQuery]FiltroObra? filtro) 
+        {
+            var listaDeObras = _servicoObra.ObterTodos(filtro);
+
+            if (listaDeObras == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(listaDeObras);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult ObterPorId(int id)
+        {
+            var obraRequisitada = _servicoObra.ObterPorId(id);
+
+            if (obraRequisitada == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(obraRequisitada);
+        }
+
         [HttpPost]
         public IActionResult Criar([FromBody] Obra obra)
         {

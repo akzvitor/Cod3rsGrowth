@@ -20,6 +20,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var query = Filtrar(filtroCompra);
             var comprasFiltradas = query.ToList();
 
+            foreach (var item in comprasFiltradas)
+            {
+                item.listaIdDosProdutos = ObterProdutosVinculados(item.Id);
+            }
+
             return comprasFiltradas;
         }
 

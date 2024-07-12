@@ -21,6 +21,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var query = Filtrar(filtroObra);
             var obrasFiltradas = query.ToList();
 
+            foreach (var item in obrasFiltradas)
+            {
+                item.Generos = ObterGenerosVinculados(item.Id);
+            }
+
             return obrasFiltradas;
         }
 
