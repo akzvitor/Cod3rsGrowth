@@ -34,6 +34,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var obraRequisitada = _db.Obras.FirstOrDefault(o => o.Id == id)
                 ?? throw new Exception("Obra não encontrada.");
 
+            obraRequisitada.Generos = ObterGenerosVinculados(id);
+
             return obraRequisitada;
         }
 

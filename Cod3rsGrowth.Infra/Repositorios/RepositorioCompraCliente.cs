@@ -33,6 +33,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var compraRequisitada = _db.ComprasCliente.FirstOrDefault(c => c.Id == id)
                 ?? throw new Exception("Compra não encontrada.");
 
+            compraRequisitada.listaIdDosProdutos = ObterProdutosVinculados(id);
+
             return compraRequisitada;
         }
 
