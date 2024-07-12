@@ -10,6 +10,8 @@ namespace Cod3rsGrowth.Web.Controllers
     public class ObrasController : ControllerBase
     {
         private readonly ServicoObra _servicoObra;
+        private const int ERRO_LISTA_VAZIA = 0;
+
         public ObrasController(ServicoObra servicoObra)
         {
             _servicoObra = servicoObra;
@@ -20,7 +22,7 @@ namespace Cod3rsGrowth.Web.Controllers
         {
             var listaDeObras = _servicoObra.ObterTodos(filtro);
 
-            if (listaDeObras == null)
+            if (listaDeObras.Count == ERRO_LISTA_VAZIA)
             {
                 return NotFound();
             }
@@ -32,11 +34,6 @@ namespace Cod3rsGrowth.Web.Controllers
         public IActionResult ObterPorId(int id)
         {
             var obraRequisitada = _servicoObra.ObterPorId(id);
-
-            if (obraRequisitada == null)
-            {
-                return NotFound();
-            }
 
             return Ok(obraRequisitada);
         }
@@ -65,6 +62,14 @@ namespace Cod3rsGrowth.Web.Controllers
             var obraEditada = _servicoObra.Editar(obra);
 
             return Ok(obraEditada);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Remover(int id)
+        {
+            _servicoObra.Remover(id);
+
+            return NoContent();
         }
     }
 }
