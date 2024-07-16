@@ -33,7 +33,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
         [Column("Sinopse"), NotNull]
         public string Sinopse { get; set; }
         public List<Genero> Generos { get; set; }
-        public string CapaImagemBase64 { get; set; }
-        public List<string> GenerosParaCriacao { get; set; }
+        public string? CapaImagemBase64 { get; set; }
     }
 }

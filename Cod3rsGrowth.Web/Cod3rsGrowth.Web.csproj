@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
     <PackageReference Include="FluentMigrator" Version="5.2.0" />
     <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.18" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cod3rsGrowth.Infra\Cod3rsGrowth.Infra.csproj" />
+    <ProjectReference Include="..\Cod3rsGrowth.Servico\Cod3rsGrowth.Servico.csproj" />
   </ItemGroup>
 
 </Project>
