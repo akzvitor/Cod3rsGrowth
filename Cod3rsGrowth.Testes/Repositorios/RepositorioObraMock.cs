@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
 
@@ -52,6 +53,11 @@ namespace Cod3rsGrowth.Testes.Repositorios
             var obra = ObterPorId(id);
 
             _listaObra.Remove(obra);
+        }
+
+        public List<Genero> ObterGenerosVinculados(int obraId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

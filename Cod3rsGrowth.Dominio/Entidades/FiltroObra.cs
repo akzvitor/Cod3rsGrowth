@@ -5,11 +5,11 @@ namespace Cod3rsGrowth.Dominio.Entidades
 {
     public class FiltroObra : IFiltro
     {
-        public string? AutorObra { get; set; }
-        public string? TituloObra { get; set; }
-        public List<Genero>? ListaDeGenerosObra { get; set; }
-        public Formato? FormatoObra { get; set; }
-        public bool? ObraFoiFinalizada { get; set; }
+        public string? Autor { get; set; }
+        public string? Titulo { get; set; }
+        public List<Genero>? Generos { get; set; }
+        public Formato? Formato { get; set; }
+        public bool? Finalizada { get; set; }
         public string? AnoInicialLancamento { get; set; }
         public string? AnoFinalLancamento { get; set; }
     }
