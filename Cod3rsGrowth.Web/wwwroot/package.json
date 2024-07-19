@@ -1,8 +1,0 @@
-{
-    "name": "ui5.coders",
-    "version": "1.0.0",
-    "description": "The UI5 coders application",
-    "scripts": {
-        "start": "ui5 serve -o index.html"
-    }
-}
