@@ -1,6 +1,6 @@
 specVersion: "3.2"
 metadata:
-  name: codersgrowth
+  name: ui5.coders
 type: application
 framework:
   name: OpenUI5

@@ -1,8 +1,9 @@
 {
-  "name": "ui5.codersgrowth",
-  "version": "1.0.0",
-  "description": "Aplicação web do projeto C0dersGrowth",
-  "scripts": {
-    "start": "ui5 serve -o index.html"
+    "name": "ui5.coders",
+    "version": "1.0.0",
+    "description": "The UI5 coders application",
+    "scripts": {
+        "start": "ui5 serve -o index.html"
+    }
   }
-}
+  
