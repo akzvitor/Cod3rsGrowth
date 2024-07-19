@@ -25,10 +25,11 @@ sap.ui.define([
                         pollingInterval: 100,
                         viewName: NOME_DA_VIEW,
                         check: function () {
-                            return !!sap.ui.test.Opa5.getJQuery()(".sapMMessageToast").length;
+                            var messageToast = sap.ui.test.Opa5.getJQuery()(".sapMMessageToast");
+                            return messageToast.length > 0 && messageToast.is(":visible");
                         },
                         success: function () {
-                            ok(true, "Message Toast encontrado!");
+                            Opa5.assert.ok(true, "Message Toast encontrado!");
                         },
                         errorMessage: "Não foi detectado nenhum Message Toast!"
                     });
