@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "sap/ui/model/json/JSONModel",
-    "sap/ui/model/resource/ResourceModel"
-], (UIComponent, JSONModel, ResourceModel) => {
+    "sap/ui/model/json/JSONModel"
+], (UIComponent, JSONModel) => {
     "use strict";
 
     return UIComponent.extend("ui5.coders.Component", {
