@@ -55,23 +55,14 @@
             "routes": [
                 {
                     "pattern": "",
-                    "name": "overview",
-                    "target": "overview"
-                },
-                {
-                    "pattern": "detail",
-                    "name": "detail",
-                    "target": "detail"
+                    "name": "paginainicial",
+                    "target": "paginainicial"
                 }
             ],
             "targets": {
-                "overview": {
-                    "id": "overview",
-                    "name": "Overview"
-                },
-                "detail": {
-                    "id": "detail",
-                    "name": "Detail"
+                "paginainicial": {
+                    "id": "paginainicial",
+                    "name": "PaginaInicial"
                 }
             }
         }

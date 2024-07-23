@@ -2,14 +2,8 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc" displayblock="true">
     <Shell>
-        <App>
-            <pages>
-                <Page title="{i18n>tituloPaginaInicial}">
-                    <content>
-                        <mvc:XMLView viewName="ui5.coders.view.PaginaInicial"/>
-                    </content>
-                </Page>
-            </pages>
-        </App>
+        <App
+            class="myApp"
+            id="app"/>
     </Shell>
 </mvc:View>

@@ -1,10 +1,10 @@
-<mvc:View controllerName="ui5.coders.controller.PaginaInicial"
+<mvc:View controllerName="ui5.coders.controller.App"
     xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc">
-    <Panel headerText="{i18n>tituloPainelOla}">
+    xmlns:mvc="sap.ui.core.mvc"
+    displayblock="true">
+    <Page headerText="{i18n>tituloPaginaInicial}">
         <content>
-            <Button id="botaoSayHello" text="{i18n>exibirTextoBotaoOla}" press=".exibirOla"/>
-            <Input value="{/recipient/name}" description="Hello {/recipient/name}" valueLiveUpdate="true" width="60%"/>
+            <mvc:XMLView viewName="ui5.coders.view.HeaderInicial" />
         </content>
-    </Panel>
+    </Page>
 </mvc:View>
