@@ -42,6 +42,39 @@
             "viewName": "ui5.coders.view.App",
             "type": "XML",
             "id": "app"
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "type": "View",
+                "viewType": "XML",
+                "path": "ui5.coders.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "transition": "slide",
+                "bypassed": {
+                    "target": "notFound"
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "paginainicial",
+                    "target": "paginainicial"
+                }
+            ],
+            "targets": {
+                "paginainicial": {
+                    "id": "paginainicial",
+                    "name": "PaginaInicial"
+                },
+                "notFound": {
+                    "id": "notFound",
+                    "name": "NotFound",
+                    "transition": "show"
+                }
+            }
         }
     }
 }

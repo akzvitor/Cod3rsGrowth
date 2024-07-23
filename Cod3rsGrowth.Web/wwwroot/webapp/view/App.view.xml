@@ -1,13 +1,9 @@
 <mvc:View controllerName="ui5.coders.controller.App"
     xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc">
-    <Button 
-        id="botaoSayHello"
-        text="{i18n>exibirTextoBotaoOla}" 
-        press=".exibirOla"/>
-    <Input
-        value="{/recipient/name}"
-        description="Hello {/recipient/name}"
-        valueLiveUpdate="true"
-        width="60%"/>
+    xmlns:mvc="sap.ui.core.mvc" displayblock="true">
+    <Shell>
+        <App
+            class="myApp"
+            id="app"/>
+    </Shell>
 </mvc:View>

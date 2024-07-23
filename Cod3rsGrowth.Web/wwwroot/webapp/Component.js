@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "sap/ui/model/json/JSONModel",
-    "sap/ui/model/resource/ResourceModel"
-], (UIComponent, JSONModel, ResourceModel) => {
+    "sap/ui/model/json/JSONModel"
+], (UIComponent, JSONModel) => {
     "use strict";
 
     return UIComponent.extend("ui5.coders.Component", {
@@ -21,10 +20,7 @@ sap.ui.define([
             const oModel = new JSONModel(oData);
             this.setModel(oModel);
 
-            const i18nModel = new ResourceModel({
-                bundleName: "ui5.coders.i18n.i18n"
-            });
-            this.setModel(i18nModel, "i18n");
+            this.getRouter().initialize();
         }
     });
 });
