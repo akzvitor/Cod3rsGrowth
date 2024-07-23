@@ -50,7 +50,12 @@
                 "viewType": "XML",
                 "path": "ui5.coders.view",
                 "controlId": "app",
-                "controlAggregation": "pages"
+                "controlAggregation": "pages",
+                "transition": "slide",
+                "bypassed": {
+                    "target": "notFound"
+                },
+                "async": true
             },
             "routes": [
                 {
@@ -63,6 +68,11 @@
                 "paginainicial": {
                     "id": "paginainicial",
                     "name": "PaginaInicial"
+                },
+                "notFound": {
+                    "id": "notFound",
+                    "name": "NotFound",
+                    "transition": "show"
                 }
             }
         }
