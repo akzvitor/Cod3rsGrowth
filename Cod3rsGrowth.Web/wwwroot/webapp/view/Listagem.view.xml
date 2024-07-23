@@ -3,8 +3,26 @@
     xmlns:mvc="sap.ui.core.mvc">
     <Panel headerText="{i18n>Listagem.titulo}">
         <content>
-            <Button id="botaoSayHello" text="{i18n>exibirTextoBotaoOla}" press=".exibirOla"/>
-            <Input value="{/recipient/name}" description="Hello {/recipient/name}" valueLiveUpdate="true" width="60%"/>
+            <Table
+                id="TabelaCompras"
+                items="{restCompras>/}">
+                <columns>
+                    <Column>
+                        <Text text="Aaaaaa" />
+                    </Column>
+                    <Column>
+                        <Text text="Bbbbbb" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{restCompras>id}"/>
+                            <Text text="{restCompras>email}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>    
         </content>
     </Panel>
 </mvc:View>

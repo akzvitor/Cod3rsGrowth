@@ -1,16 +1,18 @@
 sap.ui.define([
     "ui5/coders/controller/BaseController",
-    "sap/m/MessageToast"
-], (BaseController, MessageToast) => {
+    "sap/ui/model/json/JSONModel"
+], (BaseController, JSONModel) => {
     "use strict";
 
     return BaseController.extend("ui5.coders.controller.Listagem", {
-        exibirOla() {
-            const oBundle = this.getView().getModel("i18n").getResourceBundle();
-            const sRecipient = this.getView().getModel().getProperty("/recipient/name");
-            const sMsg = oBundle.getText("PaginaInicial.msg", [sRecipient]);
+        onInit() {
+            var comprasClienteModel = new JSONModel();
 
-            MessageToast.show(sMsg);
+            comprasClienteModel.loadData(
+                "http://localhost:5070/api/Compras", null, true, 'GET'
+            );
+
+            this.getView().setModel(comprasClienteModel, "restCompras");
         }
     });
 });
