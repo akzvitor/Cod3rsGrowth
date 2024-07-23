@@ -1,10 +1,10 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "ui5/coders/controller/BaseController",
     "sap/m/MessageToast"
-], (Controller, MessageToast) => {
+], (BaseController, MessageToast) => {
     "use strict";
 
-    return Controller.extend("ui5.coders.controller.HeaderInicial", {
+    return BaseController.extend("ui5.coders.controller.HeaderInicial", {
         exibirOla() {
             const oBundle = this.getView().getModel("i18n").getResourceBundle();
             const sRecipient = this.getView().getModel().getProperty("/recipient/name");
