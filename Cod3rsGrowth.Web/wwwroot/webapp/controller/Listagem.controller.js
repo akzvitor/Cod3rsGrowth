@@ -4,11 +4,11 @@ sap.ui.define([
 ], (BaseController, MessageToast) => {
     "use strict";
 
-    return BaseController.extend("ui5.coders.controller.HeaderInicial", {
+    return BaseController.extend("ui5.coders.controller.Listagem", {
         exibirOla() {
             const oBundle = this.getView().getModel("i18n").getResourceBundle();
             const sRecipient = this.getView().getModel().getProperty("/recipient/name");
-            const sMsg = oBundle.getText("olaMsg", [sRecipient]);
+            const sMsg = oBundle.getText("PaginaInicial.msg", [sRecipient]);
 
             MessageToast.show(sMsg);
         }

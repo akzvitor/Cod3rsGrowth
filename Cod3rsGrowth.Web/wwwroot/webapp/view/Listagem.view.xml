@@ -1,7 +1,7 @@
-<mvc:View controllerName="ui5.coders.controller.HeaderInicial"
+<mvc:View controllerName="ui5.coders.controller.Listagem"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc">
-    <Panel headerText="{i18n>tituloPainelOla}">
+    <Panel headerText="{i18n>Listagem.titulo}">
         <content>
             <Button id="botaoSayHello" text="{i18n>exibirTextoBotaoOla}" press=".exibirOla"/>
             <Input value="{/recipient/name}" description="Hello {/recipient/name}" valueLiveUpdate="true" width="60%"/>

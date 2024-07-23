@@ -1,10 +1,9 @@
 <mvc:View controllerName="ui5.coders.controller.App"
     xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc"
-    displayblock="true">
-    <Page headerText="{i18n>tituloPaginaInicial}">
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page title="{i18n>PaginaInicial.titulo}">
         <content>
-            <mvc:XMLView viewName="ui5.coders.view.HeaderInicial" />
+            <mvc:XMLView viewName="ui5.coders.view.Listagem" />
         </content>
     </Page>
 </mvc:View>
