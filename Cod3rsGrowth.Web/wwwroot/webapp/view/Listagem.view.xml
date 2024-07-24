@@ -1,28 +1,22 @@
 <mvc:View controllerName="ui5.coders.controller.Listagem"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc">
-    <Panel headerText="{i18n>Listagem.titulo}">
-        <content>
-            <Table
-                id="TabelaCompras"
-                items="{restCompras>/}">
-                <columns>
-                    <Column>
-                        <Text text="Aaaaaa" />
-                    </Column>
-                    <Column>
-                        <Text text="Bbbbbb" />
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <Text text="{restCompras>id}"/>
-                            <Text text="{restCompras>email}"/>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>    
-        </content>
-    </Panel>
+    <Table id="TabelaCompras" width="auto" items="{path: 'restCompras>/'}">
+        <columns>
+            <Column>
+                <Text text="ID" />
+            </Column>
+            <Column>
+                <Text text="E-mail" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{restCompras>id}" />
+                    <Text text="{restCompras>email}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
 </mvc:View>
