@@ -2,19 +2,55 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc">
     <Table id="TabelaCompras" width="auto" items="{path: 'restCompras>/'}">
+        <headerToolbar>
+            <Toolbar>
+                <Title text="{i18n>Listagem.titulo}" />
+                <ToolbarSpacer/>
+            </Toolbar>
+        </headerToolbar>
         <columns>
             <Column>
-                <Text text="ID" />
+                <Text text="{i18n>Listagem.colunaId}" />
             </Column>
             <Column>
-                <Text text="E-mail" />
+                <Text text="{i18n>Listagem.colunaNome}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>Listagem.colunaCpf}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>Listagem.colunaEmail}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>Listagem.colunaTelefone}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>Listagem.colunaValor}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>Listagem.colunaProdutos}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>Listagem.colunaData}" />
             </Column>
         </columns>
         <items>
             <ColumnListItem>
                 <cells>
                     <Text text="{restCompras>id}" />
+                    <Text text="{restCompras>nome}" />
+                    <Text text="{restCompras>cpf}" />
                     <Text text="{restCompras>email}" />
+                    <Text text="{restCompras>telefone}" />
+                    <Text text="{
+                                path: 'restCompras>valorCompra',
+                                formatter: '.formatter.formatarValor'
+                            }" />
+                    <Text text="{restCompras>listaIdDosProdutos}" />
+                    <Text text="{
+                                path: 'restCompras>dataCompra',
+                                formatter: '.formatter.formatarData'
+                            }" />
                 </cells>
             </ColumnListItem>
         </items>
