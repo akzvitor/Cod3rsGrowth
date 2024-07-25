@@ -1,52 +1,62 @@
 <mvc:View controllerName="ui5.coders.controller.Listagem"
     xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc">
-    <Table id="TabelaCompras" width="auto" items="{path: 'restCompras>/'}">
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+    <Table id="tabelaCompras" inset="true" alternateRowColors="true" mode="SingleSelectLeft" items="{
+            path: 'restCompras>/',
+            sorter: {
+                path: 'nome'
+            }
+        }">
         <headerToolbar>
-            <Toolbar>
-                <Title text="{i18n>Listagem.titulo}" />
-                <ToolbarSpacer/>
-            </Toolbar>
+            <OverflowToolbar>
+                <content>
+                    <Title text="{i18n>Listagem.titulo}" level="H2"/>
+                    <ToolbarSpacer />
+                    <Input id="nomeFiltroInput" placeholder="Nome" width="auto"/>
+                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="auto"/>
+                    <Input id="dataInicialFiltroInput" placeholder="Data Inicial" width="auto"/>
+                    <Input id="dataFinalFiltroInput" placeholder="Data Final" width="auto"/>
+                </content>
+            </OverflowToolbar>
         </headerToolbar>
         <columns>
-            <Column>
-                <Text text="{i18n>Listagem.colunaId}" />
-            </Column>
-            <Column>
+            <Column width="6rem">
                 <Text text="{i18n>Listagem.colunaNome}" />
             </Column>
-            <Column>
+            <Column hAlign="Center" width="12rem">
                 <Text text="{i18n>Listagem.colunaCpf}" />
             </Column>
-            <Column>
+            <Column hAlign="Center" width="12rem">
                 <Text text="{i18n>Listagem.colunaEmail}" />
             </Column>
-            <Column>
+            <Column hAlign="Center" width="12rem">
                 <Text text="{i18n>Listagem.colunaTelefone}" />
             </Column>
-            <Column>
+            <Column hAlign="Center" width="12rem">
                 <Text text="{i18n>Listagem.colunaValor}" />
             </Column>
-            <Column>
-                <Text text="{i18n>Listagem.colunaProdutos}" />
-            </Column>
-            <Column>
+            <Column hAlign="Center" width="12rem">
                 <Text text="{i18n>Listagem.colunaData}" />
             </Column>
         </columns>
         <items>
             <ColumnListItem>
                 <cells>
-                    <Text text="{restCompras>id}" />
                     <Text text="{restCompras>nome}" />
-                    <Text text="{restCompras>cpf}" />
+                    <Text text="{
+                                path: 'restCompras>cpf',
+                                formatter: '.formatter.formatarCpf'
+                            }" />
                     <Text text="{restCompras>email}" />
-                    <Text text="{restCompras>telefone}" />
+                    <Text text="{
+                                path: 'restCompras>telefone',
+                                formatter: '.formatter.formatarTelefone'
+                            }" />
                     <Text text="{
                                 path: 'restCompras>valorCompra',
                                 formatter: '.formatter.formatarValor'
                             }" />
-                    <Text text="{restCompras>listaIdDosProdutos}" />
                     <Text text="{
                                 path: 'restCompras>dataCompra',
                                 formatter: '.formatter.formatarData'
