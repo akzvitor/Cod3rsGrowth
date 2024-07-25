@@ -13,10 +13,11 @@
                 <content>
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
-                    <Input id="nomeFiltroInput" placeholder="Nome" width="auto"/>
-                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="auto"/>
-                    <Input id="dataInicialFiltroInput" placeholder="Data Inicial" width="auto"/>
-                    <Input id="dataFinalFiltroInput" placeholder="Data Final" width="auto"/>
+                    <Label text="Filtros:" />
+                    <Input id="nomeFiltroInput" placeholder="Nome" width="auto" liveChange=".aoAlterarInputFiltro"/>
+                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="auto" change="aoAlterarInputFiltro"/>
+                    <MaskInput mask="99/99/9999" id="dataInicialFiltroInput" placeholder="Data Inicial" width="auto" change="aoAlterarInputFiltro"/>
+                    <MaskInput mask="99/99/9999" id="dataFinalFiltroInput" placeholder="Data Final" width="auto" change="aoAlterarInputFiltro"/>
                 </content>
             </OverflowToolbar>
         </headerToolbar>
