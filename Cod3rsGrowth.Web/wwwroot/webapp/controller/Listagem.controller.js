@@ -5,7 +5,7 @@ sap.ui.define([
 ], (BaseController, JSONModel, formatter) => {
     "use strict";
 
-    const API_URL = "http://localhost:5070/api/Compras";
+    const API_URL = "http://localhost:5070/api/Compras?";
     const NOMDE_DO_MODELO = "restCompras";
 
     return BaseController.extend("ui5.coders.controller.Listagem", {
