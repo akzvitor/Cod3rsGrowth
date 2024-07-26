@@ -10,7 +10,7 @@
                 <content>
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
-                    <Label text="Filtros:" />
+                    <Button icon="sap-icon://add-filter" text="Filtros:" />
                     <Input id="nomeFiltroInput" placeholder="Nome" width="auto" liveChange="aoAlterarInputFiltro"/>
                     <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="auto" change="aoAlterarInputFiltro"/>
                     <MaskInput mask="99/99/9999" id="dataInicialFiltroInput" placeholder="Data Inicial" width="auto" change="aoAlterarInputFiltro"/>
@@ -63,4 +63,7 @@
             </ColumnListItem>
         </items>
     </Table>
+    <Bar />
+    <Button 
+        icon="sap-icon://sys-add" text="Adicionar"/>
 </mvc:View>
