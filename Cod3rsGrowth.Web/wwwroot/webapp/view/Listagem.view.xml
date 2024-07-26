@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Table id="tabelaCompras" width="auto" alternateRowColors="true" mode="SingleSelectLeft" items="{
+    <Table id="tabelaCompras" inset="false" width="auto" alternateRowColors="true" mode="SingleSelectLeft" items="{
             path: 'restCompras>/'
         }">
         <headerToolbar>
@@ -65,5 +65,5 @@
     </Table>
     <Bar />
     <Button 
-        icon="sap-icon://sys-add" text="Adicionar"/>
+        icon="sap-icon://create-form" text="Adicionar"/>
 </mvc:View>
