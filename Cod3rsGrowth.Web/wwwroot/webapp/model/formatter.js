@@ -14,6 +14,8 @@ sap.ui.define([
         },
 
         formatarData(data) {
+            if (data === null || data === undefined) { return data; }
+
             var oDateTimeFormat = DateFormat.getDateTimeInstance({
                 format: "yMMMd"
             });
@@ -22,10 +24,14 @@ sap.ui.define([
         },
 
         formatarCpf(cpf) {
+            if (cpf === null || cpf === undefined) { return cpf; }
+
             return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
         },
 
         formatarTelefone(telefone) {
+            if (telefone === null || telefone === undefined) { return telefone; }
+
             telefone = telefone.replace(/\D/g, '');
             telefone = telefone.replace(/(\d{2})(\d)/, "($1) $2");
             telefone = telefone.replace(/(\d)(\d{4})$/, "$1-$2");

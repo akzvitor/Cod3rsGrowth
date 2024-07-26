@@ -2,11 +2,8 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Table id="tabelaCompras" inset="true" alternateRowColors="true" mode="SingleSelectLeft" items="{
-            path: 'restCompras>/',
-            sorter: {
-                path: 'nome'
-            }
+    <Table id="tabelaCompras" width="auto" alternateRowColors="true" mode="SingleSelectLeft" items="{
+            path: 'restCompras>/'
         }">
         <headerToolbar>
             <OverflowToolbar>
@@ -14,7 +11,7 @@
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
                     <Label text="Filtros:" />
-                    <Input id="nomeFiltroInput" placeholder="Nome" width="auto" liveChange=".aoAlterarInputFiltro"/>
+                    <Input id="nomeFiltroInput" placeholder="Nome" width="auto" liveChange="aoAlterarInputFiltro"/>
                     <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="auto" change="aoAlterarInputFiltro"/>
                     <MaskInput mask="99/99/9999" id="dataInicialFiltroInput" placeholder="Data Inicial" width="auto" change="aoAlterarInputFiltro"/>
                     <MaskInput mask="99/99/9999" id="dataFinalFiltroInput" placeholder="Data Final" width="auto" change="aoAlterarInputFiltro"/>
