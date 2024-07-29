@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Table id="tabelaCompras" inset="false" width="auto" alternateRowColors="true" mode="SingleSelectLeft" items="{
+    <Table id="tabelaCompras" growing="true" inset="false" width="auto" alternateRowColors="true" mode="SingleSelectLeft" items="{
             path: 'restCompras>/',
             sorter: {
                 path: 'nome'
