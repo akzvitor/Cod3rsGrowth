@@ -157,12 +157,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 compras = compras.Where(c => c.Cpf.Trim().Replace(".", "").Replace("-", "").Contains(filtroCompra.Cpf.Trim().Replace(".", "").Replace("-", "")));
             }
 
-            if ((!string.IsNullOrEmpty(filtroCompra.DataInicial) && filtroCompra.DataInicial != DateTime.MinValue) && (!string.IsNullOrEmpty(filtroCompra.DataFinal) && filtroCompra.DataFinal != DateTime.MaxValue))
+            if (DateTime.TryParse(filtroCompra.DataInicial, out DateTime dataInicialComp) && dataInicialComp != DateTime.MinValue &&
+                DateTime.TryParse(filtroCompra.DataFinal, out DateTime dataFinalComp) && dataFinalComp != DateTime.MaxValue)
             {
-                DateTime dataInicial;
-                DateTime dataFinal;
-
-                if ((DateTime.TryParse(filtroCompra.DataInicial, out dataInicial)) && (DateTime.TryParse(filtroCompra.DataFinal, out dataFinal)))
+                if ((DateTime.TryParse(filtroCompra.DataInicial, out DateTime dataInicial)) && (DateTime.TryParse(filtroCompra.DataFinal, out DateTime dataFinal)))
                     compras = compras.Where(c => (c.DataCompra.Date >= dataInicial.Date) && (c.DataCompra <= dataFinal.Date));
             }
 
