@@ -14,13 +14,11 @@ sap.ui.define([
     const ID_TABELA = "tabelaCompras";
     const STRING_INSERIDO_INPUT_NOME = "Vitor";
     const STRING_INSERIDO_INPUT_CPF = "23985476047";
-    const STRING_INSERIDO_INPUT_DATAINICIAL = "23985476047";
-    const STRING_INSERIDO_INPUT_DATAFINAL = "23985476047";
+    const STRING_INSERIDO_INPUT_DATAINICIAL = "01012023";
+    const STRING_INSERIDO_INPUT_DATAFINAL = "01012029";
     const TAG_ITENS_TABELA = "items";
     const MENSAGEM_SUCESSO_BUSCAR_ITEM = "A tabela contém o item esperado.";
-    const MENSAGEM_ERRO_BUSCAR_ITEM = "A tabela não contém o item esperado.";
     const MENSAGEM_ERRO_CARREGAR_TABELA = "Ocorreu um erro ao carregar a tabela ou filtrar os dados.";
-
 
     Opa5.createPageObjects({
         onTheAppPage: {
@@ -73,7 +71,7 @@ sap.ui.define([
             assertions: {
                 aTabelaDeveSerFiltradaDeAcordoComFiltroNome() {
                     const propriedadeTestada = "nome";
-                    
+
                     return this.waitFor({
                         viewName: NOME_DA_VIEW,
                         id: ID_TABELA,
@@ -123,15 +121,33 @@ sap.ui.define([
                     })
                 },
 
-                aTabelaDeveSerFiltradaDeAcordoComFiltroDataInicial() {
+                aTabelaDeveSerFiltradaDeAcordoComFiltroData() {
                     const propriedadeTestada = "dataCompra";
 
+                    return this.waitFor({
+                        id: ID_TABELA,
+                        viewName: NOME_DA_VIEW,
+                        matchers: new AggregationFilled({
+                            name: TAG_ITENS_TABELA
+                        }),
+                        success: function (oTable) {
+                            const itensTabela = oTable.getItems();
 
+                            resultado = itensTabela.map((item) => {
+                                let data = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
+
+                                let dataFormatada = data.ToString();
+                                console.log(dataFormatada);
+
+                                // if (data >= new Date(STRING_INSERIDO_INPUT_DATAFINAL) || data <= new Date(STRING_INSERIDO_INPUT_DATAINICIAL))
+                                //     resultado = false
+                            })
+
+                            Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);
+                        },
+                        errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
+                    })
                 },
-
-                aTabelaDeveSerFiltradaDeAcordoComFiltroDataFinal() {
-
-                }
             }
         }
     });

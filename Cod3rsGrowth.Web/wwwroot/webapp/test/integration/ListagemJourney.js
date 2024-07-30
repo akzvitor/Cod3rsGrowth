@@ -31,18 +31,10 @@ sap.ui.define([
 
 		When.onTheAppPage.euPreenchoOInputDataInicial();
 
-		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroDataInicial();
-
-		Then.iTeardownMyApp();
-	});
-	
-	opaTest("Deveria filtrar os dados da tabela por data final e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
-		Given.iStartMyApp();
-
 		When.onTheAppPage.euPreenchoOInputDataFinal();
 
-		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroDataFinal();
-		
+		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroData();
+
 		Then.iTeardownMyApp();
 	});
 });
