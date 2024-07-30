@@ -2,13 +2,13 @@ sap.ui.define([
 	"sap/ui/test/opaQunit",
 	"sap/ui/test/Qunit",
 	"./pages/Listagem"
-], (opaTest, QUnit, Listagem) => {
+], (opaTest) => {
 	"use strict";
 
 	QUnit.module("Posts");
 
 	opaTest("Deveria filtrar os dados da tabela por nome do cliente e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
-		Given.iStartMyApp;
+		Given.iStartMyApp();
 
 		When.naPaginaDeListagemDasCompras.euPreenchoOInputNome();
 
