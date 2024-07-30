@@ -14,8 +14,8 @@ sap.ui.define([
     const ID_TABELA = "tabelaCompras";
     const STRING_INSERIDO_INPUT_NOME = "Vitor";
     const STRING_INSERIDO_INPUT_CPF = "23985476047";
-    const STRING_INSERIDO_INPUT_DATAINICIAL = "01012023";
-    const STRING_INSERIDO_INPUT_DATAFINAL = "01012029";
+    const STRING_INSERIDO_INPUT_DATAINICIAL = "01-01-2023";
+    const STRING_INSERIDO_INPUT_DATAFINAL = "01-01-2025";
     const TAG_ITENS_TABELA = "items";
     const MENSAGEM_SUCESSO_BUSCAR_ITEM = "A tabela contém o item esperado.";
     const MENSAGEM_ERRO_CARREGAR_TABELA = "Ocorreu um erro ao carregar a tabela ou filtrar os dados.";
@@ -132,22 +132,20 @@ sap.ui.define([
                         }),
                         success: function (oTable) {
                             const itensTabela = oTable.getItems();
+                            let resultado = true;
 
-                            resultado = itensTabela.map((item) => {
-                                let data = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
+                            itensTabela.map((item) => {
+                                let dataBuscada = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
 
-                                let dataFormatada = data.ToString();
-                                console.log(dataFormatada);
-
-                                // if (data >= new Date(STRING_INSERIDO_INPUT_DATAFINAL) || data <= new Date(STRING_INSERIDO_INPUT_DATAINICIAL))
-                                //     resultado = false
+                                if (dataBuscada > new Date(STRING_INSERIDO_INPUT_DATAFINAL) || dataBuscada < new Date(STRING_INSERIDO_INPUT_DATAINICIAL))
+                                    resultado = false;
                             })
 
                             Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);
                         },
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
                     })
-                },
+                }
             }
         }
     });
