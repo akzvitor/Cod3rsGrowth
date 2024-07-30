@@ -1,6 +1,5 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"sap/ui/test/Qunit",
 	"./pages/Listagem"
 ], (opaTest) => {
 	"use strict";
@@ -10,52 +9,40 @@ sap.ui.define([
 	opaTest("Deveria filtrar os dados da tabela por nome do cliente e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.naPaginaDeListagemDasCompras.euPreenchoOInputNome();
+		When.onTheAppPage.euPreenchoOInputNome();
 
-		Then.naPaginaDeListagemDasCompras.aTabelaDeveSerFiltradaDeAcordoComFiltroNome();
+		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroNome();
 
 		Then.iTeardownMyApp();
 	});
 
-	// opaTest("Deveria filtrar os dados da tabela por CPF e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
-	// 	Given.iStartMyUIComponent({
-	// 		componentConfig: {
-	// 			name: "ui5.coders"
-	// 		}
-	// 	});
+	opaTest("Deveria filtrar os dados da tabela por CPF e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
+		Given.iStartMyApp();
 
-	// 	When.onTheAppPage.euPreenchoOInputCPF();
+		When.onTheAppPage.euPreenchoOInputCPF();
 
-	// 	Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroCPF();
+		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroCPF();
 
-	// 	Then.iTeardownMyApp();
-	// });
+		Then.iTeardownMyApp();
+	});
 
-	// opaTest("Deveria filtrar os dados da tabela por data inicial e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
-	// 	Given.iStartMyUIComponent({
-	// 		componentConfig: {
-	// 			name: "ui5.coders"
-	// 		}
-	// 	});
+	opaTest("Deveria filtrar os dados da tabela por data inicial e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
+		Given.iStartMyApp();
 
-	// 	When.onTheAppPage.euPreenchoOInputDataInicial();
+		When.onTheAppPage.euPreenchoOInputDataInicial();
 
-	// 	Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroDataInicial();
+		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroDataInicial();
 
-	// 	Then.iTeardownMyApp();
-	// });
+		Then.iTeardownMyApp();
+	});
 	
-	// opaTest("Deveria filtrar os dados da tabela por data final e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
-	// 	Given.iStartMyUIComponent({
-	// 		componentConfig: {
-	// 			name: "ui5.coders"
-	// 		}
-	// 	});
+	opaTest("Deveria filtrar os dados da tabela por data final e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
+		Given.iStartMyApp();
 
-	// 	When.onTheAppPage.euPreenchoOInputDataFinal();
+		When.onTheAppPage.euPreenchoOInputDataFinal();
 
-	// 	Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroDataFinal();
+		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroDataFinal();
 		
-	// 	Then.iTeardownMyApp();
-	// });
+		Then.iTeardownMyApp();
+	});
 });

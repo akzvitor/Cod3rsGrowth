@@ -5,7 +5,7 @@ sap.ui.define([
 ], (Opa5, EnterText, AggregationFilled) => {
     "use strict";
 
-    const NOME_DA_VIEW = "ui5.coders.view.Listagem";
+    const NOME_DA_VIEW = ".Listagem";
     const NOME_DO_MODELO = "restCompras";
     const ID_INPUT_NOME = "nomeFiltroInput";
     const ID_INPUT_CPF = "cpfFiltroInput";
@@ -16,11 +16,10 @@ sap.ui.define([
     const STRING_INSERIDO_INPUT_CPF = "23985476047";
     const STRING_INSERIDO_INPUT_DATAINICIAL = "23985476047";
     const STRING_INSERIDO_INPUT_DATAFINAL = "23985476047";
-    const ITENS_TABELA = "items";
+    const TAG_ITENS_TABELA = "items";
     const MENSAGEM_SUCESSO_BUSCAR_ITEM = "A tabela contém o item esperado.";
     const MENSAGEM_ERRO_BUSCAR_ITEM = "A tabela não contém o item esperado.";
     const MENSAGEM_ERRO_CARREGAR_TABELA = "Ocorreu um erro ao carregar a tabela ou filtrar os dados.";
-    const PROPRIEDADE_NOME = "nome";
 
 
     Opa5.createPageObjects({
@@ -48,51 +47,50 @@ sap.ui.define([
                     })
                 },
 
-                euPreenchoOInputDataFinal() {
+                euPreenchoOInputDataInicial() {
                     return this.waitFor({
                         id: ID_INPUT_DATAINICIAL,
                         viewName: NOME_DA_VIEW,
                         actions: new EnterText({
-                            text: STRING_INSERIDO_INPUT_CPF
+                            text: STRING_INSERIDO_INPUT_DATAINICIAL
                         }),
-                        errorMessage: "Input de filtro CPF não encontrado."
+                        errorMessage: "Input de filtro Data Inicial não encontrado."
                     })
                 },
 
-                euPreenchoOInputCPF() {
+                euPreenchoOInputDataFinal() {
                     return this.waitFor({
-                        id: ID_INPUT_CPF,
+                        id: ID_INPUT_DATAFINAL,
                         viewName: NOME_DA_VIEW,
                         actions: new EnterText({
-                            text: STRING_INSERIDO_INPUT_CPF
+                            text: STRING_INSERIDO_INPUT_DATAFINAL
                         }),
-                        errorMessage: "Input de filtro CPF não encontrado."
+                        errorMessage: "Input de filtro Data Final não encontrado."
                     })
                 }
             },
 
             assertions: {
                 aTabelaDeveSerFiltradaDeAcordoComFiltroNome() {
-                    const stringEsperada = "Vitor";
-                    const tagLinhas = "items";
-
+                    const propriedadeTestada = "nome";
+                    
                     return this.waitFor({
                         viewName: NOME_DA_VIEW,
                         id: ID_TABELA,
                         matchers: new AggregationFilled({
-                            name: tagLinhas
+                            name: TAG_ITENS_TABELA
                         }),
                         success: function (oTable) {
                             const itensTabela = oTable.getItems();
-
                             let resultado = true;
+                    
                             itensTabela.map((item) => {
-                                let nomeBuscado = item.getBindingContext(NOME_DO_MODELO).getProperty(PROPRIEDADE_NOME);
-                                console.log(item.getBindingContext(NOME_DO_MODELO));
-                                if (nomeBuscado !== stringEsperada) {
+                                let nomeBuscado = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
+
+                                if (nomeBuscado !== STRING_INSERIDO_INPUT_NOME) 
                                     resultado = false;
-                                }
                             });
+
                             Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);
                         },
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
@@ -101,28 +99,38 @@ sap.ui.define([
 
                 aTabelaDeveSerFiltradaDeAcordoComFiltroCPF() {
                     const propriedadeTestada = "cpf";
+
                     return this.waitFor({
                         id: ID_TABELA,
                         viewName: NOME_DA_VIEW,
                         matchers: new AggregationFilled({
-                            name: ITENS_TABELA
+                            name: TAG_ITENS_TABELA
                         }),
                         success: function (oTable) {
                             const itensTabela = oTable.getItems();
+                            let resultado = true;
 
-                            var resultado = itensTabela.some(function (item) {
-                                var cpfDesejado = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
-                                return cpfDesejado === STRING_INSERIDO_INPUT_CPF;
-                            });
+                            itensTabela.map((item) => {
+                                let cpfBuscado = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
 
-                            if (resultado)
-                                Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);
-                            else
-                                Opa5.assert.ok(resultado, MENSAGEM_ERRO_BUSCAR_ITEM);
+                                if (cpfBuscado !== STRING_INSERIDO_INPUT_CPF)
+                                    resultado = false;
+                            })
 
+                            Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);
                         },
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
                     })
+                },
+
+                aTabelaDeveSerFiltradaDeAcordoComFiltroDataInicial() {
+                    const propriedadeTestada = "dataCompra";
+
+
+                },
+
+                aTabelaDeveSerFiltradaDeAcordoComFiltroDataFinal() {
+
                 }
             }
         }
