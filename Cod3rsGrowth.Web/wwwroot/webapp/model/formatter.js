@@ -6,7 +6,7 @@ sap.ui.define([
 
     return {
         formatarValor(valor) {
-            var oCurrencyFormat = NumberFormat.getCurrencyInstance({
+            let oCurrencyFormat = NumberFormat.getCurrencyInstance({
                 currencyCode: false
             });
 
@@ -16,7 +16,7 @@ sap.ui.define([
         formatarData(data) {
             if (data === null || data === undefined) { return data; }
 
-            var oDateTimeFormat = DateFormat.getDateTimeInstance({
+            let oDateTimeFormat = DateFormat.getDateTimeInstance({
                 format: "yMMMd"
             });
 

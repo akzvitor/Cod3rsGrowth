@@ -15,15 +15,15 @@ sap.ui.define([
     return BaseController.extend("ui5.coders.controller.Listagem", {
         formatter: formatter,
 
-        inicializarDados(urlDaApi) {
+        onInit() {
+            this._inicializarDados(API_URL);
+        },
+
+        _inicializarDados(urlDaApi) {
             fetch(urlDaApi)
                 .then((res) => res.json())
                 .then((data) => this.getView().setModel(new JSONModel(data), NOME_DO_MODELO))
                 .catch((err) => console.error(err));
-        },
-
-        onInit() {
-            this.inicializarDados(API_URL);
         },
 
         aoAlterarInputFiltro() {
@@ -41,7 +41,7 @@ sap.ui.define([
 
             if (inputDataFinal) { urlFiltro += "DataFinal=" + inputDataFinal + "&"; }
                 
-            this.inicializarDados(urlFiltro);
+            this._inicializarDados(urlFiltro);
         }
     });
 });
