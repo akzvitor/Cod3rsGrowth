@@ -11,11 +11,11 @@
                 <lf:Form id="formularioNovaCompra"
                     editable="true">
                     <lf:toolbar>
-                    <Toolbar id="TB1">
-                        <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" />
-                        <Title id="Title1" text="Nova Compra"/>
-                    </Toolbar>
-                </lf:toolbar>
+                        <Toolbar id="TB1">
+                            <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" />
+                            <Title id="Title1" text="Nova Compra"/>
+                        </Toolbar>
+                    </lf:toolbar>
                     <lf:layout>
                         <lf:ResponsiveGridLayout
                             labelSpanXL="3"
@@ -59,31 +59,33 @@
                 </lf:Form>
             </VBox>
         </content>
-        <subHeader>
-			<OverflowToolbar>
-				<SearchField liveChange=".onSearch" width="80%" />
-			</OverflowToolbar>
-		</subHeader>
-		<List
-			id="idList"
-			items="{
-                path: 'restObras>/'
-            }"
-			selectionChange=".onSelectionChange"
-			mode="MultiSelect"
-			growing="true"
-			growingThreshold="50"
-			includeItemInSelection="true">
-			<infoToolbar>
-				<OverflowToolbar visible="false" id="idInfoToolbar">
-					<Label id="idFilterLabel" />
-				</OverflowToolbar>
-			</infoToolbar>
-			<StandardListItem
-				title="{restObras>titulo}"
-				description="{restObras>autor}"
-				iconDensityAware="false"
-				iconInset="false" />
-		</List>
+        <content>
+            <VBox class="sapUiSmallMargin">  
+                <OverflowToolbar>
+                    <SearchField class="sapUiSmallMargin" liveChange=".onSearch" width="50%" />
+                </OverflowToolbar>
+                <List
+                    id="idList"
+                    items="{
+                        path: 'restObras>/'
+                    }"
+                    selectionChange=".onSelectionChange"
+                    mode="MultiSelect"
+                    growing="true"
+                    growingThreshold="50"
+                    includeItemInSelection="true">
+                    <infoToolbar>
+                        <OverflowToolbar visible="false" id="idInfoToolbar">
+                            <Label id="idFilterLabel" />
+                        </OverflowToolbar>
+                    </infoToolbar>
+                    <StandardListItem
+                        title="{restObras>titulo}"
+                        description="{restObras>autor}"
+                        iconDensityAware="false"
+                        iconInset="false" />
+                </List>
+            </VBox>
+        </content>
     </Page>
 </mvc:View>
