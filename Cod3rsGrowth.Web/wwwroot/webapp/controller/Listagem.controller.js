@@ -42,6 +42,11 @@ sap.ui.define([
             if (inputDataFinal) { urlFiltro += "DataFinal=" + inputDataFinal + "&"; }
                 
             this._inicializarDados(urlFiltro);
+        },
+
+        aoClicarNoBotaoAdicionar() {
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("criacaoCompra");
         }
     });
 });

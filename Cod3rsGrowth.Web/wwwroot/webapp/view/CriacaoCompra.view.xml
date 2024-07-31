@@ -2,4 +2,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
+    <Page
+        title="Criar Nova Compra">
+    </Page>
 </mvc:View>

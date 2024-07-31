@@ -4,7 +4,6 @@ sap.ui.define([
     "use strict";
 
     return BaseController.extend("ui5.coders.controller.NotFound", {
-        onInit() {
-        }
+        onInit() {}
     });
 });

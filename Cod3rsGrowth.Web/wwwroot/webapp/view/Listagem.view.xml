@@ -68,5 +68,5 @@
     </Table>
     <Bar />
     <Button 
-        icon="sap-icon://create-form" text="Adicionar"/>
+        icon="sap-icon://create-form" text="Adicionar" press="aoClicarNoBotaoAdicionar"/>
 </mvc:View>

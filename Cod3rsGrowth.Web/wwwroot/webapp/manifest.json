@@ -62,6 +62,11 @@
                     "pattern": "",
                     "name": "paginainicial",
                     "target": "paginainicial"
+                },
+                {
+                    "pattern": "criacaoCompra",
+                    "name": "criacaoCompra",
+                    "target": "criacaoCompra"
                 }
             ],
             "targets": {
@@ -72,6 +77,11 @@
                 "notFound": {
                     "id": "notFound",
                     "name": "NotFound",
+                    "transition": "show"
+                },
+                "criacaoCompra": {
+                    "id": "criacaoCompra",
+                    "name": "CriacaoCompra",
                     "transition": "show"
                 }
             }
