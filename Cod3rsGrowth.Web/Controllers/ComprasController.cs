@@ -22,11 +22,6 @@ namespace Cod3rsGrowth.Web.Controllers
         {
             var listaDeCompras = _servicoCompraCliente.ObterTodos(filtro);
 
-            if (listaDeCompras.Count == ERRO_LISTA_VAZIA)
-            {
-                return NotFound();
-            }
-
             return Ok(listaDeCompras);
         }
 

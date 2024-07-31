@@ -1,0 +1,72 @@
+<mvc:View controllerName="ui5.coders.controller.Listagem"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+    <Table id="tabelaCompras" growing="true" inset="false" width="auto" alternateRowColors="true" mode="SingleSelectLeft" items="{
+            path: 'restCompras>/',
+            sorter: {
+                path: 'nome'
+            }
+        }">
+        <headerToolbar>
+            <OverflowToolbar>
+                <content>
+                    <Title text="{i18n>Listagem.titulo}" level="H2"/>
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://add-filter" text="Filtros:" />
+                    <Input id="nomeFiltroInput" placeholder="Nome" width="auto" liveChange="aoAlterarInputFiltro"/>
+                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="auto" change="aoAlterarInputFiltro"/>
+                    <MaskInput mask="99/99/9999" id="dataInicialFiltroInput" placeholder="Data Inicial" width="auto" change="aoAlterarInputFiltro"/>
+                    <MaskInput mask="99/99/9999" id="dataFinalFiltroInput" placeholder="Data Final" width="auto" change="aoAlterarInputFiltro"/>
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column width="6rem">
+                <Text text="{i18n>Listagem.colunaNome}" />
+            </Column>
+            <Column hAlign="Center" width="12rem">
+                <Text text="{i18n>Listagem.colunaCpf}" />
+            </Column>
+            <Column hAlign="Center" width="12rem">
+                <Text text="{i18n>Listagem.colunaEmail}" />
+            </Column>
+            <Column hAlign="Center" width="12rem">
+                <Text text="{i18n>Listagem.colunaTelefone}" />
+            </Column>
+            <Column hAlign="Center" width="12rem">
+                <Text text="{i18n>Listagem.colunaValor}" />
+            </Column>
+            <Column hAlign="Center" width="12rem">
+                <Text text="{i18n>Listagem.colunaData}" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{restCompras>nome}" />
+                    <Text text="{
+                                path: 'restCompras>cpf',
+                                formatter: '.formatter.formatarCpf'
+                            }" />
+                    <Text text="{restCompras>email}" />
+                    <Text text="{
+                                path: 'restCompras>telefone',
+                                formatter: '.formatter.formatarTelefone'
+                            }" />
+                    <Text text="{
+                                path: 'restCompras>valorCompra',
+                                formatter: '.formatter.formatarValor'
+                            }" />
+                    <Text text="{
+                                path: 'restCompras>dataCompra',
+                                formatter: '.formatter.formatarData'
+                            }" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+    <Bar />
+    <Button 
+        icon="sap-icon://create-form" text="Adicionar"/>
+</mvc:View>

@@ -3,8 +3,8 @@
     "sap.app": {
         "id": "ui5.coders",
         "i18n": "i18n/i18n.properties",
-        "title": "{{tituloApp}}",
-        "description": "{{descricaoApp}}",
+        "title": "{{App.titulo}}",
+        "description": "{{App.descricao}}",
         "type": "application",
         "applicationVersion": {
             "version": "1.0.0"
