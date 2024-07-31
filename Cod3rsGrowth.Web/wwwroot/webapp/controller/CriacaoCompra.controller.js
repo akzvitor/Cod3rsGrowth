@@ -7,7 +7,7 @@ sap.ui.define([
     const API_URL = "http://localhost:5070/api/Obras";
     const NOME_DO_MODELO= "restObras";
 
-    return BaseController.extend("ui5.coders.controller.CriacaoVenda", {
+    return BaseController.extend("ui5.coders.controller.CriacaoCompra", {
         onInit() {
             this._inicializarDados(API_URL);
         },

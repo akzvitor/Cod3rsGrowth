@@ -5,16 +5,16 @@
     xmlns:f="sap.f"
 	xmlns:lf="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
-	<Page showHeader="false" showNavButton="true" navButtonPress="" class="sapUiContentPadding">
+	<Page showHeader="false" class="sapUiContentPadding">
         <content>
-            <VBox class="sapUiSmallMargin">
+            <VBox class="sapUiSmallMargin" backgroundDesign="Solid">
                 <lf:Form id="formularioNovaCompra"
                     editable="true">
                     <lf:toolbar>
-                        <Toolbar id="TB1">
+                        <OverflowToolbar id="TB1">
                             <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" />
-                            <Title id="Title1" text="Nova Compra"/>
-                        </Toolbar>
+                            <Title id="Title1" text="Dados da Compra"/>
+                        </OverflowToolbar>
                     </lf:toolbar>
                     <lf:layout>
                         <lf:ResponsiveGridLayout
@@ -32,26 +32,26 @@
                             columnsM="1"
                             singleContainerFullSize="false" />
                     </lf:layout>
-                    <lf:formContainers>
-                        <lf:FormContainer>
+                    <lf:formContainers> 
+                        <lf:FormContainer >
                             <lf:formElements>
                                 <lf:FormElement label="Nome">
                                     <lf:fields>
-                                        <Input id="nomeFormInput"/>
+                                        <Input id="nomeFormInput" width="50%" />
                                     </lf:fields>
                                 </lf:FormElement>
                                 <lf:FormElement label="E-mail">
                                     <lf:fields>
-                                        <Input id="emailFormInput" />
+                                        <Input id="emailFormInput" width="50%" />
                                     </lf:fields>
                                 </lf:FormElement>
                                 <lf:FormElement label="Telefone">
                                     <lf:fields>
-                                        <MaskInput mask="(99)9 9999-9999" id="telefoneFormInput"/>
+                                        <MaskInput mask="(99)9 9999-9999" id="telefoneFormInput" width="25%" />
                                     </lf:fields>
                                 </lf:FormElement>
                                 <lf:FormElement label="CPF">
-                                    <MaskInput mask="999.999.999-99" id="cpfFormInput"/>
+                                    <MaskInput mask="999.999.999-99" id="cpfFormInput" width="25%" />
                                 </lf:FormElement>
                             </lf:formElements>
                         </lf:FormContainer>
@@ -60,9 +60,14 @@
             </VBox>
         </content>
         <content>
-            <VBox class="sapUiSmallMargin">  
+            <VBox class="sapUiSmallMargin" backgroundDesign="Solid">
                 <OverflowToolbar>
-                    <SearchField class="sapUiSmallMargin" liveChange=".onSearch" width="50%" />
+                    <Button icon="sap-icon://add-coursebook"/>
+                    <Title class="sapUiSmallMargin" text="Catálogo de Obras"/>
+                </OverflowToolbar>  
+                <OverflowToolbar>
+                    <ToolbarSpacer />
+                    <SearchField liveChange=".onSearch" width="50%" />
                 </OverflowToolbar>
                 <List
                     id="idList"
@@ -73,7 +78,8 @@
                     mode="MultiSelect"
                     growing="true"
                     growingThreshold="50"
-                    includeItemInSelection="true">
+                    includeItemInSelection="true"
+                    showSeparators="Inner">
                     <infoToolbar>
                         <OverflowToolbar visible="false" id="idInfoToolbar">
                             <Label id="idFilterLabel" />
@@ -85,6 +91,7 @@
                         iconDensityAware="false"
                         iconInset="false" />
                 </List>
+                <Button text="Salvar" icon="sap-icon://save"/>
             </VBox>
         </content>
     </Page>

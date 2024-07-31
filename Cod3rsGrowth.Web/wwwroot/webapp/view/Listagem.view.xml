@@ -16,9 +16,9 @@
                     <ToolbarSpacer />
                     <Button icon="sap-icon://add-filter" text="Filtros:" />
                     <Input id="nomeFiltroInput" placeholder="Nome" width="auto" liveChange="aoAlterarInputFiltro"/>
-                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="auto" change="aoAlterarInputFiltro"/>
-                    <MaskInput mask="99/99/9999" id="dataInicialFiltroInput" placeholder="Data Inicial" width="auto" change="aoAlterarInputFiltro"/>
-                    <MaskInput mask="99/99/9999" id="dataFinalFiltroInput" placeholder="Data Final" width="auto" change="aoAlterarInputFiltro"/>
+                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="10%" change="aoAlterarInputFiltro"/>
+                    <MaskInput mask="99/99/9999" id="dataInicialFiltroInput" placeholder="Data Inicial" width="8%" change="aoAlterarInputFiltro"/>
+                    <MaskInput mask="99/99/9999" id="dataFinalFiltroInput" placeholder="Data Final" width="8%" change="aoAlterarInputFiltro"/>
                 </content>
             </OverflowToolbar>
         </headerToolbar>
