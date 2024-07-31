@@ -2,21 +2,22 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
 	xmlns:l="sap.ui.layout"
-	xmlns:f="sap.ui.layout.form"
+    xmlns:f="sap.f"
+	xmlns:lf="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
 	<Page showHeader="false" showNavButton="true" navButtonPress="" class="sapUiContentPadding">
         <content>
             <VBox class="sapUiSmallMargin">
-                <f:Form id="formularioNovaCompra"
+                <lf:Form id="formularioNovaCompra"
                     editable="true">
-                    <f:toolbar>
+                    <lf:toolbar>
                     <Toolbar id="TB1">
                         <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" />
                         <Title id="Title1" text="Nova Compra"/>
                     </Toolbar>
-                </f:toolbar>
-                    <f:layout>
-                        <f:ResponsiveGridLayout
+                </lf:toolbar>
+                    <lf:layout>
+                        <lf:ResponsiveGridLayout
                             labelSpanXL="3"
                             labelSpanL="3"
                             labelSpanM="3"
@@ -30,33 +31,59 @@
                             columnsL="1"
                             columnsM="1"
                             singleContainerFullSize="false" />
-                    </f:layout>
-                    <f:formContainers>
-                        <f:FormContainer>
-                            <f:formElements>
-                                <f:FormElement label="Nome">
-                                    <f:fields>
+                    </lf:layout>
+                    <lf:formContainers>
+                        <lf:FormContainer>
+                            <lf:formElements>
+                                <lf:FormElement label="Nome">
+                                    <lf:fields>
                                         <Input id="nomeFormInput"/>
-                                    </f:fields>
-                                </f:FormElement>
-                                <f:FormElement label="E-mail">
-                                    <f:fields>
+                                    </lf:fields>
+                                </lf:FormElement>
+                                <lf:FormElement label="E-mail">
+                                    <lf:fields>
                                         <Input id="emailFormInput" />
-                                    </f:fields>
-                                </f:FormElement>
-                                <f:FormElement label="Telefone">
-                                    <f:fields>
+                                    </lf:fields>
+                                </lf:FormElement>
+                                <lf:FormElement label="Telefone">
+                                    <lf:fields>
                                         <MaskInput mask="(99)9 9999-9999" id="telefoneFormInput"/>
-                                    </f:fields>
-                                </f:FormElement>
-                                <f:FormElement label="CPF">
+                                    </lf:fields>
+                                </lf:FormElement>
+                                <lf:FormElement label="CPF">
                                     <MaskInput mask="999.999.999-99" id="cpfFormInput"/>
-                                </f:FormElement>
-                            </f:formElements>
-                        </f:FormContainer>
-                    </f:formContainers>
-                </f:Form>
+                                </lf:FormElement>
+                            </lf:formElements>
+                        </lf:FormContainer>
+                    </lf:formContainers>
+                </lf:Form>
             </VBox>
         </content>
+        <subHeader>
+			<OverflowToolbar>
+				<SearchField liveChange=".onSearch" width="80%" />
+			</OverflowToolbar>
+		</subHeader>
+		<List
+			id="idList"
+			items="{
+                path: 'restObras>/'
+            }"
+			selectionChange=".onSelectionChange"
+			mode="MultiSelect"
+			growing="true"
+			growingThreshold="50"
+			includeItemInSelection="true">
+			<infoToolbar>
+				<OverflowToolbar visible="false" id="idInfoToolbar">
+					<Label id="idFilterLabel" />
+				</OverflowToolbar>
+			</infoToolbar>
+			<StandardListItem
+				title="{restObras>titulo}"
+				description="{restObras>autor}"
+				iconDensityAware="false"
+				iconInset="false" />
+		</List>
     </Page>
 </mvc:View>
