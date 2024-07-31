@@ -81,8 +81,7 @@
                 },
                 "criacaoCompra": {
                     "id": "criacaoCompra",
-                    "name": "CriacaoCompra",
-                    "transition": "show"
+                    "name": "CriacaoCompra"
                 }
             }
         }

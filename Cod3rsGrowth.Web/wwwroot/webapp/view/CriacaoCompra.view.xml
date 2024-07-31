@@ -1,8 +1,62 @@
 <mvc:View controllerName="ui5.coders.controller.CriacaoCompra"
-    xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:core="sap.ui.core">
-    <Page
-        title="Criar Nova Compra">
+    xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Page showHeader="false" showNavButton="true" navButtonPress="" class="sapUiContentPadding">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <f:Form id="formularioNovaCompra"
+                    editable="true">
+                    <f:toolbar>
+                    <Toolbar id="TB1">
+                        <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" />
+                        <Title id="Title1" text="Nova Compra"/>
+                    </Toolbar>
+                </f:toolbar>
+                    <f:layout>
+                        <f:ResponsiveGridLayout
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="4"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="Nome">
+                                    <f:fields>
+                                        <Input id="nomeFormInput"/>
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="E-mail">
+                                    <f:fields>
+                                        <Input id="emailFormInput" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Telefone">
+                                    <f:fields>
+                                        <MaskInput mask="(99)9 9999-9999" id="telefoneFormInput"/>
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="CPF">
+                                    <MaskInput mask="999.999.999-99" id="cpfFormInput"/>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+            </VBox>
+        </content>
     </Page>
 </mvc:View>
