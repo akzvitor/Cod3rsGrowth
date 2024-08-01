@@ -5,7 +5,7 @@
     xmlns:f="sap.f"
 	xmlns:lf="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
-	<Page showHeader="false" class="sapUiContentPadding">
+	<Page showHeader="true" title="Adicionar Nova Compra" titleAlignment="Center" backgroundDesign="List" class="sapUiContentPadding">
         <content>
             <VBox class="sapUiSmallMargin" backgroundDesign="Solid">
                 <lf:Form id="formularioNovaCompra"
