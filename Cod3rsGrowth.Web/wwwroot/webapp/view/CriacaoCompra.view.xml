@@ -67,10 +67,10 @@
                 </OverflowToolbar>  
                 <OverflowToolbar>
                     <ToolbarSpacer />
-                    <SearchField liveChange=".onSearch" width="50%" />
+                    <SearchField liveChange=".onSearch" width="50%" search="aoProcurarObra"/>
                 </OverflowToolbar>
                 <List
-                    id="idList"
+                    id="catalogoObras"
                     items="{
                         path: 'restObras>/'
                     }"
