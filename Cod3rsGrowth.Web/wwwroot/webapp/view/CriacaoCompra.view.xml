@@ -47,7 +47,7 @@
                                 </lf:FormElement>
                                 <lf:FormElement label="Telefone">
                                     <lf:fields>
-                                        <MaskInput mask="(99)9 9999-9999" id="telefoneFormInput" width="25%" />
+                                        <MaskInput mask="(99)99999-9999" id="telefoneFormInput" width="25%" />
                                     </lf:fields>
                                 </lf:FormElement>
                                 <lf:FormElement label="CPF">

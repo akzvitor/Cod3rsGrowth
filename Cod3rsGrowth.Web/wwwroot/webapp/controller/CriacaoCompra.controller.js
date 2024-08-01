@@ -1,8 +1,10 @@
 sap.ui.define([
     "ui5/coders/controller/BaseController",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], (BaseController, Filter, FilterOperator) => {
+    "sap/ui/model/FilterOperator",
+    "../model/formatter"
+
+], (BaseController, Filter, FilterOperator, formatter) => {
     "use strict";
 
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
@@ -14,6 +16,8 @@ sap.ui.define([
     const ID_TELEFONE_FORM_INPUT = "telefoneFormInput";
 
     return BaseController.extend("ui5.coders.controller.CriacaoCompra", {
+        formatter: formatter,
+
         onInit() {
             this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
         },
@@ -35,19 +39,22 @@ sap.ui.define([
             const inputEmail = this.oView.byId(ID_EMAIL_FORM_INPUT).getValue();
             const inputCpf = this.oView.byId(ID_CPF_FORM_INPUT).getValue();
             const inputTelefone = this.oView.byId(ID_TELEFONE_FORM_INPUT).getValue();
-            const dataCompra = Date.now;
-            const listaIdsSelecionados = this._obterObrasSelecionadas();
+            const dataDaCompra = new Date();
+            const obj = this._obterObrasSelecionadas();
 
-            console.log(listaIdsSelecionados)
+            console.log(dataDaCompra);
 
             const data = {
                 cpf: inputCpf, 
                 nome: inputNome,
                 telefone: inputTelefone,
                 email: inputEmail,
-                dataCompra: dataCompra,
-                listaIdDosProdutos: listaIdsSelecionados
+                dataCompra: dataDaCompra,
+                valorCompra: obj.valorTotalCompra,
+                listaIdDosProdutos: obj.listaIdsSelecionados
             }
+
+            console.log(obj);
 
             this._postData(data);
         },
@@ -55,17 +62,18 @@ sap.ui.define([
         _obterObrasSelecionadas() {
             let oList = this.byId("catalogoObras"); 
             let itensSelecionados = oList.getSelectedItems();
-            let listaIdsSelecionados = [];
+            let obj = {listaIdsSelecionados: [], valorTotalCompra: 0};
 
             for (let i = 0; i < itensSelecionados.length; i++) {
                 let itemSelecionado = itensSelecionados[i];
                 let contexto = itemSelecionado.getBindingContext(MODELO_OBRAS);
                 let obra = contexto.getProperty(null, contexto);
 
-                listaIdsSelecionados[i] =  obra.id;
+                obj.listaIdsSelecionados[i] =  obra.id;
+                obj.valorTotalCompra += obra.valorObra
             };
 
-            return listaIdsSelecionados;
+            return obj;
         },
 
         _postData(data) {
