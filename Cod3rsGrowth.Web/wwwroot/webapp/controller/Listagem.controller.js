@@ -5,8 +5,8 @@ sap.ui.define([
 ], (BaseController, formatter) => {
     "use strict";
 
-    const API_URL = "http://localhost:5070/api/Compras";
-    const NOME_DO_MODELO = "restCompras";
+    const API_COMPRAS_URL = "http://localhost:5070/api/Compras";
+    const MODELO_COMPRAS = "restCompras";
     const ID_NOME_FILTRO_INPUT = "nomeFiltroInput";
     const ID_CPF_FILTRO_INPUT = "cpfFiltroInput";
     const ID_DATAINICIAL_FILTRO_INPUT= "dataInicialFiltroInput";
@@ -16,7 +16,7 @@ sap.ui.define([
         formatter: formatter,
 
         onInit() {
-            this.inicializarDados(API_URL, NOME_DO_MODELO);
+            this.inicializarDados(API_COMPRAS_URL, MODELO_COMPRAS);
         },
 
         aoAlterarInputFiltro() {
@@ -34,7 +34,7 @@ sap.ui.define([
 
             if (inputDataFinal) { urlFiltro += "DataFinal=" + inputDataFinal + "&"; }
                 
-            this.inicializarDados(urlFiltro, NOME_DO_MODELO);
+            this.inicializarDados(urlFiltro, MODELO_COMPRAS);
         },
 
         aoClicarNoBotaoAdicionar() {

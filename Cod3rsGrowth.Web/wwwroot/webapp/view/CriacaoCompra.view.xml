@@ -91,7 +91,7 @@
                         iconDensityAware="false"
                         iconInset="false" />
                 </List>
-                <Button text="Salvar" icon="sap-icon://save"/>
+                <Button text="Salvar" icon="sap-icon://save" press="aoClicarNoBotaoSalvar"/>
             </VBox>
         </content>
     </Page>
