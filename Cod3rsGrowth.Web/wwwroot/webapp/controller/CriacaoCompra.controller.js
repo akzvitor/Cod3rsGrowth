@@ -1,7 +1,6 @@
 sap.ui.define([
     "ui5/coders/controller/BaseController",
-    "sap/ui/model/json/JSONModel"
-], (BaseController, JSONModel) => {
+], (BaseController) => {
     "use strict";
 
     const API_URL = "http://localhost:5070/api/Obras";
@@ -9,14 +8,7 @@ sap.ui.define([
 
     return BaseController.extend("ui5.coders.controller.CriacaoCompra", {
         onInit() {
-            this._inicializarDados(API_URL);
+            this.inicializarDados(API_URL, NOME_DO_MODELO);
         },
-
-        _inicializarDados(urlDaApi) {
-            fetch(urlDaApi)
-                .then((res) => res.json())
-                .then((data) => this.getView().setModel(new JSONModel(data), NOME_DO_MODELO))
-                .catch((err) => console.error(err));
-        }
     });
 });

@@ -17,6 +17,7 @@ sap.ui.define([
                     name: "World"
                 }
             };
+            
             const oModel = new JSONModel(oData);
             this.setModel(oModel);
 

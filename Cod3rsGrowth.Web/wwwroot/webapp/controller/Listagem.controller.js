@@ -1,8 +1,8 @@
 sap.ui.define([
     "ui5/coders/controller/BaseController",
-    "sap/ui/model/json/JSONModel",
     "../model/formatter"
-], (BaseController, JSONModel, formatter) => {
+
+], (BaseController, formatter) => {
     "use strict";
 
     const API_URL = "http://localhost:5070/api/Compras";
@@ -16,14 +16,7 @@ sap.ui.define([
         formatter: formatter,
 
         onInit() {
-            this._inicializarDados(API_URL);
-        },
-
-        _inicializarDados(urlDaApi) {
-            fetch(urlDaApi)
-                .then((res) => res.json())
-                .then((data) => this.getView().setModel(new JSONModel(data), NOME_DO_MODELO))
-                .catch((err) => console.error(err));
+            this.inicializarDados(API_URL, NOME_DO_MODELO);
         },
 
         aoAlterarInputFiltro() {
@@ -41,7 +34,7 @@ sap.ui.define([
 
             if (inputDataFinal) { urlFiltro += "DataFinal=" + inputDataFinal + "&"; }
                 
-            this._inicializarDados(urlFiltro);
+            this.inicializarDados(urlFiltro, NOME_DO_MODELO);
         },
 
         aoClicarNoBotaoAdicionar() {
