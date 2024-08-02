@@ -2,9 +2,10 @@ sap.ui.define([
     "ui5/coders/controller/BaseController",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "../model/formatter"
+    "../model/formatter",
+    "../model/validator"
 
-], (BaseController, Filter, FilterOperator, formatter) => {
+], (BaseController, Filter, FilterOperator, formatter, validator) => {
     "use strict";
 
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
@@ -17,6 +18,7 @@ sap.ui.define([
 
     return BaseController.extend("ui5.coders.controller.CriacaoCompra", {
         formatter: formatter,
+        validator: validator,
 
         onInit() {
             this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
@@ -35,18 +37,16 @@ sap.ui.define([
         },
 
         aoClicarNoBotaoSalvar() {
-            const inputNome = this.oView.byId(ID_NOME_FORM_INPUT).getValue();
+            const inputNome = this.oView.byId(ID_NOME_FORM_INPUT);
+            const valorNome = inputNome.getValue();
             const inputEmail = this.oView.byId(ID_EMAIL_FORM_INPUT).getValue();
             const inputCpf = this.oView.byId(ID_CPF_FORM_INPUT).getValue();
             const inputTelefone = this.oView.byId(ID_TELEFONE_FORM_INPUT).getValue();
             const dataDaCompra = new Date();
             const obj = this._obterObrasSelecionadas();
-
-            console.log(dataDaCompra);
-
             const data = {
-                cpf: inputCpf, 
-                nome: inputNome,
+                cpf: inputCpf,
+                nome: valorNome,
                 telefone: inputTelefone,
                 email: inputEmail,
                 dataCompra: dataDaCompra,
@@ -54,23 +54,23 @@ sap.ui.define([
                 listaIdDosProdutos: obj.listaIdsSelecionados
             }
 
-            console.log(obj);
+            validator.validarNome(inputNome);
 
             this._postData(data);
         },
 
         _obterObrasSelecionadas() {
-            let oList = this.byId("catalogoObras"); 
+            let oList = this.byId("catalogoObras");
             let itensSelecionados = oList.getSelectedItems();
-            let obj = {listaIdsSelecionados: [], valorTotalCompra: 0};
+            let obj = { listaIdsSelecionados: [], valorTotalCompra: 0 };
 
             for (let i = 0; i < itensSelecionados.length; i++) {
                 let itemSelecionado = itensSelecionados[i];
                 let contexto = itemSelecionado.getBindingContext(MODELO_OBRAS);
                 let obra = contexto.getProperty(null, contexto);
 
-                obj.listaIdsSelecionados[i] =  obra.id;
-                obj.valorTotalCompra += obra.valorObra
+                obj.listaIdsSelecionados[i] = obra.id;
+                obj.valorTotalCompra += obra.valorObra;
             };
 
             return obj;
@@ -78,14 +78,38 @@ sap.ui.define([
 
         _postData(data) {
             fetch(API_COMPRAS_URL, {
-              method: 'POST', 
-              body: JSON.stringify(data), 
-              headers:{
-                'Content-Type': 'application/json'
-              }
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-            .then(response => response.json())
-            .then(data => console.log(data));
-        }          
+                .then(response => response.json())
+                .then(data => console.log(data));
+        },
+
+        aoPreencherNome(oEvent) {
+            const oInput = oEvent.getSource();
+
+            validator.validarNome(oInput);
+        },
+
+        aoPreencherEmail(oEvent) {
+            const oInput = oEvent.getSource();
+
+            validator.validarEmail(oInput);
+        },
+        
+        aoPreencherTelefone(oEvent) {
+            const oInput = oEvent.getSource();
+
+            validator.validarTelefone(oInput);
+        },
+
+        aoPreencherCpf(oEvent) {
+            const oInput = oEvent.getSource();
+
+            validator.validarCpf(oInput);
+        }
     });
 });
