@@ -1,0 +1,53 @@
+[
+    {
+        "id": 5,
+        "cpf": "23985476047",
+        "nome": "Juliana",
+        "telefone": "62996600872",
+        "email": "juliana@live.com",
+        "valorCompra": 49.99,
+        "dataCompra": "2024-07-26T08:24:30.447",
+        "listaIdDosProdutos": [
+            1
+        ]
+    },
+
+    {
+        "id": 6,
+        "cpf": "23985476047",
+        "nome": "Juliana",
+        "telefone": "62996600872",
+        "email": "juliana@live.com",
+        "valorCompra": 49.99,
+        "dataCompra": "2024-07-26T08:24:30.447",
+        "listaIdDosProdutos": [
+            1
+        ]
+    },
+
+    {
+        "id": 7,
+        "cpf": "23985476047",
+        "nome": "Juliana",
+        "telefone": "62996600872",
+        "email": "juliana@live.com",
+        "valorCompra": 49.99,
+        "dataCompra": "2024-07-26T08:24:30.447",
+        "listaIdDosProdutos": [
+            1
+        ]
+    },
+
+    {
+        "id": 8,
+        "cpf": "23985476047",
+        "nome": "Juliana",
+        "telefone": "62996600872",
+        "email": "juliana@live.com",
+        "valorCompra": 49.99,
+        "dataCompra": "2024-07-26T08:24:30.447",
+        "listaIdDosProdutos": [
+            1
+        ]
+    }
+]

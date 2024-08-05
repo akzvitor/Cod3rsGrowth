@@ -43,18 +43,19 @@ sap.ui.define([
             const inputCpf = this.oView.byId(ID_CPF_FORM_INPUT).getValue();
             const inputTelefone = this.oView.byId(ID_TELEFONE_FORM_INPUT).getValue();
             const dataDaCompra = new Date();
-            const obj = this._obterObrasSelecionadas();
+            const oObrasSelecionadas = this._obterObrasSelecionadas();
             const data = {
                 cpf: inputCpf,
                 nome: valorNome,
                 telefone: inputTelefone,
                 email: inputEmail,
                 dataCompra: dataDaCompra,
-                valorCompra: obj.valorTotalCompra,
-                listaIdDosProdutos: obj.listaIdsSelecionados
+                valorCompra: oObrasSelecionadas.valorTotalCompra,
+                listaIdDosProdutos: oObrasSelecionadas.listaIdsSelecionados
             }
 
             validator.validarNome(inputNome);
+            validator.validarEmail(inputEmail);
 
             this._postData(data);
         },
