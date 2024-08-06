@@ -39,25 +39,29 @@ sap.ui.define([
         aoClicarNoBotaoSalvar() {
             const inputNome = this.oView.byId(ID_NOME_FORM_INPUT);
             const valorNome = inputNome.getValue();
-            const inputEmail = this.oView.byId(ID_EMAIL_FORM_INPUT).getValue();
-            const inputCpf = this.oView.byId(ID_CPF_FORM_INPUT).getValue();
-            const inputTelefone = this.oView.byId(ID_TELEFONE_FORM_INPUT).getValue();
+            const inputEmail = this.oView.byId(ID_EMAIL_FORM_INPUT);
+            const valorEmail = inputEmail.getValue()
+            const inputCpf = this.oView.byId(ID_CPF_FORM_INPUT);
+            const valorCpf = inputCpf.getValue()
+            const inputTelefone = this.oView.byId(ID_TELEFONE_FORM_INPUT);
+            const valorTelefone = inputTelefone.getValue()
             const dataDaCompra = new Date();
             const oObrasSelecionadas = this._obterObrasSelecionadas();
+            const erroListaDeProdutosVazia = 0;
             const data = {
-                cpf: inputCpf,
+                cpf: valorCpf,
                 nome: valorNome,
-                telefone: inputTelefone,
-                email: inputEmail,
+                telefone: valorTelefone,
+                email: valorEmail,
                 dataCompra: dataDaCompra,
                 valorCompra: oObrasSelecionadas.valorTotalCompra,
                 listaIdDosProdutos: oObrasSelecionadas.listaIdsSelecionados
             }
 
-            validator.validarNome(inputNome);
-            validator.validarEmail(inputEmail);
+            const dadosSaoValidos = validator.validarDados(inputNome, inputEmail, inputTelefone, inputCpf);
 
-            this._postData(data);
+            if (dadosSaoValidos && oObrasSelecionadas.listaIdsSelecionados.length !== erroListaDeProdutosVazia)
+                this._postData(data);
         },
 
         _obterObrasSelecionadas() {

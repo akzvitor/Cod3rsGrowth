@@ -13,93 +13,118 @@ sap.ui.define([
             const regexLetras = /^[a-zA-Zà-úÀ-Ú-' ]*$/;
             const mensagemErroRegexNome = "O nome deve conter apenas letras, espaços ou símbolos como - e '.";
             const mensagemErroNomeExcedeTamanhoMaximo = "O nome do cliente pode ter até 100 caracteres.";
-            const eValido = (valor !== "" && regexLetras.test(valor) && valor.length <= 100)
+            let eValido = true;
 
             if (valor === "") {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO);
+                eValido = false;
             }
 
             if (!regexLetras.test(valor)) {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(mensagemErroRegexNome);
+                eValido = false;
             }
 
             if (valor.length > 100) {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(mensagemErroNomeExcedeTamanhoMaximo);
+                eValido = false;
             }
 
             if (eValido) {
                 input.setValueState(ValueState.None);
                 return true;
             }
+
+            return false;
         },
 
         validarEmail(input) {
             const valor = input.getValue();
             const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             const mensagemErroRegexEmail = "O email deve ter formato válido e conter apenas letras sem acento, números, espaços ou alguns símbolos, como - e _.";
-            const eValido = (valor !== "" && regexEmail.test(valor))
+            let eValido = true;
 
             if (valor === "") {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO);
+                eValido = false;
             }
 
-            if (!regexEmail.test(valor)) {
+            else if (!regexEmail.test(valor)) {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(mensagemErroRegexEmail);
+                eValido = false;
             }
 
             if (eValido) {
                 input.setValueState(ValueState.None);
+                return true;
             }
+
+            return false;
         },
 
         validarTelefone(input) {
             const valor = input.getValue().replace(/[()_\-]/g, "");
             const mensagemErroTelefoneTamanhoInvalido = "O telefone deve conter 11 dígitos.";
             const tamanhoTelefone = 11;
-            const eValido = (valor !== "" && valor.length === tamanhoTelefone);
+            let eValido = true;
 
             if (valor === "") {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO);
+                eValido = false;
             }
 
-            if (valor.length !== tamanhoTelefone) {
+            else if (valor.length !== tamanhoTelefone) {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(mensagemErroTelefoneTamanhoInvalido);
+                eValido = false;
             }
 
             if (eValido) {
                 input.setValueState(ValueState.None);
+                return true;
             }
+
+            return false;
         },
 
         validarCpf(input) {
             const valor = input.getValue().replace(/[._\-]/g, "");
             const mensagemErroCPFInvalido = "O CPF informado é inválido.";
-            const eValido = (valor !== "" && this.eCpfValido(valor))
-
-
-            console.log(valor)
-
+            let eValido = true;
 
             if (valor === "") {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO);
+                eValido = false;
             }
 
-            if (!this.eCpfValido(valor)) {
+            else if (!this.eCpfValido(valor)) {
                 input.setValueState(ValueState.Error);
                 input.setValueStateText(mensagemErroCPFInvalido);
+                eValido = false;
             }
 
             if (eValido) {
                 input.setValueState(ValueState.None);
+                return true;
             }
+
+            return false;
+        },
+
+        validarDados(nome, email, telefone, cpf) {
+            const nomeEValido = this.validarNome(nome);
+            const emailValido = this.validarEmail(email);
+            const telefoneEValido = this.validarTelefone(telefone);
+            const cpfEValido = this.validarCpf(cpf);
+
+            return nomeEValido && emailValido && telefoneEValido && cpfEValido;
         },
 
         eCpfValido(cpf) {
