@@ -120,6 +120,10 @@ sap.ui.define([
             const oInput = oEvent.getSource();
 
             validator.validarCpf(oInput);
+        },
+
+        onSelectionChange() {
+            this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
         }
     });
 });
