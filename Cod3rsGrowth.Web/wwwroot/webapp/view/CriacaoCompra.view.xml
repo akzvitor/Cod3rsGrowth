@@ -7,10 +7,10 @@
 	xmlns:core="sap.ui.core">
 	<Page showHeader="true" title="Adicionar Nova Compra" titleAlignment="Center" backgroundDesign="List" class="sapUiContentPadding">
         <content>
-            <VBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Row">
+            <VBox class="sapUiSmallMargin" backgroundDesign="Solid" >
                 <lf:Form id="formularioNovaCompra"
                     editable="true"
-                    width="200%">
+                    width="100%">
                     <lf:toolbar>
                         <OverflowToolbar id="TB1">
                             <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" />
@@ -18,20 +18,10 @@
                         </OverflowToolbar>
                     </lf:toolbar>
                     <lf:layout>
-                        <lf:ResponsiveGridLayout
-                            labelSpanXL="3"
-                            labelSpanL="3"
-                            labelSpanM="3"
-                            labelSpanS="12"
-                            adjustLabelSpan="false"
-                            emptySpanXL="4"
-                            emptySpanL="4"
-                            emptySpanM="4"
-                            emptySpanS="0"
-                            columnsXL="1"
-                            columnsL="1"
-                            columnsM="1"
-                            singleContainerFullSize="false"/>
+                        <lf:ColumnLayout 
+                        columnsM="2"
+					    columnsL="2"
+					    columnsXL="4"/>
                     </lf:layout>
                     <lf:formContainers> 
                         <lf:FormContainer >
@@ -48,11 +38,11 @@
                                 </lf:FormElement>
                                 <lf:FormElement label="Telefone">
                                     <lf:fields>
-                                        <MaskInput mask="(99)99999-9999" id="telefoneFormInput" width="25%" change="aoPreencherTelefone" required="true"/>
+                                        <MaskInput mask="(99)99999-9999" id="telefoneFormInput" width="50%" change="aoPreencherTelefone" required="true"/>
                                     </lf:fields>
                                 </lf:FormElement>
                                 <lf:FormElement label="CPF">
-                                    <MaskInput mask="999.999.999-99" id="cpfFormInput" width="25%" change="aoPreencherCpf" required="true"/>
+                                    <MaskInput mask="999.999.999-99" id="cpfFormInput" width="50%" change="aoPreencherCpf" required="true"/>
                                 </lf:FormElement>
                             </lf:formElements>
                         </lf:FormContainer>
@@ -64,11 +54,12 @@
             <VBox class="sapUiSmallMargin" backgroundDesign="Solid">
                 <OverflowToolbar>
                     <Button icon="sap-icon://add-coursebook"/>
-                    <Title class="sapUiSmallMargin" text="Catálogo de Obras"/>
+                    <Title class="sapUiSmallMargin" text="Catálogo de Obras" />
+                    <Label text="Selecione ao menos uma obra" required="true"/>
                 </OverflowToolbar>  
                 <OverflowToolbar>
                     <content>
-                        <Label visible="true" text="Ao menos uma obra do catálogo deve ser selecionada."/>
+                        <ObjectStatus  id="mensagemErroProdutos" visible="false" text="Selecione ao menos uma obra" state="Error"/>
                     </content>
                     <ToolbarSpacer />
                     <SearchField liveChange=".onSearch" width="25%" search="aoProcurarObra"/>

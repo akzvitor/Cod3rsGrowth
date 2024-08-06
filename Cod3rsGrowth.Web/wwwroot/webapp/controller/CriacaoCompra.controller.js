@@ -15,6 +15,7 @@ sap.ui.define([
     const ID_EMAIL_FORM_INPUT = "emailFormInput";
     const ID_CPF_FORM_INPUT = "cpfFormInput";
     const ID_TELEFONE_FORM_INPUT = "telefoneFormInput";
+    const ID_ERRO_VALIDACAO_PRODUTOS = "mensagemErroProdutos";
 
     return BaseController.extend("ui5.coders.controller.CriacaoCompra", {
         formatter: formatter,
@@ -60,7 +61,11 @@ sap.ui.define([
 
             const dadosSaoValidos = validator.validarDados(inputNome, inputEmail, inputTelefone, inputCpf);
 
+            if(oObrasSelecionadas.listaIdsSelecionados.length === erroListaDeProdutosVazia)
+                this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(true);
+
             if (dadosSaoValidos && oObrasSelecionadas.listaIdsSelecionados.length !== erroListaDeProdutosVazia)
+                this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
                 this._postData(data);
         },
 
