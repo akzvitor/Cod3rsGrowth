@@ -33,6 +33,13 @@ sap.ui.define([
                 .then((res) => res.json())
                 .then((data) => this.getView().setModel(new JSONModel(data), nomeDoModelo))
                 .catch((err) => console.error(err));
-        }
+        },
+
+		formatarDataParaApi(data) {
+			if (data === null || data === undefined) { return data; }
+
+    		let oDate = new Date(data);
+    		return oDate.toISOString(); 
+		}
 	});
 });
