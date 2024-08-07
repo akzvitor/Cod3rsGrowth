@@ -15,10 +15,10 @@
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
                     <core:Icon src="sap-icon://add-filter" color="Blue"/>
-                    <Input id="nomeFiltroInput" placeholder="Nome" width="18%" liveChange="aoAlterarInputFiltro"/>
+                    <Input id="nomeFiltroInput" placeholder="Nome" width="18%" liveChange="aoAlterarInputFiltro" autocomplete="false"/>
                     <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="10%" change="aoAlterarInputFiltro"/>
                     <DateRangeSelection
-			            id="DRS1"
+			            id="dateRangeFiltroInput"
 			            class="DRS1"
 			            value= "{
 				            'type': 'sap.ui.model.type.DateInterval',
@@ -36,9 +36,11 @@
 					            }
 				            ]
 			            }"
-			            change="handleChange"
+			            change="aoAlterarInputFiltro"
                         width="18%"
-                        placeholder="Data"/>
+                        placeholder="Data"
+                        showFooter="true"
+                        />
                 </content>
             </OverflowToolbar>
         </headerToolbar>

@@ -9,8 +9,7 @@ sap.ui.define([
     const MODELO_COMPRAS = "restCompras";
     const ID_NOME_FILTRO_INPUT = "nomeFiltroInput";
     const ID_CPF_FILTRO_INPUT = "cpfFiltroInput";
-    const ID_DATAINICIAL_FILTRO_INPUT= "dataInicialFiltroInput";
-    const ID_DATAFINAL_FILTRO_INPUT= "dataFinalFiltroInput";
+    const ID_DATERANGE_FILTRO_INPUT= "dateRangeFiltroInput";
 
     return BaseController.extend("ui5.coders.controller.Listagem", {
         formatter: formatter,
@@ -19,22 +18,33 @@ sap.ui.define([
             this.inicializarDados(API_COMPRAS_URL, MODELO_COMPRAS);
         },
 
-        aoAlterarInputFiltro() {
+        aoAlterarInputFiltro(oEvent) {
             let urlFiltro = "http://localhost:5070/api/Compras?";
             const inputNome = this.oView.byId(ID_NOME_FILTRO_INPUT).getValue();
             const inputCpf = this.oView.byId(ID_CPF_FILTRO_INPUT).getValue();
-            const inputDataInicial = this.oView.byId(ID_DATAINICIAL_FILTRO_INPUT).getValue();
-            const inputDataFinal = this.oView.byId(ID_DATAFINAL_FILTRO_INPUT).getValue();
+            const inputDateRange = this.oView.byId(ID_DATERANGE_FILTRO_INPUT).getValue();
+            const objData = this.aoSelecionarData(oEvent);
+            const dataInicial = formatter.formatarData(objData.di);
+            const dataFinal = formatter.formatarData(objData.df);
 
             if (inputNome) { urlFiltro += "NomeCliente=" + inputNome + "&"; }
                 
             if (inputCpf) { urlFiltro += "Cpf=" + inputCpf + "&"; }
 
-            if (inputDataInicial) { urlFiltro += "DataInicial=" + inputDataInicial + "&"; }
+            if (inputDateRange) { urlFiltro += "DataInicial=" + dataInicial + "&DataFinal=" + dataFinal; }
 
-            if (inputDataFinal) { urlFiltro += "DataFinal=" + inputDataFinal + "&"; }
-                
             this.inicializarDados(urlFiltro, MODELO_COMPRAS);
+        },
+
+        aoSelecionarData(oEvent) {
+            let dataInicial = oEvent.getParameter("from");
+            let dataFinal = oEvent.getParameter("to");
+            let obj = {di: undefined, df: undefined};
+
+            obj.di = dataInicial;
+            obj.df = dataFinal;
+
+            return obj;
         },
 
         aoClicarNoBotaoAdicionar() {
