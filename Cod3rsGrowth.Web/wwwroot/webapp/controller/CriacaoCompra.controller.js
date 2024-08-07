@@ -67,6 +67,7 @@ sap.ui.define([
             if (dadosSaoValidos && oObrasSelecionadas.listaIdsSelecionados.length !== erroListaDeProdutosVazia)
                 this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
                 this._postData(data);
+                this._limparForm();
         },
 
         _obterObrasSelecionadas() {
@@ -96,6 +97,14 @@ sap.ui.define([
             })
                 .then(response => response.json())
                 .then(data => console.log(data));
+        },
+
+        _limparForm() {
+            this.oView.byId(ID_NOME_FORM_INPUT).setValue(null);
+            this.oView.byId(ID_EMAIL_FORM_INPUT).setValue(null);
+            this.oView.byId(ID_CPF_FORM_INPUT).setValue(null);
+            this.oView.byId(ID_TELEFONE_FORM_INPUT).setValue(null);
+            this.getView().byId("catalogoObras").removeSelections(true);        
         },
 
         aoPreencherNome(oEvent) {

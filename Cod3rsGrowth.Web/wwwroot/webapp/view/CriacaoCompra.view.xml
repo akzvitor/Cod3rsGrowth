@@ -95,6 +95,7 @@
                         </OverflowToolbar>
                     </infoToolbar>
                     <StandardListItem
+                        id="itemCatalogo"
                         title="{restObras>titulo}"
                         description="{restObras>autor}"
                         iconDensityAware="false"

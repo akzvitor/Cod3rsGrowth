@@ -14,7 +14,7 @@
                 <content>
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
-                    <core:Icon src="sap-icon://add-filter" color="Blue"/>
+                    <core:Icon src="sap-icon://add-filter"/>
                     <Input id="nomeFiltroInput" placeholder="Nome" width="18%" liveChange="aoAlterarInputFiltro" autocomplete="false"/>
                     <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="10%" change="aoAlterarInputFiltro"/>
                     <DateRangeSelection
