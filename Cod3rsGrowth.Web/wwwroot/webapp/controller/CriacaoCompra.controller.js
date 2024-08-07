@@ -16,6 +16,8 @@ sap.ui.define([
     const ID_CPF_FORM_INPUT = "cpfFormInput";
     const ID_TELEFONE_FORM_INPUT = "telefoneFormInput";
     const ID_ERRO_VALIDACAO_PRODUTOS = "mensagemErroProdutos";
+    const ID_CATALOGO_OBRAS = "catalogoObras";
+    const ID_MESSAGESTRIP_SUCESSO = "messageStripSucesso";
 
     return BaseController.extend("ui5.coders.controller.CriacaoCompra", {
         formatter: formatter,
@@ -23,18 +25,6 @@ sap.ui.define([
 
         onInit() {
             this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
-        },
-
-        aoProcurarObra(oEvent) {
-            const aFilter = [];
-            const sQuery = oEvent.getParameter("query");
-            if (sQuery) {
-                aFilter.push(new Filter("titulo", FilterOperator.Contains, sQuery));
-            }
-
-            const oList = this.byId("catalogoObras");
-            const oBinding = oList.getBinding("items");
-            oBinding.filter(aFilter);
         },
 
         aoClicarNoBotaoSalvar() {
@@ -68,10 +58,23 @@ sap.ui.define([
                 this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
                 this._postData(data);
                 this._limparForm();
+                this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
+        },
+
+        aoProcurarObra(oEvent) {
+            const aFilter = [];
+            const sQuery = oEvent.getParameter("query");
+            if (sQuery) {
+                aFilter.push(new Filter("titulo", FilterOperator.Contains, sQuery));
+            }
+
+            const oList = this.byId(ID_CATALOGO_OBRAS);
+            const oBinding = oList.getBinding("items");
+            oBinding.filter(aFilter);
         },
 
         _obterObrasSelecionadas() {
-            let oList = this.byId("catalogoObras");
+            let oList = this.byId(ID_CATALOGO_OBRAS);
             let itensSelecionados = oList.getSelectedItems();
             let obj = { listaIdsSelecionados: [], valorTotalCompra: 0 };
 
@@ -104,7 +107,7 @@ sap.ui.define([
             this.oView.byId(ID_EMAIL_FORM_INPUT).setValue(null);
             this.oView.byId(ID_CPF_FORM_INPUT).setValue(null);
             this.oView.byId(ID_TELEFONE_FORM_INPUT).setValue(null);
-            this.getView().byId("catalogoObras").removeSelections(true);        
+            this.getView().byId(ID_CATALOGO_OBRAS).removeSelections(true);        
         },
 
         aoPreencherNome(oEvent) {

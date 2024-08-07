@@ -62,7 +62,6 @@
                         </lf:FormContainer>
                     </lf:formContainers>
                 </lf:Form>
-                
             </VBox>
         </content>
         <content>
@@ -96,7 +95,7 @@
                     </infoToolbar>
                     <StandardListItem
                         id="itemCatalogo"
-                        title="{restObras>titulo}"
+                        title="{restObras>titulo} - R${restObras>valorObra}"
                         description="{restObras>autor}"
                         iconDensityAware="false"
                         iconInset="false" />
@@ -104,5 +103,14 @@
                 <Button text="Salvar" icon="sap-icon://save" press="aoClicarNoBotaoSalvar"/>
             </VBox>
         </content>
+        <MessageStrip
+                id="messageStripSucesso"
+				text="A compra foi salva com sucesso."
+				type="Success"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiLargeMarginTop"
+                visible="false">
+		</MessageStrip>
     </Page>
 </mvc:View>
