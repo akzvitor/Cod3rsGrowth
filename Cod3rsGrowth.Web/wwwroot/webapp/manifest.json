@@ -37,10 +37,6 @@
                     ],
                     "fallbackLocale": ""
                 }
-            },
-            "restCompras": {
-              "type": "sap.ui.model.json.JSONModel",
-              "uri": "Compras.json"
             }
         },
         "rootView": {
