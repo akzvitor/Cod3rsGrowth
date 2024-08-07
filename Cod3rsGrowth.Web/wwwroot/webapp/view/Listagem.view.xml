@@ -14,11 +14,31 @@
                 <content>
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
-                    <Button icon="sap-icon://add-filter" text="Filtros:" />
-                    <Input id="nomeFiltroInput" placeholder="Nome" width="auto" liveChange="aoAlterarInputFiltro"/>
+                    <core:Icon src="sap-icon://add-filter" color="Blue"/>
+                    <Input id="nomeFiltroInput" placeholder="Nome" width="18%" liveChange="aoAlterarInputFiltro"/>
                     <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="10%" change="aoAlterarInputFiltro"/>
-                    <MaskInput mask="99/99/9999" id="dataInicialFiltroInput" placeholder="Data Inicial" width="8%" change="aoAlterarInputFiltro"/>
-                    <MaskInput mask="99/99/9999" id="dataFinalFiltroInput" placeholder="Data Final" width="8%" change="aoAlterarInputFiltro"/>
+                    <DateRangeSelection
+			            id="DRS1"
+			            class="DRS1"
+			            value= "{
+				            'type': 'sap.ui.model.type.DateInterval',
+				            'formatOptions': {
+					        'pattern': 'dd/MM/yyyy'
+				            },
+				            'parts': [
+					            {
+						            'type': 'sap.ui.model.type.Date',
+						            'path': '/start'
+					            },
+					            {
+						            'type': 'sap.ui.model.type.Date',
+						            'path': '/end'
+					            }
+				            ]
+			            }"
+			            change="handleChange"
+                        width="18%"
+                        placeholder="Data"/>
                 </content>
             </OverflowToolbar>
         </headerToolbar>
