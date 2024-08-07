@@ -65,8 +65,8 @@
             "routes": [
                 {
                     "pattern": "",
-                    "name": "paginainicial",
-                    "target": "paginainicial"
+                    "name": "paginaInicial",
+                    "target": "paginaInicial"
                 },
                 {
                     "pattern": "criacaoCompra",
@@ -75,8 +75,8 @@
                 }
             ],
             "targets": {
-                "paginainicial": {
-                    "id": "paginainicial",
+                "paginaInicial": {
+                    "id": "paginaInicial",
                     "name": "PaginaInicial"
                 },
                 "notFound": {
