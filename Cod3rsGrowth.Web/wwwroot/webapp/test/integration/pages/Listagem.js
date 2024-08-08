@@ -2,12 +2,14 @@ sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/actions/EnterText",
     'sap/ui/test/matchers/AggregationLengthEquals',
-    "sap/ui/test/matchers/AggregationFilled"
-], (Opa5, EnterText, AggregationLengthEquals, AggregationFilled) => {
+    "sap/ui/test/matchers/AggregationFilled",
+    'sap/ui/test/actions/Press'
+], (Opa5, EnterText, AggregationLengthEquals, AggregationFilled, Press) => {
     "use strict";
 
     const NOME_DA_VIEW = ".Listagem";
     const NOME_DO_MODELO = "restCompras";
+    const ID_BOTAO_ADICIONAR = "botaoAdicionar";
     const ID_INPUT_NOME = "nomeFiltroInput";
     const ID_INPUT_CPF = "cpfFiltroInput";
     const ID_DATERANGE = "dateRangeFiltroInput";
@@ -21,8 +23,20 @@ sap.ui.define([
     const MENSAGEM_ERRO_CARREGAR_TABELA = "Ocorreu um erro ao carregar a tabela ou filtrar os dados.";
 
     Opa5.createPageObjects({
-        onTheAppPage: {
+        naPaginaDeListagem: {
             actions: {
+                euClicoNoBotaoAdicionar() {
+                    return this.waitFor({
+                        id: ID_BOTAO_ADICIONAR,
+                        viewName: NOME_DA_VIEW,
+                        actions: new Press(),
+                        errorMessage: "Botão adicionar não encontrado.",
+                        success: function() {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); 
+                        }
+                    });
+                },
+
                 euPreenchoOInputNome() {
                     return this.waitFor({
                         id: ID_INPUT_NOME,
@@ -48,7 +62,7 @@ sap.ui.define([
                         success: function() {
                             return new Promise(resolve => setTimeout(resolve, 1000)); 
                         }
-                    })
+                    });
                 },
 
                 euSelecionoAData() {
@@ -62,7 +76,7 @@ sap.ui.define([
                         success: function() {
                             return new Promise(resolve => setTimeout(resolve, 1000)); 
                         }
-                    })
+                    });
                 },
 
                 euSelecionoOPeriodo() {
@@ -76,11 +90,22 @@ sap.ui.define([
                         success: function() {
                             return new Promise(resolve => setTimeout(resolve, 1000)); 
                         }
-                    })
+                    });
                 }
             },
 
             assertions: {
+                aPaginaDeveMudarParaListagem() {
+                    return this.waitFor({
+                        id: ID_TABELA,
+                        viewName: NOME_DA_VIEW,
+                        success: function () {
+                            Opa5.assert.ok(true, "A tabela está sendo exibida.");
+                        },
+                        errorMessage: "Não é possível visualizar a tabela."
+                    });
+                },
+
                 aTabelaDeveSerFiltradaDeAcordoComFiltroNome() {
                     const propriedadeTestada = "nome";
 
@@ -130,7 +155,7 @@ sap.ui.define([
                             Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);
                         },
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
-                    })
+                    });
                 },
 
                 aTabelaDeveSerFiltradaDeAcordoComDataNoFiltroData() {
@@ -145,7 +170,7 @@ sap.ui.define([
 							Opa5.assert.ok(true, "A tabela contém os 2 itens correspondentes a data filtrada.");
 						},
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
-                    })
+                    });
                 },
 
                 aTabelaDeveSerFiltradaDeAcordoComRangeNoFiltroData() {
@@ -160,7 +185,7 @@ sap.ui.define([
 							Opa5.assert.ok(true, "A tabela contém os 9 itens correspondentes ao periodo filtrado.");
 						},
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
-                    })
+                    });
                 }
             }
         }

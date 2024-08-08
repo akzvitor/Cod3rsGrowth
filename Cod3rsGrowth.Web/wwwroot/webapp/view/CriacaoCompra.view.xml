@@ -5,7 +5,7 @@
     xmlns:f="sap.f"
 	xmlns:lf="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
-	<Page showHeader="true" title="Adicionar Nova Compra" titleAlignment="Center" backgroundDesign="List" class="sapUiContentPadding">
+	<Page id="paginaCriacaoCompra" showHeader="true" title="Adicionar Nova Compra" titleAlignment="Center" backgroundDesign="List" class="sapUiContentPadding">
         <content>
             <VBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Row">
                 <lf:Form id="formularioNovaCompra"
@@ -13,7 +13,7 @@
                     width="100%">
                     <lf:toolbar>
                         <OverflowToolbar id="TB1">
-                            <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" />
+                            <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" id="botaoNavBack"/>
                             <Title id="Title1" text="Dados da Compra"/>
                         </OverflowToolbar>
                     </lf:toolbar>

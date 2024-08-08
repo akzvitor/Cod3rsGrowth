@@ -1,17 +1,38 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/Listagem"
+	"./pages/Listagem",
+	"./pages/CriacaoCompra"
 ], (opaTest) => {
 	"use strict";
 
 	QUnit.module("Listagem");
 
+	opaTest("Deveria ver a página de criação ao clicar no botão adicionar.", (Given, When, Then) => {
+		Given.iStartMyApp();
+
+		When.naPaginaDeListagem.euClicoNoBotaoAdicionar();
+
+		Then.naPaginaDeCriacaoCompra.aPaginaDeveMudarParaCriacaoCompra();
+
+	});
+
+	opaTest("Deveria voltar para a página de Listagem.", (Given, When, Then) => {
+		Given.iStartMyApp();
+
+		When.naPaginaDeCriacaoCompra.euClicoNoBotaoNavBack();
+
+		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
+
+		Then.iTeardownMyApp();
+	});
+
+
 	opaTest("Deveria filtrar os dados da tabela por nome do cliente e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.onTheAppPage.euPreenchoOInputNome();
+		When.naPaginaDeListagem.euPreenchoOInputNome();
 
-		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroNome();
+		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComFiltroNome();
 
 		Then.iTeardownMyApp();
 	});
@@ -19,9 +40,9 @@ sap.ui.define([
 	opaTest("Deveria filtrar os dados da tabela por CPF e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.onTheAppPage.euPreenchoOInputCPF();
+		When.naPaginaDeListagem.euPreenchoOInputCPF();
 
-		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroCPF();
+		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComFiltroCPF();
 
 		Then.iTeardownMyApp();
 	});
@@ -29,9 +50,9 @@ sap.ui.define([
 	opaTest("Deveria filtrar os dados da tabela pela data e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.onTheAppPage.euSelecionoAData();
+		When.naPaginaDeListagem.euSelecionoAData();
 
-		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComDataNoFiltroData();
+		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComDataNoFiltroData();
 
 		Then.iTeardownMyApp();
 	});
@@ -39,9 +60,9 @@ sap.ui.define([
 	opaTest("Deveria filtrar os dados da tabela pelo periodo e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.onTheAppPage.euSelecionoOPeriodo();
+		When.naPaginaDeListagem.euSelecionoOPeriodo();
 
-		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComRangeNoFiltroData();
+		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComRangeNoFiltroData();
 
 		Then.iTeardownMyApp();
 	});
