@@ -3,11 +3,15 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "../model/formatter",
-    "../model/validator"
+    "../model/validator",
+    "sap/ui/core/library"
 
-], (BaseController, Filter, FilterOperator, formatter, validator) => {
+
+], (BaseController, Filter, FilterOperator, formatter, validator, coreLibrary) => {
     "use strict";
 
+    const { ValueState } = coreLibrary;
+    const ROTA_CRIACAO = "criacaoCompra"
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
     const MODELO_OBRAS = "restObras";
     const API_COMPRAS_URL = "http://localhost:5070/api/Compras";
@@ -24,8 +28,18 @@ sap.ui.define([
         validator: validator,
 
         onInit() {
-            this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
+            this._aoCoincidirRota(ROTA_CRIACAO, API_OBRAS_URL, MODELO_OBRAS);
         },
+
+         _aoCoincidirRota(rota, urlDaApi, nomeDoModelo) {
+			this.processarAcao(() => {
+				const oRouter = this.getOwnerComponent().getRouter();
+				oRouter.getRoute(rota).attachPatternMatched(() => {
+					this.inicializarDados(urlDaApi, nomeDoModelo);
+                    this._limparForm();
+				}, this);
+			});
+		},
 
         aoClicarNoBotaoSalvar() {
             this.processarAcao(() => {
@@ -115,7 +129,13 @@ sap.ui.define([
                 this.oView.byId(ID_EMAIL_FORM_INPUT).setValue(null);
                 this.oView.byId(ID_CPF_FORM_INPUT).setValue(null);
                 this.oView.byId(ID_TELEFONE_FORM_INPUT).setValue(null);
+                this.oView.byId(ID_NOME_FORM_INPUT).setValueState(ValueState.None);
+                this.oView.byId(ID_EMAIL_FORM_INPUT).setValueState(ValueState.None);
+                this.oView.byId(ID_CPF_FORM_INPUT).setValueState(ValueState.None);
+                this.oView.byId(ID_TELEFONE_FORM_INPUT).setValueState(ValueState.None);
                 this.getView().byId(ID_CATALOGO_OBRAS).removeSelections(true);
+                this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
+                this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
             });
         },
 
