@@ -3,9 +3,10 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/UIComponent",
-	"../model/formatter"
+	"../model/formatter",
+	"sap/m/MessageBox",
 
-], function(Controller, History, JSONModel, UIComponent, formatter) {
+], function(Controller, History, JSONModel, UIComponent, formatter, MessageBox) {
 	"use strict";
 
 	return Controller.extend("ui5.coders.controller.BaseController", {
@@ -14,6 +15,15 @@ sap.ui.define([
 		getRouter() {
 			return UIComponent.getRouterFor(this);
 		},
+
+		processarAcao(action) {
+            try {
+                const resultado = action();
+                return resultado;
+            } catch (error) {
+                MessageBox.error(error.message);
+            }
+        },
 
 		onNavBack() {
 			var history, previousHash;

@@ -9,7 +9,7 @@ sap.ui.define([
     const MODELO_COMPRAS = "restCompras";
     const ID_NOME_FILTRO_INPUT = "nomeFiltroInput";
     const ID_CPF_FILTRO_INPUT = "cpfFiltroInput";
-    const ID_DATERANGE_FILTRO_INPUT= "dateRangeFiltroInput";
+    const ID_DATERANGE_FILTRO_INPUT = "dateRangeFiltroInput";
 
     return BaseController.extend("ui5.coders.controller.Listagem", {
         formatter: formatter,
@@ -19,37 +19,43 @@ sap.ui.define([
         },
 
         aoAlterarInputFiltro(oEvent) {
-            let urlFiltro = "http://localhost:5070/api/Compras?";
-            const inputNome = this.oView.byId(ID_NOME_FILTRO_INPUT).getValue();
-            const inputCpf = this.oView.byId(ID_CPF_FILTRO_INPUT).getValue();
-            const inputDateRange = this.oView.byId(ID_DATERANGE_FILTRO_INPUT).getValue();
-            const objData = this.aoSelecionarData(oEvent);
-            const dataInicial =this.formatarDataParaApi(objData.di);
-            const dataFinal = this.formatarDataParaApi(objData.df);
+            this.processarAcao(() => {
+                let urlFiltro = "http://localhost:5070/api/Compras?";
+                const inputNome = this.oView.byId(ID_NOME_FILTRO_INPUT).getValue();
+                const inputCpf = this.oView.byId(ID_CPF_FILTRO_INPUT).getValue();
+                const inputDateRange = this.oView.byId(ID_DATERANGE_FILTRO_INPUT).getValue();
+                const objData = this.aoSelecionarData(oEvent);
+                const dataInicial = this.formatarDataParaApi(objData.di);
+                const dataFinal = this.formatarDataParaApi(objData.df);
 
-            if (inputNome) { urlFiltro += "NomeCliente=" + inputNome + "&"; }
-                
-            if (inputCpf) { urlFiltro += "Cpf=" + inputCpf + "&"; }
+                if (inputNome) { urlFiltro += "NomeCliente=" + inputNome + "&"; }
 
-            if (inputDateRange) { urlFiltro += "DataInicial=" + dataInicial + "&DataFinal=" + dataFinal; }
+                if (inputCpf) { urlFiltro += "Cpf=" + inputCpf + "&"; }
 
-            this.inicializarDados(urlFiltro, MODELO_COMPRAS);
+                if (inputDateRange) { urlFiltro += "DataInicial=" + dataInicial + "&DataFinal=" + dataFinal; }
+
+                this.inicializarDados(urlFiltro, MODELO_COMPRAS);
+            });
         },
 
         aoSelecionarData(oEvent) {
-            let dataInicial = oEvent.getParameter("from");
-            let dataFinal = oEvent.getParameter("to");
-            let obj = {di: undefined, df: undefined};
+            return this.processarAcao(() => {
+                let dataInicial = oEvent.getParameter("from");
+                let dataFinal = oEvent.getParameter("to");
+                let obj = { di: Number, df: Number };
 
-            obj.di = dataInicial;
-            obj.df = dataFinal;
+                obj.di = dataInicial;
+                obj.df = dataFinal;
 
-            return obj;
+                return obj;
+            });
         },
 
         aoClicarNoBotaoAdicionar() {
-            const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("criacaoCompra");
+            this.processarAcao(() => {
+                const oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("criacaoCompra");
+            });
         }
     });
 });
