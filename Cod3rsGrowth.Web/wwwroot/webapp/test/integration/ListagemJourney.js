@@ -31,7 +31,17 @@ sap.ui.define([
 
 		When.onTheAppPage.euSelecionoAData();
 
-		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroData();
+		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComDataNoFiltroData();
+
+		Then.iTeardownMyApp();
+	});
+
+	opaTest("Deveria filtrar os dados da tabela pelo periodo e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
+		Given.iStartMyApp();
+
+		When.onTheAppPage.euSelecionoOPeriodo();
+
+		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComRangeNoFiltroData();
 
 		Then.iTeardownMyApp();
 	});
