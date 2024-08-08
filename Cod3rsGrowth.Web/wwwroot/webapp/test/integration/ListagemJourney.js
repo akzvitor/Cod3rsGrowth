@@ -17,8 +17,6 @@ sap.ui.define([
 	});
 
 	opaTest("Deveria voltar para a página de Listagem.", (Given, When, Then) => {
-		Given.iStartMyApp();
-
 		When.naPaginaDeCriacaoCompra.euClicoNoBotaoNavBack();
 
 		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
