@@ -4,7 +4,7 @@ sap.ui.define([
 ], (opaTest) => {
 	"use strict";
 
-	QUnit.module("Posts");
+	QUnit.module("Listagem");
 
 	opaTest("Deveria filtrar os dados da tabela por nome do cliente e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
@@ -26,12 +26,10 @@ sap.ui.define([
 		Then.iTeardownMyApp();
 	});
 
-	opaTest("Deveria filtrar os dados da tabela por data inicial e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
+	opaTest("Deveria filtrar os dados da tabela pela data e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.onTheAppPage.euPreenchoOInputDataInicial();
-
-		When.onTheAppPage.euPreenchoOInputDataFinal();
+		When.onTheAppPage.euSelecionoAData();
 
 		Then.onTheAppPage.aTabelaDeveSerFiltradaDeAcordoComFiltroData();
 

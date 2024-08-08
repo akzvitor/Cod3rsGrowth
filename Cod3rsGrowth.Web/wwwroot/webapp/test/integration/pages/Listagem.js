@@ -9,13 +9,11 @@ sap.ui.define([
     const NOME_DO_MODELO = "restCompras";
     const ID_INPUT_NOME = "nomeFiltroInput";
     const ID_INPUT_CPF = "cpfFiltroInput";
-    const ID_INPUT_DATAINICIAL = "dataInicialFiltroInput";
-    const ID_INPUT_DATAFINAL = "dataFinalFiltroInput";
+    const ID_DATERANGE = "dateRangeFiltroInput";
     const ID_TABELA = "tabelaCompras";
-    const STRING_INSERIDO_INPUT_NOME = "Vitor";
+    const STRING_INSERIDO_INPUT_NOME = "Júlio";
     const STRING_INSERIDO_INPUT_CPF = "23985476047";
-    const STRING_INSERIDO_INPUT_DATAINICIAL = "01-01-2023";
-    const STRING_INSERIDO_INPUT_DATAFINAL = "01-01-2025";
+    const STRING_INSERIDO_INPUT_DATA_UNICA = "01/08/2024";
     const TAG_ITENS_TABELA = "items";
     const MENSAGEM_SUCESSO_BUSCAR_ITEM = "A tabela contém o item esperado.";
     const MENSAGEM_ERRO_CARREGAR_TABELA = "Ocorreu um erro ao carregar a tabela ou filtrar os dados.";
@@ -45,25 +43,14 @@ sap.ui.define([
                     })
                 },
 
-                euPreenchoOInputDataInicial() {
+                euSelecionoAData() {
                     return this.waitFor({
-                        id: ID_INPUT_DATAINICIAL,
+                        id: ID_DATERANGE,
                         viewName: NOME_DA_VIEW,
                         actions: new EnterText({
-                            text: STRING_INSERIDO_INPUT_DATAINICIAL
+                            text: STRING_INSERIDO_INPUT_DATA_UNICA
                         }),
-                        errorMessage: "Input de filtro Data Inicial não encontrado."
-                    })
-                },
-
-                euPreenchoOInputDataFinal() {
-                    return this.waitFor({
-                        id: ID_INPUT_DATAFINAL,
-                        viewName: NOME_DA_VIEW,
-                        actions: new EnterText({
-                            text: STRING_INSERIDO_INPUT_DATAFINAL
-                        }),
-                        errorMessage: "Input de filtro Data Final não encontrado."
+                        errorMessage: "Input de filtro Data Única não encontrado."
                     })
                 }
             },
@@ -135,9 +122,12 @@ sap.ui.define([
                             let resultado = true;
 
                             itensTabela.map((item) => {
-                                let dataBuscada = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
+                                let dataBuscada = new Date(item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada));
+                                let dataDaTabelaFormatada = new Date(STRING_INSERIDO_INPUT_DATA_UNICA);
 
-                                if (dataBuscada > new Date(STRING_INSERIDO_INPUT_DATAFINAL) || dataBuscada < new Date(STRING_INSERIDO_INPUT_DATAINICIAL))
+                                console.log(dataBuscada + " não é igual a " + dataDaTabelaFormatada);
+
+                                if (dataBuscada.toISOString() !== dataDaTabelaFormatada.toISOString())
                                     resultado = false;
                             })
 
