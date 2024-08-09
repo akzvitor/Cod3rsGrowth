@@ -48,10 +48,33 @@ sap.ui.define([
 		},
 
 		inicializarDados(urlDaApi, nomeDoModelo) {
+			let sucesso = true;
 			fetch(urlDaApi)
-				.then((res) => res.json())
-				.then((data) => this.getView().setModel(new JSONModel(data), nomeDoModelo))
+				.then((res) => {
+					if (!res.ok)
+						sucesso = false;
+					return res.json();
+				})
+				.then((data) => {
+					console.log(data);
+					sucesso ?  this.getView().setModel(new JSONModel(data), nomeDoModelo)
+					: this.capturarErroApi(data);
+				})
 				.catch((err) => console.error(err));
+		},
+
+		capturarErroApi(erroRfc) {
+			const mensagemErroPrincipal = erroRfc.Extensions.Erros.join(', ');
+			const mensagemErroCompleta = `<p><strong>Status:</strong> ${erroRfc.Status}</p>` +
+				`<p><strong>Detalhes:</strong><br /> ${erroRfc.Detail}</p>` +
+				"<p>Para mais ajuda acesse <a href='//www.sap.com' target='_top'>aqui</a>.";
+
+			MessageBox.error(mensagemErroPrincipal, {
+				title: "Erro",
+				details: mensagemErroCompleta,
+				styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+				dependentOn: this.getView()
+			});
 		},
 
 		formatarDataParaApi(data) {
