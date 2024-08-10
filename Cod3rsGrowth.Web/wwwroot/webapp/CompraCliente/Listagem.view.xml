@@ -15,8 +15,8 @@
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
                     <core:Icon src="sap-icon://add-filter"/>
-                    <Input id="nomeFiltroInput" placeholder="Nome" width="18%" change="aoAlterarInputFiltro" autocomplete="false"/>
-                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="10%" change="aoAlterarInputFiltro"/>
+                    <Input id="nomeFiltroInput" placeholder="{i18n>Listagem.placeholderNome}" width="18%" change="aoAlterarInputFiltro" autocomplete="false"/>
+                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="{i18n>Listagem.placeholderCpf}" width="10%" change="aoAlterarInputFiltro"/>
                     <DateRangeSelection
 			            id="dateRangeFiltroInput"
 			            class="DRS1"
@@ -38,7 +38,7 @@
 			            }"
 			            change="aoAlterarInputFiltro"
                         width="18%"
-                        placeholder="Data"
+                        placeholder="{i18n>Listagem.placeholderData}"
                         showFooter="true"
                         />
                 </content>
@@ -91,5 +91,5 @@
     </Table>
     <Bar />
     <Button 
-        id="botaoAdicionar" icon="sap-icon://create-form" text="Adicionar" press="aoClicarNoBotaoAdicionar" />
+        id="botaoAdicionar" icon="sap-icon://create-form" text="{i18n>Listagem.botaoAdicionar}" press="aoClicarNoBotaoAdicionar" />
 </mvc:View>
