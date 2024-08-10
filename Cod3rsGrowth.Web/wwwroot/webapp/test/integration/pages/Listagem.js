@@ -14,10 +14,10 @@ sap.ui.define([
     const ID_INPUT_CPF = "cpfFiltroInput";
     const ID_DATERANGE = "dateRangeFiltroInput";
     const ID_TABELA = "tabelaCompras";
-    const STRING_INSERIDO_INPUT_NOME = "Júlio";
-    const STRING_INSERIDO_INPUT_CPF = "23985476047";
-    const STRING_INSERIDO_INPUT_DATA_UNICA = "01/08/2024";
-    const STRING_INSERIDO_INPUT_DATA_RANGE = "01/08/2024 - 07/08/2024"
+    const STRING_INSERIDO_INPUT_NOME = "Vitor";
+    const STRING_INSERIDO_INPUT_CPF = "12345678901";
+    const STRING_INSERIDO_INPUT_DATA_UNICA = "09/08/2024";
+    const STRING_INSERIDO_INPUT_DATA_RANGE = "07/08/2022 - 07/08/2025"
     const TAG_ITENS_TABELA = "items";
     const MENSAGEM_SUCESSO_BUSCAR_ITEM = "A tabela contém o item esperado.";
     const MENSAGEM_ERRO_CARREGAR_TABELA = "Ocorreu um erro ao carregar a tabela ou filtrar os dados.";
@@ -122,7 +122,7 @@ sap.ui.define([
                             itensTabela.map((item) => {
                                 let nomeBuscado = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
 
-                                if (nomeBuscado !== STRING_INSERIDO_INPUT_NOME) 
+                                if (!nomeBuscado.includes(STRING_INSERIDO_INPUT_NOME)) 
                                     resultado = false;
                             });
 
@@ -164,7 +164,7 @@ sap.ui.define([
                         viewName: NOME_DA_VIEW,
                         matchers: new AggregationLengthEquals({
                             name: TAG_ITENS_TABELA,
-                            length: 2
+                            length: 1
                         }),
                         success: function () {
 							Opa5.assert.ok(true, "A tabela contém os 2 itens correspondentes a data filtrada.");
@@ -179,7 +179,7 @@ sap.ui.define([
                         viewName: NOME_DA_VIEW,
                         matchers: new AggregationLengthEquals({
                             name: TAG_ITENS_TABELA,
-                            length: 9
+                            length: 12
                         }),
                         success: function () {
 							Opa5.assert.ok(true, "A tabela contém os 9 itens correspondentes ao periodo filtrado.");

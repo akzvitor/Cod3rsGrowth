@@ -1,5 +1,5 @@
 sap.ui.define([
-    "ui5/coders/controller/BaseController",
+    "ui5/coders/BaseController",
     "../model/formatter"
 
 ], (BaseController, formatter) => {
@@ -12,7 +12,7 @@ sap.ui.define([
     const ID_CPF_FILTRO_INPUT = "cpfFiltroInput";
     const ID_DATERANGE_FILTRO_INPUT = "dateRangeFiltroInput";
 
-    return BaseController.extend("ui5.coders.controller.Listagem", {
+    return BaseController.extend("ui5.coders.Listagem", {
         formatter: formatter,
 
         onInit() {

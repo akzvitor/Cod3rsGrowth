@@ -40,7 +40,7 @@
             }
         },
         "rootView": {
-            "viewName": "ui5.coders.view.App",
+            "viewName": "ui5.coders.App",
             "type": "XML",
             "id": "app"
         },
@@ -49,7 +49,7 @@
                 "routerClass": "sap.m.routing.Router",
                 "type": "View",
                 "viewType": "XML",
-                "path": "ui5.coders.view",
+                "path": "ui5.coders",
                 "controlId": "app",
                 "controlAggregation": "pages",
                 "transition": "slide",
@@ -82,7 +82,7 @@
                 },
                 "criacaoCompra": {
                     "id": "criacaoCompra",
-                    "name": "CriacaoCompra"
+                    "name": "CompraCliente.CriacaoCompra"
                 }
             }
         }

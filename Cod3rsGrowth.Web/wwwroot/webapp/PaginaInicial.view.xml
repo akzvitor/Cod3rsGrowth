@@ -1,10 +1,10 @@
-<mvc:View controllerName="ui5.coders.controller.App"
+<mvc:View controllerName="ui5.coders.App"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc">
     <Page title="{i18n>PaginaInicial.titulo}" class="sapUiContentPadding" titleAlignment="Center" backgroundDesign="List">
         <content>
             <VBox class="sapUiSmallMargin" backgroundDesign="Solid">
-                <mvc:XMLView viewName="ui5.coders.view.Listagem" />
+                <mvc:XMLView viewName="ui5.coders.CompraCliente.Listagem" />
             </VBox>
         </content>
     </Page>

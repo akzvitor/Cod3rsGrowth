@@ -3,13 +3,13 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/UIComponent",
-	"../model/formatter",
+	"ui5/coders/model/formatter",
 	"sap/m/MessageBox",
 
 ], function (Controller, History, JSONModel, UIComponent, formatter, MessageBox) {
 	"use strict";
 
-	return Controller.extend("ui5.coders.controller.BaseController", {
+	return Controller.extend("ui5.coders.BaseController", {
 		formatter: formatter,
 
 		getRouter() {
