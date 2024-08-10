@@ -4,8 +4,9 @@ using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 var servicos = builder.Services;
-var stringDeConexao = builder.Configuration.GetConnectionString("StringConexao") ??
-    throw new Exception("N�o foi poss�vel obter a string de conex�o.");
+var comando = args.FirstOrDefault();
+var stringDeConexao = comando is "--teste" ? builder.Configuration.GetConnectionString("StringConexao") 
+                        : builder.Configuration.GetConnectionString("StringConexaoTeste")
 
 ModuloDeInjecaoWeb.BindService(servicos, stringDeConexao);
 
