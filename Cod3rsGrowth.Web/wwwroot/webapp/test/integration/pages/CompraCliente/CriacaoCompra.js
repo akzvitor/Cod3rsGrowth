@@ -6,7 +6,7 @@ sap.ui.define([
 ], (Opa5, Properties, Press) => {
     "use strict";
 
-    const NOME_DA_VIEW = ".CriacaoCompra";
+    const NOME_DA_VIEW = "CompraCliente.CriacaoCompra";
 
     Opa5.createPageObjects({
         naPaginaDeCriacaoCompra: {

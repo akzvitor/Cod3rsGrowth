@@ -8,7 +8,7 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "ui5.coders.CompraCliente",
+		viewNamespace: "ui5.coders.app",
 		autoWait: true
 	});
 });

@@ -7,7 +7,7 @@ sap.ui.define([
 ], (Opa5, EnterText, AggregationLengthEquals, AggregationFilled, Press) => {
     "use strict";
 
-    const NOME_DA_VIEW = ".Listagem";
+    const NOME_DA_VIEW = "CompraCliente.Listagem";
     const NOME_DO_MODELO = "restCompras";
     const ID_BOTAO_ADICIONAR = "botaoAdicionar";
     const ID_INPUT_NOME = "nomeFiltroInput";
@@ -15,8 +15,8 @@ sap.ui.define([
     const ID_DATERANGE = "dateRangeFiltroInput";
     const ID_TABELA = "tabelaCompras";
     const STRING_INSERIDO_INPUT_NOME = "Vitor";
-    const STRING_INSERIDO_INPUT_CPF = "12345678901";
-    const STRING_INSERIDO_INPUT_DATA_UNICA = "09/08/2024";
+    const STRING_INSERIDO_INPUT_CPF = "29494660013";
+    const STRING_INSERIDO_INPUT_DATA_UNICA = "12/08/2024";
     const STRING_INSERIDO_INPUT_DATA_RANGE = "07/08/2022 - 07/08/2025"
     const TAG_ITENS_TABELA = "items";
     const MENSAGEM_SUCESSO_BUSCAR_ITEM = "A tabela contém o item esperado.";
@@ -164,7 +164,7 @@ sap.ui.define([
                         viewName: NOME_DA_VIEW,
                         matchers: new AggregationLengthEquals({
                             name: TAG_ITENS_TABELA,
-                            length: 1
+                            length: 4
                         }),
                         success: function () {
 							Opa5.assert.ok(true, "A tabela contém os 2 itens correspondentes a data filtrada.");
@@ -179,7 +179,7 @@ sap.ui.define([
                         viewName: NOME_DA_VIEW,
                         matchers: new AggregationLengthEquals({
                             name: TAG_ITENS_TABELA,
-                            length: 12
+                            length: 4
                         }),
                         success: function () {
 							Opa5.assert.ok(true, "A tabela contém os 9 itens correspondentes ao periodo filtrado.");
