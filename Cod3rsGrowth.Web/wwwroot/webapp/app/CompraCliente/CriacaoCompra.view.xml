@@ -1,4 +1,4 @@
-<mvc:View controllerName="ui5.coders.CompraCliente.CriacaoCompra"
+<mvc:View controllerName="ui5.coders.app.CompraCliente.CriacaoCompra"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
 	xmlns:l="sap.ui.layout"

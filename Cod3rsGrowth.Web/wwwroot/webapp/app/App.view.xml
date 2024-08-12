@@ -1,4 +1,4 @@
-<mvc:View controllerName="ui5.coders.App"
+<mvc:View controllerName="ui5.coders.app.App"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc">
     <Shell>

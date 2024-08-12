@@ -1,5 +1,5 @@
 sap.ui.define([
-    "ui5/coders/BaseController",
+    "ui5/coders/app/common/BaseController",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "ui5/coders/model/formatter",
@@ -23,7 +23,7 @@ sap.ui.define([
     const ID_CATALOGO_OBRAS = "catalogoObras";
     const ID_MESSAGESTRIP_SUCESSO = "messageStripSucesso";
 
-    return BaseController.extend("ui5.coders.CriacaoCompra", {
+    return BaseController.extend("ui5.coders.app.CompraCliente.CriacaoCompra", {
         formatter: formatter,
         validator: validator,
 

@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Controller, History, JSONModel, UIComponent, formatter, MessageBox) {
 	"use strict";
 
-	return Controller.extend("ui5.coders.BaseController", {
+	return Controller.extend("ui5.coders.app.common.BaseController", {
 		formatter: formatter,
 
 		getRouter() {

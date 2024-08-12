@@ -40,7 +40,7 @@
             }
         },
         "rootView": {
-            "viewName": "ui5.coders.App",
+            "viewName": "ui5.coders.app.App",
             "type": "XML",
             "id": "app"
         },
@@ -73,16 +73,16 @@
             "targets": {
                 "paginaInicial": {
                     "id": "paginaInicial",
-                    "name": "PaginaInicial"
+                    "name": "app.PaginaInicial.PaginaInicial"
                 },
                 "notFound": {
                     "id": "notFound",
-                    "name": "NotFound",
+                    "name": "app.NotFound.NotFound",
                     "transition": "show"
                 },
                 "criacaoCompra": {
                     "id": "criacaoCompra",
-                    "name": "CompraCliente.CriacaoCompra"
+                    "name": "app.CompraCliente.CriacaoCompra"
                 }
             }
         }
