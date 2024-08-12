@@ -20,7 +20,6 @@ sap.ui.define([
 		When.naPaginaDeCriacaoCompra.euClicoNoBotaoNavBack();
 
 		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
-
 		Then.iTeardownMyApp();
 	});
 
@@ -31,7 +30,6 @@ sap.ui.define([
 		When.naPaginaDeListagem.euPreenchoOInputNome();
 
 		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComFiltroNome();
-
 		Then.iTeardownMyApp();
 	});
 
@@ -41,7 +39,6 @@ sap.ui.define([
 		When.naPaginaDeListagem.euPreenchoOInputCPF();
 
 		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComFiltroCPF();
-
 		Then.iTeardownMyApp();
 	});
 
@@ -51,7 +48,6 @@ sap.ui.define([
 		When.naPaginaDeListagem.euSelecionoAData();
 
 		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComDataNoFiltroData();
-
 		Then.iTeardownMyApp();
 	});
 
@@ -61,7 +57,6 @@ sap.ui.define([
 		When.naPaginaDeListagem.euSelecionoOPeriodo();
 
 		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComRangeNoFiltroData();
-
 		Then.iTeardownMyApp();
 	});
 });

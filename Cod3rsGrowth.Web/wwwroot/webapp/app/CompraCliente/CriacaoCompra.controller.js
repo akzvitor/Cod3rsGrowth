@@ -22,6 +22,7 @@ sap.ui.define([
     const ID_ERRO_VALIDACAO_PRODUTOS = "mensagemErroProdutos";
     const ID_CATALOGO_OBRAS = "catalogoObras";
     const ID_MESSAGESTRIP_SUCESSO = "messageStripSucesso";
+    const ID_MESSAGESTRIP_ERRO = "messageStripErro";
 
     return BaseController.extend("ui5.coders.app.CompraCliente.CriacaoCompra", {
         formatter: formatter,
@@ -65,6 +66,9 @@ sap.ui.define([
                 }
 
                 const dadosSaoValidos = validator.validarDados(inputNome, inputEmail, inputTelefone, inputCpf);
+
+                if(!dadosSaoValidos)
+                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
 
                 if (oObrasSelecionadas.listaIdsSelecionados.length === erroListaDeProdutosVazia)
                     this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(true);
@@ -136,6 +140,8 @@ sap.ui.define([
                 this.getView().byId(ID_CATALOGO_OBRAS).removeSelections(true);
                 this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
                 this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
+                this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(false);
+
             });
         },
 

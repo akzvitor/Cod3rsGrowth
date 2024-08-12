@@ -5,13 +5,31 @@
     xmlns:f="sap.f"
 	xmlns:lf="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
+    <MessageStrip
+                id="messageStripSucesso"
+				text="{i18n>CriacaoCompra.messageStripSucesso}"
+				type="Success"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiLargeMarginTop"
+                visible="false">
+	</MessageStrip>
+    <MessageStrip
+                id="messageStripErro"
+				text="{i18n>CriacaoCompra.messageStripErro}"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiLargeMarginTop"
+                visible="false">
+	</MessageStrip>
 	<Page id="paginaCriacaoCompra" showHeader="true" title="{i18n>CriacaoCompra.titulo}" titleAlignment="Center" backgroundDesign="List" class="sapUiContentPadding" >
         <content>
             <OverflowToolbar id="TB1">
                 <Button icon="sap-icon://navigation-left-arrow" press="onNavBack" id="botaoNavBack"/>
                 <Title id="Title1" text="{i18n>CriacaoCompra.tituloFormulario}"/>
                 <ToolbarSpacer />
-                <Button text="{i18n>CriacaoCompra.botaoSalvar}" icon="sap-icon://save" press="aoClicarNoBotaoSalvar"/>
+                <Button text="{i18n>CriacaoCompra.botaoSalvar}" icon="sap-icon://save" press="aoClicarNoBotaoSalvar" id="botaoSalvar"/>
             </OverflowToolbar>
             <HBox class="sapUiSmallMargin">
                 <VBox class="sapUiLargeMarginEnd">
@@ -49,7 +67,8 @@
                     selectionChange=".onSelectionChange"
                     mode="MultiSelect"
                     growing="true"
-                    growingThreshold="50"
+		            growingThreshold="6"
+		            growingScrollToLoad="false"
                     includeItemInSelection="true"
                     showSeparators="Inner">
                     <infoToolbar>
@@ -66,14 +85,5 @@
                 </List>
             </VBox>
         </content>
-        <MessageStrip
-                id="messageStripSucesso"
-				text="{i18n>CriacaoCompra.messageStripSucesso}"
-				type="Success"
-				showIcon="true"
-				showCloseButton="true"
-				class="sapUiLargeMarginTop"
-                visible="false">
-		</MessageStrip>
     </Page>
 </mvc:View>
