@@ -38,7 +38,7 @@
                     <ObjectStatus  id="mensagemErroProdutos" visible="false" text="{i18n>CriacaoCompra.mensagemErroProdutos}" state="Error"/>
                 </content>
                 <ToolbarSpacer />
-                <SearchField width="18%" search="aoProcurarObra" placeholder="{i18n>CriacaoCompra.searchFieldPlaceholder}"/>
+                <SearchField width="18%" search="aoProcurarObra" placeholder="{i18n>CriacaoCompra.searchFieldPlaceholder}" id="searchFieldCatalogo"/>
             </OverflowToolbar>
             <VBox class="sapUiSmallMargin" backgroundDesign="Solid" >
                 <List
