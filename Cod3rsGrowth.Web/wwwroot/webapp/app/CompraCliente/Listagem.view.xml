@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Table id="tabelaCompras" growing="true" growingThreshold="15" inset="false" width="auto" alternateRowColors="true" mode="SingleSelectLeft" 
+    <Table id="tabelaCompras" growing="true" growingThreshold="15" inset="false" width="auto" alternateRowColors="true"
         items="{
             path: 'restCompras>/',
             sorter: {
@@ -64,8 +64,8 @@
                 <Text text="{i18n>Listagem.colunaData}" />
             </Column>
         </columns>
-        <items>
-            <ColumnListItem>
+        <items >
+            <ColumnListItem type="Navigation" press="aoSelecionarCompra">
                 <cells>
                     <Text text="{restCompras>nome}" />
                     <Text text="{

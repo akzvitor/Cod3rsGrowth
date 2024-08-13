@@ -70,7 +70,7 @@
                     "target": "criacaoCompra"
                 },
                 {
-                    "pattern": "detalhes",
+                    "pattern": "detalhes/{idCompra}",
                     "name": "detalhes",
                     "target": "detalhes"
                 }

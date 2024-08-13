@@ -2,5 +2,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Page title="Detalhes"></Page>
+    <Page title="Detalhes" titleAlignment="Center" binding="{restCompras>/}" navButtonPress="onNavBack" showNavButton="true" backgroundDesign="List" class="sapUiContentPadding">
+        <ObjectHeader intro="{restCompras>nome}" title="{restCompras>email}"/>
+    </Page>
 </mvc:View>

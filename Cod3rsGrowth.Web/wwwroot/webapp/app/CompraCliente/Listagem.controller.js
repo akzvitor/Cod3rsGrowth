@@ -57,6 +57,14 @@ sap.ui.define([
                 const oRouter = this.getOwnerComponent().getRouter();
                 oRouter.navTo("criacaoCompra");
             });
+        },
+
+        aoSelecionarCompra(oEvent) {
+            const oItem = oEvent.getSource();
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("detalhes", {
+                idCompra: window.encodeURIComponent(oItem.getBindingContext(MODELO_COMPRAS).getProperty("id"))
+            })
         }
     });
 });
