@@ -16,7 +16,7 @@ sap.ui.define([
             actions: {
                 euClicoNoBotaoNavBack() {
                     return this.waitFor({
-                        id:"botaoNavBack",
+                        id:"paginaCriacaoCompra",
                         viewName: NOME_DA_VIEW,
                         actions: new Press(),
                         errorMessage: "Botão de navback não encontrado"
