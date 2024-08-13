@@ -2,4 +2,5 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
+    <Page title="Detalhes"></Page>
 </mvc:View>
