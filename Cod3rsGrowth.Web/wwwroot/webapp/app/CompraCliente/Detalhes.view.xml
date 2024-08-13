@@ -1,0 +1,5 @@
+<mvc:View controllerName="ui5.coders.app.CompraCliente.Detalhes"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+</mvc:View>
