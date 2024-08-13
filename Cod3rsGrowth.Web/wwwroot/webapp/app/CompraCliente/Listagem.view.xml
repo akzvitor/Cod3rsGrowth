@@ -1,8 +1,9 @@
-<mvc:View controllerName="ui5.coders.controller.Listagem"
+<mvc:View controllerName="ui5.coders.app.CompraCliente.Listagem"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Table id="tabelaCompras" growing="true" inset="false" width="auto" alternateRowColors="true" mode="SingleSelectLeft" items="{
+    <Table id="tabelaCompras" growing="true" growingThreshold="15" inset="false" width="auto" alternateRowColors="true" mode="SingleSelectLeft" 
+        items="{
             path: 'restCompras>/',
             sorter: {
                 path: 'nome'
@@ -13,11 +14,33 @@
                 <content>
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
-                    <Button icon="sap-icon://add-filter" text="Filtros:" />
-                    <Input id="nomeFiltroInput" placeholder="Nome" width="auto" liveChange="aoAlterarInputFiltro"/>
-                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="CPF" width="auto" change="aoAlterarInputFiltro"/>
-                    <MaskInput mask="99/99/9999" id="dataInicialFiltroInput" placeholder="Data Inicial" width="auto" change="aoAlterarInputFiltro"/>
-                    <MaskInput mask="99/99/9999" id="dataFinalFiltroInput" placeholder="Data Final" width="auto" change="aoAlterarInputFiltro"/>
+                    <core:Icon src="sap-icon://add-filter"/>
+                    <Input id="nomeFiltroInput" placeholder="{i18n>Listagem.placeholderNome}" width="18%" change="aoAlterarInputFiltro" autocomplete="false"/>
+                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="{i18n>Listagem.placeholderCpf}" width="10%" change="aoAlterarInputFiltro"/>
+                    <DateRangeSelection
+			            id="dateRangeFiltroInput"
+			            class="DRS1"
+			            value= "{
+				            'type': 'sap.ui.model.type.DateInterval',
+				            'formatOptions': {
+					        'pattern': 'dd/MM/yyyy'
+				            },
+				            'parts': [
+					            {
+						            'type': 'sap.ui.model.type.Date',
+						            'path': '/start'
+					            },
+					            {
+						            'type': 'sap.ui.model.type.Date',
+						            'path': '/end'
+					            }
+				            ]
+			            }"
+			            change="aoAlterarInputFiltro"
+                        width="18%"
+                        placeholder="{i18n>Listagem.placeholderData}"
+                        showFooter="true"
+                        />
                 </content>
             </OverflowToolbar>
         </headerToolbar>
@@ -68,5 +91,5 @@
     </Table>
     <Bar />
     <Button 
-        icon="sap-icon://create-form" text="Adicionar"/>
+        id="botaoAdicionar" icon="sap-icon://create-form" text="{i18n>Listagem.botaoAdicionar}" press="aoClicarNoBotaoAdicionar" />
 </mvc:View>

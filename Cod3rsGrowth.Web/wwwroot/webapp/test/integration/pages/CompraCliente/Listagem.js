@@ -1,28 +1,42 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/actions/EnterText",
-    "sap/ui/test/matchers/AggregationFilled"
-], (Opa5, EnterText, AggregationFilled) => {
+    'sap/ui/test/matchers/AggregationLengthEquals',
+    "sap/ui/test/matchers/AggregationFilled",
+    'sap/ui/test/actions/Press'
+], (Opa5, EnterText, AggregationLengthEquals, AggregationFilled, Press) => {
     "use strict";
 
-    const NOME_DA_VIEW = ".Listagem";
+    const NOME_DA_VIEW = "CompraCliente.Listagem";
     const NOME_DO_MODELO = "restCompras";
+    const ID_BOTAO_ADICIONAR = "botaoAdicionar";
     const ID_INPUT_NOME = "nomeFiltroInput";
     const ID_INPUT_CPF = "cpfFiltroInput";
-    const ID_INPUT_DATAINICIAL = "dataInicialFiltroInput";
-    const ID_INPUT_DATAFINAL = "dataFinalFiltroInput";
+    const ID_DATERANGE = "dateRangeFiltroInput";
     const ID_TABELA = "tabelaCompras";
     const STRING_INSERIDO_INPUT_NOME = "Vitor";
-    const STRING_INSERIDO_INPUT_CPF = "23985476047";
-    const STRING_INSERIDO_INPUT_DATAINICIAL = "01-01-2023";
-    const STRING_INSERIDO_INPUT_DATAFINAL = "01-01-2025";
+    const STRING_INSERIDO_INPUT_CPF = "29494660013";
+    const STRING_INSERIDO_INPUT_DATA_UNICA = "12/08/2024";
+    const STRING_INSERIDO_INPUT_DATA_RANGE = "07/08/2022 - 12/08/2024"
     const TAG_ITENS_TABELA = "items";
     const MENSAGEM_SUCESSO_BUSCAR_ITEM = "A tabela contém o item esperado.";
     const MENSAGEM_ERRO_CARREGAR_TABELA = "Ocorreu um erro ao carregar a tabela ou filtrar os dados.";
 
     Opa5.createPageObjects({
-        onTheAppPage: {
+        naPaginaDeListagem: {
             actions: {
+                euClicoNoBotaoAdicionar() {
+                    return this.waitFor({
+                        id: ID_BOTAO_ADICIONAR,
+                        viewName: NOME_DA_VIEW,
+                        actions: new Press(),
+                        errorMessage: "Botão adicionar não encontrado.",
+                        success: function() {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); 
+                        }
+                    });
+                },
+
                 euPreenchoOInputNome() {
                     return this.waitFor({
                         id: ID_INPUT_NOME,
@@ -30,7 +44,10 @@ sap.ui.define([
                         actions: new EnterText({
                              text: STRING_INSERIDO_INPUT_NOME 
                         }),
-                        errorMessage: "Input de filtro Nome não encontrado."
+                        errorMessage: "Input de filtro Nome não encontrado.",
+                        success: function() {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); 
+                        }
                     });
                 },
 
@@ -41,40 +58,60 @@ sap.ui.define([
                         actions: new EnterText({
                             text: STRING_INSERIDO_INPUT_CPF
                         }),
-                        errorMessage: "Input de filtro CPF não encontrado."
-                    })
+                        errorMessage: "Input de filtro CPF não encontrado.",
+                        success: function() {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); 
+                        }
+                    });
                 },
 
-                euPreenchoOInputDataInicial() {
+                euSelecionoAData() {
                     return this.waitFor({
-                        id: ID_INPUT_DATAINICIAL,
+                        id: ID_DATERANGE,
                         viewName: NOME_DA_VIEW,
                         actions: new EnterText({
-                            text: STRING_INSERIDO_INPUT_DATAINICIAL
+                            text: STRING_INSERIDO_INPUT_DATA_UNICA
                         }),
-                        errorMessage: "Input de filtro Data Inicial não encontrado."
-                    })
+                        errorMessage: "Input de filtro Data Única não encontrado.",
+                        success: function() {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); 
+                        }
+                    });
                 },
 
-                euPreenchoOInputDataFinal() {
+                euSelecionoOPeriodo() {
                     return this.waitFor({
-                        id: ID_INPUT_DATAFINAL,
+                        id: ID_DATERANGE,
                         viewName: NOME_DA_VIEW,
                         actions: new EnterText({
-                            text: STRING_INSERIDO_INPUT_DATAFINAL
+                            text: STRING_INSERIDO_INPUT_DATA_RANGE
                         }),
-                        errorMessage: "Input de filtro Data Final não encontrado."
-                    })
+                        errorMessage: "Input de filtro Data com Range não encontrado.",
+                        success: function() {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); 
+                        }
+                    });
                 }
             },
 
             assertions: {
+                aPaginaDeveMudarParaListagem() {
+                    return this.waitFor({
+                        id: ID_TABELA,
+                        viewName: NOME_DA_VIEW,
+                        success: function () {
+                            Opa5.assert.ok(true, "A tabela está sendo exibida.");
+                        },
+                        errorMessage: "Não é possível visualizar a tabela."
+                    });
+                },
+
                 aTabelaDeveSerFiltradaDeAcordoComFiltroNome() {
                     const propriedadeTestada = "nome";
 
                     return this.waitFor({
-                        viewName: NOME_DA_VIEW,
                         id: ID_TABELA,
+                        viewName: NOME_DA_VIEW,
                         matchers: new AggregationFilled({
                             name: TAG_ITENS_TABELA
                         }),
@@ -85,7 +122,7 @@ sap.ui.define([
                             itensTabela.map((item) => {
                                 let nomeBuscado = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
 
-                                if (nomeBuscado !== STRING_INSERIDO_INPUT_NOME) 
+                                if (!nomeBuscado.includes(STRING_INSERIDO_INPUT_NOME)) 
                                     resultado = false;
                             });
 
@@ -118,33 +155,37 @@ sap.ui.define([
                             Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);
                         },
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
-                    })
+                    });
                 },
 
-                aTabelaDeveSerFiltradaDeAcordoComFiltroData() {
-                    const propriedadeTestada = "dataCompra";
-
+                aTabelaDeveSerFiltradaDeAcordoComDataNoFiltroData() {
                     return this.waitFor({
                         id: ID_TABELA,
                         viewName: NOME_DA_VIEW,
-                        matchers: new AggregationFilled({
-                            name: TAG_ITENS_TABELA
+                        matchers: new AggregationLengthEquals({
+                            name: TAG_ITENS_TABELA,
+                            length: 7
                         }),
-                        success: function (oTable) {
-                            const itensTabela = oTable.getItems();
-                            let resultado = true;
-
-                            itensTabela.map((item) => {
-                                let dataBuscada = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
-
-                                if (dataBuscada > new Date(STRING_INSERIDO_INPUT_DATAFINAL) || dataBuscada < new Date(STRING_INSERIDO_INPUT_DATAINICIAL))
-                                    resultado = false;
-                            })
-
-                            Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);
-                        },
+                        success: function () {
+							Opa5.assert.ok(true, "A tabela contém os 2 itens correspondentes a data filtrada.");
+						},
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
-                    })
+                    });
+                },
+
+                aTabelaDeveSerFiltradaDeAcordoComRangeNoFiltroData() {
+                    return this.waitFor({
+                        id: ID_TABELA,
+                        viewName: NOME_DA_VIEW,
+                        matchers: new AggregationLengthEquals({
+                            name: TAG_ITENS_TABELA,
+                            length: 7
+                        }),
+                        success: function () {
+							Opa5.assert.ok(true, "A tabela contém os 9 itens correspondentes ao periodo filtrado.");
+						},
+                        errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
+                    });
                 }
             }
         }

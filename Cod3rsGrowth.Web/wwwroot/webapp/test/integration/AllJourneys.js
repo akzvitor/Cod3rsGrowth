@@ -1,13 +1,14 @@
 sap.ui.define([
 	"sap/ui/test/Opa5",
 	"./arrangements/Startup",
-	"./ListagemJourney"
+	"./pages/CompraCliente/ListagemJourney",
+	"./pages/CompraCliente/CriacaoCompraJourney"
 ], function (Opa5, Startup) {
 	"use strict";
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "ui5.coders.view",
+		viewNamespace: "ui5.coders.app",
 		autoWait: true
 	});
 });

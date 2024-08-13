@@ -22,6 +22,7 @@
         "dependencies": {
             "minUI5Version": "1.108.0",
             "libs": {
+                "sap.f": {},
                 "sap.ui.core": {},
                 "sap.m": {}
             }
@@ -39,7 +40,7 @@
             }
         },
         "rootView": {
-            "viewName": "ui5.coders.view.App",
+            "viewName": "ui5.coders.app.App",
             "type": "XML",
             "id": "app"
         },
@@ -48,7 +49,7 @@
                 "routerClass": "sap.m.routing.Router",
                 "type": "View",
                 "viewType": "XML",
-                "path": "ui5.coders.view",
+                "path": "ui5.coders",
                 "controlId": "app",
                 "controlAggregation": "pages",
                 "transition": "slide",
@@ -60,19 +61,28 @@
             "routes": [
                 {
                     "pattern": "",
-                    "name": "paginainicial",
-                    "target": "paginainicial"
+                    "name": "paginaInicial",
+                    "target": "paginaInicial"
+                },
+                {
+                    "pattern": "criacaoCompra",
+                    "name": "criacaoCompra",
+                    "target": "criacaoCompra"
                 }
             ],
             "targets": {
-                "paginainicial": {
-                    "id": "paginainicial",
-                    "name": "PaginaInicial"
+                "paginaInicial": {
+                    "id": "paginaInicial",
+                    "name": "app.PaginaInicial.PaginaInicial"
                 },
                 "notFound": {
                     "id": "notFound",
-                    "name": "NotFound",
+                    "name": "app.NotFound.NotFound",
                     "transition": "show"
+                },
+                "criacaoCompra": {
+                    "id": "criacaoCompra",
+                    "name": "app.CompraCliente.CriacaoCompra"
                 }
             }
         }
