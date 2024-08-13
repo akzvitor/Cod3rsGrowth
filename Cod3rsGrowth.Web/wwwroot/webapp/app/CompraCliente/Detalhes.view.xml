@@ -8,7 +8,6 @@
 	xmlns:lf="sap.ui.layout.form">
     <Page title="Detalhes" titleAlignment="Center" binding="{restCompras>/}" navButtonPress="onNavBack" showNavButton="true" backgroundDesign="List" class="sapUiContentPadding">
         <ObjectHeader intro="{restCompras>nome}" title="{restCompras>email}" icon="sap-icon://add-filter" number="R${restCompras>valorCompra}"/>
-
         <Title id="carouselTitle"
         class="sapUiMediumMarginTop"
         text="10 Matching Results"></Title>
@@ -16,7 +15,7 @@
         id="carouselSample"
         height="auto"
         pages="{
-            path: 'restCompras>/'
+            path: 'restObras>/'
         }">
         <customLayout>
             <CarouselLayout visiblePagesCount="4"/>
@@ -25,14 +24,12 @@
             vertical="false"
             horizontal="false"
             class="sapUiContentPadding">
-
             <f:Card>
                 <f:header>
                     <cards:Header
-                        title="{restCompras>nome}"
-                        subtitle="{restCompras>email}"
-                        iconSrc="{restCompras>email}"
-                        iconDisplayShape="Square" />
+                        title="AAAAA"
+                        subtitle="{restObras>titulo}"
+                        iconDisplayShape="Square" />                        
                 </f:header>
                 <f:content>
                     <l:VerticalLayout class="sapUiContentPadding" width="100%">
@@ -43,19 +40,19 @@
                                         <Label text="Supplier:" />
                                     </HBox>
                                     <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{nome}" />
+                                        <Text text="{restObras>titulo}" />
                                     </HBox>
                                     <HBox class="sapUiTinyMarginBottom">
                                         <Label text="Main Category:" />
                                     </HBox>
                                     <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{restCompras>nome}" />
+                                        <Text text="{restObras>titulo}" />
                                     </HBox>
                                     <HBox class="sapUiTinyMarginBottom">
                                         <Label text="Category:" />
                                     </HBox>
                                     <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{restCompras>nome}" />
+                                        <Text text="{restObras>Autor}" />
                                     </HBox>
                                 </l:BlockLayoutCell>
 
