@@ -2,86 +2,103 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
-	xmlns:f="sap.f"
-	xmlns:cards="sap.f.cards"
-	xmlns:l="sap.ui.layout"
-	xmlns:lf="sap.ui.layout.form">
-    <Page title="Detalhes" titleAlignment="Center" binding="{restCompras>/}" navButtonPress="onNavBack" showNavButton="true" backgroundDesign="List" class="sapUiContentPadding">
-        <ObjectHeader intro="{restCompras>nome}" title="{restCompras>email}" icon="sap-icon://add-filter" number="R${restCompras>valorCompra}"/>
-        <Title id="carouselTitle"
-        class="sapUiMediumMarginTop"
-        text="10 Matching Results"></Title>
-        <Carousel
-        id="carouselSample"
-        height="auto"
-        pages="{
-            path: 'restObras>/'
+    xmlns:f="sap.f"
+    xmlns:cards="sap.f.cards"
+    xmlns:l="sap.ui.layout"
+    xmlns:lf="sap.ui.layout.form">
+    <Page title="Detalhes" titleAlignment="Center" binding="{restCompras>/}"
+        navButtonPress="onNavBack" showNavButton="true" backgroundDesign="List"
+        class="sapUiContentPadding">
+        <HBox class="sapUiSmallMargin">
+            <VBox class="sapUiLargeMarginEnd">
+                <ObjectListItem intro="Nome" title="{restCompras>nome}" />
+                <ObjectListItem intro="E-mail" title="{restCompras>email}" />
+            </VBox>
+            <VBox class="sapUiLargeMarginBeginEnd">
+                <ObjectListItem intro="CPF"
+                    title="{
+                                path: 'restCompras>cpf',
+                                formatter: '.formatter.formatarCpf'
+                            }" />
+                <ObjectListItem intro="Telefone"
+                    title="{
+                                path: 'restCompras>telefone',
+                                formatter: '.formatter.formatarTelefone'
+                            }" />
+            </VBox>
+            <VBox class="sapUiLargeMarginBegin">
+                <ObjectListItem intro="Data da compra"
+                    title="{
+                                path: 'restCompras>dataCompra',
+                                formatter: '.formatter.formatarData'
+                            }" />
+                <ObjectListItem intro="Valor Total"
+                    title="{
+                                path: 'restCompras>valorCompra',
+                                formatter: '.formatter.formatarValor'
+                            }" />
+            </VBox>
+        </HBox>
+        <HBox class="sapUiLargeMarginTop">
+            <Table class="sapUiSmallMargin" id="tabelaObras" growing="true" growingThreshold="7"
+                inset="false" width="auto"
+                items="{
+            path: 'restObras>/',
+            sorter: {
+                path: 'titulo'
+            }
         }">
-        <customLayout>
-            <CarouselLayout visiblePagesCount="4"/>
-        </customLayout>
-        <ScrollContainer
-            vertical="false"
-            horizontal="false"
-            class="sapUiContentPadding">
-            <f:Card>
-                <f:header>
-                    <cards:Header
-                        title="AAAAA"
-                        subtitle="{restObras>titulo}"
-                        iconDisplayShape="Square" />                        
-                </f:header>
-                <f:content>
-                    <l:VerticalLayout class="sapUiContentPadding" width="100%">
-                        <l:BlockLayout>
-                            <l:BlockLayoutRow>
-                                <l:BlockLayoutCell title="Main Information" width="1">
-                                    <HBox class="sapUiTinyMarginBottom">
-                                        <Label text="Supplier:" />
-                                    </HBox>
-                                    <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{restObras>titulo}" />
-                                    </HBox>
-                                    <HBox class="sapUiTinyMarginBottom">
-                                        <Label text="Main Category:" />
-                                    </HBox>
-                                    <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{restObras>titulo}" />
-                                    </HBox>
-                                    <HBox class="sapUiTinyMarginBottom">
-                                        <Label text="Category:" />
-                                    </HBox>
-                                    <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{restObras>Autor}" />
-                                    </HBox>
-                                </l:BlockLayoutCell>
-
-                                <l:BlockLayoutCell title="Specifications" width="1">
-                                    <HBox class="sapUiTinyMarginBottom">
-                                        <Label text="Width (cm)" />
-                                    </HBox>
-                                    <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{restCompras>nome}" />
-                                    </HBox>
-                                    <HBox class="sapUiTinyMarginBottom">
-                                        <Label text="Height (cm)" />
-                                    </HBox>
-                                    <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{restCompras>nome}" />
-                                    </HBox>
-                                    <HBox class="sapUiTinyMarginBottom">
-                                        <Label text="Weight (kg)" />
-                                    </HBox>
-                                    <HBox class="sapUiSmallMarginBottom">
-                                        <Text text="{restCompras>nome}" />
-                                    </HBox>
-                                </l:BlockLayoutCell>
-                            </l:BlockLayoutRow>
-                        </l:BlockLayout>
-                    </l:VerticalLayout>
-                </f:content>
-            </f:Card>
-        </ScrollContainer>
-    </Carousel>
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title text="Pedidos" level="H2" />
+                            <ToolbarSpacer />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="15rem">
+                        <Text text="Título" />
+                    </Column>
+                    <Column hAlign="Begin" width="9rem">
+                        <Text text="Autor" />
+                    </Column>
+                    <Column hAlign="Begin" width="6rem">
+                        <Text text="Formato" />
+                    </Column>
+                    <Column hAlign="Center" width="6rem">
+                        <Text text="Capítulos" />
+                    </Column>
+                    <Column hAlign="Center" width="6rem">
+                        <Text text="Valor" />
+                    </Column>
+                    <Column hAlign="Center" width="12rem">
+                        <Text text="Início da Publicação" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{restObras>titulo}" />
+                            <Text text="{restObras>autor}" />
+                            <Text text="{
+                                path: 'restObras>formato',
+                                formatter: '.formatter.formatarFormato'
+                            }" />
+                            <Text text="{restObras>numeroCapitulos}" />
+                            <Text text="{
+                                path: 'restObras>valorObra',
+                                formatter: '.formatter.formatarValor'
+                            }" />
+                            <Text
+                                text="{
+                                path: 'restObras>inicioPublicacao',
+                                formatter: '.formatter.formatarData'
+                            }" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </HBox>
     </Page>
 </mvc:View>

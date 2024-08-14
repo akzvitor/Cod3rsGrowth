@@ -10,13 +10,12 @@ sap.ui.define([
     const API_COMPRAS_URL = "http://localhost:5070/api/Compras";
     const MODELO_COMPRAS = "restCompras";
     const MODELO_OBRAS = "restObras";
-    const API_OBRAS_URL = "http://localhost:5070/api/Obras";
+    const API_OBRAS_URL = "http://localhost:5070/api/Obras/Compra";
 
 
     return BaseController.extend("ui5.coders.app.CompraCliente.Detalhes", {
         onInit() {
 			 this._aoCoincidirRota(ROTA_DETALHES);
-             this.inicializarObras();
 		},
 
         _aoCoincidirRota(rota) {
@@ -39,11 +38,8 @@ sap.ui.define([
 					: this.capturarErroApi(data);
 				})
 				.catch((err) => console.error(err));
-		},
 
-        inicializarObras() {
-			let sucesso = true;
-			fetch(API_OBRAS_URL)
+				fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
 				.then((res) => {
 					if (!res.ok)
 						sucesso = false;
@@ -54,6 +50,6 @@ sap.ui.define([
 					: this.capturarErroApi(data);
 				})
 				.catch((err) => console.error(err));
-		}
+		},
     });
 });
