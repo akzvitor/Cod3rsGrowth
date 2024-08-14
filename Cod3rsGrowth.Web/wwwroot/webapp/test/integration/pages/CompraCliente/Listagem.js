@@ -2,9 +2,10 @@ sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/actions/EnterText",
     'sap/ui/test/matchers/AggregationLengthEquals',
+    'sap/ui/test/matchers/PropertyStrictEquals',
     "sap/ui/test/matchers/AggregationFilled",
     'sap/ui/test/actions/Press'
-], (Opa5, EnterText, AggregationLengthEquals, AggregationFilled, Press) => {
+], (Opa5, EnterText, AggregationLengthEquals, PropertyStrictEquals, AggregationFilled, Press) => {
     "use strict";
 
     const NOME_DA_VIEW = "CompraCliente.Listagem";
@@ -31,6 +32,24 @@ sap.ui.define([
                         viewName: NOME_DA_VIEW,
                         actions: new Press(),
                         errorMessage: "Botão adicionar não encontrado.",
+                        success: function() {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); 
+                        }
+                    });
+                },
+
+                euClicoEmUmItemDaTabela() {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.Text",
+                        matchers: [
+                            new PropertyStrictEquals({
+                                name: "text",
+                                value: "Vitor"
+                            })
+                        ],
+                        actions: new Press(),
+                        errorMessage: "Item não encontrado.",
                         success: function() {
                             return new Promise(resolve => setTimeout(resolve, 1000)); 
                         }

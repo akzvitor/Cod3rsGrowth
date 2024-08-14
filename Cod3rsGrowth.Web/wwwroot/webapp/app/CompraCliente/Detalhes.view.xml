@@ -6,7 +6,7 @@
     xmlns:cards="sap.f.cards"
     xmlns:l="sap.ui.layout"
     xmlns:lf="sap.ui.layout.form">
-    <Page title="Detalhes" titleAlignment="Center" binding="{restCompras>/}"
+    <Page id="paginaDetalhes" title="Detalhes" titleAlignment="Center" binding="{restCompras>/}"
         navButtonPress="onNavBack" showNavButton="true" backgroundDesign="List"
         class="sapUiContentPadding">
         <HBox class="sapUiSmallMargin">
