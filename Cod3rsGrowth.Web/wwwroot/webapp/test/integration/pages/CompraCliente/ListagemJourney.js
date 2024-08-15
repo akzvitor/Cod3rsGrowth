@@ -14,7 +14,6 @@ sap.ui.define([
 		When.naPaginaDeListagem.euClicoNoBotaoAdicionar();
 
 		Then.naPaginaDeCriacaoCompra.aPaginaDeveMudarParaCriacaoCompra();
-
 	});
 
 	opaTest("Deveria voltar para a página de Listagem.", (Given, When, Then) => {

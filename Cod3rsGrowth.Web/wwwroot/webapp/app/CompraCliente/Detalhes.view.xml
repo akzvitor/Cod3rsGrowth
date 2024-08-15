@@ -9,96 +9,104 @@
     <Page id="paginaDetalhes" title="Detalhes" titleAlignment="Center" binding="{restCompras>/}"
         navButtonPress="onNavBack" showNavButton="true" backgroundDesign="List"
         class="sapUiContentPadding">
-        <HBox class="sapUiSmallMargin">
-            <VBox class="sapUiLargeMarginEnd">
-                <ObjectListItem intro="Nome" title="{restCompras>nome}" />
-                <ObjectListItem intro="E-mail" title="{restCompras>email}" />
-            </VBox>
-            <VBox class="sapUiLargeMarginBeginEnd">
-                <ObjectListItem intro="CPF"
-                    title="{
+        <OverflowToolbar id="TB1">
+            <core:Icon src="sap-icon://information" color="Tile" />
+            <Title class="sapUiSmallMargin" id="Title1" text="Informações da compra" />
+            <ToolbarSpacer />
+        </OverflowToolbar>
+        <content>
+            <HBox class="sapUiSmallMargin">
+                <VBox class="sapUiLargeMarginEnd">
+                    <ObjectListItem intro="Nome" title="{restCompras>nome}" />
+                    <ObjectListItem intro="E-mail" title="{restCompras>email}" />
+                </VBox>
+                <VBox class="sapUiLargeMarginBeginEnd">
+                    <ObjectListItem intro="CPF"
+                        title="{
                                 path: 'restCompras>cpf',
                                 formatter: '.formatter.formatarCpf'
                             }" />
-                <ObjectListItem intro="Telefone"
-                    title="{
+                    <ObjectListItem intro="Telefone"
+                        title="{
                                 path: 'restCompras>telefone',
                                 formatter: '.formatter.formatarTelefone'
                             }" />
-            </VBox>
-            <VBox class="sapUiLargeMarginBegin">
-                <ObjectListItem intro="Data da compra"
-                    title="{
+                </VBox>
+                <VBox class="sapUiLargeMarginBegin">
+                    <ObjectListItem intro="Data da compra"
+                        title="{
                                 path: 'restCompras>dataCompra',
                                 formatter: '.formatter.formatarData'
                             }" />
-                <ObjectListItem intro="Valor Total"
-                    title="{
+                    <ObjectListItem intro="Valor Total"
+                        title="{
                                 path: 'restCompras>valorCompra',
                                 formatter: '.formatter.formatarValor'
                             }" />
-            </VBox>
-        </HBox>
-        <HBox class="sapUiLargeMarginTop">
-            <Table class="sapUiSmallMargin" id="tabelaObras" growing="true" growingThreshold="7"
-                inset="false" width="auto"
-                items="{
-            path: 'restObras>/',
-            sorter: {
-                path: 'titulo'
-            }
-        }">
-                <headerToolbar>
-                    <OverflowToolbar>
-                        <content>
-                            <Title text="Pedidos" level="H2" />
-                            <ToolbarSpacer />
-                        </content>
-                    </OverflowToolbar>
-                </headerToolbar>
-                <columns>
-                    <Column width="15rem">
-                        <Text text="Título" />
-                    </Column>
-                    <Column hAlign="Begin" width="9rem">
-                        <Text text="Autor" />
-                    </Column>
-                    <Column hAlign="Begin" width="6rem">
-                        <Text text="Formato" />
-                    </Column>
-                    <Column hAlign="Center" width="6rem">
-                        <Text text="Capítulos" />
-                    </Column>
-                    <Column hAlign="Center" width="6rem">
-                        <Text text="Valor" />
-                    </Column>
-                    <Column hAlign="Center" width="12rem">
-                        <Text text="Início da Publicação" />
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <Text text="{restObras>titulo}" />
-                            <Text text="{restObras>autor}" />
-                            <Text text="{
-                                path: 'restObras>formato',
-                                formatter: '.formatter.formatarFormato'
-                            }" />
-                            <Text text="{restObras>numeroCapitulos}" />
-                            <Text text="{
-                                path: 'restObras>valorObra',
-                                formatter: '.formatter.formatarValor'
-                            }" />
-                            <Text
-                                text="{
-                                path: 'restObras>inicioPublicacao',
-                                formatter: '.formatter.formatarData'
-                            }" />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
-        </HBox>
+                </VBox>
+            </HBox>
+        </content>
+        <content>
+            <OverflowToolbar class="sapUiLargeMarginTop">
+                <core:Icon src="sap-icon://form" color="Tile" />
+                <Title class="sapUiSmallMargin" text="Produtos" />
+                <ToolbarSpacer />
+            </OverflowToolbar>
+            <HBox >
+                <Table class="sapUiSmallMargin" id="tabelaObras" growing="true" growingThreshold="7"
+                    inset="false" width="auto"
+                    items="{
+                path: 'restObras>/',
+                sorter: {
+                    path: 'titulo'
+                }
+            }">
+                    <columns>
+                        <Column width="15rem">
+                            <Text text="Título" />
+                        </Column>
+                        <Column hAlign="Begin" width="9rem">
+                            <Text text="Autor" />
+                        </Column>
+                        <Column hAlign="Begin" width="6rem">
+                            <Text text="Formato" />
+                        </Column>
+                        <Column hAlign="Center" width="6rem">
+                            <Text text="Capítulos" />
+                        </Column>
+                        <Column hAlign="Center" width="6rem">
+                            <Text text="Valor" />
+                        </Column>
+                        <Column hAlign="Center" width="12rem">
+                            <Text text="Início da Publicação" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{restObras>titulo}" />
+                                <Text text="{restObras>autor}" />
+                                <Text
+                                    text="{
+                                    path: 'restObras>formato',
+                                    formatter: '.formatter.formatarFormato'
+                                }" />
+                                <Text text="{restObras>numeroCapitulos}" />
+                                <Text
+                                    text="{
+                                    path: 'restObras>valorObra',
+                                    formatter: '.formatter.formatarValor'
+                                }" />
+                                <Text
+                                    text="{
+                                    path: 'restObras>inicioPublicacao',
+                                    formatter: '.formatter.formatarData'
+                                }" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </HBox>
+        </content>
     </Page>
 </mvc:View>

@@ -30,7 +30,7 @@
 	    </MessageStrip>
         <content>
             <OverflowToolbar id="TB1">
-                <core:Icon src="sap-icon://form" color="Tile"/>
+                <core:Icon src="sap-icon://create-form" color="Tile"/>
                 <Title class="sapUiSmallMargin" id="Title1" text="{i18n>CriacaoCompra.tituloFormulario}"/>
                 <ToolbarSpacer />
             </OverflowToolbar>
