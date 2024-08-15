@@ -1,9 +1,9 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
-    "sap/ui/test/matchers/Properties",  
+    "sap/ui/test/matchers/PropertyStrictEquals",  
     "sap/ui/test/actions/Press"  
 
-], (Opa5, Properties, Press) => {
+], (Opa5, PropertyStrictEquals, Press) => {
     "use strict";
 
     const NOME_DA_VIEW = "CompraCliente.Detalhes";
@@ -40,8 +40,124 @@ sap.ui.define([
                     });
                 },
 
-                deveExibirDetalhesDaCompraCorreta() {
-                    ret
+                oObjectListItemComIntroNomeDevePossuirOValor(valor) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.ObjectListItem",
+                        matchers: {
+                            i18NText: {
+                                propertyName: "intro",
+                                key: "Compra.Nome"
+                            },
+                            properties: {
+                                title: valor
+                            }
+                        },
+                        success: function () {
+							Opa5.assert.ok(true, `O objeto de intro Nome possui o valor ${valor}.`);
+						},
+                        errorMessage: `O objeto de intro Nome não possui o valor esperado (${valor}).`
+                    });
+                },
+
+                oObjectListItemComIntroEmailDevePossuirOValor(valor) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.ObjectListItem",
+                        matchers: {
+                            i18NText: {
+                                propertyName: "intro",
+                                key: "Compra.Email"
+                            },
+                            properties: {
+                                title: valor
+                            }
+                        },
+                        success: function () {
+							Opa5.assert.ok(true, `O objeto de intro E-mail possui o valor ${valor}.`);
+						},
+                        errorMessage: `O objeto de intro E-mail não possui o valor esperado (${valor}).`
+                    });
+                },
+
+                oObjectListItemComIntroCpfDevePossuirOValor(valor) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.ObjectListItem",
+                        matchers: {
+                            i18NText: {
+                                propertyName: "intro",
+                                key: "Compra.Cpf"
+                            },
+                            properties: {
+                                title: valor
+                            }
+                        },
+                        success: function () {
+							Opa5.assert.ok(true, `O objeto de intro CPF possui o valor ${valor}.`);
+						},
+                        errorMessage: `O objeto de intro CPF não possui o valor esperado (${valor}).`
+                    });
+                },
+
+                oObjectListItemComIntroTelefoneDevePossuirOValor(valor) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.ObjectListItem",
+                        matchers: {
+                            i18NText: {
+                                propertyName: "intro",
+                                key: "Compra.Telefone"
+                            },
+                            properties: {
+                                title: valor
+                            }
+                        },
+                        success: function () {
+							Opa5.assert.ok(true, `O objeto de intro Telefone possui o valor ${valor}.`);
+						},
+                        errorMessage: `O objeto de intro Telefone não possui o valor esperado (${valor}).`
+                    });
+                },
+
+                oObjectListItemComIntroDataCompraDevePossuirOValor(valor) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.ObjectListItem",
+                        matchers: {
+                            i18NText: {
+                                propertyName: "intro",
+                                key: "Detalhes.DataCompra"
+                            },
+                            properties: {
+                                title: valor
+                            }
+                        },
+                        success: function () {
+							Opa5.assert.ok(true, `O objeto de intro Data da compra possui o valor ${valor}.`);
+						},
+                        errorMessage: `O objeto de intro Data da compra não possui o valor esperado (${valor}).`
+                    });
+                },
+
+                oObjectListItemComIntroValorTotalDevePossuirOValor(valor) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.ObjectListItem",
+                        matchers: {
+                            i18NText: {
+                                propertyName: "intro",
+                                key: "Detalhes.ValorTotal"
+                            },
+                            properties: {
+                                title: valor
+                            }
+                        },
+                        success: function () {
+							Opa5.assert.ok(true, `O objeto de intro Valor total possui o valor ${valor}.`);
+						},
+                        errorMessage: `O objeto de intro Valor total não possui o valor esperado (${valor}).`
+                    });
                 }
             }
         }

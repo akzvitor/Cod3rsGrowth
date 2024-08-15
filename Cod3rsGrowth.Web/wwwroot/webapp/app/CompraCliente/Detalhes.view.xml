@@ -38,7 +38,7 @@
                                 path: 'restCompras>dataCompra',
                                 formatter: '.formatter.formatarData'
                             }" />
-                    <ObjectListItem intro="{i18n>Detalhes.ValorTotal}"
+                    <ObjectListItem intro="{i18n>Detalhes.ValorTotal}" id="objValorTotal"
                         title="{
                                 path: 'restCompras>valorCompra',
                                 formatter: '.formatter.formatarValor'
