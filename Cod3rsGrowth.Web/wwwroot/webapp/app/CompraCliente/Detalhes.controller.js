@@ -39,7 +39,7 @@ sap.ui.define([
 				})
 				.catch((err) => console.error(err));
 
-				fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
+			fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
 				.then((res) => {
 					if (!res.ok)
 						sucesso = false;

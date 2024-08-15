@@ -39,6 +39,10 @@ sap.ui.define([
                         }
                     });
                 },
+
+                deveExibirDetalhesDaCompraCorreta() {
+                    ret
+                }
             }
         }
     });
