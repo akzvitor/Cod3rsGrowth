@@ -1,9 +1,9 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
-    "sap/ui/test/matchers/PropertyStrictEquals",  
+    "sap/ui/test/matchers/Properties",  
     "sap/ui/test/actions/Press"  
 
-], (Opa5, PropertyStrictEquals, Press) => {
+], (Opa5, Properties, Press) => {
     "use strict";
 
     const NOME_DA_VIEW = "CompraCliente.Detalhes";

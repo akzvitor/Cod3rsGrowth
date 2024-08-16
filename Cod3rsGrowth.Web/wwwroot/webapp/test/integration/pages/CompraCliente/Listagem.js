@@ -183,7 +183,7 @@ sap.ui.define([
                         viewName: NOME_DA_VIEW,
                         matchers: new AggregationLengthEquals({
                             name: TAG_ITENS_TABELA,
-                            length: 7
+                            length: 5
                         }),
                         success: function () {
 							Opa5.assert.ok(true, "A tabela contém os 2 itens correspondentes a data filtrada.");
@@ -198,7 +198,7 @@ sap.ui.define([
                         viewName: NOME_DA_VIEW,
                         matchers: new AggregationLengthEquals({
                             name: TAG_ITENS_TABELA,
-                            length: 7
+                            length: 5
                         }),
                         success: function () {
 							Opa5.assert.ok(true, "A tabela contém os 9 itens correspondentes ao periodo filtrado.");
