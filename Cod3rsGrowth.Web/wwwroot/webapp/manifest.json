@@ -68,6 +68,11 @@
                     "pattern": "criacaoCompra",
                     "name": "criacaoCompra",
                     "target": "criacaoCompra"
+                },
+                {
+                    "pattern": "detalhes/{idCompra}",
+                    "name": "detalhes",
+                    "target": "detalhes"
                 }
             ],
             "targets": {
@@ -83,6 +88,10 @@
                 "criacaoCompra": {
                     "id": "criacaoCompra",
                     "name": "app.CompraCliente.CriacaoCompra"
+                },
+                "detalhes": {
+                    "id": "detalhes",
+                    "name": "app.CompraCliente.Detalhes"
                 }
             }
         }

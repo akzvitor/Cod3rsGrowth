@@ -56,7 +56,6 @@ sap.ui.define([
 					return res.json();
 				})
 				.then((data) => {
-					console.log(data);
 					sucesso ?  this.getView().setModel(new JSONModel(data), nomeDoModelo)
 					: this.capturarErroApi(data);
 				})

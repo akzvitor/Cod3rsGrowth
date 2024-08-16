@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
 	"./Listagem",
-	"./CriacaoCompra"
+	"./CriacaoCompra",
+	"./Detalhes"
 ], (opaTest) => {
 	"use strict";
 
@@ -13,11 +14,25 @@ sap.ui.define([
 		When.naPaginaDeListagem.euClicoNoBotaoAdicionar();
 
 		Then.naPaginaDeCriacaoCompra.aPaginaDeveMudarParaCriacaoCompra();
-
 	});
 
 	opaTest("Deveria voltar para a página de Listagem.", (Given, When, Then) => {
 		When.naPaginaDeCriacaoCompra.euClicoNoBotaoNavBack();
+
+		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
+		Then.iTeardownMyApp();
+	});
+
+	opaTest("Deveria ver a página de detalhes ao clicar em algum item da tabela.", (Given, When, Then) => {
+		Given.iStartMyApp();
+
+		When.naPaginaDeListagem.euClicoEmUmItemDaTabela();
+
+		Then.naPaginaDeDetalhes.aPaginaDeveMudarParaDetalhes();
+	});
+
+	opaTest("Deveria voltar para a página de Listagem.", (Given, When, Then) => {
+		When.naPaginaDeDetalhes.euClicoNoBotaoNavBack();
 
 		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
 		Then.iTeardownMyApp();

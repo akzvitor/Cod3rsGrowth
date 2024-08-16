@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Table id="tabelaCompras" growing="true" growingThreshold="15" inset="false" width="auto" alternateRowColors="true" mode="SingleSelectLeft" 
+    <Table id="tabelaCompras" growing="true" growingThreshold="15" inset="false" width="auto" alternateRowColors="true"
         items="{
             path: 'restCompras>/',
             sorter: {
@@ -15,8 +15,8 @@
                     <Title text="{i18n>Listagem.titulo}" level="H2"/>
                     <ToolbarSpacer />
                     <core:Icon src="sap-icon://add-filter"/>
-                    <Input id="nomeFiltroInput" placeholder="{i18n>Listagem.placeholderNome}" width="18%" change="aoAlterarInputFiltro" autocomplete="false"/>
-                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="{i18n>Listagem.placeholderCpf}" width="10%" change="aoAlterarInputFiltro"/>
+                    <Input id="nomeFiltroInput" placeholder="{i18n>Compra.Nome}" width="18%" change="aoAlterarInputFiltro" autocomplete="false"/>
+                    <MaskInput mask="999.999.999-99" id="cpfFiltroInput" placeholder="{i18n>Compra.Cpf}" width="10%" change="aoAlterarInputFiltro"/>
                     <DateRangeSelection
 			            id="dateRangeFiltroInput"
 			            class="DRS1"
@@ -38,7 +38,7 @@
 			            }"
 			            change="aoAlterarInputFiltro"
                         width="18%"
-                        placeholder="{i18n>Listagem.placeholderData}"
+                        placeholder="{i18n>Compra.Data}"
                         showFooter="true"
                         />
                 </content>
@@ -46,26 +46,26 @@
         </headerToolbar>
         <columns>
             <Column width="6rem">
-                <Text text="{i18n>Listagem.colunaNome}" />
+                <Text text="{i18n>Compra.Nome}" />
             </Column>
             <Column hAlign="Center" width="12rem">
-                <Text text="{i18n>Listagem.colunaCpf}" />
+                <Text text="{i18n>Compra.Cpf}" />
             </Column>
             <Column hAlign="Center" width="12rem">
-                <Text text="{i18n>Listagem.colunaEmail}" />
+                <Text text="{i18n>Compra.Email}" />
             </Column>
             <Column hAlign="Center" width="12rem">
-                <Text text="{i18n>Listagem.colunaTelefone}" />
+                <Text text="{i18n>Compra.Telefone}" />
             </Column>
             <Column hAlign="Center" width="12rem">
-                <Text text="{i18n>Listagem.colunaValor}" />
+                <Text text="{i18n>Compra.Valor}" />
             </Column>
             <Column hAlign="Center" width="12rem">
-                <Text text="{i18n>Listagem.colunaData}" />
+                <Text text="{i18n>Compra.Data}" />
             </Column>
         </columns>
-        <items>
-            <ColumnListItem>
+        <items >
+            <ColumnListItem type="Navigation" press="aoSelecionarCompra">
                 <cells>
                     <Text text="{restCompras>nome}" />
                     <Text text="{

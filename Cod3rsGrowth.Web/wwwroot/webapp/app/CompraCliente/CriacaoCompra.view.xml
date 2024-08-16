@@ -30,21 +30,21 @@
 	    </MessageStrip>
         <content>
             <OverflowToolbar id="TB1">
-                <core:Icon src="sap-icon://form" color="Tile"/>
+                <core:Icon src="sap-icon://create-form" color="Tile"/>
                 <Title class="sapUiSmallMargin" id="Title1" text="{i18n>CriacaoCompra.tituloFormulario}"/>
                 <ToolbarSpacer />
             </OverflowToolbar>
             <HBox class="sapUiSmallMargin">
                 <VBox class="sapUiLargeMarginEnd">
-                    <Label text="{i18n>CriacaoCompra.labelNome}" required="true" />
+                    <Label text="{i18n>Compra.Nome}" required="true" />
                     <Input id="nomeFormInput" width="130%" liveChange="aoPreencherNome" required="true" autocomplete="false"/>
-                    <Label text="{i18n>CriacaoCompra.labelEmail}" required="true" class="sapUiSmallMarginTop"/>
+                    <Label text="{i18n>Compra.Email}" required="true" class="sapUiSmallMarginTop"/>
                     <Input id="emailFormInput" width="130%" liveChange="aoPreencherEmail" required="true" autocomplete="false" />
                 </VBox>
                 <VBox class="sapUiLargeMarginBegin">
-                    <Label text="{i18n>CriacaoCompra.labelCpf}" required="true" />
+                    <Label text="{i18n>Compra.Cpf}" required="true" />
                     <MaskInput mask="999.999.999-99" id="cpfFormInput" width="75%" change="aoPreencherCpf" required="true" />
-                    <Label text="{i18n>CriacaoCompra.labelTelefone}" required="true" class="sapUiSmallMarginTop"/>
+                    <Label text="{i18n>Compra.Telefone}" required="true" class="sapUiSmallMarginTop"/>
                     <MaskInput mask="(99)99999-9999" id="telefoneFormInput" width="75%" change="aoPreencherTelefone" required="true" />
                 </VBox>    
             </HBox>

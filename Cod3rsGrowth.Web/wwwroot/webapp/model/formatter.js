@@ -37,5 +37,20 @@ sap.ui.define([
             telefone = telefone.replace(/(\d)(\d{4})$/, "$1-$2");
             return telefone;
         },
+
+        formatarFormato(formato) {
+            const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+            switch (formato) {
+                case 0:
+                    return oResourceBundle.getText("Formato.manga");
+                case 1:
+                    return oResourceBundle.getText("Formato.manhwa");
+                case 2:
+                    return oResourceBundle.getText("Formato.manhua");
+                case 3:
+                    return oResourceBundle.getText("Formato.webnovel");
+            }
+        }
     };
 });
