@@ -9,6 +9,9 @@
     <Page id="paginaDetalhes" title="{i18n>Detalhes.Titulo}" titleAlignment="Center" binding="{restCompras>/}"
         navButtonPress="onNavBack" showNavButton="true" backgroundDesign="List"
         class="sapUiContentPadding">
+        <headerContent>
+            <Button text="{i18n>Detalhes.BotaoEditar}" icon="sap-icon://edit" press="aoClicarNoBotaoEditar" id="botaoEditar"/>
+        </headerContent>
         <OverflowToolbar id="TB1">
             <core:Icon src="sap-icon://information" color="Tile" />
             <Title class="sapUiSmallMargin" id="Title1" text="{i18n>Detalhes.HeaderDados}" />

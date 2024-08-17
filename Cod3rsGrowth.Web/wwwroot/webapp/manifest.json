@@ -73,6 +73,11 @@
                     "pattern": "detalhes/{idCompra}",
                     "name": "detalhes",
                     "target": "detalhes"
+                },
+                {
+                    "pattern": "edicaoCompra/{idCompra}",
+                    "name": "edicaoCompra",
+                    "target": "criacaoCompra"
                 }
             ],
             "targets": {

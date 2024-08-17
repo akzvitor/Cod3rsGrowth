@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Table id="tabelaCompras" growing="true" growingThreshold="15" inset="false" width="auto" alternateRowColors="true"
+    <Table id="tabelaCompras" growing="true" growingThreshold="10" inset="false" width="auto" alternateRowColors="true"
         items="{
             path: 'restCompras>/',
             sorter: {
@@ -90,6 +90,4 @@
         </items>
     </Table>
     <Bar />
-    <Button 
-        id="botaoAdicionar" icon="sap-icon://create-form" text="{i18n>Listagem.botaoAdicionar}" press="aoClicarNoBotaoAdicionar" />
 </mvc:View>

@@ -60,11 +60,13 @@ sap.ui.define([
         },
 
         aoSelecionarCompra(oEvent) {
-            const oItem = oEvent.getSource();
-            const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("detalhes", {
-                idCompra: window.encodeURIComponent(oItem.getBindingContext(MODELO_COMPRAS).getProperty("id"))
-            })
+            this.processarAcao(() => {
+                const oItem = oEvent.getSource();
+                const oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("detalhes", {
+                    idCompra: window.encodeURIComponent(oItem.getBindingContext(MODELO_COMPRAS).getProperty("id"))
+                })
+            });
         }
     });
 });

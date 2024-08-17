@@ -11,7 +11,7 @@ sap.ui.define([
     "use strict";
 
     const { ValueState } = coreLibrary;
-    const ROTA_CRIACAO = "criacaoCompra"
+    const ROTA_CRIACAO = "criacaoCompra";
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
     const MODELO_OBRAS = "restObras";
     const API_COMPRAS_URL = "http://localhost:5070/api/Compras";
