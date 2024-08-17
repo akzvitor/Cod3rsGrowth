@@ -4,16 +4,18 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "ui5/coders/model/formatter",
     "ui5/coders/model/validator",
-    "sap/ui/core/library"
+    "sap/ui/core/library",
+    "sap/ui/model/json/JSONModel",
 
-
-], (BaseController, Filter, FilterOperator, formatter, validator, coreLibrary) => {
+], (BaseController, Filter, FilterOperator, formatter, validator, coreLibrary, JSONModel) => {
     "use strict";
 
     const { ValueState } = coreLibrary;
     const ROTA_CRIACAO = "criacaoCompra";
+    const ROTA_EDICAO = "edicaoCompra";
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
     const MODELO_OBRAS = "restObras";
+    const MODELO_COMPRAS = "restCompras";
     const API_COMPRAS_URL = "http://localhost:5070/api/Compras";
     const ID_NOME_FORM_INPUT = "nomeFormInput";
     const ID_EMAIL_FORM_INPUT = "emailFormInput";
@@ -29,18 +31,38 @@ sap.ui.define([
         validator: validator,
 
         onInit() {
-            this._aoCoincidirRota(ROTA_CRIACAO, API_OBRAS_URL, MODELO_OBRAS);
+            this._aoCoincidirRota(API_OBRAS_URL, MODELO_OBRAS);
         },
 
-         _aoCoincidirRota(rota, urlDaApi, nomeDoModelo) {
+         _aoCoincidirRota(urlDaApi, nomeDoModelo) {
 			this.processarAcao(() => {
 				const oRouter = this.getOwnerComponent().getRouter();
-				oRouter.getRoute(rota).attachPatternMatched(() => {
+				oRouter.getRoute(ROTA_CRIACAO).attachPatternMatched(() => {
 					this.inicializarDados(urlDaApi, nomeDoModelo);
                     this._limparForm();
 				}, this);
+                oRouter.getRoute(ROTA_EDICAO).attachPatternMatched(this.preencherInputsComDadosDaCompra, this);
 			});
 		},
+
+        preencherInputsComDadosDaCompra(oEvent) {
+            let sucesso = true;
+		    fetch(API_COMPRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
+				.then((res) => {
+					if (!res.ok)
+						sucesso = false;
+					return res.json();
+				})
+				.then((data) => {
+					sucesso ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
+
+                    this.oView.byId(ID_NOME_FORM_INPUT).setValue(data.nome);
+                    this.oView.byId(ID_EMAIL_FORM_INPUT).setValue(data.email);
+                    this.oView.byId(ID_CPF_FORM_INPUT).setValue(data.cpf);
+                    this.oView.byId(ID_TELEFONE_FORM_INPUT).setValue(data.telefone);
+				})
+				.catch((err) => console.error(err));
+        },
 
         aoClicarNoBotaoSalvar() {
             this.processarAcao(() => {
