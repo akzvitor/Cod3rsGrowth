@@ -41,7 +41,10 @@ sap.ui.define([
 					this.inicializarDados(urlDaApi, nomeDoModelo);
                     this._limparForm();
 				}, this);
-                oRouter.getRoute(ROTA_EDICAO).attachPatternMatched(this.preencherInputsComDadosDaCompra, this);
+                oRouter.getRoute(ROTA_EDICAO).attachPatternMatched((oEvent) => {
+                    this.inicializarDados(urlDaApi, nomeDoModelo);
+                    this.preencherInputsComDadosDaCompra(oEvent);
+                }, this);
 			});
 		},
 
