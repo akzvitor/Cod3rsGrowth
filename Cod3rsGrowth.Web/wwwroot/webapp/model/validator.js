@@ -70,7 +70,7 @@ sap.ui.define([
         validarTelefone(input) {
             const valor = input.getValue().replace(/[()_\-]/g, "");
             const mensagemErroTelefoneTamanhoInvalido = "O telefone deve conter 11 dígitos.";
-            const tamanhoTelefone = 11;
+            const tamanhoTelefone = 12;
             let eValido = true;
 
             if (valor === "") {

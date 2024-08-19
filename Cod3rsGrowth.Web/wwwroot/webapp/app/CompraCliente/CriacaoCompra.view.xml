@@ -45,7 +45,7 @@
                     <Label text="{i18n>Compra.Cpf}" required="true" />
                     <MaskInput mask="999.999.999-99" id="cpfFormInput" width="75%" change="aoPreencherCpf" required="true" />
                     <Label text="{i18n>Compra.Telefone}" required="true" class="sapUiSmallMarginTop"/>
-                    <MaskInput mask="(99)99999-9999" id="telefoneFormInput" width="75%" change="aoPreencherTelefone" required="true" />
+                    <MaskInput mask="(99) 99999-9999" id="telefoneFormInput" width="75%" change="aoPreencherTelefone" required="true" />
                 </VBox>    
             </HBox>
         </content>

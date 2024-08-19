@@ -61,8 +61,8 @@ sap.ui.define([
 
                     this.oView.byId(ID_NOME_FORM_INPUT).setValue(data.nome);
                     this.oView.byId(ID_EMAIL_FORM_INPUT).setValue(data.email);
-                    this.oView.byId(ID_CPF_FORM_INPUT).setValue(data.cpf);
-                    this.oView.byId(ID_TELEFONE_FORM_INPUT).setValue(data.telefone);
+                    this.oView.byId(ID_CPF_FORM_INPUT).setValue(formatter.formatarCpf(data.cpf));
+                    this.oView.byId(ID_TELEFONE_FORM_INPUT).setValue(formatter.formatarTelefone(data.telefone));
 				})
 				.catch((err) => console.error(err));
         },
