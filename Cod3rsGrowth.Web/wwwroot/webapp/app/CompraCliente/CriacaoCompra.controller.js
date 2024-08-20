@@ -39,14 +39,16 @@ sap.ui.define([
 			this.processarAcao(() => {
 				const oRouter = this.getOwnerComponent().getRouter();
 				oRouter.getRoute(ROTA_CRIACAO).attachPatternMatched(() => {
+                    this._alterarTitulo("CriacaoCompra.titulo")
 					this.inicializarDados(urlDaApi, nomeDoModelo);
                     this._limparInputs();
                     this._esconderMensagensDeErro();
                     this._removerSelecoes();
                     this._removerValueStates();
+                    console.log(this.getView())
 				}, this);
                 oRouter.getRoute(ROTA_EDICAO).attachPatternMatched((oEvent) => {
-                    this._alterarTituloParaEditar()
+                    this._alterarTitulo("EdicaoCompra.titulo")
                     this._esconderMensagensDeErro();
                     this._removerValueStates();
                     this.inicializarDados(urlDaApi, nomeDoModelo);
@@ -66,10 +68,6 @@ sap.ui.define([
 				.then((data) => {
 					sucesso ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
 
-                    this.oView.byId(ID_NOME_FORM_INPUT).setValue(data.nome);
-                    this.oView.byId(ID_EMAIL_FORM_INPUT).setValue(data.email);
-                    this.oView.byId(ID_CPF_FORM_INPUT).setValue(formatter.formatarCpf(data.cpf));
-                    this.oView.byId(ID_TELEFONE_FORM_INPUT).setValue(formatter.formatarTelefone(data.telefone));
                     this._selecionarItensComprados(data.listaIdDosProdutos);
 
 				})
@@ -208,8 +206,10 @@ sap.ui.define([
             this.getView().byId(ID_CATALOGO_OBRAS).removeSelections(true);
         },
 
-        _alterarTituloParaEditar() {
-            this.oView.byId(ID_PAGINA).setTitle("Editar Compra");
+        _alterarTitulo(chavei18n) {
+            const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            
+            this.oView.byId(ID_PAGINA).setTitle(oResourceBundle.getText(chavei18n));
         },
 
         aoPreencherNome(oEvent) {
