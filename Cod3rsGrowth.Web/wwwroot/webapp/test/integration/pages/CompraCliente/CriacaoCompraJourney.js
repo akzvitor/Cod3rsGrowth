@@ -35,8 +35,8 @@ sap.ui.define([
 			hash: "criacaoCompra"
 		});
 
-		When.naPaginaDeCriacaoCompra.euPreenchoOInputNomeComDadoValido("nomeFormInput", "Cirilla");
-		When.naPaginaDeCriacaoCompra.euPreenchoOInputEmailComDadoValido("emailFormInput", "ciri@km.com");
+		When.naPaginaDeCriacaoCompra.euPreenchoOInputNomeComDadoValido("nomeFormInput", "Paulo");
+		When.naPaginaDeCriacaoCompra.euPreenchoOInputEmailComDadoValido("emailFormInput", "aasfae@km.com");
 		When.naPaginaDeCriacaoCompra.euPreenchoOInputCpfComDadoValido("cpfFormInput", "69964405057");
 		When.naPaginaDeCriacaoCompra.euPreenchoOInputTelefoneComDadoValido("telefoneFormInput", "65345445456");
 		When.naPaginaDeCriacaoCompra.euSelecionoAoMenosUmaObraDoCatalogo();

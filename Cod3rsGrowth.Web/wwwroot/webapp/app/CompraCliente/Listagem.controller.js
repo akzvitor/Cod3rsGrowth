@@ -5,7 +5,7 @@ sap.ui.define([
 ], (BaseController, formatter) => {
     "use strict";
 
-    const ROTA_PAGINAINICIAL = "paginaInicial"
+    const ROTA_LISTAGEM = "listagem"
     const API_COMPRAS_URL = "http://localhost:5070/api/Compras";
     const MODELO_COMPRAS = "restCompras";
     const ID_NOME_FILTRO_INPUT = "nomeFiltroInput";
@@ -16,7 +16,7 @@ sap.ui.define([
         formatter: formatter,
 
         onInit() {
-            this.aoCoincidirRota(ROTA_PAGINAINICIAL, API_COMPRAS_URL, MODELO_COMPRAS);
+            this.aoCoincidirRota(ROTA_LISTAGEM, API_COMPRAS_URL, MODELO_COMPRAS);
         },
 
         aoAlterarInputFiltro(oEvent) {
