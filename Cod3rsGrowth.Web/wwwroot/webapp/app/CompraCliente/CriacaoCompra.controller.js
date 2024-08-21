@@ -26,6 +26,9 @@ sap.ui.define([
     const ID_MESSAGESTRIP_SUCESSO = "messageStripSucesso";
     const ID_MESSAGESTRIP_ERRO = "messageStripErro";
     const ID_PAGINA = "paginaCriacaoCompra";
+    var rota;
+    var id_parametro;
+    var dataEdicao;
 
     return BaseController.extend("ui5.coders.app.CompraCliente.CriacaoCompra", {
         formatter: formatter,
@@ -38,16 +41,20 @@ sap.ui.define([
          _aoCoincidirRota(urlDaApi, nomeDoModelo) {
 			this.processarAcao(() => {
 				const oRouter = this.getOwnerComponent().getRouter();
-				oRouter.getRoute(ROTA_CRIACAO).attachPatternMatched(() => {
+				oRouter.getRoute(ROTA_CRIACAO).attachPatternMatched((oEvent) => {
+                    const oRouter = this.getRouter();
+                    rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
                     this._alterarTitulo("CriacaoCompra.titulo")
 					this.inicializarDados(urlDaApi, nomeDoModelo);
                     this._limparInputs();
                     this._esconderMensagensDeErro();
                     this._removerSelecoes();
                     this._removerValueStates();
-                    console.log(this.getView())
 				}, this);
                 oRouter.getRoute(ROTA_EDICAO).attachPatternMatched((oEvent) => {
+                    const oRouter = this.getRouter();
+                    rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
+                    this.resgatarIdURL(oEvent);
                     this._alterarTitulo("EdicaoCompra.titulo")
                     this._esconderMensagensDeErro();
                     this._removerValueStates();
@@ -69,9 +76,17 @@ sap.ui.define([
 					sucesso ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
 
                     this._selecionarItensComprados(data.listaIdDosProdutos);
-
+                    this.resgatarDataEdicao(data.dataCompra);
 				})
 				.catch((err) => console.error(err));
+        },
+
+        resgatarIdURL(oEvent) {
+            id_parametro = window.decodeURIComponent(oEvent.getParameter("arguments").idCompra);
+        },
+
+        resgatarDataEdicao(data) {
+            dataEdicao = data
         },
 
         aoClicarNoBotaoSalvar() {
@@ -87,7 +102,7 @@ sap.ui.define([
                 const dataDaCompra = new Date();
                 const oObrasSelecionadas = this._obterObrasSelecionadas();
                 const erroListaDeProdutosVazia = 0;
-                const data = {
+                let data = {
                     cpf: valorCpf,
                     nome: valorNome,
                     telefone: valorTelefone,
@@ -107,7 +122,17 @@ sap.ui.define([
 
                 if (dadosSaoValidos && oObrasSelecionadas.listaIdsSelecionados.length !== erroListaDeProdutosVazia) {
                     this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
-                    this._postData(data);
+                    
+                    if (rota === ROTA_CRIACAO) {
+                        this._postData(data);
+                    }
+
+                    if (rota === ROTA_EDICAO) {
+                        data.id = id_parametro;
+                        data.dataCompra = dataEdicao;
+                        this._putData(data);
+                    }
+
                     this._limparInputs();
                     this._esconderMensagensDeErro();
                     this._removerSelecoes();
@@ -135,7 +160,6 @@ sap.ui.define([
             return this.processarAcao(() => {
                 let oList = this.byId(ID_CATALOGO_OBRAS);
                 let itensSelecionados = oList.getSelectedItems();
-                console.log(oList);
                 let obj = { listaIdsSelecionados: [], valorTotalCompra: 0 };
 
                 for (let i = 0; i < itensSelecionados.length; i++) {
@@ -171,6 +195,18 @@ sap.ui.define([
         _postData(data) {
             fetch(API_COMPRAS_URL, {
                 method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => console.log(data));
+        },
+
+        _putData(data) {
+            fetch(API_COMPRAS_URL, {
+                method: 'PUT',
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
