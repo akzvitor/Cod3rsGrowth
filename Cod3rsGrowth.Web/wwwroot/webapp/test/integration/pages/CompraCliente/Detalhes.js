@@ -7,16 +7,26 @@ sap.ui.define([
     "use strict";
 
     const NOME_DA_VIEW = "CompraCliente.Detalhes";
+    const ID_PAGINA_DETALHES = "paginaDetalhes";
 
     Opa5.createPageObjects({
         naPaginaDeDetalhes: {
             actions: {
                 euClicoNoBotaoNavBack() {
                     return this.waitFor({
-                        id:"paginaDetalhes",
+                        id:ID_PAGINA_DETALHES,
                         viewName: NOME_DA_VIEW,
                         actions: new Press(),
                         errorMessage: "Botão de navback não encontrado"
+                    });
+                },
+                
+                euClicoNoBotaoEditar() {
+                    return this.waitFor({
+                        id:"botaoEditar",
+                        viewName: NOME_DA_VIEW,
+                        actions: new Press(),
+                        errorMessage: "Botão Editar não encontrado"
                     });
                 }
             },

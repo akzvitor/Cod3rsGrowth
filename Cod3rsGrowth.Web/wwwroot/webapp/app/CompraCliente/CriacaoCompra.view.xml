@@ -6,13 +6,12 @@
 	xmlns:lf="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
 
-	<Page id="paginaCriacaoCompra" navButtonPress="onNavBack" showHeader="true" title="{i18n>CriacaoCompra.titulo}" titleAlignment="Center" showNavButton="true" backgroundDesign="List" class="sapUiContentPadding" >
+	<Page id="paginaCriacaoCompra" binding="{restCompras>/}" navButtonPress="onNavBack" showHeader="true" title="{i18n>CriacaoCompra.titulo}" titleAlignment="Center" showNavButton="true" backgroundDesign="List" class="sapUiContentPadding" >
         <headerContent>
             <Button text="{i18n>CriacaoCompra.botaoSalvar}" icon="sap-icon://save" press="aoClicarNoBotaoSalvar" id="botaoSalvar"/>
         </headerContent>
         <MessageStrip
                 id="messageStripSucesso"
-				text="{i18n>CriacaoCompra.messageStripSucesso}"
 				type="Success"
 				showIcon="true"
 				showCloseButton="true"
@@ -21,7 +20,6 @@
 	    </MessageStrip>
         <MessageStrip
                 id="messageStripErro"
-				text="{i18n>CriacaoCompra.messageStripErro}"
 				type="Error"
 				showIcon="true"
 				showCloseButton="true"
@@ -37,15 +35,21 @@
             <HBox class="sapUiSmallMargin">
                 <VBox class="sapUiLargeMarginEnd">
                     <Label text="{i18n>Compra.Nome}" required="true" />
-                    <Input id="nomeFormInput" width="130%" liveChange="aoPreencherNome" required="true" autocomplete="false"/>
+                    <Input id="nomeFormInput" value="{restCompras>nome}" width="130%" liveChange="aoPreencherNome" required="true" autocomplete="false"/>
                     <Label text="{i18n>Compra.Email}" required="true" class="sapUiSmallMarginTop"/>
-                    <Input id="emailFormInput" width="130%" liveChange="aoPreencherEmail" required="true" autocomplete="false" />
+                    <Input id="emailFormInput" value="{restCompras>email}" width="130%" liveChange="aoPreencherEmail" required="true" autocomplete="false" />
                 </VBox>
                 <VBox class="sapUiLargeMarginBegin">
                     <Label text="{i18n>Compra.Cpf}" required="true" />
-                    <MaskInput mask="999.999.999-99" id="cpfFormInput" width="75%" change="aoPreencherCpf" required="true" />
+                    <MaskInput mask="999.999.999-99" value="{
+                                path: 'restCompras>cpf',
+                                formatter: '.formatter.formatarCpf'
+                            }" id="cpfFormInput" width="75%" change="aoPreencherCpf" required="true" />
                     <Label text="{i18n>Compra.Telefone}" required="true" class="sapUiSmallMarginTop"/>
-                    <MaskInput mask="(99)99999-9999" id="telefoneFormInput" width="75%" change="aoPreencherTelefone" required="true" />
+                    <MaskInput mask="(99) 99999-9999" value="{
+                                path: 'restCompras>telefone',
+                                formatter: '.formatter.formatarTelefone'
+                            }" id="telefoneFormInput" width="75%" change="aoPreencherTelefone" required="true" />
                 </VBox>    
             </HBox>
         </content>

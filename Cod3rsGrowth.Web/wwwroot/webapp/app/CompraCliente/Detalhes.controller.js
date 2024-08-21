@@ -51,5 +51,15 @@ sap.ui.define([
 				})
 				.catch((err) => console.error(err));
 		},
+
+		aoClicarNoBotaoEditar(oEvent) {
+            this.processarAcao(() => {
+				const oItem = oEvent.getSource();
+                const oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("edicaoCompra" , {
+					idCompra: window.encodeURIComponent(oItem.getBindingContext(MODELO_COMPRAS).getProperty("id"))
+				});
+            });
+        }
     });
 });

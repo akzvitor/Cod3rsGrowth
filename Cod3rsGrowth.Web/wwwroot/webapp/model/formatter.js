@@ -23,13 +23,13 @@ sap.ui.define([
             return oDateTimeFormat.format(new Date(data));
         },
 
-        formatarCpf(cpf) {
+        async formatarCpf(cpf) {
             if (cpf === null || cpf === undefined) { return cpf; }
 
             return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
         },
 
-        formatarTelefone(telefone) {
+        async formatarTelefone(telefone) {
             if (telefone === null || telefone === undefined) { return telefone; }
 
             telefone = telefone.replace(/\D/g, '');

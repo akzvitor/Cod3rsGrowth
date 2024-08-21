@@ -61,8 +61,8 @@
             "routes": [
                 {
                     "pattern": "",
-                    "name": "paginaInicial",
-                    "target": "paginaInicial"
+                    "name": "listagem",
+                    "target": "listagem"
                 },
                 {
                     "pattern": "criacaoCompra",
@@ -73,12 +73,17 @@
                     "pattern": "detalhes/{idCompra}",
                     "name": "detalhes",
                     "target": "detalhes"
+                },
+                {
+                    "pattern": "edicaoCompra/{idCompra}",
+                    "name": "edicaoCompra",
+                    "target": "criacaoCompra"
                 }
             ],
             "targets": {
-                "paginaInicial": {
-                    "id": "paginaInicial",
-                    "name": "app.PaginaInicial.PaginaInicial"
+                "listagem": {
+                    "id": "listagem",
+                    "name": "app.CompraCliente.Listagem"
                 },
                 "notFound": {
                     "id": "notFound",
