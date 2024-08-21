@@ -12,7 +12,6 @@
         </headerContent>
         <MessageStrip
                 id="messageStripSucesso"
-				text="{i18n>CriacaoCompra.messageStripSucesso}"
 				type="Success"
 				showIcon="true"
 				showCloseButton="true"
@@ -21,7 +20,6 @@
 	    </MessageStrip>
         <MessageStrip
                 id="messageStripErro"
-				text="{i18n>CriacaoCompra.messageStripErro}"
 				type="Error"
 				showIcon="true"
 				showCloseButton="true"

@@ -148,7 +148,7 @@ sap.ui.define([
                         id: "messageStripErro",
                         viewName: NOME_DA_VIEW,
                         matchers: new Properties({
-                            text: "Não foi possível salvar a compra, verifique os dados inseridos",
+                            text: "Não foi possível salvar a compra, verifique os dados inseridos.",
                             visible: true
                         }),
                         success: function () {
@@ -163,7 +163,7 @@ sap.ui.define([
                         id: "messageStripSucesso",
                         viewName: NOME_DA_VIEW,
                         matchers: new Properties({
-                            text: "A compra foi salva com sucesso",
+                            text: "A compra foi salva com sucesso.",
                             visible: true
                         }),
                         success: function () {
@@ -171,7 +171,93 @@ sap.ui.define([
                         },
                         errorMessage: "Não apresentou nenhuma mensagem"
                     });
-                }
+                },
+
+                oInputNomeDeveConterOValor(nome) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "nomeFormInput",
+                        matchers: new Properties({
+                            value: nome
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O input nome foi carregado com o valor ${nome}`)
+                        },
+                        errorMessage: "O input nome não foi carregado com o valor correto"
+                    })
+                },
+
+                oInputEmailDeveConterOValor(email) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "emailFormInput",
+                        matchers: new Properties({
+                            value: email
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O input email foi carregado com o valor ${email}`)
+                        },
+                        errorMessage: "O input email não foi carregado com o valor correto"
+                    })
+                },
+
+                oInputCPFDeveConterOValor(cpf) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "cpfFormInput",
+                        matchers: new Properties({
+                            value: cpf
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O input cpf foi carregado com o valor ${cpf}`)
+                        },
+                        errorMessage: "O input cpf não foi carregado com o valor correto"
+                    })
+                },
+
+                oInputTelefoneDeveConterOValor(telefone) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "telefoneFormInput",
+                        matchers: new Properties({
+                            value: telefone
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O input telefone foi carregado com o valor ${telefone}`)
+                        },
+                        errorMessage: "O input telefone não foi carregado com o valor correto"
+                    })
+                },
+
+                deveApresentarMensagemDeErroAoEditarCompra() {
+                    return this.waitFor({
+                        id: "messageStripErro",
+                        viewName: NOME_DA_VIEW,
+                        matchers: new Properties({
+                            text: "Não foi possível editar a compra, verifique os dados inseridos.",
+                            visible: true
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, "A mensagem de erro foi apresentada.");
+                        },
+                        errorMessage: "Não apresentou mensagem de erro"
+                    });
+                },
+
+                deveApresentarMensagemDeSucessoAoEditarCompra() {
+                    return this.waitFor({
+                        id: "messageStripSucesso",
+                        viewName: NOME_DA_VIEW,
+                        matchers: new Properties({
+                            text: "A compra foi editada com sucesso.",
+                            visible: true
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, "A mensagem de sucesso ao editar compra foi apresentada.");
+                        },
+                        errorMessage: "Não apresentou nenhuma mensagem"
+                    });
+                },
             }
         }
     });

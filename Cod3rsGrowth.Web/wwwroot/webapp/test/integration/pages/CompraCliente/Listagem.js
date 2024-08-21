@@ -205,7 +205,7 @@ sap.ui.define([
 						},
                         errorMessage: MENSAGEM_ERRO_CARREGAR_TABELA
                     });
-                }
+                },
             }
         }
     });

@@ -91,6 +91,7 @@ sap.ui.define([
 
         aoClicarNoBotaoSalvar() {
             this.processarAcao(() => {
+                const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
                 const inputNome = this.oView.byId(ID_NOME_FORM_INPUT);
                 const valorNome = inputNome.getValue();
                 const inputEmail = this.oView.byId(ID_EMAIL_FORM_INPUT);
@@ -114,9 +115,16 @@ sap.ui.define([
 
                 const dadosSaoValidos = validator.validarDados(inputNome, inputEmail, inputTelefone, inputCpf);
 
-                if(!dadosSaoValidos)
-                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
+                if(!dadosSaoValidos) {
+                    if (rota === ROTA_CRIACAO) 
+                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoCompra.messageStripErroCriar"));
 
+                    if (rota === ROTA_EDICAO) 
+                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoCompra.messageStripErroEditar"));
+
+                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
+                }
+                
                 if (oObrasSelecionadas.listaIdsSelecionados.length === erroListaDeProdutosVazia)
                     this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(true);
 
@@ -124,10 +132,12 @@ sap.ui.define([
                     this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
                     
                     if (rota === ROTA_CRIACAO) {
+                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoCriar"));
                         this._postData(data);
                     }
 
                     if (rota === ROTA_EDICAO) {
+                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoEditar"));
                         data.id = id_parametro;
                         data.dataCompra = dataEdicao;
                         this._putData(data);
