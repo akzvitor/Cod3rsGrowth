@@ -7,6 +7,23 @@ sap.ui.define([
     
     QUnit.module("Detalhes");
 
+    opaTest("Deveria ver a página de edição ao clicar no botão Editar.", (Given, When, Then) => {
+		Given.iStartMyApp({
+            hash: "detalhes/3"
+        });
+
+		When.naPaginaDeDetalhes.euClicoNoBotaoEditar();
+
+		Then.naPaginaDeCriacaoCompra.aPaginaDeveMudarParaEdicaoCompra();
+	});
+
+    opaTest("Deveria voltar para a página de Detalhes.", (Given, When, Then) => {
+		When.naPaginaDeCriacaoCompra.euClicoNoBotaoNavBack();
+
+		Then.naPaginaDeDetalhes.aPaginaDeveMudarParaDetalhes();
+		Then.iTeardownMyApp();
+	});
+
     opaTest("Deveria mostrar detalhes da compra correta.", (Given, When, Then) => {
         Given.iStartMyApp();
 

@@ -110,6 +110,24 @@ sap.ui.define([
                     });
                 },
 
+                aPaginaDeveMudarParaEdicaoCompra() {
+                    return this.waitFor({
+                        success: function() {
+                            return this.waitFor({
+                                id:"paginaCriacaoCompra",
+                                viewName: NOME_DA_VIEW,
+                                matchers: new Properties ({
+                                    title: "Editar Compra"
+                                }),
+                                success: function () {
+                                    Opa5.assert.ok(true, "Está na página de Edição de Compra")
+                                },
+                                errorMessage: "Não está mostrando o título Edtar Compra"
+                            });
+                        }
+                    });
+                },
+
                 deveFiltrarOCatalogoPelaObraBuscada() {
                     return this.waitFor({
                         id:"catalogoObras",
