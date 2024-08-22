@@ -11,6 +11,7 @@
         class="sapUiContentPadding">
         <headerContent>
             <Button text="{i18n>Detalhes.BotaoEditar}" icon="sap-icon://edit" press="aoClicarNoBotaoEditar" id="botaoEditar"/>
+            <Button text="{i18n>Detalhes.BotaoRemover}" icon="sap-icon://delete" press="aoClicarNoBotaoRemover" id="botaoRemover"/>
         </headerContent>
         <OverflowToolbar id="TB1">
             <core:Icon src="sap-icon://information" color="Tile" />

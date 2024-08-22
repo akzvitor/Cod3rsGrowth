@@ -1,9 +1,9 @@
 sap.ui.define([
     "ui5/coders/app/common/BaseController",
     "sap/ui/model/json/JSONModel",
-
+	"sap/m/MessageBox"
     
-], (BaseController, JSONModel) => {
+], (BaseController, JSONModel, MessageBox) => {
     "use strict";
 
     const ROTA_DETALHES = "detalhes";
@@ -60,6 +60,12 @@ sap.ui.define([
 					idCompra: window.encodeURIComponent(oItem.getBindingContext(MODELO_COMPRAS).getProperty("id"))
 				});
             });
-        }
+        },
+
+		aoClicarNoBotaoRemover() {
+			MessageBox.confirm("Tem certeza que deseja remover esta compra?",
+				title = "Deletar"
+			)
+		}
     });
 });
