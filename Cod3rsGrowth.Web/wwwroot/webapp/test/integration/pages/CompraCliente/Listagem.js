@@ -38,14 +38,14 @@ sap.ui.define([
                     });
                 },
 
-                euClicoEmUmItemDaTabela() {
+                euClicoNoItemDaTabelaComNome(nome) {
                     return this.waitFor({
                         viewName: NOME_DA_VIEW,
                         controlType: "sap.m.Text",
                         matchers: [
                             new PropertyStrictEquals({
                                 name: "text",
-                                value: "Bruno"
+                                value: nome
                             })
                         ],
                         actions: new Press(),

@@ -61,7 +61,7 @@ sap.ui.define([
 
 	opaTest("Deveria apresentar erro ao tentar editar obra com dado inválido", (Given, When, Then) => {
 		Given.iStartMyApp({
-			hash: "edicaoCompra/20"
+			hash: "edicaoCompra/17"
 		});
 
 		When.naPaginaDeCriacaoCompra.euPreenchoOInputNomeComDadoInvalido("nomeFormInput", "2314");
@@ -74,7 +74,7 @@ sap.ui.define([
 
 	opaTest("Deveria editar a obra quando todos os dados forem validados", (Given, When, Then) => {
 		Given.iStartMyApp({
-			hash: "edicaoCompra/20"
+			hash: "edicaoCompra/17"
 		});
 
 		When.naPaginaDeCriacaoCompra.euPreenchoOInputNomeComDadoValido("nomeFormInput", "João");
