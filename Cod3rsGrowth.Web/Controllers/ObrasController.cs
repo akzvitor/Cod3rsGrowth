@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Servicos;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.JsonPatch.Internal;
@@ -31,6 +32,13 @@ namespace Cod3rsGrowth.Web.Controllers
             }
 
             return Ok(listaDeObras);
+        }
+
+        [HttpGet("Formatos")]
+        public IActionResult ObterFormatos() {
+            var formatos = ExtensaoEnums.ObterListaDescricoesEnum<Formato>();
+
+            return Ok(formatos);
         }
 
         [HttpGet("Compra/{id}")]
