@@ -64,12 +64,12 @@
                     <items >
                         <ColumnListItem type="Navigation" press="aoSelecionarCompra">
                             <cells>
-                                <Text text="{restCompras>nome}" />
+                                <Text text="{restCompras>nome}" maxLines="1" />
                                 <Text text="{
                                 path: 'restCompras>cpf',
                                 formatter: '.formatter.formatarCpf'
                             }" />
-                                <Text text="{restCompras>email}" />
+                                <Text text="{restCompras>email}" maxLines="1" />
                                 <Text text="{
                                 path: 'restCompras>telefone',
                                 formatter: '.formatter.formatarTelefone'

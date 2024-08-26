@@ -22,27 +22,11 @@
                                 <core:Icon src="sap-icon://add-filter"/>
                                 <Input id="tituloFiltroInput" placeholder="{i18n>Obra.Titulo}" width="18%" change="aoAlterarInputFiltro" autocomplete="false"/>
                                 <Input id="autorFiltroInput" placeholder="{i18n>Obra.Autor}" width="10%" change="aoAlterarInputFiltro"/>
-                                <!-- <DateRangeSelection id="dateRangeFiltroInput" class="DRS1" value= "{
-				            'type': 'sap.ui.model.type.DateInterval',
-				            'formatOptions': {
-					        'pattern': 'dd/MM/yyyy'
-				            },
-				            'parts': [
-					            {
-						            'type': 'sap.ui.model.type.Date',
-						            'path': '/start'
-					            },
-					            {
-						            'type': 'sap.ui.model.type.Date',
-						            'path': '/end'
-					            }
-				            ]
-			            }" change="aoAlterarInputFiltro" width="18%" placeholder="{i18n>Compra.Data}" showFooter="true" /> -->
                             </content>
                         </OverflowToolbar>
                     </headerToolbar>
                     <columns>
-                        <Column width="6rem">
+                        <Column width="14rem">
                             <Text text="{i18n>Obra.Titulo}" />
                         </Column>
                         <Column hAlign="Center" width="12rem">
@@ -60,26 +44,19 @@
                         <Column hAlign="Center" width="12rem">
                             <Text text="{i18n>Obra.Valor}" />
                         </Column>
-                        <!-- <Column hAlign="Center" width="12rem">
-                            <Text text="{i18n>Compra.Data}" />
-                        </Column> -->
                     </columns>
                     <items >
                         <ColumnListItem type="Navigation" press="aoSelecionarObra">
                             <cells>
-                                <Text text="{restObras>titulo}" />
+                                <Text text="{restObras>titulo}" maxLines="1" />
                                 <Text text="{restObras>numeroCapitulos}" />
-                                <Text text="{restObras>Formato}" />
+                                <Text text="{restObras>formato}" />
                                 <Text text="{restObras>foiFinalizada}" />
-                                <Text text="{restObras>autor}" />
+                                <Text text="{restObras>autor}" maxLines="1" />
                                 <Text text="{
                                     path: 'restObras>valorObra',
                                     formatter: '.formatter.formatarValor'
                                 }" />
-                                <!-- <Text text="{
-                                path: 'restObras>valorObra',
-                                formatter: '.formatter.formatarObra'
-                            }" /> -->
                             </cells>
                         </ColumnListItem>
                     </items>
