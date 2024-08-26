@@ -6,10 +6,12 @@ sap.ui.define([
 
     const ROTA_LISTAGEM_OBRAS = "listagemObra";
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
+    const API_FORMATOS_URL = "http://localhost:5070/api/Obras/Formatos";
     const MODELO_OBRAS = "restObras";
+    const MODELO_FORMATOS = "restFormatos";
     const ID_INPUT_TITULO = "tituloFiltroInput";
     const ID_INPUT_AUTOR = "autorFiltroInput";
-    const ID_COMBOBOX_STATUS = "statusFiltroComboBox"
+    const ID_COMBOBOX_STATUS = "statusFiltroComboBox";
 
     return BaseController.extend("ui5.coders.app.Obra.Listagem", {
         formatter: formatter,
@@ -33,6 +35,23 @@ sap.ui.define([
                 if (comboBoxStatus) { urlFiltro += "Finalizada=" + comboBoxStatus + "&"; }
 
                 this.inicializarDados(urlFiltro, MODELO_OBRAS);
+            });
+        },
+
+        _inicializarComboBox() {
+            this.processarAcao(() => {
+                let sucesso = true;
+                fetch(API_FORMATOS_URL)
+                    .then((res) => {
+                        if (!res.ok)
+                            sucesso = false;
+                        return res.json();
+                    })
+                    .then((data) => {
+                        sucesso ? this.getView().setModel(new JSONModel({descricao: data}), MODELO_FORMATOS)
+                            : this.capturarErroApi(data);
+                    })
+                    .catch((err) => console.error(err));
             });
         }
     });

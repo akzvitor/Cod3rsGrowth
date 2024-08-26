@@ -22,8 +22,8 @@
                                 <core:Icon src="sap-icon://add-filter"/>
                                 <Input id="tituloFiltroInput" placeholder="{i18n>Obra.Titulo}" width="18%" change="aoAlterarInputFiltro" autocomplete="false"/>
                                 <Input id="autorFiltroInput" placeholder="{i18n>Obra.Autor}" width="18%" change="aoAlterarInputFiltro"/>
-                                <ComboBox id="formatoFiltroComboBox" items="{path: 'restObras>/'}" placeholder="Formato" width="14%">
-                                    <core:Item key="{restObras>id}" text="{restObras>formato}"/>
+                                <ComboBox id="formatoFiltroComboBox" items="{restFormatos>/descricao" placeholder="Formato" width="14%">
+                                    <core:Item key="{path: }" text=""/>
                                 </ComboBox>
                                 <ComboBox id="statusFiltroComboBox" placeholder="Status" width="14%" selectionChange="aoAlterarInputFiltro">
                                     <core:Item key="true" text="Finalizadas"/>
