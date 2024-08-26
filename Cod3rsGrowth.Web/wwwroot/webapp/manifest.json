@@ -78,6 +78,11 @@
                     "pattern": "edicaoCompra/{idCompra}",
                     "name": "edicaoCompra",
                     "target": "criacaoCompra"
+                },
+                {
+                    "pattern": "listagemObra",
+                    "name": "listagemObra",
+                    "target": "listagemObra"
                 }
             ],
             "targets": {
@@ -97,6 +102,10 @@
                 "detalhes": {
                     "id": "detalhes",
                     "name": "app.CompraCliente.Detalhes"
+                },
+                "listagemObra": {
+                    "id": "listagemObra",
+                    "name": "app.Obra.Listagem"
                 }
             }
         }
