@@ -26,7 +26,7 @@ sap.ui.define([
 	opaTest("Deveria ver a página de detalhes ao clicar em algum item da tabela.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.naPaginaDeListagem.euClicoEmUmItemDaTabela();
+		When.naPaginaDeListagem.euClicoNoItemDaTabelaComNome("Bruno");
 
 		Then.naPaginaDeDetalhes.aPaginaDeveMudarParaDetalhes();
 	});

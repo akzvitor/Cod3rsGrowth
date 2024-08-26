@@ -1,7 +1,7 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
-    "sap/ui/test/matchers/Properties",  
-    "sap/ui/test/actions/Press"  
+    "sap/ui/test/matchers/Properties",
+    "sap/ui/test/actions/Press"
 
 ], (Opa5, Properties, Press) => {
     "use strict";
@@ -14,20 +14,63 @@ sap.ui.define([
             actions: {
                 euClicoNoBotaoNavBack() {
                     return this.waitFor({
-                        id:ID_PAGINA_DETALHES,
+                        id: ID_PAGINA_DETALHES,
                         viewName: NOME_DA_VIEW,
                         actions: new Press(),
                         errorMessage: "Botão de navback não encontrado"
                     });
                 },
-                
+
                 euClicoNoBotaoEditar() {
                     return this.waitFor({
-                        id:"botaoEditar",
+                        id: "botaoEditar",
                         viewName: NOME_DA_VIEW,
                         actions: new Press(),
                         errorMessage: "Botão Editar não encontrado"
                     });
+                },
+
+                euClicoNoBotaoRemover() {
+                    return this.waitFor({
+                        id: "botaoRemover",
+                        viewName: NOME_DA_VIEW,
+                        actions: new Press(),
+                        errorMessage: "Botão Editar não encontrado"
+                    });
+                },
+
+                euClicoNoBotaoSim() {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        searchOpenDialogs: true,
+                        controlType: "sap.m.Button",
+                        success(aButtons) {
+                            return aButtons.filter(function (oButton) {
+                                if (oButton.getText() == "Sim") {
+                                    oButton.firePress();
+                                }
+                            });
+                        },
+                        actions: new Press(),
+                        errorMessage: "Botão de confirmação não encontrado."
+                    })
+                },
+
+                euClicoNoBotaoVoltarParaPaginaInicial() {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        searchOpenDialogs: true,
+                        controlType: "sap.m.Button",
+                        success(aButtons) {
+                            return aButtons.filter(function (oButton) {
+                                if (oButton.getText() == "Voltar para a página inicial") {
+                                    oButton.firePress();
+                                }
+                            });
+                        },
+                        actions: new Press(),
+                        errorMessage: "Botão de voltar não encontrado."
+                    })
                 }
             },
 
@@ -36,9 +79,9 @@ sap.ui.define([
                     return this.waitFor({
                         success: function () {
                             return this.waitFor({
-                                id:"paginaDetalhes",
+                                id: "paginaDetalhes",
                                 viewName: NOME_DA_VIEW,
-                                matchers: new Properties ({
+                                matchers: new Properties({
                                     title: "Detalhes"
                                 }),
                                 success: function () {
@@ -64,8 +107,8 @@ sap.ui.define([
                             }
                         },
                         success: function () {
-							Opa5.assert.ok(true, `O objeto de intro Nome possui o valor ${valor}.`);
-						},
+                            Opa5.assert.ok(true, `O objeto de intro Nome possui o valor ${valor}.`);
+                        },
                         errorMessage: `O objeto de intro Nome não possui o valor esperado (${valor}).`
                     });
                 },
@@ -84,8 +127,8 @@ sap.ui.define([
                             }
                         },
                         success: function () {
-							Opa5.assert.ok(true, `O objeto de intro E-mail possui o valor ${valor}.`);
-						},
+                            Opa5.assert.ok(true, `O objeto de intro E-mail possui o valor ${valor}.`);
+                        },
                         errorMessage: `O objeto de intro E-mail não possui o valor esperado (${valor}).`
                     });
                 },
@@ -104,8 +147,8 @@ sap.ui.define([
                             }
                         },
                         success: function () {
-							Opa5.assert.ok(true, `O objeto de intro CPF possui o valor ${valor}.`);
-						},
+                            Opa5.assert.ok(true, `O objeto de intro CPF possui o valor ${valor}.`);
+                        },
                         errorMessage: `O objeto de intro CPF não possui o valor esperado (${valor}).`
                     });
                 },
@@ -124,8 +167,8 @@ sap.ui.define([
                             }
                         },
                         success: function () {
-							Opa5.assert.ok(true, `O objeto de intro Telefone possui o valor ${valor}.`);
-						},
+                            Opa5.assert.ok(true, `O objeto de intro Telefone possui o valor ${valor}.`);
+                        },
                         errorMessage: `O objeto de intro Telefone não possui o valor esperado (${valor}).`
                     });
                 },
@@ -144,8 +187,8 @@ sap.ui.define([
                             }
                         },
                         success: function () {
-							Opa5.assert.ok(true, `O objeto de intro Data da compra possui o valor ${valor}.`);
-						},
+                            Opa5.assert.ok(true, `O objeto de intro Data da compra possui o valor ${valor}.`);
+                        },
                         errorMessage: `O objeto de intro Data da compra não possui o valor esperado (${valor}).`
                     });
                 },
@@ -164,9 +207,25 @@ sap.ui.define([
                             }
                         },
                         success: function () {
-							Opa5.assert.ok(true, `O objeto de intro Valor total possui o valor ${valor}.`);
-						},
+                            Opa5.assert.ok(true, `O objeto de intro Valor total possui o valor ${valor}.`);
+                        },
                         errorMessage: `O objeto de intro Valor total não possui o valor esperado (${valor}).`
+                    });
+                },
+
+                deveMostrarMensagemDeSucessoAoRemover() {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        searchOpenDialogs: true,
+                        matchers: {
+                            properties: {
+                                title: "Êxito"
+                            }
+                        },
+                        success: function () {
+                            Opa5.assert.ok(true, "A mensagem de sucesso foi exibida corretamente.");
+                        },
+                        errorMessage: "Não foi exibida a mensagem de sucesso."
                     });
                 }
             }

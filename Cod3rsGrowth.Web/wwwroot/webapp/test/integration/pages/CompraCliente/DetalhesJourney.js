@@ -24,10 +24,10 @@ sap.ui.define([
 		Then.iTeardownMyApp();
 	});
 
-    opaTest("Deveria mostrar detalhes da compra correta.", (Given, When, Then) => {
+    opaTest("Deveria mostrar detalhes da compra correta partindo da tela de listagem.", (Given, When, Then) => {
         Given.iStartMyApp();
 
-        When.naPaginaDeListagem.euClicoEmUmItemDaTabela();
+        When.naPaginaDeListagem.euClicoNoItemDaTabelaComNome("Bruno");
 
         Then.naPaginaDeDetalhes.oObjectListItemComIntroNomeDevePossuirOValor("Bruno");
         Then.naPaginaDeDetalhes.oObjectListItemComIntroEmailDevePossuirOValor("bruno@uol.com");
@@ -38,7 +38,7 @@ sap.ui.define([
         Then.iTeardownMyApp();
     });
 
-    opaTest("Deveria mostrar detalhes da compra correta.", (Given, When, Then) => {
+    opaTest("Deveria mostrar detalhes da compra correta ao iniciar na página de detalhes.", (Given, When, Then) => {
         Given.iStartMyApp({
 			hash: "detalhes/4"
 		});
@@ -49,6 +49,23 @@ sap.ui.define([
         Then.naPaginaDeDetalhes.oObjectListItemComIntroTelefoneDevePossuirOValor("(43) 62352-3634");
         Then.naPaginaDeDetalhes.oObjectListItemComIntroDataCompraDevePossuirOValor("19 de ago. de 2024");
         Then.naPaginaDeDetalhes.oObjectListItemComIntroValorTotalDevePossuirOValor("R$ 79,99");
+        Then.iTeardownMyApp();
+    });
+
+    opaTest("Deveria deletar a compra corretamente.", (Given, When, Then) => {
+        Given.iStartMyApp();
+
+        When.naPaginaDeListagem.euClicoNoItemDaTabelaComNome("Paulo");
+        When.naPaginaDeDetalhes.euClicoNoBotaoRemover();
+        When.naPaginaDeDetalhes.euClicoNoBotaoSim();
+
+        Then.naPaginaDeDetalhes.deveMostrarMensagemDeSucessoAoRemover();
+    });
+
+    opaTest("Deveria navegar de volta para a página de listagem ao clicar no botão voltar.", (Given, When, Then) => {
+        When.naPaginaDeDetalhes.euClicoNoBotaoVoltarParaPaginaInicial();
+
+		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
         Then.iTeardownMyApp();
     });
 });
