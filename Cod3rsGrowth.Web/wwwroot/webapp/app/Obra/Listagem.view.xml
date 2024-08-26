@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Page title="{i18n>ListagemObra.titulo}" class="sapUiContentPadding" titleAlignment="Center" backgroundDesign="List">
+    <Page title="{i18n>ListagemObra.tituloPagina}" class="sapUiContentPadding" titleAlignment="Center" backgroundDesign="List">
         <headerContent>
             <Button id="botaoAdicionarObra" icon="sap-icon://create-form" text="{i18n>ListagemObra.botaoAdicionar}" press="aoClicarNoBotaoAdicionarObra"/>
         </headerContent>
@@ -17,7 +17,7 @@
                     <headerToolbar>
                         <OverflowToolbar>
                             <content>
-                                <Title text="{i18n>ListagemObra.titulo}" level="H2"/>
+                                <Title text="{i18n>ListagemObra.tituloTabela}" level="H2"/>
                                 <ToolbarSpacer />
                                 <core:Icon src="sap-icon://add-filter"/>
                                 <Input id="tituloFiltroInput" placeholder="{i18n>Obra.Titulo}" width="18%" change="aoAlterarInputFiltro" autocomplete="false"/>
@@ -29,7 +29,7 @@
                         <Column width="14rem">
                             <Text text="{i18n>Obra.Titulo}" />
                         </Column>
-                        <Column hAlign="Center" width="12rem">
+                        <Column hAlign="Center" width="10rem">
                             <Text text="{i18n>Obra.Capitulos}" />
                         </Column>
                         <Column hAlign="Center" width="12rem">
@@ -50,8 +50,14 @@
                             <cells>
                                 <Text text="{restObras>titulo}" maxLines="1" />
                                 <Text text="{restObras>numeroCapitulos}" />
-                                <Text text="{restObras>formato}" />
-                                <Text text="{restObras>foiFinalizada}" />
+                                <Text text="{
+                                    path: 'restObras>formato',
+                                    formatter: '.formatter.formatarFormato'
+                                }" />
+                                <Text text="{
+                                    path: 'restObras>foiFinalizada',
+                                    formatter: '.formatter.formatarStatus'
+                                }" />
                                 <Text text="{restObras>autor}" maxLines="1" />
                                 <Text text="{
                                     path: 'restObras>valorObra',

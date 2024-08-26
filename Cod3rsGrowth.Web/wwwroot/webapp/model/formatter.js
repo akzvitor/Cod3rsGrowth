@@ -51,6 +51,17 @@ sap.ui.define([
                 case 3:
                     return oResourceBundle.getText("Formato.webnovel");
             }
+        },
+
+        formatarStatus(status) {
+            const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+            switch (status) {
+                case false:
+                    return oResourceBundle.getText("Status.EmLancamento");
+                case true:
+                    return oResourceBundle.getText("Status.Finalizada");
+            }
         }
     };
 });
