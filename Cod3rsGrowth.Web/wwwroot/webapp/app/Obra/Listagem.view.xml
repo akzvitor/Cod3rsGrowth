@@ -4,7 +4,7 @@
     xmlns:core="sap.ui.core">
     <Page title="{i18n>ListagemObra.titulo}" class="sapUiContentPadding" titleAlignment="Center" backgroundDesign="List">
         <headerContent>
-            <Button id="botaoAdicionarObra" icon="sap-icon://create-form" text="{i18n>ListagemObra.botaoAdicionarListagemObra}" press="aoClicarNoBotaoAdicionarObra"/>
+            <Button id="botaoAdicionarObra" icon="sap-icon://create-form" text="{i18n>ListagemObra.botaoAdicionar}" press="aoClicarNoBotaoAdicionarObra"/>
         </headerContent>
         <content>
             <VBox>
@@ -72,7 +72,10 @@
                                 <Text text="{restObras>Formato}" />
                                 <Text text="{restObras>foiFinalizada}" />
                                 <Text text="{restObras>autor}" />
-                                <Text text="{restObras>valorObra}" />
+                                <Text text="{
+                                    path: 'restObras>valorObra',
+                                    formatter: '.formatter.formatarValor'
+                                }" />
                                 <!-- <Text text="{
                                 path: 'restObras>valorObra',
                                 formatter: '.formatter.formatarObra'
