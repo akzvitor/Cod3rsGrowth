@@ -10,7 +10,6 @@ namespace Cod3rsGrowth.Web.Controllers
     public class ComprasController : ControllerBase
     {
         private readonly ServicoCompraCliente _servicoCompraCliente;
-        private const int ERRO_LISTA_VAZIA = 0;
 
         public ComprasController(ServicoCompraCliente servicoCompraCliente)
         {

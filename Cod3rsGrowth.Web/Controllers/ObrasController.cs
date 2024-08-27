@@ -13,7 +13,6 @@ namespace Cod3rsGrowth.Web.Controllers
     {
         private readonly ServicoObra _servicoObra;
         private readonly ServicoCompraCliente _servicoCompraCliente;
-        private const int ERRO_LISTA_VAZIA = 0;
 
         public ObrasController(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
@@ -25,11 +24,6 @@ namespace Cod3rsGrowth.Web.Controllers
         public IActionResult ObterTodos([FromQuery]FiltroObra? filtro) 
         {
             var listaDeObras = _servicoObra.ObterTodos(filtro);
-
-            if (listaDeObras.Count == ERRO_LISTA_VAZIA)
-            {
-                return NotFound();
-            }
 
             return Ok(listaDeObras);
         }

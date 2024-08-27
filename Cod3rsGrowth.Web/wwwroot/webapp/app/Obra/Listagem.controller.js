@@ -1,7 +1,9 @@
 sap.ui.define([
     "ui5/coders/app/common/BaseController",
-    'ui5/coders/model/formatter'
-], (BaseController, formatter) => {
+    'ui5/coders/model/formatter',
+    "sap/ui/model/json/JSONModel",
+
+], (BaseController, formatter, JSONModel) => {
     "use strict";
 
     const ROTA_LISTAGEM_OBRAS = "listagemObra";
@@ -12,12 +14,14 @@ sap.ui.define([
     const ID_INPUT_TITULO = "tituloFiltroInput";
     const ID_INPUT_AUTOR = "autorFiltroInput";
     const ID_COMBOBOX_STATUS = "statusFiltroComboBox";
+    const ID_COMBOBOX_FORMATO = "formatoFiltroComboBox";
 
     return BaseController.extend("ui5.coders.app.Obra.Listagem", {
         formatter: formatter,
 
         onInit() {
             this.aoCoincidirRota(ROTA_LISTAGEM_OBRAS, API_OBRAS_URL, MODELO_OBRAS);
+            this._inicializarComboBox();
         },
 
         aoAlterarInputFiltro() {
@@ -26,13 +30,15 @@ sap.ui.define([
                 const inputTitulo = this.oView.byId(ID_INPUT_TITULO).getValue();
                 const inputAutor = this.oView.byId(ID_INPUT_AUTOR).getValue();
                 const comboBoxStatus = this.oView.byId(ID_COMBOBOX_STATUS).getSelectedKey();
-                console.log(comboBoxStatus);
+                const comboBoxFormato = this.oView.byId(ID_COMBOBOX_FORMATO).getSelectedKey();
 
                 if (inputTitulo) { urlFiltro += "Titulo=" + inputTitulo + "&"; }
 
                 if (inputAutor) { urlFiltro += "Autor=" + inputAutor + "&"; }
 
                 if (comboBoxStatus) { urlFiltro += "Finalizada=" + comboBoxStatus + "&"; }
+
+                if (comboBoxFormato) { urlFiltro += "Formato=" + comboBoxFormato + "&"; }
 
                 this.inicializarDados(urlFiltro, MODELO_OBRAS);
             });
@@ -48,8 +54,12 @@ sap.ui.define([
                         return res.json();
                     })
                     .then((data) => {
-                        sucesso ? this.getView().setModel(new JSONModel({descricao: data}), MODELO_FORMATOS)
-                            : this.capturarErroApi(data);
+                        if(sucesso) {
+                            const formatos = data.map((item) => ({formato: item}));
+                            this.getView().setModel(new JSONModel({descricoes: formatos}), MODELO_FORMATOS);
+                        } 
+                        else  
+                            this.capturarErroApi(data);
                     })
                     .catch((err) => console.error(err));
             });
