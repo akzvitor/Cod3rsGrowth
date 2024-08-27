@@ -27,7 +27,7 @@ sap.ui.define([
     opaTest("Deveria mostrar detalhes da compra correta partindo da tela de listagem.", (Given, When, Then) => {
         Given.iStartMyApp();
 
-        When.naPaginaDeListagem.euClicoNoItemDaTabelaComNome("Bruno");
+        When.naPaginaDeListagemCompras.euClicoNoItemDaTabelaComNome("Bruno");
 
         Then.naPaginaDeDetalhes.oObjectListItemComIntroNomeDevePossuirOValor("Bruno");
         Then.naPaginaDeDetalhes.oObjectListItemComIntroEmailDevePossuirOValor("bruno@uol.com");
@@ -55,7 +55,7 @@ sap.ui.define([
     opaTest("Deveria deletar a compra corretamente.", (Given, When, Then) => {
         Given.iStartMyApp();
 
-        When.naPaginaDeListagem.euClicoNoItemDaTabelaComNome("Paulo");
+        When.naPaginaDeListagemCompras.euClicoNoItemDaTabelaComNome("Paulo");
         When.naPaginaDeDetalhes.euClicoNoBotaoRemover();
         When.naPaginaDeDetalhes.euClicoNoBotaoSim();
 
@@ -65,7 +65,7 @@ sap.ui.define([
     opaTest("Deveria navegar de volta para a página de listagem ao clicar no botão voltar.", (Given, When, Then) => {
         When.naPaginaDeDetalhes.euClicoNoBotaoVoltarParaPaginaInicial();
 
-		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
+		Then.naPaginaDeListagemCompras.aPaginaDeveMudarParaListagem();
         Then.iTeardownMyApp();
     });
 });

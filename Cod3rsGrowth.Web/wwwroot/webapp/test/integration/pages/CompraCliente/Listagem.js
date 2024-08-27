@@ -24,17 +24,29 @@ sap.ui.define([
     const MENSAGEM_ERRO_CARREGAR_TABELA = "Ocorreu um erro ao carregar a tabela ou filtrar os dados.";
 
     Opa5.createPageObjects({
-        naPaginaDeListagem: {
+        naPaginaDeListagemCompras: {
             actions: {
                 euClicoNoBotaoAdicionar() {
                     return this.waitFor({
                         id: ID_BOTAO_ADICIONAR,
                         viewName: NOME_DA_VIEW,
                         actions: new Press(),
-                        errorMessage: "Botão adicionar não encontrado.",
                         success: function() {
                             return new Promise(resolve => setTimeout(resolve, 1000)); 
-                        }
+                        },
+                        errorMessage: "Botão adicionar não encontrado."
+                    });
+                },
+
+                euClicoNoBotaoObras() {
+                    return this.waitFor({
+                        id: "botaoObras",
+                        viewName: NOME_DA_VIEW,
+                        actions: new Press(),
+                        success: function () {
+                            Opa5.assert.ok(true, "Botão obras encontrado.")
+                        },
+                        errorMessage: "Botão obras não encontrado."
                     });
                 },
 
@@ -61,7 +73,7 @@ sap.ui.define([
                         id: ID_INPUT_NOME,
                         viewName: NOME_DA_VIEW,
                         actions: new EnterText({
-                             text: STRING_INSERIDO_INPUT_NOME 
+                            text: STRING_INSERIDO_INPUT_NOME 
                         }),
                         errorMessage: "Input de filtro Nome não encontrado.",
                         success: function() {
