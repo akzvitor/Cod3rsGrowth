@@ -63,6 +63,13 @@ sap.ui.define([
                     })
                     .catch((err) => console.error(err));
             });
+        },
+
+        aoClicarNoBotaoCompras() {
+            this.processarAcao(() => {
+				const oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("listagem");
+			});
         }
     });
 });

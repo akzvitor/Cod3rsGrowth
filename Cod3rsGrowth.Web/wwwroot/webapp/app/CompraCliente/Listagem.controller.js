@@ -67,6 +67,13 @@ sap.ui.define([
                     idCompra: window.encodeURIComponent(oItem.getBindingContext(MODELO_COMPRAS).getProperty("id"))
                 })
             });
+        },
+
+        aoClicarNoBotaoObras() {
+            this.processarAcao(() => {
+				const oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("listagemObra");
+			});
         }
     });
 });
