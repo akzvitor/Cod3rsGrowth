@@ -175,6 +175,50 @@ sap.ui.define([
                 return false
 
             return true
+        },
+
+        validarTitulo(input) {
+            const valor = input.getValue();
+            const tamanhoLimiteTitulo = 2000;
+            const mensagemErroTituloExcedeTamanhoMaximo = `O título pode ter no máximo ${tamanhoLimiteTitulo} caracteres.`;
+            let invalido = false;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) { input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); }
+
+            if (valor.length > tamanhoLimiteTitulo) { input.setValueStateText(mensagemErroTituloExcedeTamanhoMaximo); }
+
+            if (!invalido) { 
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return invalido;
+        },
+
+        validarAutor(input) {
+            const valor = input.getValue();
+            const tamanhoLimiteAutor = 150;
+            const regexAutor = /^[a-zA-Zà-úÀ-Ú0-9-_ ]*$/;
+            const mensagemErroAutorExcedeTamanhoMaximo = `O nome do autor deve ter até ${tamanhoLimiteAutor} caracteres.`;
+            const mensagemErroRegexAutor = "O nome do autor deve conter apenas letras, números, espaços ou símbolos como - ou _.";
+            let invalido = false;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) { input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); }
+
+            if (valor.length > tamanhoLimiteAutor) {input.setValueStateText(mensagemErroAutorExcedeTamanhoMaximo); }
+
+            if (!regexAutor.test(valor)) { input.setValueStateText(mensagemErroRegexAutor); }
+
+            if (!invalido) { 
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return invalido;
         }
     };
 });

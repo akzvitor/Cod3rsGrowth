@@ -73,7 +73,7 @@
                             selectionChange="aoSelecionarGenero"
                             selectionFinish="aoTerminarSelecao"
                             width="80%"
-                            maxWidth="80%"
+                            maxWidth="65%"
                             items="{restGeneros>/opcoes}">
                             <core:Item key="{path: 'restGeneros>opcao'}"
                             text="{path: 'restGeneros>opcao'}"/>
@@ -83,8 +83,8 @@
                 <HBox class="sapUiSmallMargin">
                     <VBox>
                         <Label text="{i18n>Obra.Sinopse}" required="true" class="sapUiMediumMarginTop"/>
-                        <TextArea value="{restObras>sinopse}" growing="false" growingMaxLines="7" width="430%" 
-                            rows="7" placeholder="Sinopse"/>
+                        <TextArea value="{restObras>sinopse}" change="aoPreencherSinopse" growing="false" 
+                            growingMaxLines="7" width="430%" rows="7" placeholder="Sinopse"/>
                     </VBox>
                 </HBox>
             </VBox>
