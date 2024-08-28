@@ -22,38 +22,54 @@ sap.ui.define([
             this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
         },
 
-        aoPreencherTitulo() {
+        aoPreencherTitulo(oEvent) {
+            this.processarAcao(() => {
+                const oInput = oEvent.getSource();
 
+                validator.validarTitulo(oInput);
+            });
         },
 
-        aoPreencherAutor() {
+        aoPreencherAutor(oEvent) {
+            this.processarAcao(() => {
+                const oInput = oEvent.getSource();
 
+                validator.validarAutor(oInput);
+            });
         },
 
-        aoSelecionarFormato() {
+        aoSelecionarFormato(oEvent) {
+            this.processarAcao(() => {
+                const oInput = oEvent.getSource();
 
+                validator.validarFormato(oInput);
+            });
         },
 
-        aoSelecionarNumeroDeCapitulos() {
+        aoSelecionarStatus(oEvent) {
+            this.processarAcao(() => {
+                const oInput = oEvent.getSource();
 
+                validator.validarStatus(oInput);
+            });
         },
 
-        aoSelecionarStatus() {
+        aoSelecionarData(oEvent) {
+            this.processarAcao(() => {
+                const oInput = oEvent.getSource();
 
-        },
-
-        aoSelecionarData() {
-
-        },
-
-        aoSelecionarValor() {
-
+                validator.validarInicioDaPublicacao(oInput);
+            });
         },
 
         //TO DO - SELECIONAR GENERO: DUAS FUNÇÕES -> QUAL USAR?
 
-        aoPreencherSinopse() {
-            
+        aoPreencherSinopse(oEvent) {
+            this.processarAcao(() => {
+                const oInput = oEvent.getSource();
+
+                validator.validarSinopse(oInput);
+            });
         }
     });
 });

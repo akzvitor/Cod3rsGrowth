@@ -219,6 +219,99 @@ sap.ui.define([
             }
 
             return invalido;
+        },
+
+        validarSinopse(input) {
+            const valor = input.getValue();
+            const tamanhoLimiteSinopse = 2000;
+            const mensagemErroSinopseExcedeTamanhoMaximo = `A sinopse deve ter no máximo ${tamanhoLimiteSinopse} caracteres.`;
+            let invalido = false;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) { input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); }
+
+            if (valor.length > tamanhoLimiteSinopse) {input.setValueStateText(mensagemErroSinopseExcedeTamanhoMaximo); }
+
+            if (!invalido) { 
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return invalido;
+        },
+
+        validarInicioDaPublicacao(input) {
+            const valorString = input.getValue();
+            const valorData = new Date(valorString);
+            const mensagemErroDataPubliInvalida = "Data inválida. Não é possível colocar uma data futura."
+
+            let invalido = false;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) { input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); }
+
+            if (valorData >= Date.now()) { input.setValueStateText(mensagemErroDataPubliInvalida); }
+
+            if (!invalido) { 
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return invalido;
+        },
+
+        validarFormato(input) {
+            const valor = input.getValue();
+            const mensagemErroFormatoInvalido = "Formato de obra inválido."
+            const listaDeFormatos = ["Mangá", "Manhua", "Manhwa", "Web Novel"]
+
+            let invalido = false;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) { input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); }
+
+            if (!listaDeFormatos.includes(valor)) { input.setValueStateText(mensagemErroFormatoInvalido); }
+
+            if (!invalido) { 
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return invalido;
+        },
+
+        validarGeneros(input) {
+            const valor = input.getValue();
+
+            let invalido = false;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) { input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); }
+
+            // TO DO - VERIFICAR GENEROS QUE NÃO ESTÃO NA LISTA? É POSSÍVEL COLOCAR ALGUM GÊNERO ALEATÓRIO?
+
+            if (!invalido) { 
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return invalido;
+        },
+
+        validarDadosObra(titulo, autor, sinopse, inicioDaPublicacao, formato, generos) {
+            const tituloEValido = this.validarTitulo(titulo);
+            const autorEValido = this.validarAutor(autor);
+            const sinopseEValida = this.validarSinopse(sinopse);
+            const inicioDaPublicacaoEValido = this.validarInicioDaPublicacao(inicioDaPublicacao);
+            const formatoEValido = this.validarFormato(formato);
+            const generosSaoValidos = this.validarGeneros(generos);
+
+            return tituloEValido && autorEValido && sinopseEValida && inicioDaPublicacaoEValido
+                && formatoEValido && generosSaoValidos;
         }
     };
 });
