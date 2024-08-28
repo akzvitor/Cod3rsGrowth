@@ -12,6 +12,8 @@ sap.ui.define([
     const MODELO_FORMATOS="restFormatos";
     const API_GENEROS_URL="http://localhost:5070/api/Obras/generos";
     const MODELO_GENEROS="restGeneros";
+    const ID_TITULO_INPUT = "tituloFormInput";
+    const ID_AUTOR_INPUT = "autorFormInput";
 
     return BaseController.extend("ui5.coders.app.Obra.CriacaoObra", {
         formatter: formatter,
@@ -20,6 +22,10 @@ sap.ui.define([
         onInit() {
             this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
             this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
+        },
+
+        aoClicarNoBotaoSalvar() {
+            
         },
 
         aoPreencherTitulo(oEvent) {
