@@ -28,7 +28,7 @@ namespace Cod3rsGrowth.Web.Controllers
             return Ok(listaDeObras);
         }
 
-        [HttpGet("Formatos")]
+        [HttpGet("formatos")]
         public IActionResult ObterFormatos() {
             var formatos = ExtensaoEnums.ObterListaDescricoesEnum<Formato>();
 

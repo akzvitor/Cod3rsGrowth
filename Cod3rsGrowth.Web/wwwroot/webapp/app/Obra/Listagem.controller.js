@@ -8,7 +8,7 @@ sap.ui.define([
 
     const ROTA_LISTAGEM_OBRAS = "listagemObra";
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
-    const API_FORMATOS_URL = "http://localhost:5070/api/Obras/Formatos";
+    const API_FORMATOS_URL = "http://localhost:5070/api/Obras/formatos";
     const MODELO_OBRAS = "restObras";
     const MODELO_FORMATOS = "restFormatos";
     const ID_INPUT_TITULO = "tituloFiltroInput";
