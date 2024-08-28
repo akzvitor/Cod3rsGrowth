@@ -31,10 +31,10 @@
                                     change="aoAlterarInputFiltro" autocomplete="false"/>
                                 <Input id="autorFiltroInput" placeholder="{i18n>Obra.Autor}" width="18%"
                                     change="aoAlterarInputFiltro"/>
-                                <ComboBox id="formatoFiltroComboBox" items="{restFormatos>/descricoes}"
+                                <ComboBox id="formatoFiltroComboBox" items="{restFormatos>/opcoes}"
                                     selectionChange="aoAlterarInputFiltro" placeholder="Formato" width="14%">
-                                    <core:Item key="{path: 'restFormatos>formato', formatter: '.formatter.formatarFormatoParaFiltro'}"
-                                        text="{path: 'restFormatos>formato'}"/>
+                                    <core:Item key="{path: 'restFormatos>opcao', formatter: '.formatter.formatarFormatoParaFiltro'}"
+                                        text="{path: 'restFormatos>opcao'}"/>
                                 </ComboBox>
                                 <ComboBox id="statusFiltroComboBox" placeholder="Status" width="14%"
                                     selectionChange="aoAlterarInputFiltro">

@@ -20,96 +20,74 @@
                 <Title class="sapUiSmallMargin" id="Title1" text="{i18n>CriacaoObra.tituloFormulario}"/>
                 <ToolbarSpacer />
             </OverflowToolbar>
-            <HBox class="sapUiLargeMargin">
-                <VBox class="sapUiLargeMarginEnd">
-                    <Label text="{i18n>Obra.Titulo}" required="true" />
-                    <Input id="tituloFormInput" value="{restObras>titulo}" width="130%" liveChange="aoPreencherTitulo" required="true" autocomplete="false"/>
-                    <Label text="{i18n>Obra.Autor}" required="true" class="sapUiSmallMarginTop"/>
-                    <Input id="autorFormInput" value="{restObras>autor}" width="130%" liveChange="aoPreencherAutor" required="true" autocomplete="false" />
-                </VBox>
-                <VBox class="sapUiLargeMarginBegin">
-                    <Label text="{i18n>Obra.Capitulos}" required="true" />
-                    <StepInput
-                        id="stepInputCapitulos"
-                        value="1"
-                        min="1"
-                        max="20000"
-                        width="40%"
-                        textAlign="Center"
-                        change="aoSelecionarNumeroDeCapitulos"/>
-                    <Label text="{i18n>Obra.Formato}" required="true" class="sapUiSmallMarginTop"/>
-                    <ComboBox id="formatoComboBox" items="{restFormatos>/descricoes}"
-                        selectionChange="aoSelecionarFormato" placeholder="Formato" width="50%">
-                        <core:Item key="{path: 'restFormatos>formato', formatter: '.formatter.formatarFormatoParaFiltro'}"
-                            text="{path: 'restFormatos>formato'}"/>
+            <VBox>
+                <HBox class="sapUiSmallMargin">
+                    <VBox class="sapUiLargeMarginEnd">
+                        <Label text="{i18n>Obra.Titulo}" required="true" />
+                        <Input id="tituloFormInput" value="{restObras>titulo}" width="130%" liveChange="aoPreencherTitulo" required="true" autocomplete="false"/>
+                        <Label text="{i18n>Obra.Autor}" required="true" class="sapUiLargeMarginTop"/>
+                        <Input id="autorFormInput" value="{restObras>autor}" width="130%" liveChange="aoPreencherAutor" required="true" autocomplete="false" />
+                    </VBox>
+                    <VBox class="sapUiLargeMarginBegin">
+                        <Label text="{i18n>Obra.Formato}" required="true"/>
+                        <ComboBox id="formatoComboBox" items="{restFormatos>/opcoes}"
+                            selectionChange="aoSelecionarFormato" placeholder="Formato" maxWidth="100%" width="100%">
+                            <core:Item key="{path: 'restFormatos>opcao', formatter: '.formatter.formatarFormatoParaFiltro'}"
+                                text="{path: 'restFormatos>opcao'}"/>
                         </ComboBox>
-                </VBox>
-                <VBox class="sapUiLargeMarginEnd">
-                    <Label text="{i18n>Obra.Valor}" required="true" />
-                    <StepInput
-                    id="stepInputValor"
-                    value="0"
-                    displayValuePrecision="2"
-                    min="0"
-                    max="20000"
-                    width="auto"
-                    textAlign="Center"
-                    description="BRL"
-                    change="aoSelecionarValor"/>
-                    <Label text="{i18n>Obra.Status}" required="true" class="sapUiSmallMarginTop"/>
-                    <ComboBox id="statusComboBox" placeholder="Status" width="60%"
-                        selectionChange="aoSelecionarStatus">
-                        <core:Item key="true" text="Finalizadas"/>
-                        <core:Item key="false" text="Em lançamento"/>
-                    </ComboBox>
-                </VBox>
-                <VBox class="sapUiLargeMarginBegin">
-                    <Label text="{i18n>Obra.InicioPubli}" required="true" />
-                    <DatePicker id="datePickerFormInput" class="DRS1" change="aoSelecionarData" width="auto" 
-                        placeholder="{i18n>Obra.Data}" showFooter="true" />
-                    <Label text="{i18n>Obra.Sinopse}" required="true" class="sapUiSmallMarginTop"/>
-                    <TextArea value="{restObras>sinopse}" growing="true" growingMaxLines="7" width="50%" 
-                        rows="1" placeholder="Sinopse"/>
-                </VBox>
-            </HBox>
-            <HBox class="sapUiSmallMargin">
-                <VBox>
-                    <Label text="{i18n>Obra.Generos}" required="true" class="sapUiSmallMarginTop"/>
-                    <MultiComboBox
-			            selectionChange="aoSelecionarGenero"
-			            selectionFinish="aoTerminarSelecao"
-			            width="100%"
-			            items="{
-				            path: '/ProductCollection',
-				            sorter: { path: 'Name' }
-			            }">
-			            <core:Item key="{ProductId}" text="{Name}"/>
-		            </MultiComboBox>
-                </VBox>
-            </HBox>
-        </content>
-        <!-- <content>
-            <OverflowToolbar class="sapUiLargeMarginTop">
-                <core:Icon src="sap-icon://add-coursebook" color="Tile"/>
-                <Title class="sapUiSmallMargin" text="{i18n>CriacaoCompra.tituloCatalogo}" />
-                <content>
-                    <ObjectStatus id="mensagemErroProdutos" visible="false" text="{i18n>CriacaoCompra.mensagemErroProdutos}" state="Error"/>
-                </content>
-                <ToolbarSpacer />
-                <SearchField width="18%" search="aoProcurarObra" placeholder="{i18n>CriacaoCompra.searchFieldPlaceholder}" id="searchFieldCatalogo"/>
-            </OverflowToolbar>
-            <VBox class="sapUiSmallMargin" backgroundDesign="Solid">
-                <List id="catalogoObras" items="{
-                        path: 'restObras>/'
-                    }" selectionChange=".onSelectionChange" mode="MultiSelect" growing="true" growingThreshold="7" growingScrollToLoad="false" includeItemInSelection="true" showSeparators="Inner">
-                    <infoToolbar>
-                        <OverflowToolbar visible="false" id="idInfoToolbar">
-                            <Label id="idFilterLabel" />
-                        </OverflowToolbar>
-                    </infoToolbar>
-                    <StandardListItem id="itemCatalogo" title="{restObras>titulo} - R${restObras>valorObra}" description="{restObras>autor}" iconDensityAware="false" iconInset="false" />
-                </List>
+                        <Label text="{i18n>Obra.Capitulos}" required="true" class="sapUiLargeMarginTop"/>
+                        <StepInput
+                            id="stepInputCapitulos"
+                            value="1"
+                            min="1"
+                            max="20000"
+                            width="100%"
+                            textAlign="Center"
+                            change="aoSelecionarNumeroDeCapitulos"/>
+                    </VBox>
+                    <VBox class="sapUiLargeMarginBegin">
+                        <Label text="{i18n>Obra.Status}" required="true" />
+                        <ComboBox id="statusComboBox" placeholder="Status" maxWidth="100%" width="130%"
+                            selectionChange="aoSelecionarStatus">
+                            <core:Item key="true" text="Finalizadas"/>
+                            <core:Item key="false" text="Em lançamento"/>
+                        </ComboBox>
+                        <Label text="{i18n>Obra.InicioPubli}" required="true" class="sapUiLargeMarginTop"/>
+                        <DatePicker id="datePickerFormInput" change="aoSelecionarData" width="100%" 
+                            placeholder="{i18n>Obra.Data}" showFooter="true"/>
+                    </VBox>
+                    <VBox class="sapUiLargeMarginBegin">
+                        <Label text="{i18n>Obra.Valor}" required="true"/>
+                        <StepInput
+                        id="stepInputValor"
+                        value="0"
+                        displayValuePrecision="2"
+                        min="0"
+                        max="20000"
+                        width="135%"
+                        textAlign="Center"
+                        description="BRL"
+                        change="aoSelecionarValor"/>
+                        <Label text="{i18n>Obra.Generos}" required="true" class="sapUiLargeMarginTop"/>
+                        <MultiComboBox
+                            selectionChange="aoSelecionarGenero"
+                            selectionFinish="aoTerminarSelecao"
+                            width="80%"
+                            maxWidth="80%"
+                            items="{restGeneros>/opcoes}">
+                            <core:Item key="{path: 'restGeneros>opcao'}"
+                            text="{path: 'restGeneros>opcao'}"/>
+                        </MultiComboBox>
+                    </VBox>
+                </HBox>
+                <HBox class="sapUiSmallMargin">
+                    <VBox>
+                        <Label text="{i18n>Obra.Sinopse}" required="true" class="sapUiMediumMarginTop"/>
+                        <TextArea value="{restObras>sinopse}" growing="false" growingMaxLines="7" width="430%" 
+                            rows="7" placeholder="Sinopse"/>
+                    </VBox>
+                </HBox>
             </VBox>
-        </content> -->
+        </content>
     </Page>
 </mvc:View>

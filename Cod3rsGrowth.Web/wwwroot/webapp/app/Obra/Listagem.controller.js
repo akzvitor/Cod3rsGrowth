@@ -21,7 +21,7 @@ sap.ui.define([
 
         onInit() {
             this.aoCoincidirRota(ROTA_LISTAGEM_OBRAS, API_OBRAS_URL, MODELO_OBRAS);
-            this.inicializarComboBoxFormato();
+            this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
         },
 
         aoAlterarInputFiltro() {

@@ -83,10 +83,10 @@ sap.ui.define([
 			return oDate.toISOString();
 		},
 
-		inicializarComboBoxFormato() {
+		inicializarComboBox(urlApi, nomeDoModelo) {
             this.processarAcao(() => {
                 let sucesso = true;
-                fetch("http://localhost:5070/api/Obras/formatos")
+                fetch(urlApi)
                     .then((res) => {
                         if (!res.ok)
                             sucesso = false;
@@ -94,8 +94,8 @@ sap.ui.define([
                     })
                     .then((data) => {
                         if(sucesso) {
-                            const formatos = data.map((item) => ({formato: item}));
-                            this.getView().setModel(new JSONModel({descricoes: formatos}), "restFormatos");
+                            const opcoes = data.map((item) => ({opcao: item}));
+                            this.getView().setModel(new JSONModel({opcoes: opcoes}), nomeDoModelo);
                         } 
                         else  
                             this.capturarErroApi(data);
