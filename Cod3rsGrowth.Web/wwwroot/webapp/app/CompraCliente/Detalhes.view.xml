@@ -93,7 +93,7 @@
                                 <Text
                                     text="{
                                     path: 'restObras>formato',
-                                    formatter: '.formatter.formatarFormato'
+                                    formatter: '.formatter.formatarFormatoParaTabela'
                                 }" />
                                 <Text text="{restObras>numeroCapitulos}" />
                                 <Text

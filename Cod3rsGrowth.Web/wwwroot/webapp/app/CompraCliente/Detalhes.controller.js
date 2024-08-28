@@ -60,9 +60,8 @@ sap.ui.define([
 				.catch((err) => console.error(err));
 		},
 
-		aoClicarNoBotaoEditar(oEvent) {
+		aoClicarNoBotaoEditar() {
 			this.processarAcao(() => {
-				const oItem = oEvent.getSource();
 				const oRouter = this.getOwnerComponent().getRouter();
 				oRouter.navTo("edicaoCompra", {
 					idCompra: id_parametro

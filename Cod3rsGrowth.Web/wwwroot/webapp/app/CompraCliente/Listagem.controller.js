@@ -5,7 +5,7 @@ sap.ui.define([
 ], (BaseController, formatter) => {
     "use strict";
 
-    const ROTA_LISTAGEM = "listagem"
+    const ROTA_LISTAGEM = "listagem";
     const API_COMPRAS_URL = "http://localhost:5070/api/Compras";
     const MODELO_COMPRAS = "restCompras";
     const ID_NOME_FILTRO_INPUT = "nomeFiltroInput";
@@ -67,6 +67,13 @@ sap.ui.define([
                     idCompra: window.encodeURIComponent(oItem.getBindingContext(MODELO_COMPRAS).getProperty("id"))
                 })
             });
+        },
+
+        aoClicarNoBotaoObras() {
+            this.processarAcao(() => {
+				const oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("listagemObra");
+			});
         }
     });
 });

@@ -134,6 +134,8 @@ sap.ui.define([
                     if (rota === ROTA_CRIACAO) {
                         this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoCriar"));
                         this._postData(data);
+                        this._limparInputs();
+                        this._removerSelecoes();
                     }
 
                     if (rota === ROTA_EDICAO) {
@@ -143,9 +145,7 @@ sap.ui.define([
                         this._putData(data);
                     }
 
-                    this._limparInputs();
                     this._esconderMensagensDeErro();
-                    this._removerSelecoes();
                     this._removerValueStates();
                     this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
                 }

@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servico.Servicos;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.JsonPatch.Internal;
@@ -12,7 +13,6 @@ namespace Cod3rsGrowth.Web.Controllers
     {
         private readonly ServicoObra _servicoObra;
         private readonly ServicoCompraCliente _servicoCompraCliente;
-        private const int ERRO_LISTA_VAZIA = 0;
 
         public ObrasController(ServicoObra servicoObra, ServicoCompraCliente servicoCompraCliente)
         {
@@ -25,12 +25,14 @@ namespace Cod3rsGrowth.Web.Controllers
         {
             var listaDeObras = _servicoObra.ObterTodos(filtro);
 
-            if (listaDeObras.Count == ERRO_LISTA_VAZIA)
-            {
-                return NotFound();
-            }
-
             return Ok(listaDeObras);
+        }
+
+        [HttpGet("formatos")]
+        public IActionResult ObterFormatos() {
+            var formatos = ExtensaoEnums.ObterListaDescricoesEnum<Formato>();
+
+            return Ok(formatos);
         }
 
         [HttpGet("Compra/{id}")]

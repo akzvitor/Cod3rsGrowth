@@ -6,12 +6,12 @@ sap.ui.define([
 ], (opaTest) => {
 	"use strict";
 
-	QUnit.module("Listagem");
+	QUnit.module("Listagem Compras");
 
 	opaTest("Deveria ver a página de criação ao clicar no botão adicionar.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.naPaginaDeListagem.euClicoNoBotaoAdicionar();
+		When.naPaginaDeListagemCompras.euClicoNoBotaoAdicionar();
 
 		Then.naPaginaDeCriacaoCompra.aPaginaDeveMudarParaCriacaoCompra();
 	});
@@ -19,14 +19,14 @@ sap.ui.define([
 	opaTest("Deveria voltar para a página de Listagem.", (Given, When, Then) => {
 		When.naPaginaDeCriacaoCompra.euClicoNoBotaoNavBack();
 
-		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
+		Then.naPaginaDeListagemCompras.aPaginaDeveMudarParaListagem();
 		Then.iTeardownMyApp();
 	});
 
 	opaTest("Deveria ver a página de detalhes ao clicar em algum item da tabela.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.naPaginaDeListagem.euClicoNoItemDaTabelaComNome("Bruno");
+		When.naPaginaDeListagemCompras.euClicoNoItemDaTabelaComNome("Bruno");
 
 		Then.naPaginaDeDetalhes.aPaginaDeveMudarParaDetalhes();
 	});
@@ -34,7 +34,7 @@ sap.ui.define([
 	opaTest("Deveria voltar para a página de Listagem.", (Given, When, Then) => {
 		When.naPaginaDeDetalhes.euClicoNoBotaoNavBack();
 
-		Then.naPaginaDeListagem.aPaginaDeveMudarParaListagem();
+		Then.naPaginaDeListagemCompras.aPaginaDeveMudarParaListagem();
 		Then.iTeardownMyApp();
 	});
 
@@ -42,36 +42,36 @@ sap.ui.define([
 	opaTest("Deveria filtrar os dados da tabela por nome do cliente e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.naPaginaDeListagem.euPreenchoOInputNome();
+		When.naPaginaDeListagemCompras.euPreenchoOInputNome();
 
-		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComFiltroNome();
+		Then.naPaginaDeListagemCompras.aTabelaDeveSerFiltradaDeAcordoComFiltroNome();
 		Then.iTeardownMyApp();
 	});
 
 	opaTest("Deveria filtrar os dados da tabela por CPF e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.naPaginaDeListagem.euPreenchoOInputCPF();
+		When.naPaginaDeListagemCompras.euPreenchoOInputCPF();
 
-		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComFiltroCPF();
+		Then.naPaginaDeListagemCompras.aTabelaDeveSerFiltradaDeAcordoComFiltroCPF();
 		Then.iTeardownMyApp();
 	});
 
 	opaTest("Deveria filtrar os dados da tabela pela data e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.naPaginaDeListagem.euSelecionoAData();
+		When.naPaginaDeListagemCompras.euSelecionoAData();
 
-		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComDataNoFiltroData();
+		Then.naPaginaDeListagemCompras.aTabelaDeveSerFiltradaDeAcordoComDataNoFiltroData();
 		Then.iTeardownMyApp();
 	});
 
 	opaTest("Deveria filtrar os dados da tabela pelo periodo e exibir a tabela com os dados filtrados.", (Given, When, Then) => {
 		Given.iStartMyApp();
 
-		When.naPaginaDeListagem.euSelecionoOPeriodo();
+		When.naPaginaDeListagemCompras.euSelecionoOPeriodo();
 
-		Then.naPaginaDeListagem.aTabelaDeveSerFiltradaDeAcordoComRangeNoFiltroData();
+		Then.naPaginaDeListagemCompras.aTabelaDeveSerFiltradaDeAcordoComRangeNoFiltroData();
 		Then.iTeardownMyApp();
 	});
 });

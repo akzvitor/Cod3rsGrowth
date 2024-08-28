@@ -38,11 +38,11 @@ sap.ui.define([
             return telefone;
         },
 
-        formatarFormato(formato) {
+        formatarFormatoParaTabela(formato) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
             switch (formato) {
-                case 0:
+                case 0 :
                     return oResourceBundle.getText("Formato.manga");
                 case 1:
                     return oResourceBundle.getText("Formato.manhwa");
@@ -50,6 +50,28 @@ sap.ui.define([
                     return oResourceBundle.getText("Formato.manhua");
                 case 3:
                     return oResourceBundle.getText("Formato.webnovel");
+            }
+        },
+
+        formatarFormatoParaFiltro(formato) {
+            switch (formato) {
+                case "Mangá":
+                    return "Manga";
+                case "Web Novel":
+                    return "WebNovel";
+                default:
+                    return formato;
+            }
+        },
+
+        formatarStatus(status) {
+            const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+            switch (status) {
+                case false:
+                    return oResourceBundle.getText("Status.EmLancamento");
+                case true:
+                    return oResourceBundle.getText("Status.Finalizada");
             }
         }
     };
