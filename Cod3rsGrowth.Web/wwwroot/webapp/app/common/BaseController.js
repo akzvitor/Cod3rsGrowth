@@ -81,6 +81,27 @@ sap.ui.define([
 
 			let oDate = new Date(data);
 			return oDate.toISOString();
-		}
+		},
+
+		inicializarComboBoxFormato() {
+            this.processarAcao(() => {
+                let sucesso = true;
+                fetch("http://localhost:5070/api/Obras/formatos")
+                    .then((res) => {
+                        if (!res.ok)
+                            sucesso = false;
+                        return res.json();
+                    })
+                    .then((data) => {
+                        if(sucesso) {
+                            const formatos = data.map((item) => ({formato: item}));
+                            this.getView().setModel(new JSONModel({descricoes: formatos}), "restFormatos");
+                        } 
+                        else  
+                            this.capturarErroApi(data);
+                    })
+                    .catch((err) => console.error(err));
+            });
+        }
 	});
 });

@@ -83,6 +83,11 @@
                     "pattern": "listagemObra",
                     "name": "listagemObra",
                     "target": "listagemObra"
+                },
+                {
+                    "pattern": "criacaoObra",
+                    "name": "criacaoObra",
+                    "target": "criacaoObra"
                 }
             ],
             "targets": {
@@ -106,6 +111,10 @@
                 "listagemObra": {
                     "id": "listagemObra",
                     "name": "app.Obra.Listagem"
+                },
+                "criacaoObra": {
+                    "id": "criacaoObra",
+                    "name": "app.Obra.CriacaoObra"
                 }
             }
         }
