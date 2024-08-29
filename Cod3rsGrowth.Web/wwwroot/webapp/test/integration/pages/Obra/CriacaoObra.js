@@ -1,12 +1,13 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
-	'sap/ui/test/matchers/Properties',
+    'sap/ui/test/matchers/Properties',
     'sap/ui/test/actions/Press',
     'sap/ui/test/actions/EnterText',
     'sap/ui/test/matchers/AggregationLengthEquals',
-    'sap/ui/test/matchers/AggregationFilled'
+    'sap/ui/test/matchers/AggregationFilled',
+    'sap/ui/test/matchers/Ancestor',
 
-], (Opa5, Properties, Press, EnterText, AggregationLengthEquals, AggregationFilled) => {
+], (Opa5, Properties, Press, EnterText, AggregationLengthEquals, AggregationFilled, Ancestor) => {
     "use strict";
 
     const NOME_DA_VIEW = "Obra.CriacaoObra";
@@ -16,10 +17,10 @@ sap.ui.define([
             actions: {
                 euClicoNoBotaoNavBack() {
                     return this.waitFor({
-                        id:"paginaCriacaoObra",
+                        id: "paginaCriacaoObra",
                         viewName: NOME_DA_VIEW,
                         actions: new Press(),
-                        errorMessage: "Botão de navback não encontrado"  
+                        errorMessage: "Botão de navback não encontrado"
                     });
                 },
 
@@ -78,8 +79,24 @@ sap.ui.define([
                     });
                 },
 
-                euSelecionoOsGeneros() {
-
+                // TO DO - Verificar controltype (sap.ui.core.Item ?) e a key
+                euSelecionoOGenero(genero) {
+                    return this.waitFor({
+                        id: "generosMultiComboBox",
+                        actions: new Press(),
+                        success: function (oMultiComboBox) {
+                            this.waitFor({
+                                controlType: "sap.m.StandardListItem",
+                                matchers: [
+                                    new Ancestor(oMultiComboBox),
+                                    new Properties({ key: genero })
+                                ],
+                                actions: new Press(),
+                                errorMessage: `Não foi possível selecionar a key ${genero} na MultiComboBox de generos.`
+                            });
+                        },
+                        errorMessage: "Multi Combo Box de generos não foi encontrada."
+                    });
                 },
 
                 euPreenchoASinopseComOValor(sinopse) {
