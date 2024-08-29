@@ -347,7 +347,7 @@ sap.ui.define([
 
             input.setValueState(ValueState.Error);
 
-            if (!valor) { 
+            if (valor.length === 0) { 
                 input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); 
                 eValido = false;
             }
@@ -356,7 +356,6 @@ sap.ui.define([
                 input.setValueState(ValueState.None);
                 return true;
             }
-
             return false;
         },
 
@@ -369,6 +368,9 @@ sap.ui.define([
             const generosSaoValidos = this.validarGeneros(generos);
             const statusEValido = this.validarStatus(status);
 
+            console.log(generos.getSelectedKeys())
+            console.log(generosSaoValidos);
+            
             return tituloEValido && autorEValido && sinopseEValida && inicioDaPublicacaoEValido
                 && formatoEValido && generosSaoValidos && statusEValido;
         }

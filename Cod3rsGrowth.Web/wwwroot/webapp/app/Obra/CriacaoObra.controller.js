@@ -1,11 +1,10 @@
 sap.ui.define([
     "ui5/coders/app/common/BaseController",
     'ui5/coders/model/formatter',
-    "sap/ui/model/json/JSONModel",
     'ui5/coders/model/validator',
     "sap/ui/core/library",
  
-], (BaseController, formatter, JSONModel, validator, coreLibrary) => {
+], (BaseController, formatter, validator, coreLibrary) => {
     "use strict";
  
     const { ValueState } = coreLibrary;
@@ -81,14 +80,12 @@ sap.ui.define([
                 console.log(inputDataPubli.getDateValue())
 
                 if (!dadosSaoValidos) {
-                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoCompra.messageStripErroCriar"));
+                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroCriar"));
                     this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
-                    console.log("entrou em dados invalidos")
                 }
 
                 if (dadosSaoValidos) {
-                    console.log("dados validos")
-                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoCriar"));
+                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoCriar"));
                     this.postData(API_OBRAS_URL, data);
                     this._limparInputs();
                     this._esconderMensagensDeErro();
