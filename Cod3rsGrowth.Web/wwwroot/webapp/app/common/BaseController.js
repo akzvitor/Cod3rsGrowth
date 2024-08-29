@@ -76,13 +76,6 @@ sap.ui.define([
 			});
 		},
 
-		formatarDataParaApi(data) {
-			if (data === null || data === undefined) { return data; }
-
-			let oDate = new Date(data);
-			return oDate.toISOString();
-		},
-
 		inicializarComboBox(urlApi, nomeDoModelo) {
             this.processarAcao(() => {
                 let sucesso = true;
@@ -102,6 +95,18 @@ sap.ui.define([
                     })
                     .catch((err) => console.error(err));
             });
-        }
+        },
+
+		postData(urlApi, objeto) {
+            fetch(urlApi, {
+                method: 'POST',
+                body: JSON.stringify(objeto),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => console.log(data));
+        },
 	});
 });

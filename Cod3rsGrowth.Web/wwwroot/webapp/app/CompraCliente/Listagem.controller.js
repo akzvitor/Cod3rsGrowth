@@ -26,8 +26,8 @@ sap.ui.define([
                 const inputCpf = this.oView.byId(ID_CPF_FILTRO_INPUT).getValue();
                 const inputDateRange = this.oView.byId(ID_DATERANGE_FILTRO_INPUT).getValue();
                 const objData = this.aoSelecionarData(oEvent);
-                const dataInicial = this.formatarDataParaApi(objData.di);
-                const dataFinal = this.formatarDataParaApi(objData.df);
+                const dataInicial = formatter.formatarDataParaApi(objData.di);
+                const dataFinal = formatter.formatarDataParaApi(objData.df);
 
                 if (inputNome) { urlFiltro += "NomeCliente=" + inputNome + "&"; }
 
@@ -36,6 +36,9 @@ sap.ui.define([
                 if (inputDateRange) { urlFiltro += "DataInicial=" + dataInicial + "&DataFinal=" + dataFinal; }
 
                 this.inicializarDados(urlFiltro, MODELO_COMPRAS);
+
+                console.log(objData.di);
+                console.log(formatter.formatarDataParaApi(objData.di));
             });
         },
 

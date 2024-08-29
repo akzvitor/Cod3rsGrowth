@@ -49,7 +49,7 @@
                         <Label text="{i18n>Obra.Status}" required="true" />
                         <ComboBox id="statusComboBox" placeholder="Status" maxWidth="100%" width="130%"
                             selectionChange="aoSelecionarStatus">
-                            <core:Item key="true" text="Finalizadas"/>
+                            <core:Item key="true" text="Finalizada"/>
                             <core:Item key="false" text="Em lançamento"/>
                         </ComboBox>
                         <Label text="{i18n>Obra.InicioPubli}" required="true" class="sapUiLargeMarginTop"/>
@@ -70,8 +70,8 @@
                         change="aoSelecionarValor"/>
                         <Label text="{i18n>Obra.Generos}" required="true" class="sapUiLargeMarginTop"/>
                         <MultiComboBox
-                            selectionChange="aoSelecionarGenero"
-                            selectionFinish="aoTerminarSelecao"
+                            id="generosMultiComboBox"
+                            selectionFinish="aoSelecionarGeneros"
                             width="80%"
                             maxWidth="65%"
                             items="{restGeneros>/opcoes}">
@@ -83,7 +83,7 @@
                 <HBox class="sapUiSmallMargin">
                     <VBox>
                         <Label text="{i18n>Obra.Sinopse}" required="true" class="sapUiMediumMarginTop"/>
-                        <TextArea value="{restObras>sinopse}" change="aoPreencherSinopse" growing="false" 
+                        <TextArea id="sinopseTextArea" value="{restObras>sinopse}" change="aoPreencherSinopse" growing="false" 
                             growingMaxLines="7" width="430%" rows="7" placeholder="Sinopse"/>
                     </VBox>
                 </HBox>

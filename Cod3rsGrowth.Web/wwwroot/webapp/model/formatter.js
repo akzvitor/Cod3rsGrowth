@@ -23,6 +23,13 @@ sap.ui.define([
             return oDateTimeFormat.format(new Date(data));
         },
 
+        formatarDataParaApi(data) {
+			if (data === null || data === undefined) { return data; }
+
+			let oDate = new Date(data);
+			return oDate.toISOString();
+		},
+
         async formatarCpf(cpf) {
             if (cpf === null || cpf === undefined) { return cpf; }
 
@@ -53,6 +60,21 @@ sap.ui.define([
             }
         },
 
+        formatarFormatoParaApi(formato) {
+            switch (formato) {
+                case "Manga" :
+                    return 0;
+                case "Manhua":
+                    return 1;
+                case "Manhwa":
+                    return 2;
+                case "WebNovel":
+                    return 3;
+                default:
+                    return formato;
+            }
+        },
+
         formatarFormatoParaFiltro(formato) {
             switch (formato) {
                 case "Mangá":
@@ -64,6 +86,48 @@ sap.ui.define([
             }
         },
 
+        formatarGenerosParaApi(listaDeDescricoes) {
+            const generos = {
+                "Ação": 0,
+                "Artes Marciais": 1,
+                "Aventura": 2,
+                "Comédia": 3,
+                "Drama": 4,
+                "Ecchi": 5,
+                "Espaço": 6,
+                "Esporte": 7,
+                "Fantasia": 8,
+                "Harém": 9,
+                "Histórico": 10,
+                "Horror": 11,
+                "Jogos": 12,
+                "Mahou Shoujo": 13,
+                "Mecha": 14,
+                "Militar": 15,
+                "Mistério": 16,
+                "Musical": 17,
+                "Psicológico": 18,
+                "Romance": 19,
+                "Samurai": 20,
+                "Sci-fi": 21,
+                "Seinen": 22,
+                "Shoujo": 23,
+                "Shounen": 24,
+                "Slice of Life": 25,
+                "Sobrenatural": 26,
+                "Vida Escolar": 27,
+                "Yaoi": 28,
+                "Yuri": 29
+            }
+            let listaDeInteiros = [];
+
+            listaDeDescricoes.forEach(descricao => {
+                listaDeInteiros.push(generos[descricao]);
+            });
+
+            return listaDeInteiros;
+        },
+
         formatarStatus(status) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
@@ -73,6 +137,10 @@ sap.ui.define([
                 case true:
                     return oResourceBundle.getText("Status.Finalizada");
             }
+        },
+
+        converterStringParaBoolean(string) {
+            return string === "true"
         }
     };
 });
