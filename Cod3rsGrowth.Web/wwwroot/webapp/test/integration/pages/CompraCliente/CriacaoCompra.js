@@ -154,7 +154,7 @@ sap.ui.define([
                         success: function () {
                             Opa5.assert.ok(true, "A mensagem de erro foi apresentada.");
                         },
-                        errorMessage: "Não apresentou mensagem de erro"
+                        errorMessage: "Não apresentou mensagem de erro."
                     });
                 },
 
@@ -169,7 +169,7 @@ sap.ui.define([
                         success: function () {
                             Opa5.assert.ok(true, "A mensagem de sucesso ao salvar compra foi apresentada.");
                         },
-                        errorMessage: "Não apresentou nenhuma mensagem"
+                        errorMessage: "Não apresentou nenhuma mensagem."
                     });
                 },
 

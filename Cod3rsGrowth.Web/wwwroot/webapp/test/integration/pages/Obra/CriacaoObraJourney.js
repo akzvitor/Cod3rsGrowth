@@ -11,7 +11,7 @@ sap.ui.define([
 			hash: "criacaoObra"
 		});
 
-		When.naPaginaDeCriacaoObra.euPreenchoOInputTituloComDadoInvalido("tituloFormInput", "2314");
+		When.naPaginaDeCriacaoObra.euPreenchoOInputTituloComOValor("2314");
 		When.naPaginaDeCriacaoObra.euClicoNoBotaoSalvar();
 
 		Then.naPaginaDeCriacaoCompra.deveApresentarMensagemDeErroAoSalvarObra();
@@ -23,7 +23,7 @@ sap.ui.define([
 			hash: "criacaoObra"
 		});
 
-		When.naPaginaDeCriacaoObra.euPreenchoOInputNomeComOValor("TesteOPA");
+		When.naPaginaDeCriacaoObra.euPreenchoOInputTituloComOValor("TesteOPA");
 		When.naPaginaDeCriacaoObra.euPreenchoOInputAutorComOValor("Sr. Teste Opa");
 		When.naPaginaDeCriacaoObra.euSelecionoOFormato("Mangá");
 		When.naPaginaDeCriacaoObra.euSelecionoOStatus("Em lançamento");
