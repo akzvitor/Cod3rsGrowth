@@ -347,7 +347,7 @@ sap.ui.define([
 
             input.setValueState(ValueState.Error);
 
-            if (valor.length === 0) { 
+            if (!valor.length) { 
                 input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); 
                 eValido = false;
             }

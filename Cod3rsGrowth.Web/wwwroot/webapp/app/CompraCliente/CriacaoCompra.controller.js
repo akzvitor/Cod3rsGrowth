@@ -65,15 +65,12 @@ sap.ui.define([
 		},
 
         preencherInputsComDadosDaCompra(oEvent) {
-            let sucesso = true;
 		    fetch(API_COMPRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
 				.then((res) => {
-					if (!res.ok)
-						sucesso = false;
 					return res.json();
 				})
 				.then((data) => {
-					sucesso ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
+					!data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
 
                     this._selecionarItensComprados(data.listaIdDosProdutos);
                     this.resgatarDataEdicao(data.dataCompra);

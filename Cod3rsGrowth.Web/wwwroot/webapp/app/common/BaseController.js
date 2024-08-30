@@ -48,15 +48,12 @@ sap.ui.define([
 		},
 
 		inicializarDados(urlDaApi, nomeDoModelo) {
-			let sucesso = true;
 			fetch(urlDaApi)
 				.then((res) => {
-					if (!res.ok)
-						sucesso = false;
 					return res.json();
 				})
 				.then((data) => {
-					sucesso ?  this.getView().setModel(new JSONModel(data), nomeDoModelo)
+					!data.Detail ?  this.getView().setModel(new JSONModel(data), nomeDoModelo)
 					: this.capturarErroApi(data);
 				})
 				.catch((err) => console.error(err));
@@ -78,15 +75,12 @@ sap.ui.define([
 
 		inicializarComboBox(urlApi, nomeDoModelo) {
             this.processarAcao(() => {
-                let sucesso = true;
                 fetch(urlApi)
                     .then((res) => {
-                        if (!res.ok)
-                            sucesso = false;
                         return res.json();
                     })
                     .then((data) => {
-                        if(sucesso) {
+                        if (!data.Detail) {
                             const opcoes = data.map((item) => ({opcao: item}));
                             this.getView().setModel(new JSONModel({opcoes: opcoes}), nomeDoModelo);
                         } 

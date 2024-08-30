@@ -34,27 +34,22 @@ sap.ui.define([
 		},
 
 		_inicializarDadosDaCompraSelecionada(oEvent) {
-			let sucesso = true;
 			fetch(API_COMPRAS_URL + id_parametro)
 				.then((res) => {
-					if (!res.ok)
-						sucesso = false;
 					return res.json();
 				})
 				.then((data) => {
-					sucesso ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS)
+					!data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS)
 						: this.capturarErroApi(data);
 				})
 				.catch((err) => console.error(err));
 
 			fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
 				.then((res) => {
-					if (!res.ok)
-						sucesso = false;
 					return res.json();
 				})
 				.then((data) => {
-					sucesso ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS)
+					!data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS)
 						: this.capturarErroApi(data);
 				})
 				.catch((err) => console.error(err));
@@ -89,8 +84,6 @@ sap.ui.define([
 		},
 
 		_removerCompra(id) {
-
-			let sucesso = true;
 			fetch(API_COMPRAS_URL + id, {
 				method: 'DELETE',
 				headers: {
@@ -98,12 +91,10 @@ sap.ui.define([
 				}
 			})
 				.then((res) => {
-					if (!res.ok)
-						sucesso = false;
-					console.log(res);
+					return res.ok ? console.log(res) : res.json()
 				})
 				.then((data) => {
-					sucesso ? console.log(data)
+					!data.Detail ? console.log(data)
 						: this.capturarErroApi(data);
 				})
 				.catch((err) => console.error(err));
