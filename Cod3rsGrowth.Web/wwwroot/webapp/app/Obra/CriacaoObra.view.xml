@@ -76,7 +76,7 @@
                             maxWidth="65%"
                             items="{restGeneros>/opcoes}">
                             <core:Item key="{path: 'restGeneros>opcao'}"
-                            text="{path: 'restGeneros>opcao'}"/>
+                                text="{path: 'restGeneros>opcao'}"/>
                         </MultiComboBox>
                     </VBox>
                 </HBox>

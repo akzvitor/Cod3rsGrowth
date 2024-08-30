@@ -14,7 +14,7 @@ sap.ui.define([
 		When.naPaginaDeCriacaoObra.euPreenchoOInputTituloComOValor("2314");
 		When.naPaginaDeCriacaoObra.euClicoNoBotaoSalvar();
 
-		Then.naPaginaDeCriacaoCompra.deveApresentarMensagemDeErroAoSalvarObra();
+		Then.naPaginaDeCriacaoObra.deveApresentarMensagemDeErroAoSalvarObra();
 		Then.iTeardownMyApp();
 	});
 
@@ -24,11 +24,12 @@ sap.ui.define([
 		});
 
 		When.naPaginaDeCriacaoObra.euPreenchoOInputTituloComOValor("TesteOPA");
-		When.naPaginaDeCriacaoObra.euPreenchoOInputAutorComOValor("Sr. Teste Opa");
+		When.naPaginaDeCriacaoObra.euPreenchoOInputAutorComOValor("Sr Teste Opa");
 		When.naPaginaDeCriacaoObra.euSelecionoOFormato("Mangá");
 		When.naPaginaDeCriacaoObra.euSelecionoOStatus("Em lançamento");
 		When.naPaginaDeCriacaoObra.euSelecionoADataDePublicacao("22/05/2005");
-		When.naPaginaDeCriacaoObra.euSelecionoOsGeneros();
+		When.naPaginaDeCriacaoObra.euAbroAComboBoxDeGeneros();
+		When.naPaginaDeCriacaoObra.euSelecionoOGenero("Aventura");
 		When.naPaginaDeCriacaoObra.euPreenchoASinopseComOValor("One Page Acceptance Tests!");
 		When.naPaginaDeCriacaoObra.euClicoNoBotaoSalvar();
 

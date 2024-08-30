@@ -1,13 +1,14 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
-    'sap/ui/test/matchers/Properties',
+    'sap/ui/test/matchers/PropertyStrictEquals',
     'sap/ui/test/actions/Press',
     'sap/ui/test/actions/EnterText',
     'sap/ui/test/matchers/AggregationLengthEquals',
     'sap/ui/test/matchers/AggregationFilled',
     'sap/ui/test/matchers/Ancestor',
+    'sap/ui/test/matchers/Properties',
 
-], (Opa5, Properties, Press, EnterText, AggregationLengthEquals, AggregationFilled, Ancestor) => {
+], (Opa5, PropertyStrictEquals, Press, EnterText, AggregationLengthEquals, AggregationFilled, Ancestor, Properties) => {
     "use strict";
 
     const NOME_DA_VIEW = "Obra.CriacaoObra";
@@ -80,22 +81,25 @@ sap.ui.define([
                 },
 
                 // TO DO - Verificar controltype (sap.ui.core.Item ?) e a key
+                euAbroAComboBoxDeGeneros() {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.ui.core.Icon",
+                        matchers: [
+                            new Properties({ src: "sap-icon://slim-arrow-down" })
+                        ],
+                        actions: new Press(),
+                        errorMessage: "Multi Combo Box de generos não foi encontrada."
+                    });
+                },
+
                 euSelecionoOGenero(genero) {
                     return this.waitFor({
-                        id: "generosMultiComboBox",
-                        actions: new Press(),
-                        success: function (oMultiComboBox) {
-                            this.waitFor({
-                                controlType: "sap.m.StandardListItem",
-                                matchers: [
-                                    new Ancestor(oMultiComboBox),
-                                    new Properties({ key: genero })
-                                ],
-                                actions: new Press(),
-                                errorMessage: `Não foi possível selecionar a key ${genero} na MultiComboBox de generos.`
-                            });
+                        controlType: "sap.m.MultiComboBox",
+                        actions: function (oMultiComboBox) {
+                            oMultiComboBox.setSelectedKeys(genero)
                         },
-                        errorMessage: "Multi Combo Box de generos não foi encontrada."
+                        errorMessage: `Não foi possível selecionar a key ${genero} na MultiComboBox de generos.`
                     });
                 },
 
