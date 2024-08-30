@@ -73,7 +73,7 @@
                             id="generosMultiComboBox"
                             selectionFinish="aoSelecionarGeneros"
                             width="80%"
-                            maxWidth="65%"
+                            maxWidth="180px"
                             items="{restGeneros>/opcoes}">
                             <core:Item key="{path: 'restGeneros>opcao'}"
                                 text="{path: 'restGeneros>opcao'}"/>
