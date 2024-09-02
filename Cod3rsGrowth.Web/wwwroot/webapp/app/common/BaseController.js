@@ -102,5 +102,17 @@ sap.ui.define([
                 .then(response => response.json())
                 .then(data => console.log(data));
         },
+
+		putData(urlApi, data) {
+            fetch(urlApi, {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => console.log(data));
+        },
 	});
 });

@@ -139,7 +139,7 @@ sap.ui.define([
                         this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoEditar"));
                         data.id = id_parametro;
                         data.dataCompra = dataEdicao;
-                        this._putData(data);
+                        this.putData(API_COMPRAS_URL, data)
                     }
 
                     this._esconderMensagensDeErro();
@@ -197,18 +197,6 @@ sap.ui.define([
                     }
                 };
             });
-        },
-
-        _putData(data) {
-            fetch(API_COMPRAS_URL, {
-                method: 'PUT',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => console.log(data));
         },
 
         _limparInputs() {

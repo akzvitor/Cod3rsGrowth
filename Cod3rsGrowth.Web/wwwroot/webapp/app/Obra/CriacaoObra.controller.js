@@ -54,7 +54,6 @@ sap.ui.define([
                     const oRouter = this.getRouter();
                     rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
                     this._resgatarIdURL(oEvent);
-                    this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
                     this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
                     this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
                     this.preencherInputsComDadosDaObra(oEvent);
@@ -76,21 +75,6 @@ sap.ui.define([
             })
             .catch((err) => console.error(err));
         },
-
-        // _inicializarDadosDaObraSelecionada() {
-        //     let sucesso = true;
-        //     fetch(API_OBRAS_URL + "/" + id_parametro)
-        //         .then((res) => {
-        //             if (!res.ok)
-        //                 sucesso = false;
-        //             return res.json();
-        //         })
-        //         .then((data) => {
-        //             sucesso ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS)
-        //                 : this.capturarErroApi(data);
-        //         })
-        //         .catch((err) => console.error(err));
-        // },
 
         aoClicarNoBotaoSalvar() {
             this.processarAcao(() => {

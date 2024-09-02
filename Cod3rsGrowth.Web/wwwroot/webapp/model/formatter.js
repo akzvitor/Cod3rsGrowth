@@ -52,9 +52,9 @@ sap.ui.define([
                 case 0:
                     return oResourceBundle.getText("Formato.manga");
                 case 1:
-                    return oResourceBundle.getText("Formato.manhwa");
-                case 2:
                     return oResourceBundle.getText("Formato.manhua");
+                case 2:
+                    return oResourceBundle.getText("Formato.manhwa");
                 case 3:
                     return oResourceBundle.getText("Formato.webnovel");
             }

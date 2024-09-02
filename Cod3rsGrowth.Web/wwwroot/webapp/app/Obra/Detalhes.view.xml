@@ -63,7 +63,7 @@
             <HBox class="sapUiLargeMargin">
                 <VBox class="" width="100%">
                     <Label text="{i18n>Obra.Sinopse}" />
-                    <Text id="sinopseTextArea" text="{restObras>sinopse}" change="aoPreencherSinopse"
+                    <Text id="sinopseTextArea" text="{restObras>sinopse}"
                         width="100%" tooltip="{i18n>Obra.Sinopse}"/>
                 </VBox>
             </HBox>
