@@ -34,7 +34,7 @@ sap.ui.define([
         Then.naPaginaDeDetalhes.oObjectListItemComIntroCpfDevePossuirOValor("602.582.600-50");
         Then.naPaginaDeDetalhes.oObjectListItemComIntroTelefoneDevePossuirOValor("(33) 53523-4235");
         Then.naPaginaDeDetalhes.oObjectListItemComIntroDataCompraDevePossuirOValor("19 de ago. de 2024");
-        Then.naPaginaDeDetalhes.oObjectListItemComIntroValorTotalDevePossuirOValor("R$ 49,99");
+        Then.naPaginaDeDetalhes.oObjectListItemComIntroValorTotalDevePossuirOValor("R$ 129,98");
         Then.iTeardownMyApp();
     });
 
