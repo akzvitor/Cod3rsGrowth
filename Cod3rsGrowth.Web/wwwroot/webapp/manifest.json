@@ -93,6 +93,11 @@
                     "pattern": "detalhesObra/{idObra}",
                     "name": "detalhesObra",
                     "target": "detalhesObra"
+                },
+                {
+                    "pattern": "edicaoObra/{idObra}",
+                    "name": "edicaoObra",
+                    "target": "criacaoObra"
                 }
             ],
             "targets": {

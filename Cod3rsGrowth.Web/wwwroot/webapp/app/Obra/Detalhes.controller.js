@@ -47,6 +47,15 @@ sap.ui.define([
                         : this.capturarErroApi(data);
                 })
                 .catch((err) => console.error(err));
+        },
+
+        aoClicarNoBotaoEditar() {
+            this.processarAcao(() => {
+				const oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("edicaoObra", {
+					idObra: id_parametro
+				});
+			});
         }
     });
 });

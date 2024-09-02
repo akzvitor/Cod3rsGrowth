@@ -3,13 +3,16 @@ sap.ui.define([
     'ui5/coders/model/formatter',
     'ui5/coders/model/validator',
     "sap/ui/core/library",
+    "sap/ui/model/json/JSONModel",
  
-], (BaseController, formatter, validator, coreLibrary) => {
+], (BaseController, formatter, validator, coreLibrary, JSONModel) => {
     "use strict";
  
     const { ValueState } = coreLibrary;
     const ROTA_CRIACAO_OBRA = "criacaoObra";
+    const ROTA_EDICAO_OBRA="edicaoObra";
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
+    const MODELO_OBRAS = "restObras";
     const API_FORMATOS_URL ="http://localhost:5070/api/Obras/formatos";
     const MODELO_FORMATOS = "restFormatos";
     const API_GENEROS_URL = "http://localhost:5070/api/Obras/generos";
@@ -25,6 +28,8 @@ sap.ui.define([
     const ID_GENEROS_MULTICOMBOBOX = "generosMultiComboBox";
     const ID_MESSAGESTRIP_SUCESSO = "messageStripSucesso";
     const ID_MESSAGESTRIP_ERRO = "messageStripErro";
+    var rota;
+    var id_parametro;
 
     return BaseController.extend("ui5.coders.app.Obra.CriacaoObra", {
         formatter: formatter,
@@ -45,8 +50,47 @@ sap.ui.define([
                     this._esconderMensagensDeErro();
                     this._removerValueStates();
                 }, this);
+                oRouter.getRoute(ROTA_EDICAO_OBRA).attachPatternMatched((oEvent) => {
+                    const oRouter = this.getRouter();
+                    rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
+                    this._resgatarIdURL(oEvent);
+                    this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
+                    this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
+                    this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
+                    this.preencherInputsComDadosDaObra(oEvent);
+                });
             });
         },
+
+        _resgatarIdURL(oEvent) {
+            id_parametro = window.decodeURIComponent(oEvent.getParameter("arguments").idObra);
+        },
+
+        preencherInputsComDadosDaObra(oEvent) {
+            fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idObra))
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                !data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS) : this.capturarErroApi(data);
+            })
+            .catch((err) => console.error(err));
+        },
+
+        // _inicializarDadosDaObraSelecionada() {
+        //     let sucesso = true;
+        //     fetch(API_OBRAS_URL + "/" + id_parametro)
+        //         .then((res) => {
+        //             if (!res.ok)
+        //                 sucesso = false;
+        //             return res.json();
+        //         })
+        //         .then((data) => {
+        //             sucesso ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS)
+        //                 : this.capturarErroApi(data);
+        //         })
+        //         .catch((err) => console.error(err));
+        // },
 
         aoClicarNoBotaoSalvar() {
             this.processarAcao(() => {
@@ -74,10 +118,6 @@ sap.ui.define([
                     generos: formatter.formatarGenerosParaApi(inputGeneros.getSelectedKeys()),
                     capaImagemBase64: null
                 };
-
-                console.log(typeof(formatter.formatarFormatoParaApi(inputFormato.getSelectedKey())));
-                console.log(data.inicioPublicacao);
-                console.log(inputDataPubli.getDateValue())
 
                 if (!dadosSaoValidos) {
                     this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroCriar"));

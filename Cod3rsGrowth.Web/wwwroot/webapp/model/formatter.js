@@ -49,7 +49,7 @@ sap.ui.define([
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
  
             switch (formato) {
-                case 0 :
+                case 0:
                     return oResourceBundle.getText("Formato.manga");
                 case 1:
                     return oResourceBundle.getText("Formato.manhwa");
@@ -70,6 +70,21 @@ sap.ui.define([
                     return 2;
                 case "WebNovel":
                     return 3;
+                default:
+                    return formato;
+            }
+        },
+
+        formatarFormatoParaEdicao(formato) {
+            switch (formato) {
+                case 0:
+                    return "Manga";
+                case 1:
+                    return "Manhua";
+                case 2:
+                    return "Manhwa";
+                case 3:
+                    return "WebNovel";
                 default:
                     return formato;
             }
@@ -122,7 +137,7 @@ sap.ui.define([
             let listaDeDescricoes = [];
  
             listaDeEnum.forEach(codigoInt => {
-                listaDeDescricoes.push(" " + generos[codigoInt]);
+                listaDeDescricoes.push(generos[codigoInt]);
             });
  
             return listaDeDescricoes;
