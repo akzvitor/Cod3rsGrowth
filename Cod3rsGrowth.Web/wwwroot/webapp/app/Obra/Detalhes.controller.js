@@ -31,7 +31,9 @@ sap.ui.define([
         },
  
         _resgatarIdURL(oEvent) {
-            id_parametro = window.decodeURIComponent(oEvent.getParameter("arguments").idObra);
+            this.processarAcao(() => {
+                id_parametro = window.decodeURIComponent(oEvent.getParameter("arguments").idObra);
+            });
         },
  
         _inicializarDadosDaObraSelecionada() {

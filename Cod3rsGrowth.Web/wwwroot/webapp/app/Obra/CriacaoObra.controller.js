@@ -62,7 +62,9 @@ sap.ui.define([
         },
 
         _resgatarIdURL(oEvent) {
-            id_parametro = window.decodeURIComponent(oEvent.getParameter("arguments").idObra);
+            this.processarAcao(() => {
+                id_parametro = window.decodeURIComponent(oEvent.getParameter("arguments").idObra);
+            });
         },
 
         preencherInputsComDadosDaObra(oEvent) {
@@ -122,7 +124,9 @@ sap.ui.define([
         },
 
         _removerSelecoes() {
-            this.getView().byId(ID_GENEROS_MULTICOMBOBOX).removeAllSelectedItems();
+            this.processarAcao(() => {
+                this.getView().byId(ID_GENEROS_MULTICOMBOBOX).removeAllSelectedItems();
+            });
         },
 
         _limparInputs() {
