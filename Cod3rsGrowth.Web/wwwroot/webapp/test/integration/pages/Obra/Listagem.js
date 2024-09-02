@@ -2,9 +2,10 @@ sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/actions/Press",
     "sap/ui/test/actions/EnterText",
-    "sap/ui/test/matchers/AggregationContainsPropertyEqual"
+    "sap/ui/test/matchers/AggregationContainsPropertyEqual",
+    "sap/ui/test/matchers/PropertyStrictEquals"
 
-], (Opa5, Press, EnterText, AggregationContainsPropertyEqual) => {
+], (Opa5, Press, EnterText, AggregationContainsPropertyEqual, PropertyStrictEquals) => {
     "use strict";
 
     const NOME_DA_VIEW = "Obra.Listagem"
@@ -77,6 +78,24 @@ sap.ui.define([
                             Opa5.assert.ok(true, "ComboBox status encontrado.")
                         },
                         errorMessage: "ComboBox status não encontrado."
+                    });
+                },
+
+                euClicoNoItemDaTabelaComTitulo(titulo) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.Text",
+                        matchers: [
+                            new PropertyStrictEquals({
+                                name: "text",
+                                value: titulo
+                            })
+                        ],
+                        actions: new Press(),
+                        errorMessage: "Item não encontrado.",
+                        success: function() {
+                            return new Promise(resolve => setTimeout(resolve, 1000)); 
+                        }
                     });
                 }
             },
