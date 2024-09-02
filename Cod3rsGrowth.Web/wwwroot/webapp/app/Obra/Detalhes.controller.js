@@ -35,15 +35,12 @@ sap.ui.define([
         },
  
         _inicializarDadosDaObraSelecionada() {
-            let sucesso = true;
             fetch(API_OBRAS_URL + id_parametro)
                 .then((res) => {
-                    if (!res.ok)
-                        sucesso = false;
                     return res.json();
                 })
                 .then((data) => {
-                    sucesso ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS)
+                    !data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS)
                         : this.capturarErroApi(data);
                 })
                 .catch((err) => console.error(err));
