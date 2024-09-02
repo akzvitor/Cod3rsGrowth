@@ -21,7 +21,7 @@ sap.ui.define([
 
         onInit() {
             this.aoCoincidirRota(ROTA_LISTAGEM_OBRAS, API_OBRAS_URL, MODELO_OBRAS);
-            this._inicializarComboBox();
+            this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
         },
 
         aoAlterarInputFiltro() {
@@ -44,32 +44,18 @@ sap.ui.define([
             });
         },
 
-        _inicializarComboBox() {
-            this.processarAcao(() => {
-                let sucesso = true;
-                fetch(API_FORMATOS_URL)
-                    .then((res) => {
-                        if (!res.ok)
-                            sucesso = false;
-                        return res.json();
-                    })
-                    .then((data) => {
-                        if(sucesso) {
-                            const formatos = data.map((item) => ({formato: item}));
-                            this.getView().setModel(new JSONModel({descricoes: formatos}), MODELO_FORMATOS);
-                        } 
-                        else  
-                            this.capturarErroApi(data);
-                    })
-                    .catch((err) => console.error(err));
-            });
-        },
-
         aoClicarNoBotaoCompras() {
             this.processarAcao(() => {
 				const oRouter = this.getOwnerComponent().getRouter();
 				oRouter.navTo("listagem");
 			});
+        },
+
+        aoClicarNoBotaoAdicionarObra() {
+            this.processarAcao(() => {
+                const oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("criacaoObra");
+            });
         }
     });
 });

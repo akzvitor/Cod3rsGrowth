@@ -48,15 +48,12 @@ sap.ui.define([
 		},
 
 		inicializarDados(urlDaApi, nomeDoModelo) {
-			let sucesso = true;
 			fetch(urlDaApi)
 				.then((res) => {
-					if (!res.ok)
-						sucesso = false;
 					return res.json();
 				})
 				.then((data) => {
-					sucesso ?  this.getView().setModel(new JSONModel(data), nomeDoModelo)
+					!data.Detail ?  this.getView().setModel(new JSONModel(data), nomeDoModelo)
 					: this.capturarErroApi(data);
 				})
 				.catch((err) => console.error(err));
@@ -76,11 +73,34 @@ sap.ui.define([
 			});
 		},
 
-		formatarDataParaApi(data) {
-			if (data === null || data === undefined) { return data; }
+		inicializarComboBox(urlApi, nomeDoModelo) {
+            this.processarAcao(() => {
+                fetch(urlApi)
+                    .then((res) => {
+                        return res.json();
+                    })
+                    .then((data) => {
+                        if (!data.Detail) {
+                            const opcoes = data.map((item) => ({opcao: item}));
+                            this.getView().setModel(new JSONModel({opcoes: opcoes}), nomeDoModelo);
+                        } 
+                        else  
+                            this.capturarErroApi(data);
+                    })
+                    .catch((err) => console.error(err));
+            });
+        },
 
-			let oDate = new Date(data);
-			return oDate.toISOString();
-		}
+		postData(urlApi, objeto) {
+            fetch(urlApi, {
+                method: 'POST',
+                body: JSON.stringify(objeto),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => console.log(data));
+        },
 	});
 });

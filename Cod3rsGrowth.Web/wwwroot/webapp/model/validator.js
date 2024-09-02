@@ -175,6 +175,204 @@ sap.ui.define([
                 return false
 
             return true
+        },
+
+        validarTitulo(input) {
+            const valor = input.getValue();
+            const tamanhoLimiteTitulo = 2000;
+            const mensagemErroTituloExcedeTamanhoMaximo = `O título pode ter no máximo ${tamanhoLimiteTitulo} caracteres.`;
+            let eValido = true;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) {
+                input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO);
+                eValido = false;
+            }
+
+            if (valor.length > tamanhoLimiteTitulo) {
+                input.setValueStateText(mensagemErroTituloExcedeTamanhoMaximo);
+                eValido = false
+            }
+
+            if (eValido) {
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return false;
+        },
+
+        validarAutor(input) {
+            const valor = input.getValue();
+            const tamanhoLimiteAutor = 150;
+            const regexAutor = /^[a-zA-Zà-úÀ-Ú0-9-_ ]*$/;
+            const mensagemErroAutorExcedeTamanhoMaximo = `O nome do autor deve ter até ${tamanhoLimiteAutor} caracteres.`;
+            const mensagemErroRegexAutor = "O nome do autor deve conter apenas letras, números, espaços ou símbolos como - ou _.";
+            let eValido = true;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) {
+                input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO);
+                eValido = false;
+            }
+
+            if (valor.length > tamanhoLimiteAutor) {
+                input.setValueStateText(mensagemErroAutorExcedeTamanhoMaximo);
+                eValido = false;
+            }
+
+            if (!regexAutor.test(valor)) {
+                input.setValueStateText(mensagemErroRegexAutor);
+                eValido = false;
+            }
+
+            if (eValido) {
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return false;
+        },
+
+        validarSinopse(input) {
+            const valor = input.getValue();
+            const tamanhoLimiteSinopse = 2000;
+            const mensagemErroSinopseExcedeTamanhoMaximo = `A sinopse deve ter no máximo ${tamanhoLimiteSinopse} caracteres.`;
+            let eValido = true;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) {
+                input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO);
+                eValido = false;
+            }
+
+            if (valor.length > tamanhoLimiteSinopse) {
+                input.setValueStateText(mensagemErroSinopseExcedeTamanhoMaximo);
+                eValido = false;
+            }
+
+            if (eValido) {
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return false;
+        },
+
+        validarInicioDaPublicacao(input) {
+            const valorString = input.getDateValue();
+            const valorData = new Date(valorString);
+            const mensagemErroDataPubliInvalida = "Data inválida. Não é possível colocar uma data futura."
+            let eValido = true;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valorString) { 
+                input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); 
+                eValido = false;
+            }
+
+            else if (valorData >= Date.now()) { 
+                input.setValueStateText(mensagemErroDataPubliInvalida); 
+                eValido = false;
+            }
+
+            if (eValido) {
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return false;
+        },
+
+        validarStatus(input) {
+            const valor = input.getValue();
+            const mensagemErroStatusInvalido = "Status inválido."
+            const listaDeStatus = ["Finalizada", "Em lançamento"]
+            let eValido = true;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) { 
+                input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO);
+                eValido = false;
+            }
+
+            if (!listaDeStatus.includes(valor)) { 
+                input.setValueStateText(mensagemErroStatusInvalido); 
+                eValido = false;
+            }
+
+            if (eValido) {
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return false;
+        },
+
+
+        validarFormato(input) {
+            const valor = input.getValue();
+            const mensagemErroFormatoInvalido = "Formato de obra inválido."
+            const listaDeFormatos = ["Mangá", "Manhua", "Manhwa", "Web Novel"]
+            let eValido = true;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor) { 
+                input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); 
+                eValido = false;
+            }
+
+            if (!listaDeFormatos.includes(valor)) { 
+                input.setValueStateText(mensagemErroFormatoInvalido); 
+                eValido = false;
+            }
+
+            if (eValido) {
+                input.setValueState(ValueState.None);
+                return true;
+            }
+
+            return false;
+        },
+
+        validarGeneros(input) {
+            const valor = input.getSelectedKeys();
+            let eValido = true;
+
+            input.setValueState(ValueState.Error);
+
+            if (!valor.length) { 
+                input.setValueStateText(MENSAGEM_ERRO_CAMPO_VAZIO); 
+                eValido = false;
+            }
+
+            if (eValido) {
+                input.setValueState(ValueState.None);
+                return true;
+            }
+            return false;
+        },
+
+        validarDadosObra(titulo, autor, sinopse, inicioDaPublicacao, formato, generos, status) {
+            const tituloEValido = this.validarTitulo(titulo);
+            const autorEValido = this.validarAutor(autor);
+            const sinopseEValida = this.validarSinopse(sinopse);
+            const inicioDaPublicacaoEValido = this.validarInicioDaPublicacao(inicioDaPublicacao);
+            const formatoEValido = this.validarFormato(formato);
+            const generosSaoValidos = this.validarGeneros(generos);
+            const statusEValido = this.validarStatus(status);
+
+            console.log(generos.getSelectedKeys())
+            console.log(generosSaoValidos);
+            
+            return tituloEValido && autorEValido && sinopseEValida && inicioDaPublicacaoEValido
+                && formatoEValido && generosSaoValidos && statusEValido;
         }
     };
 });

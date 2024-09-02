@@ -35,6 +35,13 @@ namespace Cod3rsGrowth.Web.Controllers
             return Ok(formatos);
         }
 
+        [HttpGet("generos")]
+        public IActionResult ObterGeneros() {
+            var generos = ExtensaoEnums.ObterListaDescricoesEnum<Genero>();
+
+            return Ok(generos);
+        }
+
         [HttpGet("Compra/{id}")]
         public IActionResult ObterObrasVinculadas(int id)
         {

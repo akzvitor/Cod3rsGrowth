@@ -178,9 +178,14 @@ sap.ui.define([
 
                             itensTabela.map((item) => {
                                 let cpfBuscado = item.getBindingContext(NOME_DO_MODELO).getProperty(propriedadeTestada);
+                                cpfBuscado = cpfBuscado.replaceAll(".", "");
+                                cpfBuscado = cpfBuscado.replace("-", "");
 
-                                if (cpfBuscado !== STRING_INSERIDO_INPUT_CPF)
+                                if (cpfBuscado !== STRING_INSERIDO_INPUT_CPF){
+                                    console.log(cpfBuscado)
+                                    console.log(STRING_INSERIDO_INPUT_CPF)
                                     resultado = false;
+                                }  
                             })
 
                             Opa5.assert.ok(resultado, MENSAGEM_SUCESSO_BUSCAR_ITEM);

@@ -65,15 +65,12 @@ sap.ui.define([
 		},
 
         preencherInputsComDadosDaCompra(oEvent) {
-            let sucesso = true;
 		    fetch(API_COMPRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
 				.then((res) => {
-					if (!res.ok)
-						sucesso = false;
 					return res.json();
 				})
 				.then((data) => {
-					sucesso ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
+					!data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
 
                     this._selecionarItensComprados(data.listaIdDosProdutos);
                     this.resgatarDataEdicao(data.dataCompra);
@@ -133,7 +130,7 @@ sap.ui.define([
                     
                     if (rota === ROTA_CRIACAO) {
                         this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoCriar"));
-                        this._postData(data);
+                        this.postData(API_COMPRAS_URL, data);
                         this._limparInputs();
                         this._removerSelecoes();
                     }
@@ -200,18 +197,6 @@ sap.ui.define([
                     }
                 };
             });
-        },
-
-        _postData(data) {
-            fetch(API_COMPRAS_URL, {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => console.log(data));
         },
 
         _putData(data) {
