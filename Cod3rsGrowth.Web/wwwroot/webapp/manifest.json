@@ -88,6 +88,11 @@
                     "pattern": "criacaoObra",
                     "name": "criacaoObra",
                     "target": "criacaoObra"
+                },
+                {
+                    "pattern": "detalhesObra/{idObra}",
+                    "name": "detalhesObra",
+                    "target": "detalhesObra"
                 }
             ],
             "targets": {
@@ -115,6 +120,10 @@
                 "criacaoObra": {
                     "id": "criacaoObra",
                     "name": "app.Obra.CriacaoObra"
+                },
+                "detalhesObra": {
+                    "id": "detalhesObra",
+                    "name": "app.Obra.Detalhes"
                 }
             }
         }
