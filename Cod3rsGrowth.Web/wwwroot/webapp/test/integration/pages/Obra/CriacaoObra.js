@@ -312,6 +312,21 @@ sap.ui.define([
                         },
                         errorMessage: "Não apresentou mensagem de erro."
                     });
+                },
+
+                deveApresentarMensagemDeSucessoAoEditarObra() {
+                    return this.waitFor({
+                        id: "messageStripSucesso",
+                        viewName: NOME_DA_VIEW,
+                        matchers: new Properties({
+                            text: "A obra foi editada com sucesso.",
+                            visible: true
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, "A mensagem de sucesso foi apresentada.");
+                        },
+                        errorMessage: "Não apresentou mensagem de sucesso."
+                    });
                 }
             }
         }

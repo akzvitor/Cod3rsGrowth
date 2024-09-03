@@ -72,14 +72,12 @@ sap.ui.define([
 			hash: "edicaoObra/25"
 		});
 
-		When.naPaginaDeCriacaoCompra.euPreenchoOInputNomeComDadoValido("nomeFormInput", "João");
-		When.naPaginaDeCriacaoCompra.euPreenchoOInputEmailComDadoValido("emailFormInput", "joaogamer@hotmail.com");
-		When.naPaginaDeCriacaoCompra.euPreenchoOInputCpfComDadoValido("cpfFormInput", "69964405057");
-		When.naPaginaDeCriacaoCompra.euPreenchoOInputTelefoneComDadoValido("telefoneFormInput", "65345445456");
-		When.naPaginaDeCriacaoCompra.euSelecionoAoMenosUmaObraDoCatalogo();
-		When.naPaginaDeCriacaoCompra.euClicoNoBotaoSalvar();
+		When.naPaginaDeCriacaoObra.euPreenchoOInputTituloComOValor("TesteOPA Edição");
+		When.naPaginaDeCriacaoObra.euPreenchoOInputAutorComOValor("Sr Teste Opa Edição");
+		When.naPaginaDeCriacaoObra.euPreenchoASinopseComOValor("Edição Edição Edição Edição Edição Edição");
+		When.naPaginaDeCriacaoObra.euClicoNoBotaoSalvar();
 
-		Then.naPaginaDeCriacaoCompra.deveApresentarMensagemDeSucessoAoEditarCompra();
+		Then.naPaginaDeCriacaoObra.deveApresentarMensagemDeSucessoAoEditarObra();
 		Then.iTeardownMyApp();
 	});
 });
