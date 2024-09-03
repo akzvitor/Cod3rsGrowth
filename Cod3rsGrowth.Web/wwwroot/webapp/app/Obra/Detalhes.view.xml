@@ -1,0 +1,72 @@
+<mvc:View controllerName="ui5.coders.app.Obra.Detalhes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:cards="sap.f.cards"
+    xmlns:l="sap.ui.layout"
+    xmlns:lf="sap.ui.layout.form">
+    <Page id="paginaDetalhesObra" title="{i18n>DetalhesObra.Titulo}" titleAlignment="Center" binding="{restObras>/}"
+        navButtonPress="onNavBack" showNavButton="true" backgroundDesign="List"
+        class="sapUiContentPadding">
+        <headerContent>
+            <Button text="{i18n>DetalhesObra.BotaoEditar}" icon="sap-icon://edit" press="aoClicarNoBotaoEditar" id="botaoEditar"/>
+            <Button text="{i18n>DetalhesObra.BotaoRemover}" icon="sap-icon://delete" press="aoClicarNoBotaoRemover" id="botaoRemover"/>
+        </headerContent>
+        <OverflowToolbar id="TB1">
+            <core:Icon src="sap-icon://information" color="Tile" />
+            <Title class="sapUiSmallMargin" id="Title1" text="{i18n>DetalhesObra.HeaderDados}" />
+            <ToolbarSpacer />
+        </OverflowToolbar>
+        <content>
+            <HBox class="sapUiLargeMargin">
+                <VBox class="sapUiLargeMarginEnd" width="40rem">
+                    <Label text="{i18n>Obra.Autor}" />
+                    <Text text="{restObras>autor}" class="sapUiLargeMarginBotton" tooltip="{i18n>Obra.Autor}"/>
+                    <Label text="{i18n>Obra.Titulo}" class="sapUiLargeMarginTop"/>
+                    <Text text="{restObras>titulo} " class="sapUiLargeMarginBotton" tooltip="{i18n>Obra.Titulo}"/>
+                </VBox>
+                <VBox class="sapUiLargeMarginBeginEnd" width="40rem">
+                    <Label text="{i18n>Obra.Formato}"/>
+                    <Text text="{
+                                path: 'restObras>formato',
+                                formatter: '.formatter.formatarFormatoParaTabela'
+                            }" class="sapUiLargeMarginBotton" tooltip="{i18n>Obra.Formato}"/>
+                    <Label text="{i18n>Obra.Capitulos}" class="sapUiLargeMarginTop"/>
+                    <Text text="{restObras>numeroCapitulos}" class="sapUiLargeMarginBotton" tooltip="{i18n>Obra.Capitulos}"/>
+                </VBox>
+                <VBox class="sapUiLargeMarginBeginEnd" width="40rem">
+                    <Label text="{i18n>Obra.Status}"/>
+                    <Text text="{
+                                path: 'restObras>foiFinalizada',
+                                formatter: '.formatter.formatarStatus'
+                            }" class="sapUiLargeMarginBotton" tooltip="{i18n>Obra.Status}"/>
+                    <Label text="{i18n>Obra.InicioPubli}" class="sapUiLargeMarginTop"/>
+                    <Text text="{
+                                path: 'restObras>inicioPublicacao',
+                                formatter: '.formatter.formatarData'
+                            }" class="sapUiLargeMarginBotton" tooltip="{i18n>Obra.InicioPubli}"/>
+                </VBox>
+                <VBox class="sapUiLargeMarginBeginEnd" width="80rem">
+                    <Label text="{i18n>Obra.Valor}"/>
+                    <Text text="{
+                                path: 'restObras>valorObra',
+                                formatter: '.formatter.formatarValor'
+                            }" class="sapUiLargeMarginBotton" tooltip="{i18n>Obra.Valor}"/>
+                    <Label text="{i18n>Obra.Generos}" class="sapUiLargeMarginTop"/>
+                    <Text text="{
+                                path: 'restObras>generos',
+                                formatter: '.formatter.formatarGenerosParaExibicao'
+                            }" class="sapUiLargeMarginBotton" tooltip="{i18n>Obra.Generos}"/>
+                </VBox>
+            </HBox>
+            <HBox class="sapUiLargeMargin">
+                <VBox class="" width="100%">
+                    <Label text="{i18n>Obra.Sinopse}" />
+                    <Text id="sinopseTextArea" text="{restObras>sinopse}"
+                        width="100%" tooltip="{i18n>Obra.Sinopse}"/>
+                </VBox>
+            </HBox>
+        </content>
+    </Page>
+</mvc:View>

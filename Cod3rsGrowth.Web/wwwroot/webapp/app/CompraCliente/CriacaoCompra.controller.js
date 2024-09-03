@@ -44,7 +44,7 @@ sap.ui.define([
 				oRouter.getRoute(ROTA_CRIACAO).attachPatternMatched((oEvent) => {
                     const oRouter = this.getRouter();
                     rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
-                    this._alterarTitulo("CriacaoCompra.titulo")
+                    this.alterarTituloDaPagina(ID_PAGINA, "CriacaoCompra.titulo")
 					this.inicializarDados(urlDaApi, nomeDoModelo);
                     this._limparInputs();
                     this._esconderMensagensDeErro();
@@ -55,7 +55,7 @@ sap.ui.define([
                     const oRouter = this.getRouter();
                     rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
                     this.resgatarIdURL(oEvent);
-                    this._alterarTitulo("EdicaoCompra.titulo")
+                    this.alterarTituloDaPagina(ID_PAGINA, "EdicaoCompra.titulo")
                     this._esconderMensagensDeErro();
                     this._removerValueStates();
                     this.inicializarDados(urlDaApi, nomeDoModelo);
@@ -139,7 +139,7 @@ sap.ui.define([
                         this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoEditar"));
                         data.id = id_parametro;
                         data.dataCompra = dataEdicao;
-                        this._putData(data);
+                        this.putData(API_COMPRAS_URL, data)
                     }
 
                     this._esconderMensagensDeErro();
@@ -199,18 +199,6 @@ sap.ui.define([
             });
         },
 
-        _putData(data) {
-            fetch(API_COMPRAS_URL, {
-                method: 'PUT',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => console.log(data));
-        },
-
         _limparInputs() {
             this.processarAcao(() => {
                 this.oView.byId(ID_NOME_FORM_INPUT).setValue(null);
@@ -235,12 +223,6 @@ sap.ui.define([
 
         _removerSelecoes() {
             this.getView().byId(ID_CATALOGO_OBRAS).removeSelections(true);
-        },
-
-        _alterarTitulo(chavei18n) {
-            const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-            
-            this.oView.byId(ID_PAGINA).setTitle(oResourceBundle.getText(chavei18n));
         },
 
         aoPreencherNome(oEvent) {

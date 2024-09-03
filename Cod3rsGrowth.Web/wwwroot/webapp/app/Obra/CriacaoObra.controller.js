@@ -3,13 +3,16 @@ sap.ui.define([
     'ui5/coders/model/formatter',
     'ui5/coders/model/validator',
     "sap/ui/core/library",
+    "sap/ui/model/json/JSONModel",
  
-], (BaseController, formatter, validator, coreLibrary) => {
+], (BaseController, formatter, validator, coreLibrary, JSONModel) => {
     "use strict";
  
     const { ValueState } = coreLibrary;
     const ROTA_CRIACAO_OBRA = "criacaoObra";
+    const ROTA_EDICAO_OBRA="edicaoObra";
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
+    const MODELO_OBRAS = "restObras";
     const API_FORMATOS_URL ="http://localhost:5070/api/Obras/formatos";
     const MODELO_FORMATOS = "restFormatos";
     const API_GENEROS_URL = "http://localhost:5070/api/Obras/generos";
@@ -25,6 +28,9 @@ sap.ui.define([
     const ID_GENEROS_MULTICOMBOBOX = "generosMultiComboBox";
     const ID_MESSAGESTRIP_SUCESSO = "messageStripSucesso";
     const ID_MESSAGESTRIP_ERRO = "messageStripErro";
+    const ID_PAGINA = "paginaCriacaoObra";
+    var rota;
+    var id_parametro;
 
     return BaseController.extend("ui5.coders.app.Obra.CriacaoObra", {
         formatter: formatter,
@@ -35,17 +41,48 @@ sap.ui.define([
         },
 
         _aoCoincidirRota() {
-            this.processarAcao(() => {
+            this.processarAcao(() => { 
                 const oRouter = this.getOwnerComponent().getRouter();
                 oRouter.getRoute(ROTA_CRIACAO_OBRA).attachPatternMatched((oEvent) => {
+                    const oRouter = this.getRouter();
+                    rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
+                    this.alterarTituloDaPagina(ID_PAGINA, "CriacaoObra.titulo");
                     this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
                     this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
+                    this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
                     this._limparInputs();
                     this._removerSelecoes();
-                    this._esconderMensagensDeErro();
+                    this._esconderMensagens();
                     this._removerValueStates();
                 }, this);
+                oRouter.getRoute(ROTA_EDICAO_OBRA).attachPatternMatched((oEvent) => {
+                    const oRouter = this.getRouter();
+                    rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
+                    this.alterarTituloDaPagina(ID_PAGINA, "CriacaoObra.TituloEditar");
+                    this._resgatarIdURL(oEvent);
+                    this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
+                    this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
+                    this.preencherInputsComDadosDaObra(oEvent);
+                    this._esconderMensagens();
+                });
             });
+        },
+
+        _resgatarIdURL(oEvent) {
+            this.processarAcao(() => {
+                id_parametro = window.decodeURIComponent(oEvent.getParameter("arguments").idObra);
+            });
+        },
+
+        preencherInputsComDadosDaObra(oEvent) {
+            fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idObra))
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                !data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS) : this.capturarErroApi(data);
+            })
+            .catch((err) => console.error(err));
         },
 
         aoClicarNoBotaoSalvar() {
@@ -75,30 +112,41 @@ sap.ui.define([
                     capaImagemBase64: null
                 };
 
-                console.log(typeof(formatter.formatarFormatoParaApi(inputFormato.getSelectedKey())));
-                console.log(data.inicioPublicacao);
-                console.log(inputDataPubli.getDateValue())
-
                 if (!dadosSaoValidos) {
-                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroCriar"));
+                    rota === ROTA_CRIACAO_OBRA ? 
+                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroCriar")) :
+                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroEditar"));
+                
+                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
                     this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
                 }
 
                 if (dadosSaoValidos) {
-                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoCriar"));
-                    this.postData(API_OBRAS_URL, data);
-                    this._limparInputs();
-                    this._esconderMensagensDeErro();
-                    this._removerValueStates();
-                    this._removerSelecoes();
-                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
+
+                    if (rota === ROTA_CRIACAO_OBRA) {
+                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoCriar"));
+                        this.postData(API_OBRAS_URL, data);
+                        this._limparInputs();
+                        this._removerSelecoes();
+                    }
+
+                    if (rota === ROTA_EDICAO_OBRA) {
+                        data.id = id_parametro;
+                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoEditar"));
+                        this.putData(API_OBRAS_URL, data);
+                    }
                     
+                    this._esconderMensagens();
+                    this._removerValueStates();
+                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
                 }
             });
         },
 
         _removerSelecoes() {
-            this.getView().byId(ID_GENEROS_MULTICOMBOBOX).removeAllSelectedItems();
+            this.processarAcao(() => {
+                this.getView().byId(ID_GENEROS_MULTICOMBOBOX).removeAllSelectedItems();
+            });
         },
 
         _limparInputs() {
@@ -115,7 +163,7 @@ sap.ui.define([
             });
         },
 
-        _esconderMensagensDeErro() {
+        _esconderMensagens() {
             this.processarAcao(() => {
                 this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
                 this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(false);

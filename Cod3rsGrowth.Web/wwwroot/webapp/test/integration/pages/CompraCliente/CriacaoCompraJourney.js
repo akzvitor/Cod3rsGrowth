@@ -59,7 +59,7 @@ sap.ui.define([
 		Then.iTeardownMyApp();
 	});
 
-	opaTest("Deveria apresentar erro ao tentar editar obra com dado inválido", (Given, When, Then) => {
+	opaTest("Deveria apresentar erro ao tentar editar compra com dado inválido", (Given, When, Then) => {
 		Given.iStartMyApp({
 			hash: "edicaoCompra/17"
 		});
@@ -72,7 +72,7 @@ sap.ui.define([
 	});
 
 
-	opaTest("Deveria editar a obra quando todos os dados forem validados", (Given, When, Then) => {
+	opaTest("Deveria editar a compra quando todos os dados forem validados", (Given, When, Then) => {
 		Given.iStartMyApp({
 			hash: "edicaoCompra/17"
 		});

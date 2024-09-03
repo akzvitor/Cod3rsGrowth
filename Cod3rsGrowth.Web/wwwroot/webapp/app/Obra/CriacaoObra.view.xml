@@ -6,7 +6,7 @@
     xmlns:lf="sap.ui.layout.form"
     xmlns:core="sap.ui.core">
 
-    <Page id="paginaCriacaoObra" binding="{restCompras>/}" navButtonPress="onNavBack" showHeader="true" title="{i18n>CriacaoObra.titulo}" titleAlignment="Center" showNavButton="true" backgroundDesign="List" class="sapUiContentPadding">
+    <Page id="paginaCriacaoObra" binding="{restObras>/}" navButtonPress="onNavBack" showHeader="true" title="{i18n>CriacaoObra.titulo}" titleAlignment="Center" showNavButton="true" backgroundDesign="List" class="sapUiContentPadding">
         <headerContent>
             <Button text="{i18n>CriacaoObra.botaoSalvar}" icon="sap-icon://save" press="aoClicarNoBotaoSalvar" id="botaoSalvar"/>
         </headerContent>
@@ -30,7 +30,8 @@
                     </VBox>
                     <VBox class="sapUiLargeMarginBegin">
                         <Label text="{i18n>Obra.Formato}" required="true"/>
-                        <ComboBox id="formatoComboBox" items="{restFormatos>/opcoes}"
+                        <ComboBox id="formatoComboBox" items="{restFormatos>/opcoes}" 
+                            selectedKey="{path: 'restObras>formato', formatter: '.formatter.formatarFormatoParaEdicao'}"
                             selectionChange="aoSelecionarFormato" placeholder="Formato" maxWidth="100%" width="100%">
                             <core:Item key="{path: 'restFormatos>opcao', formatter: '.formatter.formatarFormatoParaFiltro'}"
                                 text="{path: 'restFormatos>opcao'}"/>
@@ -38,7 +39,7 @@
                         <Label text="{i18n>Obra.Capitulos}" required="true" class="sapUiLargeMarginTop"/>
                         <StepInput
                             id="stepInputCapitulos"
-                            value="1"
+                            value="{restObras>numeroCapitulos}"
                             min="1"
                             max="20000"
                             width="100%"
@@ -48,19 +49,22 @@
                     <VBox class="sapUiLargeMarginBegin">
                         <Label text="{i18n>Obra.Status}" required="true" />
                         <ComboBox id="statusComboBox" placeholder="Status" maxWidth="100%" width="130%"
+                            selectedKey="{path: 'restObras>foiFinalizada'}"
                             selectionChange="aoSelecionarStatus">
                             <core:Item key="true" text="Finalizada"/>
                             <core:Item key="false" text="Em lançamento"/>
                         </ComboBox>
                         <Label text="{i18n>Obra.InicioPubli}" required="true" class="sapUiLargeMarginTop"/>
                         <DatePicker id="datePickerFormInput" change="aoSelecionarData" width="100%" 
-                            placeholder="{i18n>Obra.Data}" showFooter="true"/>
+                            placeholder="{i18n>Obra.Data}" showFooter="true" 
+                            value="{path: 'restObras>inicioPublicacao', formatter: '.formatter.formatarData'}" >
+                        </DatePicker>
                     </VBox>
                     <VBox class="sapUiLargeMarginBegin">
                         <Label text="{i18n>Obra.Valor}" required="true"/>
                         <StepInput
                         id="stepInputValor"
-                        value="0"
+                        value="{restObras>valorObra}"
                         displayValuePrecision="2"
                         min="0"
                         max="20000"
@@ -72,6 +76,7 @@
                         <MultiComboBox
                             id="generosMultiComboBox"
                             selectionFinish="aoSelecionarGeneros"
+                            selectedKeys="{path: 'restObras>generos', formatter: '.formatter.formatarGenerosParaExibicao'}"
                             width="80%"
                             maxWidth="180px"
                             items="{restGeneros>/opcoes}">
