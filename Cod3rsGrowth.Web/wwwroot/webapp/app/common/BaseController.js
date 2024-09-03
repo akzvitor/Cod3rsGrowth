@@ -115,6 +115,26 @@ sap.ui.define([
                 .then(data => console.log(data));
         },
 
+		deleteData(urlApi, id) {
+			fetch(urlApi + id, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				}
+			})
+				.then((res) => {
+					if (res.ok) {
+						console.log(res);
+						return null;
+					}
+				})
+				.then((data) => {
+					if (!data.Detail) 
+						this.capturarErroApi(data);
+				})
+				.catch((err) => console.error(err));
+		},
+
 		alterarTituloDaPagina(idPagina, chavei18n) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             

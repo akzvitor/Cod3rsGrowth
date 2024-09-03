@@ -55,6 +55,24 @@ sap.ui.define([
 					idObra: id_parametro
 				});
 			});
+        },
+        
+        aoClicarNoBotaoRemover() {
+            MessageBox.confirm("Tem certeza que deseja excluir essa obra?", {
+                title: "Excluir Obra",
+                actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                onClose: (sAction) => {
+                    if (sAction === MessageBox.Action.YES) {
+                        this.deleteData(API_OBRAS_URL, id_parametro);
+                        MessageBox.success("A obra foi removida com sucesso.", {
+                            actions: ["Voltar para a lista de obras"],
+                            onClose: () => {
+                                this.getRouter().navTo("listagemObra", {}, true)
+                            }
+                        });
+                    }
+                }
+            });
         }
     });
 });

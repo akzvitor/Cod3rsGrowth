@@ -65,39 +65,21 @@ sap.ui.define([
 		},
 
 		aoClicarNoBotaoRemover: function () {
-			const thisFunction = this;
 			MessageBox.confirm("Tem certeza que deseja excluir essa compra?", {
 				title: "Excluir Compra",
 				actions: [MessageBox.Action.YES, MessageBox.Action.NO],
-				onClose: function (sAction) {
+				onClose: (sAction) => {
 					if (sAction === MessageBox.Action.YES) {
-						thisFunction._removerCompra(id_parametro);
+						this.deleteData(API_COMPRAS_URL, id_parametro);
 						MessageBox.success(`A compra foi removida com sucesso.`, {
 							actions: ["Voltar para a página inicial"],
-							onClose: function () {
-								thisFunction.getRouter().navTo("listagem", {}, true);
+							onClose: () => {
+								this.getRouter().navTo("listagem", {}, true);
 							}
 						});
 					}
 				}
 			});
-		},
-
-		_removerCompra(id) {
-			fetch(API_COMPRAS_URL + id, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-				}
-			})
-				.then((res) => {
-					return res.ok ? console.log(res) : res.json()
-				})
-				.then((data) => {
-					!data.Detail ? console.log(data)
-						: this.capturarErroApi(data);
-				})
-				.catch((err) => console.error(err));
 		}
 	});
 });
