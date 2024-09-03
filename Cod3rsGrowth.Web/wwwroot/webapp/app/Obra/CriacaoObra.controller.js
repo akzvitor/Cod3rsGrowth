@@ -28,6 +28,7 @@ sap.ui.define([
     const ID_GENEROS_MULTICOMBOBOX = "generosMultiComboBox";
     const ID_MESSAGESTRIP_SUCESSO = "messageStripSucesso";
     const ID_MESSAGESTRIP_ERRO = "messageStripErro";
+    const ID_PAGINA = "paginaCriacaoObra";
     var rota;
     var id_parametro;
 
@@ -40,23 +41,29 @@ sap.ui.define([
         },
 
         _aoCoincidirRota() {
-            this.processarAcao(() => {
+            this.processarAcao(() => { 
                 const oRouter = this.getOwnerComponent().getRouter();
                 oRouter.getRoute(ROTA_CRIACAO_OBRA).attachPatternMatched((oEvent) => {
+                    const oRouter = this.getRouter();
+                    rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
+                    this.alterarTituloDaPagina(ID_PAGINA, "CriacaoObra.titulo");
                     this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
                     this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
+                    this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
                     this._limparInputs();
                     this._removerSelecoes();
-                    this._esconderMensagensDeErro();
+                    this._esconderMensagens();
                     this._removerValueStates();
                 }, this);
                 oRouter.getRoute(ROTA_EDICAO_OBRA).attachPatternMatched((oEvent) => {
                     const oRouter = this.getRouter();
                     rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
+                    this.alterarTituloDaPagina(ID_PAGINA, "CriacaoObra.TituloEditar");
                     this._resgatarIdURL(oEvent);
                     this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
                     this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
                     this.preencherInputsComDadosDaObra(oEvent);
+                    this._esconderMensagens();
                 });
             });
         },
@@ -106,19 +113,32 @@ sap.ui.define([
                 };
 
                 if (!dadosSaoValidos) {
-                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroCriar"));
+                    rota === ROTA_CRIACAO_OBRA ? 
+                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroCriar")) :
+                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroEditar"));
+                
+                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
                     this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
                 }
 
                 if (dadosSaoValidos) {
-                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoCriar"));
-                    this.postData(API_OBRAS_URL, data);
-                    this._limparInputs();
-                    this._esconderMensagensDeErro();
-                    this._removerValueStates();
-                    this._removerSelecoes();
-                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
+
+                    if (rota === ROTA_CRIACAO_OBRA) {
+                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoCriar"));
+                        this.postData(API_OBRAS_URL, data);
+                        this._limparInputs();
+                        this._removerSelecoes();
+                    }
+
+                    if (rota === ROTA_EDICAO_OBRA) {
+                        data.id = id_parametro;
+                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoEditar"));
+                        this.putData(API_OBRAS_URL, data);
+                    }
                     
+                    this._esconderMensagens();
+                    this._removerValueStates();
+                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
                 }
             });
         },
@@ -143,7 +163,7 @@ sap.ui.define([
             });
         },
 
-        _esconderMensagensDeErro() {
+        _esconderMensagens() {
             this.processarAcao(() => {
                 this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
                 this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(false);

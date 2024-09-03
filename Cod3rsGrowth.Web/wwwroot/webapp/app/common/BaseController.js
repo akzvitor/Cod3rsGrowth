@@ -114,5 +114,11 @@ sap.ui.define([
                 .then(response => response.json())
                 .then(data => console.log(data));
         },
+
+		alterarTituloDaPagina(idPagina, chavei18n) {
+            const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            
+            this.oView.byId(idPagina).setTitle(oResourceBundle.getText(chavei18n));
+        },
 	});
 });

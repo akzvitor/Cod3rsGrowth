@@ -12,10 +12,35 @@ sap.ui.define([
     Opa5.createPageObjects({
         naPaginaDeDetalhesDaObra: {
             actions: {
-
+                euClicoNoBotaoEditar() {
+                    return this.waitFor({
+                        id: "botaoEditar",
+                        viewName: NOME_DA_VIEW,
+                        actions: new Press(),
+                        errorMessage: "Botão Editar não encontrado"
+                    });
+                }
             },
 
             assertions: {
+                aPaginaDeveMudarParaDetalhes() {
+                    return this.waitFor({
+                        success: function () {
+                            return this.waitFor({
+                                id: "paginaDetalhesObra",
+                                viewName: NOME_DA_VIEW,
+                                matchers: new Properties({
+                                    title: "Detalhes"
+                                }),
+                                success: function () {
+                                    Opa5.assert.ok(true, "Está na página de Detalhes da obra");
+                                },
+                                errorMessage: "Não está mostrando o título Detalhes"
+                            });
+                        }
+                    });
+                },
+
                 oTextComTooltipI18nAutorDevePossuirOValor(autor) {
                     return this.waitFor({
                         viewName: NOME_DA_VIEW,

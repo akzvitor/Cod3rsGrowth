@@ -80,7 +80,6 @@ sap.ui.define([
                     });
                 },
 
-                // TO DO - Verificar controltype (sap.ui.core.Item ?) e a key
                 euAbroAComboBoxDeGeneros() {
                     return this.waitFor({
                         viewName: NOME_DA_VIEW,
@@ -125,6 +124,24 @@ sap.ui.define([
             },
 
             assertions: {
+                aPaginaDeveMudarParaEdicaoObra() {
+                    return this.waitFor({
+                        success: function() {
+                            return this.waitFor({
+                                id:"paginaCriacaoObra",
+                                viewName: NOME_DA_VIEW,
+                                matchers: new Properties ({
+                                    title: "Editar Obra"
+                                }),
+                                success: function () {
+                                    Opa5.assert.ok(true, "Está na página de Edição de Obra")
+                                },
+                                errorMessage: "Não está mostrando o título Editar Obra"
+                            });
+                        }
+                    });
+                },
+
                 deveApresentarMensagemDeErroAoSalvarObra() {
                     return this.waitFor({
                         id: "messageStripErro",
