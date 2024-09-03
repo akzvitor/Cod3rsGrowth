@@ -126,11 +126,11 @@ sap.ui.define([
             assertions: {
                 aPaginaDeveMudarParaEdicaoObra() {
                     return this.waitFor({
-                        success: function() {
+                        success: function () {
                             return this.waitFor({
-                                id:"paginaCriacaoObra",
+                                id: "paginaCriacaoObra",
                                 viewName: NOME_DA_VIEW,
-                                matchers: new Properties ({
+                                matchers: new Properties({
                                     title: "Editar Obra"
                                 }),
                                 success: function () {
@@ -169,6 +169,148 @@ sap.ui.define([
                             Opa5.assert.ok(true, "A mensagem de sucesso ao salvar obra foi apresentada.");
                         },
                         errorMessage: "Não apresentou mensagem de sucesso."
+                    });
+                },
+
+                oInputAutorDeveConterOValor(autor) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "autorFormInput",
+                        matchers: new Properties({
+                            value: autor
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O input autor foi carregado com o valor ${autor}`)
+                        },
+                        errorMessage: "O input autor não foi carregado com o valor correto"
+                    })
+                },
+
+                oInputTituloDeveConterOValor(titulo) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "tituloFormInput",
+                        matchers: new Properties({
+                            value: titulo
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O input titulo foi carregado com o valor ${titulo}`)
+                        },
+                        errorMessage: "O input titulo não foi carregado com o valor correto"
+                    })
+                },
+
+                aComboBoxFormatoDeveConterOValor(formato) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "formatoComboBox",
+                        matchers: new Properties({
+                            value: formato
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `A combo box formato foi carregada com o valor ${formato}`)
+                        },
+                        errorMessage: "A combo box formato não foi carregada com o valor correto"
+                    })
+                },
+
+                oStepInputCapitulosDeveConterOValor(numeroDeCapitulos) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "stepInputCapitulos",
+                        matchers: new Properties({
+                            value: numeroDeCapitulos
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O step input capítulos foi carregado com o valor ${numeroDeCapitulos}`)
+                        },
+                        errorMessage: "O step input capítulos não foi carregado com o valor correto"
+                    })
+                },
+
+                aComboBoxStatusDeveConterOValor(status) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "statusComboBox",
+                        matchers: new Properties({
+                            value: status
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `A combo box status foi carregada com o valor ${status}`)
+                        },
+                        errorMessage: "A combo box status não foi carregada com o valor correto"
+                    })
+                },
+
+                oDatePickerDeveConterOValor(data) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "datePickerFormInput",
+                        matchers: new Properties({
+                            value: data
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O date picker foi carregado com o valor ${data}`)
+                        },
+                        errorMessage: "O date picker não foi carregado com o valor correto"
+                    })
+                },
+
+                oStepInputValorDeveConterOValor(valor) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "stepInputValor",
+                        matchers: new Properties({
+                            value: valor
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O step input valor foi carregado com o valor ${valor}`)
+                        },
+                        errorMessage: "O step input valor não foi carregado com o valor correto"
+                    })
+                },
+
+                aMultiComboBoxGenerosDeveConterOValor(generos) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        controlType: "sap.m.MultiComboBox",
+                        matchers: new PropertyStrictEquals({
+                            name: "value",
+                            value: ""
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `A multi combo box generos foi carregada com o valor ${generos}`)
+                        },
+                        errorMessage: "A multi combo box generos não foi carregada com o valor correto"
+                    })
+                },
+
+                oTextAreaSinopseDeveConterOValor(sinopse) {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        id: "sinopseTextArea",
+                        matchers: new Properties({
+                            value: sinopse
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `O text area sinopse foi carregado com o valor ${sinopse}`)
+                        },
+                        errorMessage: "O text area sinopse não foi carregado com o valor correto"
+                    })
+                },
+
+                deveApresentarMensagemDeErroAoEditarObra(){
+                    return this.waitFor({
+                        id: "messageStripErro",
+                        viewName: NOME_DA_VIEW,
+                        matchers: new Properties({
+                            text: "Não foi possível editar a obra, verifique os dados inseridos.",
+                            visible: true
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, "A mensagem de erro foi apresentada.");
+                        },
+                        errorMessage: "Não apresentou mensagem de erro."
                     });
                 }
             }

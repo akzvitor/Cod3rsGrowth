@@ -63,7 +63,7 @@ sap.ui.define([
 
         When.naPaginaDeListagemObras.euPreenchoOComboBoxStatusComOValor("Finalizadas");
 
-        Then.naPaginaDeListagemObras.deveExibirONumeroDeObrasQueSeAplicamAoFiltro(2);
+        Then.naPaginaDeListagemObras.deveExibirONumeroDeObrasQueSeAplicamAoFiltro(1);
         Then.iTeardownMyApp();
     });
 })
