@@ -45,12 +45,7 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet("Compra/{id}")]
         public IActionResult ObterObrasVinculadas(int id)
         {
-            var listaDeIds = _servicoCompraCliente.ObterProdutosVinculados(id);
-            var listaDeObras = new List<Obra>();
-
-            listaDeIds.ForEach(item => {
-                listaDeObras.Add(_servicoObra.ObterPorId(item));
-            });
+            var listaDeObras = _servicoObra.ObterObrasVinculadas(id);
 
             return Ok(listaDeObras);
         }
