@@ -54,7 +54,7 @@ sap.ui.define([
                         controlType: "sap.m.Button",
                         success(aButtons) {
                             return aButtons.filter(function (oButton) {
-                                if (oButton.getText() == "Voltar para a lista de obras") {
+                                if (oButton.getText() == "Voltar") {
                                     oButton.firePress();
                                 }
                             });
