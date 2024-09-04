@@ -11,6 +11,7 @@ sap.ui.define([
     const MODELO_OBRAS = "restObras";
     const API_GENEROS_URL = "http://localhost:5070/api/Obras/generos";
     const MODELO_GENEROS = "restGeneros";
+    const ROTA_LISTAGEM = "listagemObra";
     var id_parametro;
  
  
@@ -63,13 +64,8 @@ sap.ui.define([
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                 onClose: (sAction) => {
                     if (sAction === MessageBox.Action.YES) {
-                        this.deleteData(API_OBRAS_URL, id_parametro);
-                        MessageBox.success("A obra foi removida com sucesso.", {
-                            actions: ["Voltar para a lista de obras"],
-                            onClose: () => {
-                                this.getRouter().navTo("listagemObra", {}, true)
-                            }
-                        });
+                        const mensagemDeSucesso = "A obra foi removida com sucesso.";
+                        this.deleteData(API_OBRAS_URL, id_parametro, mensagemDeSucesso, ROTA_LISTAGEM);
                     }
                 }
             });

@@ -73,7 +73,7 @@ sap.ui.define([
     });
 
     opaTest("Deveria navegar de volta para a página de listagem ao clicar no botão voltar.", (Given, When, Then) => {
-        When.naPaginaDeDetalhesObra.euClicoNoBotaoVoltarParaPaginaInicial();
+        When.naPaginaDeDetalhesDaObra.euClicoNoBotaoVoltarParaListaDeObras();
 
 		Then.naPaginaDeListagemObras.aPaginaDeveMudarParaListagem();
         Then.iTeardownMyApp();

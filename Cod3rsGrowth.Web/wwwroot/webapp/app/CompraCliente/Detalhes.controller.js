@@ -11,6 +11,7 @@ sap.ui.define([
 	const MODELO_COMPRAS = "restCompras";
 	const MODELO_OBRAS = "restObras";
 	const API_OBRAS_URL = "http://localhost:5070/api/Obras/Compra";
+	const ROTA_LISTAGEM = "listagem"
 	var id_parametro;
 
 
@@ -70,13 +71,8 @@ sap.ui.define([
 				actions: [MessageBox.Action.YES, MessageBox.Action.NO],
 				onClose: (sAction) => {
 					if (sAction === MessageBox.Action.YES) {
-						this.deleteData(API_COMPRAS_URL, id_parametro);
-						MessageBox.success(`A compra foi removida com sucesso.`, {
-							actions: ["Voltar para a página inicial"],
-							onClose: () => {
-								this.getRouter().navTo("listagem", {}, true);
-							}
-						});
+						const mensagemDeSucesso = "A compra foi removida com sucesso."
+						this.deleteData(API_COMPRAS_URL, id_parametro, mensagemDeSucesso, ROTA_LISTAGEM);
 					}
 				}
 			});

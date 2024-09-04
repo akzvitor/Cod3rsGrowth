@@ -47,7 +47,7 @@ sap.ui.define([
                     });
                 },
 
-                euClicoNoBotaoVoltarParaPaginaInicial() {
+                euClicoNoBotaoVoltarParaListaDeObras() {
                     return this.waitFor({
                         viewName: NOME_DA_VIEW,
                         searchOpenDialogs: true,
