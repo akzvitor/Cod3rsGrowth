@@ -4,16 +4,16 @@ sap.ui.define([
     'ui5/coders/model/validator',
     "sap/ui/core/library",
     "sap/ui/model/json/JSONModel",
- 
+
 ], (BaseController, formatter, validator, coreLibrary, JSONModel) => {
     "use strict";
- 
+
     const { ValueState } = coreLibrary;
     const ROTA_CRIACAO_OBRA = "criacaoObra";
-    const ROTA_EDICAO_OBRA="edicaoObra";
+    const ROTA_EDICAO_OBRA = "edicaoObra";
     const API_OBRAS_URL = "http://localhost:5070/api/Obras";
     const MODELO_OBRAS = "restObras";
-    const API_FORMATOS_URL ="http://localhost:5070/api/Obras/formatos";
+    const API_FORMATOS_URL = "http://localhost:5070/api/Obras/formatos";
     const MODELO_FORMATOS = "restFormatos";
     const API_GENEROS_URL = "http://localhost:5070/api/Obras/generos";
     const MODELO_GENEROS = "restGeneros";
@@ -35,13 +35,13 @@ sap.ui.define([
     return BaseController.extend("ui5.coders.app.Obra.CriacaoObra", {
         formatter: formatter,
         validator: validator,
- 
+
         onInit() {
             this._aoCoincidirRota();
         },
 
         _aoCoincidirRota() {
-            this.processarAcao(() => { 
+            this.processarAcao(() => {
                 const oRouter = this.getOwnerComponent().getRouter();
                 oRouter.getRoute(ROTA_CRIACAO_OBRA).attachPatternMatched((oEvent) => {
                     const oRouter = this.getRouter();
@@ -75,18 +75,65 @@ sap.ui.define([
 
         preencherInputsComDadosDaObra(oEvent) {
             fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idObra))
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                !data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS) : this.capturarErroApi(data);
-            })
-            .catch((err) => console.error(err));
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    !data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_OBRAS) : this.capturarErroApi(data);
+                })
+                .catch((err) => console.error(err));
         },
 
         aoClicarNoBotaoSalvar() {
             this.processarAcao(() => {
+                const [inputTitulo, inputAutor, inputFormato, inputCapitulos, inputStatus, inputDataPubli,
+                    inputValor, inputSinopse, inputGeneros] = this._obterInputs();
+                const dadosSaoValidos = validator.validarDadosObra(inputTitulo, inputAutor, inputSinopse, inputDataPubli,
+                    inputFormato, inputGeneros, inputStatus);
                 const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+    
+                let obra = this._criarObra();
+    
+                if (!dadosSaoValidos) {
+                    rota === ROTA_CRIACAO_OBRA ?
+                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroCriar")) :
+                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroEditar"));
+    
+                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
+                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
+                }
+    
+                if (dadosSaoValidos) {
+                    this._salvarObra(obra);
+                }
+            });
+        },
+
+        _salvarObra(obra) {
+            this.processarAcao(() => {
+                const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+            if (rota === ROTA_CRIACAO_OBRA) {
+                this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoCriar"));
+                this.postData(API_OBRAS_URL, obra);
+                this._limparInputs();
+                this._removerSelecoes();
+            }
+
+            if (rota === ROTA_EDICAO_OBRA) {
+                obra.id = id_parametro;
+                this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoEditar"));
+                this.putData(API_OBRAS_URL, obra);
+            }
+
+            this._esconderMensagens();
+            this._removerValueStates();
+            this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
+            });
+        },
+
+        _obterInputs() {
+            return this.processarAcao(() => {
                 const inputTitulo = this.oView.byId(ID_TITULO_INPUT);
                 const inputAutor = this.oView.byId(ID_AUTOR_INPUT);
                 const inputFormato = this.oView.byId(ID_FORMATO_COMBOBOX);
@@ -96,9 +143,18 @@ sap.ui.define([
                 const inputValor = this.oView.byId(ID_VALOR_STEPINPUT);
                 const inputSinopse = this.oView.byId(ID_SINOPSE_TEXTAREA);
                 const inputGeneros = this.oView.byId(ID_GENEROS_MULTICOMBOBOX);
-                const dadosSaoValidos = validator.validarDadosObra(inputTitulo, inputAutor, inputSinopse, inputDataPubli,
-                    inputFormato, inputGeneros, inputStatus);
-                let data = {
+
+                return [inputTitulo, inputAutor, inputFormato, inputCapitulos, inputStatus, inputDataPubli,
+                    inputValor, inputSinopse, inputGeneros];
+            });
+        },
+
+        _criarObra() {
+            return this.processarAcao(() => {
+                const [inputTitulo, inputAutor, inputFormato, inputCapitulos, inputStatus, inputDataPubli,
+                    inputValor, inputSinopse, inputGeneros] = this._obterInputs();
+
+                return {
                     titulo: inputTitulo.getValue(),
                     autor: inputAutor.getValue(),
                     numeroCapitulos: inputCapitulos.getValue(),
@@ -109,35 +165,6 @@ sap.ui.define([
                     sinopse: inputSinopse.getValue(),
                     generos: formatter.formatarGenerosParaApi(inputGeneros.getSelectedKeys()),
                     capaImagemBase64: null
-                };
-
-                if (!dadosSaoValidos) {
-                    rota === ROTA_CRIACAO_OBRA ? 
-                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroCriar")) :
-                        this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoObra.messageStripErroEditar"));
-                
-                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
-                    this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
-                }
-
-                if (dadosSaoValidos) {
-
-                    if (rota === ROTA_CRIACAO_OBRA) {
-                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoCriar"));
-                        this.postData(API_OBRAS_URL, data);
-                        this._limparInputs();
-                        this._removerSelecoes();
-                    }
-
-                    if (rota === ROTA_EDICAO_OBRA) {
-                        data.id = id_parametro;
-                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoObra.messageStripSucessoEditar"));
-                        this.putData(API_OBRAS_URL, data);
-                    }
-                    
-                    this._esconderMensagens();
-                    this._removerValueStates();
-                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
                 }
             });
         },
@@ -150,15 +177,11 @@ sap.ui.define([
 
         _limparInputs() {
             this.processarAcao(() => {
-                this.oView.byId(ID_TITULO_INPUT).setValue(null);
-                this.oView.byId(ID_AUTOR_INPUT).setValue(null);
-                this.oView.byId(ID_FORMATO_COMBOBOX).setValue(null);
-                this.oView.byId(ID_CAPITULOS_STEPINPUT).setValue(null);
-                this.oView.byId(ID_STATUS_COMBOBOX).setValue(null);
-                this.oView.byId(ID_DATAPUBLI_DATEPICKER).setValue(null);
-                this.oView.byId(ID_VALOR_STEPINPUT).setValue(null);
-                this.oView.byId(ID_GENEROS_MULTICOMBOBOX).setValue(null);
-                this.oView.byId(ID_SINOPSE_TEXTAREA).setValue(null);
+                const listaDeInputs = this._obterInputs();
+
+                listaDeInputs.forEach(input => {
+                    input.setValue(null);
+                });
             });
         },
 
@@ -166,21 +189,17 @@ sap.ui.define([
             this.processarAcao(() => {
                 this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(false);
                 this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(false);
-            })
+            });
         },
 
         _removerValueStates() {
             this.processarAcao(() => {
-                this.oView.byId(ID_TITULO_INPUT).setValueState(ValueState.None)
-                this.oView.byId(ID_AUTOR_INPUT).setValueState(ValueState.None)
-                this.oView.byId(ID_FORMATO_COMBOBOX).setValueState(ValueState.None)
-                this.oView.byId(ID_CAPITULOS_STEPINPUT).setValueState(ValueState.None)
-                this.oView.byId(ID_STATUS_COMBOBOX).setValueState(ValueState.None)
-                this.oView.byId(ID_DATAPUBLI_DATEPICKER).setValueState(ValueState.None)
-                this.oView.byId(ID_VALOR_STEPINPUT).setValueState(ValueState.None)
-                this.oView.byId(ID_GENEROS_MULTICOMBOBOX).setValueState(ValueState.None)
-                this.oView.byId(ID_SINOPSE_TEXTAREA).setValueState(ValueState.None)
-            })
+                const listaDeInputs = this._obterInputs();
+
+                listaDeInputs.forEach(input => {
+                    input.setValueState(ValueState.None);
+                });
+            });
         },
 
         aoPreencherTitulo(oEvent) {

@@ -21,7 +21,7 @@ sap.ui.define([
 				const resultado = action();
 				return resultado;
 			} catch (error) {
-				MessageBox.error(error.message);
+				console.error(error.message);
 			}
 		},
 
