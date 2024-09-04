@@ -57,8 +57,7 @@ sap.ui.define([
 
         aoClicarNoBotaoAdicionar() {
             this.processarAcao(() => {
-                const oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo("criacaoCompra");
+                this.navegarPara("criacaoCompra")
             });
         },
 
@@ -74,8 +73,7 @@ sap.ui.define([
 
         aoClicarNoBotaoObras() {
             this.processarAcao(() => {
-				const oRouter = this.getOwnerComponent().getRouter();
-				oRouter.navTo("listagemObra");
+                this.navegarPara("listagemObra")
 			});
         }
     });
