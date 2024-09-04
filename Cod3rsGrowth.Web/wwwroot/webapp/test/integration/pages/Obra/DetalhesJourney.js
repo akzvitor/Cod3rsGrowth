@@ -59,4 +59,23 @@ sap.ui.define([
         Then.naPaginaDeDetalhesDaObra.oTextComTooltipI18nSinopseDevePossuirOValor("Akame ga Kill! é um mangá shonen escrito por Takahiro e ilustrado por Tetsuya Tashiro que conta a história de Tatsumi, um jovem aldeão que se junta ao exército para lutar pelo império e ajudar a sua vila pobre. Depois de ver os seus amigos morrerem e descobrir a corrupção do governo, Tatsumi é recrutado pela assassina Leone e junta-se ao Night Raid, um grupo de guerreiros secretos que lutam contra a corrupção do império.");
         Then.iTeardownMyApp();
     });
+
+    opaTest("Deveria deletar a obra corretamente.", (Given, When, Then) => {
+        Given.iStartMyApp({
+            hash: "listagemObra"
+        });
+
+        When.naPaginaDeListagemObras.euClicoNoItemDaTabelaComTitulo("TesteOPA");
+        When.naPaginaDeDetalhesDaObra.euClicoNoBotaoRemover();
+        When.naPaginaDeDetalhesDaObra.euClicoNoBotaoSim();
+
+        Then.naPaginaDeDetalhesDaObra.deveMostrarMensagemDeSucessoAoRemover();
+    });
+
+    opaTest("Deveria navegar de volta para a página de listagem ao clicar no botão voltar.", (Given, When, Then) => {
+        When.naPaginaDeDetalhesDaObra.euClicoNoBotaoVoltarParaListaDeObras();
+
+		Then.naPaginaDeListagemObras.aPaginaDeveMudarParaListagem();
+        Then.iTeardownMyApp();
+    });
 });

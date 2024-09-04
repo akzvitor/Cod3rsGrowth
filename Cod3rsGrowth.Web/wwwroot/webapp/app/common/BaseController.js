@@ -115,6 +115,34 @@ sap.ui.define([
                 .then(data => console.log(data));
         },
 
+		deleteData(urlApi, id, mensagem, rotaParaVoltar) {
+			fetch(urlApi + id, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				}
+			})
+				.then((res) => {
+					return res.ok ? 
+					this.exibirMensagemDeSucessoAoRemover(mensagem, rotaParaVoltar) :
+					res.json();
+				})
+				.then((data) => {
+					if (data && data.Detail) 
+						this.capturarErroApi(data) 
+				})
+				.catch((err) => console.error(err));
+		},
+
+		exibirMensagemDeSucessoAoRemover(mensagem, rotaParaVoltar) {
+			MessageBox.success(mensagem, {
+				actions: ["Voltar"],
+				onClose: () => {
+					this.getRouter().navTo(rotaParaVoltar, {}, true);
+				}
+			});
+		},
+
 		alterarTituloDaPagina(idPagina, chavei18n) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             

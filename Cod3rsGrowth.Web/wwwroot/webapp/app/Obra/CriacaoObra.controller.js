@@ -49,7 +49,6 @@ sap.ui.define([
                     this.alterarTituloDaPagina(ID_PAGINA, "CriacaoObra.titulo");
                     this.inicializarComboBox(API_FORMATOS_URL, MODELO_FORMATOS);
                     this.inicializarComboBox(API_GENEROS_URL, MODELO_GENEROS);
-                    this.inicializarDados(API_OBRAS_URL, MODELO_OBRAS);
                     this._limparInputs();
                     this._removerSelecoes();
                     this._esconderMensagens();

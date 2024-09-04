@@ -35,7 +35,7 @@ sap.ui.define([
                         id: "botaoRemover",
                         viewName: NOME_DA_VIEW,
                         actions: new Press(),
-                        errorMessage: "Botão Editar não encontrado"
+                        errorMessage: "Botão Remover não encontrado"
                     });
                 },
 
@@ -53,7 +53,7 @@ sap.ui.define([
                         },
                         actions: new Press(),
                         errorMessage: "Botão de confirmação não encontrado."
-                    })
+                    });
                 },
 
                 euClicoNoBotaoVoltarParaPaginaInicial() {
@@ -63,14 +63,14 @@ sap.ui.define([
                         controlType: "sap.m.Button",
                         success(aButtons) {
                             return aButtons.filter(function (oButton) {
-                                if (oButton.getText() == "Voltar para a página inicial") {
+                                if (oButton.getText() == "Voltar") {
                                     oButton.firePress();
                                 }
                             });
                         },
                         actions: new Press(),
                         errorMessage: "Botão de voltar não encontrado."
-                    })
+                    });
                 }
             },
 

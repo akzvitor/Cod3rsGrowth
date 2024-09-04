@@ -367,9 +367,6 @@ sap.ui.define([
             const formatoEValido = this.validarFormato(formato);
             const generosSaoValidos = this.validarGeneros(generos);
             const statusEValido = this.validarStatus(status);
-
-            console.log(generos.getSelectedKeys())
-            console.log(generosSaoValidos);
             
             return tituloEValido && autorEValido && sinopseEValida && inicioDaPublicacaoEValido
                 && formatoEValido && generosSaoValidos && statusEValido;

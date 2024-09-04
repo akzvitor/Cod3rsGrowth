@@ -11,6 +11,7 @@ sap.ui.define([
     const MODELO_OBRAS = "restObras";
     const API_GENEROS_URL = "http://localhost:5070/api/Obras/generos";
     const MODELO_GENEROS = "restGeneros";
+    const ROTA_LISTAGEM = "listagemObra";
     var id_parametro;
  
  
@@ -55,6 +56,19 @@ sap.ui.define([
 					idObra: id_parametro
 				});
 			});
+        },
+        
+        aoClicarNoBotaoRemover() {
+            MessageBox.confirm("Tem certeza que deseja excluir essa obra?", {
+                title: "Excluir Obra",
+                actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                onClose: (sAction) => {
+                    if (sAction === MessageBox.Action.YES) {
+                        const mensagemDeSucesso = "A obra foi removida com sucesso.";
+                        this.deleteData(API_OBRAS_URL, id_parametro, mensagemDeSucesso, ROTA_LISTAGEM);
+                    }
+                }
+            });
         }
     });
 });

@@ -19,6 +19,49 @@ sap.ui.define([
                         actions: new Press(),
                         errorMessage: "Botão Editar não encontrado"
                     });
+                },
+
+                euClicoNoBotaoRemover() {
+                    return this.waitFor({
+                        id: "botaoRemover",
+                        viewName: NOME_DA_VIEW,
+                        actions: new Press(),
+                        errorMessage: "Botão Remover não encontrado"
+                    });
+                },
+
+                euClicoNoBotaoSim() {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        searchOpenDialogs: true,
+                        controlType: "sap.m.Button",
+                        success(aButtons) {
+                            return aButtons.filter(function (oButton) {
+                                if (oButton.getText() == "Sim") {
+                                    oButton.firePress();
+                                }
+                            });
+                        },
+                        actions: new Press(),
+                        errorMessage: "Botão de confirmação não encontrado."
+                    });
+                },
+
+                euClicoNoBotaoVoltarParaListaDeObras() {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        searchOpenDialogs: true,
+                        controlType: "sap.m.Button",
+                        success(aButtons) {
+                            return aButtons.filter(function (oButton) {
+                                if (oButton.getText() == "Voltar") {
+                                    oButton.firePress();
+                                }
+                            });
+                        },
+                        actions: new Press(),
+                        errorMessage: "Botão de voltar não encontrado."
+                    });
                 }
             },
 
@@ -218,6 +261,22 @@ sap.ui.define([
                             Opa5.assert.ok(true, `O Text de tooltip Sinopse possui o valor ${sinopse}.`);
                         },
                         errorMessage: `O Text de tooltip Sinopse não possui o valor esperado (${sinopse}).`
+                    });
+                },
+
+                deveMostrarMensagemDeSucessoAoRemover() {
+                    return this.waitFor({
+                        viewName: NOME_DA_VIEW,
+                        searchOpenDialogs: true,
+                        matchers: {
+                            properties: {
+                                title: "Êxito"
+                            }
+                        },
+                        success: function () {
+                            Opa5.assert.ok(true, "A mensagem de sucesso foi exibida corretamente.");
+                        },
+                        errorMessage: "Não foi exibida a mensagem de sucesso."
                     });
                 }
             }
