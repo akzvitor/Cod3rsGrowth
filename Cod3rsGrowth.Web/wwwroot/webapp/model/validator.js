@@ -352,6 +352,12 @@ sap.ui.define([
                 eValido = false;
             }
 
+            if (valor.length > 10) {
+                input.setValueStateText("A obra pode conter até 10 generos");
+                eValido = false; 
+
+            }
+
             if (eValido) {
                 input.setValueState(ValueState.None);
                 return true;

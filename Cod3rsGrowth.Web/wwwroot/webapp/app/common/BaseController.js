@@ -148,5 +148,10 @@ sap.ui.define([
             
             this.oView.byId(idPagina).setTitle(oResourceBundle.getText(chavei18n));
         },
+
+		navegarPara(rota) {
+			const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo(rota);
+		}
 	});
 });

@@ -46,12 +46,12 @@ sap.ui.define([
             return this.processarAcao(() => {
                 let dataInicial = oEvent.getParameter("from");
                 let dataFinal = oEvent.getParameter("to");
-                let obj = { di: Number, df: Number };
+                let dataCompraDTO = { di: Number, df: Number };
 
-                obj.di = dataInicial;
-                obj.df = dataFinal;
+                dataCompraDTO.di = dataInicial;
+                dataCompraDTO.df = dataFinal;
 
-                return obj;
+                return dataCompraDTO;
             });
         },
 

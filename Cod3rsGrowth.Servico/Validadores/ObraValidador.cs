@@ -48,8 +48,8 @@ namespace Cod3rsGrowth.Servico.Validadores
                 .WithMessage("Formato de obra inválido.");
 
             RuleFor(obra => obra.Generos)
-                .NotEmpty().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).");
-                // .Must(list => list.Count < 10).WithMessage("O limite de gêneros em uma única obra é 10.");
+                .NotEmpty().WithMessage("O(s) gênero(s) da obra deve(m) ser informado(s).")
+                .Must(list => list.Count <= 10).WithMessage("O limite de gêneros em uma única obra é 10.");
 
             RuleForEach(obra => obra.Generos)
                 .IsInEnum()
