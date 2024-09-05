@@ -9,13 +9,14 @@ namespace Cod3rsGrowth.Servico.Servicos
     {
         private readonly IRepositorioCompraCliente _repositorioCompraCliente;
         private readonly CompraClienteValidador _validadorCompraCliente;
-        private readonly IRepositorioObra _repositorioObra;
+        private readonly ServicoObra _servicoObra;
 
-        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente, IRepositorioObra repositorioObra, CompraClienteValidador validadorCompraCliente)
+        public ServicoCompraCliente(IRepositorioCompraCliente repositorioCompraCliente, CompraClienteValidador validadorCompraCliente,
+                                    ServicoObra servicoObra)
         {
             _repositorioCompraCliente = repositorioCompraCliente;
-            _repositorioObra = repositorioObra;
             _validadorCompraCliente = validadorCompraCliente;
+            _servicoObra = servicoObra;
         }
 
         public List<CompraCliente> ObterTodos(FiltroCompraCliente? filtro = null)
@@ -67,6 +68,19 @@ namespace Cod3rsGrowth.Servico.Servicos
         public List<int> ObterProdutosVinculados(int compraId)
         {
             return _repositorioCompraCliente.ObterProdutosVinculados(compraId);
+        }
+
+        public List<Obra> ObterObrasVinculadas(int compraId)
+        {
+            var listaDeIds = ObterProdutosVinculados(compraId);
+            var listaDeObras = new List<Obra>();
+
+            listaDeIds.ForEach(item =>
+            {
+                listaDeObras.Add(_servicoObra.ObterPorId(item));
+            });
+
+            return listaDeObras;
         }
     }
 }
