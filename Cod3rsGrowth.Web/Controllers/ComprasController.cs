@@ -65,5 +65,13 @@ namespace Cod3rsGrowth.Web.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("compra/{id}/obras")]
+        public IActionResult ObterObrasVinculadas(int id)
+        {
+            var listaDeObras = _servicoCompraCliente.ObterObrasVinculadas(id);
+
+            return Ok(listaDeObras);
+        }
     }
 }

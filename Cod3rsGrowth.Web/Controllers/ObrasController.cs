@@ -42,14 +42,6 @@ namespace Cod3rsGrowth.Web.Controllers
             return Ok(generos);
         }
 
-        [HttpGet("Compra/{id}")]
-        public IActionResult ObterObrasVinculadas(int id)
-        {
-            var listaDeObras = _servicoObra.ObterObrasVinculadas(id);
-
-            return Ok(listaDeObras);
-        }
-
         [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
