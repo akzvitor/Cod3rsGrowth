@@ -35,6 +35,7 @@ namespace Cod3rsGrowth.Web.Extensoes
                             problemDetails.Title = exception.Message;
                             problemDetails.Status = StatusCodes.Status500InternalServerError;
                             problemDetails.Detail = exception.Demystify().ToString();
+                            problemDetails.Extensions["Erros"] = exception.Message.Split("\r\n");
                         }
                         context.Response.StatusCode = problemDetails.Status.Value;
                         context.Response.ContentType = "application/problem+json";

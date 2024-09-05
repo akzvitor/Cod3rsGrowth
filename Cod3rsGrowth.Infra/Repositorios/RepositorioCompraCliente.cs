@@ -161,7 +161,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             {
                 compras = compras.Where(c => (c.DataCompra >= filtroCompra.DataInicial.Value) && (c.DataCompra <= filtroCompra.DataFinal.Value));
             }
-
+            
             return compras;
         }
     }

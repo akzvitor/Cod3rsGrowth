@@ -10,7 +10,6 @@ namespace Cod3rsGrowth.Web.Controllers
     public class ComprasController : ControllerBase
     {
         private readonly ServicoCompraCliente _servicoCompraCliente;
-        private const int ERRO_LISTA_VAZIA = 0;
 
         public ComprasController(ServicoCompraCliente servicoCompraCliente)
         {
@@ -21,11 +20,6 @@ namespace Cod3rsGrowth.Web.Controllers
         public IActionResult ObterTodos([FromQuery] FiltroCompraCliente? filtro)
         {
             var listaDeCompras = _servicoCompraCliente.ObterTodos(filtro);
-
-            if (listaDeCompras.Count == ERRO_LISTA_VAZIA)
-            {
-                return NotFound();
-            }
 
             return Ok(listaDeCompras);
         }
@@ -70,6 +64,14 @@ namespace Cod3rsGrowth.Web.Controllers
             _servicoCompraCliente.Remover(id);
 
             return NoContent();
+        }
+
+        [HttpGet("compra/{id}/obras")]
+        public IActionResult ObterObrasVinculadas(int id)
+        {
+            var listaDeObras = _servicoCompraCliente.ObterObrasVinculadas(id);
+
+            return Ok(listaDeObras);
         }
     }
 }
