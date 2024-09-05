@@ -38,19 +38,19 @@ sap.ui.define([
             this._aoCoincidirRota(API_OBRAS_URL, MODELO_OBRAS);
         },
 
-         _aoCoincidirRota(urlDaApi, nomeDoModelo) {
-			this.processarAcao(() => {
-				const oRouter = this.getOwnerComponent().getRouter();
-				oRouter.getRoute(ROTA_CRIACAO).attachPatternMatched((oEvent) => {
+        _aoCoincidirRota(urlDaApi, nomeDoModelo) {
+            this.processarAcao(() => {
+                const oRouter = this.getOwnerComponent().getRouter();
+                oRouter.getRoute(ROTA_CRIACAO).attachPatternMatched((oEvent) => {
                     const oRouter = this.getRouter();
                     rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
                     this.alterarTituloDaPagina(ID_PAGINA, "CriacaoCompra.titulo")
-					this.inicializarDados(urlDaApi, nomeDoModelo);
+                    this.inicializarDados(urlDaApi, nomeDoModelo);
                     this._limparInputs();
                     this._esconderMensagensDeErro();
                     this._removerSelecoes();
                     this._removerValueStates();
-				}, this);
+                }, this);
                 oRouter.getRoute(ROTA_EDICAO).attachPatternMatched((oEvent) => {
                     const oRouter = this.getRouter();
                     rota = oRouter.getRoute(oEvent.getParameter('name'))._oConfig.name;
@@ -61,21 +61,21 @@ sap.ui.define([
                     this.inicializarDados(urlDaApi, nomeDoModelo);
                     this.preencherInputsComDadosDaCompra(oEvent);
                 }, this);
-			});
-		},
+            });
+        },
 
         preencherInputsComDadosDaCompra(oEvent) {
-		    fetch(API_COMPRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
-				.then((res) => {
-					return res.json();
-				})
-				.then((data) => {
-					!data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
+            fetch(API_COMPRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    !data.Detail ? this.getView().setModel(new JSONModel(data), MODELO_COMPRAS) : this.capturarErroApi(data);
 
                     this._selecionarItensComprados(data.listaIdDosProdutos);
                     this.resgatarDataEdicao(data.dataCompra);
-				})
-				.catch((err) => console.error(err));
+                })
+                .catch((err) => console.error(err));
         },
 
         resgatarIdURL(oEvent) {
@@ -83,69 +83,34 @@ sap.ui.define([
         },
 
         resgatarDataEdicao(data) {
-            dataEdicao = data
+            dataEdicao = data;
         },
 
         aoClicarNoBotaoSalvar() {
             this.processarAcao(() => {
                 const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-                const inputNome = this.oView.byId(ID_NOME_FORM_INPUT);
-                const valorNome = inputNome.getValue();
-                const inputEmail = this.oView.byId(ID_EMAIL_FORM_INPUT);
-                const valorEmail = inputEmail.getValue()
-                const inputCpf = this.oView.byId(ID_CPF_FORM_INPUT);
-                const valorCpf = inputCpf.getValue()
-                const inputTelefone = this.oView.byId(ID_TELEFONE_FORM_INPUT);
-                const valorTelefone = inputTelefone.getValue()
-                const dataDaCompra = new Date();
-                const oObrasSelecionadas = this._obterObrasSelecionadas();
+                const [inputCpf, inputEmail, inputNome, inputTelefone] = this._obterInputs();
                 const erroListaDeProdutosVazia = 0;
-                let data = {
-                    cpf: valorCpf,
-                    nome: valorNome,
-                    telefone: valorTelefone,
-                    email: valorEmail,
-                    dataCompra: dataDaCompra,
-                    valorCompra: oObrasSelecionadas.valorTotalCompra,
-                    listaIdDosProdutos: oObrasSelecionadas.listaIdsSelecionados
-                }
+                let compra = this._criarCompra();
+                const oObrasSelecionadas = this._obterObrasSelecionadas();
 
                 const dadosSaoValidos = validator.validarDados(inputNome, inputEmail, inputTelefone, inputCpf);
 
-                if(!dadosSaoValidos) {
-                    if (rota === ROTA_CRIACAO) 
+                if (!dadosSaoValidos) {
+                    if (rota === ROTA_CRIACAO)
                         this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoCompra.messageStripErroCriar"));
 
-                    if (rota === ROTA_EDICAO) 
+                    if (rota === ROTA_EDICAO)
                         this.oView.byId(ID_MESSAGESTRIP_ERRO).setText(oResourceBundle.getText("CriacaoCompra.messageStripErroEditar"));
 
                     this.oView.byId(ID_MESSAGESTRIP_ERRO).setVisible(true);
                 }
-                
+
                 if (oObrasSelecionadas.listaIdsSelecionados.length === erroListaDeProdutosVazia)
                     this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(true);
 
-                if (dadosSaoValidos && oObrasSelecionadas.listaIdsSelecionados.length !== erroListaDeProdutosVazia) {
-                    this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
-                    
-                    if (rota === ROTA_CRIACAO) {
-                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoCriar"));
-                        this.postData(API_COMPRAS_URL, data);
-                        this._limparInputs();
-                        this._removerSelecoes();
-                    }
-
-                    if (rota === ROTA_EDICAO) {
-                        this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoEditar"));
-                        data.id = id_parametro;
-                        data.dataCompra = dataEdicao;
-                        this.putData(API_COMPRAS_URL, data)
-                    }
-
-                    this._esconderMensagensDeErro();
-                    this._removerValueStates();
-                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
-                }
+                if (dadosSaoValidos && oObrasSelecionadas.listaIdsSelecionados.length !== erroListaDeProdutosVazia)
+                    this._salvarCompra(compra);
             });
         },
 
@@ -161,6 +126,60 @@ sap.ui.define([
                 const oBinding = oList.getBinding("items");
                 oBinding.filter(aFilter);
             });
+        },
+
+        _obterInputs() {
+            return this.processarAcao(() => {
+                const inputNome = this.oView.byId(ID_NOME_FORM_INPUT);
+                const inputEmail = this.oView.byId(ID_EMAIL_FORM_INPUT);
+                const inputCpf = this.oView.byId(ID_CPF_FORM_INPUT);
+                const inputTelefone = this.oView.byId(ID_TELEFONE_FORM_INPUT);
+
+                return [inputCpf, inputEmail, inputNome, inputTelefone];
+            });
+        },
+
+        _criarCompra() {
+            return this.processarAcao(() => {
+                const [inputCpf, inputEmail, inputNome, inputTelefone] = this._obterInputs();
+                const dataDaCompra = new Date();
+                const oObrasSelecionadas = this._obterObrasSelecionadas();
+
+                return {
+                    cpf: inputCpf.getValue(),
+                    nome: inputNome.getValue(),
+                    telefone: inputTelefone.getValue(),
+                    email: inputEmail.getValue(),
+                    dataCompra: dataDaCompra,
+                    valorCompra: oObrasSelecionadas.valorTotalCompra,
+                    listaIdDosProdutos: oObrasSelecionadas.listaIdsSelecionados
+                };
+            });
+        },
+
+        _salvarCompra(compra) {
+            this.processarAcao(() => {
+                this.oView.byId(ID_ERRO_VALIDACAO_PRODUTOS).setVisible(false);
+                const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+                if (rota === ROTA_CRIACAO) {
+                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoCriar"));
+                    this.postData(API_COMPRAS_URL, compra);
+                    this._limparInputs();
+                    this._removerSelecoes();
+                }
+
+                if (rota === ROTA_EDICAO) {
+                    this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setText(oResourceBundle.getText("CriacaoCompra.messageStripSucessoEditar"));
+                    compra.id = id_parametro;
+                    compra.dataCompra = dataEdicao;
+                    this.putData(API_COMPRAS_URL, compra)
+                }
+
+                this._esconderMensagensDeErro();
+                this._removerValueStates();
+                this.oView.byId(ID_MESSAGESTRIP_SUCESSO).setVisible(true);
+            })
         },
 
         _obterObrasSelecionadas() {
@@ -187,12 +206,12 @@ sap.ui.define([
                 let oList = this.byId(ID_CATALOGO_OBRAS);
                 let itensDoCatalogo = oList.getItems();
 
-                for (let i = 0; i< itensDoCatalogo.length; i++) {
+                for (let i = 0; i < itensDoCatalogo.length; i++) {
                     let itemSelecionado = itensDoCatalogo[i];
                     let contexto = itemSelecionado.getBindingContext(MODELO_OBRAS);
                     let obra = contexto.getProperty(null, contexto);
 
-                    if(listaDeIds.includes(obra.id)) {
+                    if (listaDeIds.includes(obra.id)) {
                         oList.setSelectedItem(itemSelecionado);
                     }
                 };
@@ -201,10 +220,11 @@ sap.ui.define([
 
         _limparInputs() {
             this.processarAcao(() => {
-                this.oView.byId(ID_NOME_FORM_INPUT).setValue(null);
-                this.oView.byId(ID_EMAIL_FORM_INPUT).setValue(null);
-                this.oView.byId(ID_CPF_FORM_INPUT).setValue(null);
-                this.oView.byId(ID_TELEFONE_FORM_INPUT).setValue(null);
+                const listaDeInputs = this._obterInputs();
+
+                listaDeInputs.forEach(input => {
+                    input.setValue(null);
+                });
             });
         },
 
@@ -215,10 +235,13 @@ sap.ui.define([
         },
 
         _removerValueStates() {
-            this.oView.byId(ID_NOME_FORM_INPUT).setValueState(ValueState.None);
-            this.oView.byId(ID_EMAIL_FORM_INPUT).setValueState(ValueState.None);
-            this.oView.byId(ID_CPF_FORM_INPUT).setValueState(ValueState.None);
-            this.oView.byId(ID_TELEFONE_FORM_INPUT).setValueState(ValueState.None);
+            this.processarAcao(() => {
+                const listaDeInputs = this._obterInputs();
+
+                listaDeInputs.forEach(input => {
+                    input.setValueState(ValueState.None);
+                });
+            });
         },
 
         _removerSelecoes() {
