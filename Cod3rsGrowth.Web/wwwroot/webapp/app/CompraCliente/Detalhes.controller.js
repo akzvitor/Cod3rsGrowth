@@ -10,7 +10,7 @@ sap.ui.define([
 	const API_COMPRAS_URL = "http://localhost:5070/api/Compras/";
 	const MODELO_COMPRAS = "restCompras";
 	const MODELO_OBRAS = "restObras";
-	const API_OBRAS_URL = "http://localhost:5070/api/Obras/Compra";
+	const API_OBRAS_URL = "http://localhost:5070/api/Compras/compra";
 	const ROTA_LISTAGEM = "listagem"
 	var id_parametro;
 
@@ -45,7 +45,7 @@ sap.ui.define([
 				})
 				.catch((err) => console.error(err));
 
-			fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra))
+			fetch(API_OBRAS_URL + "/" + window.decodeURIComponent(oEvent.getParameter("arguments").idCompra) + "/obras")
 				.then((res) => {
 					return res.json();
 				})
