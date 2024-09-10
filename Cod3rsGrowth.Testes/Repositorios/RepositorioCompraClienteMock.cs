@@ -7,7 +7,6 @@ namespace Cod3rsGrowth.Testes.Repositorios
     public class RepositorioCompraClienteMock : IRepositorioCompraCliente
     {
         private List<CompraCliente> _listaCompraCliente = ListaSingleton.Instancia.ListaCompraCliente;
-        private int _compraClienteId = 100;
 
         public List<CompraCliente> ObterTodos(FiltroCompraCliente? filtro = null)
         {
@@ -24,8 +23,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
 
         public CompraCliente Criar(CompraCliente compraCliente)
         {
-            compraCliente.Id = _compraClienteId;
-            _compraClienteId++;
+            compraCliente.Id = ListaSingleton.Instancia.GerarNovoId();
             _listaCompraCliente.Add(compraCliente);
 
             return compraCliente;
