@@ -4,10 +4,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     public sealed class ListaSingleton
     {
-        private static readonly ListaSingleton? _instancia;
+        private static readonly ListaSingleton? _instancia = new();
 
         public List<CompraCliente> ListaCompraCliente { get; set; } = new List<CompraCliente> { };
         public List<Obra> ListaObra { get; set; } = new List<Obra> { };
+        public int IdObjetoCriado { get; set; } = 100;
 
         public static ListaSingleton Instancia
         {
@@ -16,6 +17,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 return _instancia
                     ?? new ListaSingleton();
             }
+        }
+
+        public int GerarNovoId()
+        {
+            return IdObjetoCriado++;
         }
     }
 }

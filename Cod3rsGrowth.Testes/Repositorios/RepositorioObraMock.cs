@@ -8,7 +8,6 @@ namespace Cod3rsGrowth.Testes.Repositorios
     public class RepositorioObraMock : IRepositorioObra
     {
         private List<Obra> _listaObra = ListaSingleton.Instancia.ListaObra;
-        private int _obraId = 100;
 
         public List<Obra> ObterTodos(FiltroObra? filtro = null)
         {
@@ -23,9 +22,8 @@ namespace Cod3rsGrowth.Testes.Repositorios
         }
 
         public Obra Criar(Obra obra)
-        { 
-            obra.Id = _obraId;
-            _obraId++;
+        {
+            obra.Id = ListaSingleton.Instancia.GerarNovoId();
             _listaObra.Add(obra);
 
             return obra;
