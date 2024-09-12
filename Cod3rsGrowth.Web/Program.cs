@@ -1,14 +1,19 @@
 using Cod3rsGrowth.Web.Extensoes;
 using Cod3rsGrowth.Web.ModuloDeInjecao;
+using FluentMigrator.Runner;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 var servicos = builder.Services;
 var comando = args.FirstOrDefault();
-var stringDeConexao = comando is "--teste" ? builder.Configuration.GetConnectionString("StringConexaoTeste") 
-                        : builder.Configuration.GetConnectionString("StringConexao");
+var stringDeConexao = Environment.GetEnvironmentVariable("STRING_CONEXAO");
 
 ModuloDeInjecaoWeb.BindService(servicos, stringDeConexao);
+
+var serviceProvider = servicos.BuildServiceProvider();
+var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+runner.MigrateUp();
 
 var app = builder.Build();
 
